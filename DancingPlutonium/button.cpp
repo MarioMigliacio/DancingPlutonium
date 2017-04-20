@@ -1,6 +1,5 @@
 #include "button.h"
 
-
 Button::Button(const sf::Vector2f& pos, const sf::String name, const sf::Color& fillColor, const sf::Color& boarderColor) 
 	: location(pos), buttonFillColor(fillColor), buttonBoarderColor(boarderColor)
 {
@@ -27,7 +26,7 @@ void Button::Update(float dt)
 	{
 		accumulator += dt;
 
-		if (buttonName.getGlobalBounds().contains(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y))
+		if (buttonName.getGlobalBounds().contains((float)sf::Mouse::getPosition().x, (float)sf::Mouse::getPosition().y))
 		{
 			if (alpha < 255 && isFading == false)
 			{
@@ -55,6 +54,11 @@ void Button::Update(float dt)
 
 			setColor(sf::Color(buttonFillColor.r, buttonFillColor.g, buttonFillColor.b, alpha),
 				sf::Color(buttonBoarderColor.r, buttonBoarderColor.g, buttonBoarderColor.b, alpha));
+
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+			{
+				OnClick();
+			}
 		}
 		else
 		{
@@ -70,6 +74,11 @@ void Button::Update(float dt)
 
 bool Button::OnClick()
 {
+	if (isClickable)
+	{
+		// we need gamestate transition logic here.
+	}
+
 	return false;
 }
 

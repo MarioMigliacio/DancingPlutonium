@@ -7,14 +7,14 @@
 
 int main()
 {
-	sf::RenderWindow window(RES1080P, "Dancing Plutonium", sf::Style::Fullscreen);	
+	sf::RenderWindow window(RES1080P, "Dancing Plutonium", sf::Style::Fullscreen);
 	sf::Texture texture;	
 
 	// current button testings:
 	std::vector<Button> buttonContainer;
-	Button welcomeButton = Button(sf::Vector2f(RES1080P.width / 5, RES1080P.height / 10), "Welcome To Dancing Plutonium", sf::Color::Red, sf::Color::Blue);
-	Button playButton = Button(sf::Vector2f(RES1080P.width / 2 - 100, RES1080P.height / 5), "Play", sf::Color::Yellow, sf::Color::Blue);
-	Button optionsButton = Button(sf::Vector2f(RES1080P.width / 2 - 170, RES1080P.height / 5 + 100), "Options", sf::Color::Yellow, sf::Color::Blue);
+	Button welcomeButton = Button(sf::Vector2f((float)RES1080P.width / 5, (float)RES1080P.height / 10), "Welcome To Dancing Plutonium", sf::Color::Red, sf::Color::Blue);
+	Button playButton = Button(sf::Vector2f((float)RES1080P.width / 2 - 100, (float)RES1080P.height / 5), "Play", sf::Color::Yellow, sf::Color::Blue);
+	Button optionsButton = Button(sf::Vector2f((float)RES1080P.width / 2 - 170, (float)RES1080P.height / 5 + 100), "Options", sf::Color::Yellow, sf::Color::Blue);
 	
 	welcomeButton.setPosition(sf::Vector2f(RES1080P.width / 2 - welcomeButton.getBounds().width / 2, RES1080P.height / 10 - welcomeButton.getBounds().height / 2));
 	playButton.setPosition(sf::Vector2f(RES1080P.width / 2 - playButton.getBounds().width / 2, RES1080P.height / 5 - playButton.getBounds().height / 2));
@@ -59,7 +59,7 @@ int main()
 		window.clear();
 		window.draw(background);
 
-		for (int i = 0; i < buttonContainer.size(); i++)
+		for (int i = 0; i < (int)buttonContainer.size(); i++)
 		{
 			buttonContainer[i].Update(dt.asSeconds());
 			buttonContainer[i].Draw(window);
