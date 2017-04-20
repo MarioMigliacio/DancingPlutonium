@@ -9,17 +9,21 @@ public:
 	void Draw(sf::RenderTarget& rt) const;	
 	void Update(float dt);
 	bool OnClick();
+	void setPosition(const sf::Vector2f pos);
+	sf::FloatRect getBounds() const;
 
 private:
 	bool isFading;
 	bool isClickable;
 	bool isClicked;
 	float accumulator;
+
 	sf::Uint8 alpha;
 	sf::Text buttonName;
 	sf::Color buttonFillColor;
 	sf::Color buttonBoarderColor;
 	sf::Vector2f location;
+	sf::FloatRect bounds;
 	sf::Font font;
 
 private:

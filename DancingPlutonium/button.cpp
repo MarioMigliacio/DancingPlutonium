@@ -59,6 +59,7 @@ void Button::Update(float dt)
 		else
 		{
 			setColor(buttonFillColor, buttonBoarderColor);
+			accumulator = 0.0f;
 		}
 	}
 	else
@@ -70,6 +71,16 @@ void Button::Update(float dt)
 bool Button::OnClick()
 {
 	return false;
+}
+
+void Button::setPosition(const sf::Vector2f pos)
+{
+	location = pos;
+}
+
+sf::FloatRect Button::getBounds() const
+{
+	return bounds;
 }
 
 void Button::setColor(const sf::Color& fillColor, const sf::Color& boarderColor)
