@@ -4,12 +4,12 @@
 #include "Button.h"
 #include "enumTypes.h"
 
+#define RES1080P sf::VideoMode(1920, 1080)
+
 int main()
 {
 	sf::RenderWindow window(RES1080P, "Dancing Plutonium", sf::Style::Fullscreen);
 	sf::Texture texture;
-	GameState currentState = GameState::MainMenu;
-	GameDifficulty gameDifficulty = GameDifficulty::Easy;
 
 	// current button testings:
 	std::vector<Button> buttonContainer;
