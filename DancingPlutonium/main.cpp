@@ -28,7 +28,7 @@ int main()
 	buttonContainer.push_back(optionsButton);
 	buttonContainer.push_back(scoreButton);
 
-	if (!texture.loadFromFile("Content/Images/TitleBackground.png"))
+	if (!texture.loadFromFile("Content/Images/TitleBackground.jpg"))
 	{
 		return EXIT_FAILURE;
 	}
