@@ -22,7 +22,7 @@ void Button::Draw(sf::RenderTarget& rt) const
 	rt.draw(buttonName);
 }
 
-void Button::Update(float dt, GameState currentState)
+void Button::Update(float dt)
 {
 	if (isClickable)
 	{
@@ -59,7 +59,7 @@ void Button::Update(float dt, GameState currentState)
 
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 			{
-				OnClick(currentState);
+				IsClicked();
 			}
 		}
 		else
@@ -74,31 +74,14 @@ void Button::Update(float dt, GameState currentState)
 	}
 }
 
-bool Button::OnClick(GameState currentState) const
+bool Button::IsClicked() 
 {
 	if (isClickable)
 	{
-		// we need gamestate transition logic here.
-		switch (currentState)
-		{
-		case GameState::MainMenu:
-			if (buttonName.getString() == "Play")
-			{
-				currentState = GameState::Level1;
-			}
-			else if (buttonName.getString() == "Options")
-			{
-				currentState = GameState::Options;
-			}
-			else if (buttonName.getString() == "Scoreboard")
-			{
-				currentState = GameState::ScoreBoard;
-			}
-			break;
-		}
+		isClicked = true;
 	}
 
-	return false;
+	return isClicked;
 }
 
 void Button::setPosition(const sf::Vector2f pos)

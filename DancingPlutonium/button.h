@@ -8,8 +8,8 @@ class Button
 public:
 	Button(const sf::String name, const sf::Color& fillColor, const sf::Color& boarderColor);
 	void Draw(sf::RenderTarget& rt) const;
-	void Update(float dt, GameState currentState);
-	bool OnClick(GameState currentState) const;
+	void Update(float dt);
+	bool IsClicked();
 	void setPosition(const sf::Vector2f pos);
 	sf::FloatRect getBounds() const;
 

@@ -1,5 +1,7 @@
 #pragma once
 
+#define RES1080P sf::VideoMode(1920, 1080)
+
 enum GameState
 {
 	MainMenu,

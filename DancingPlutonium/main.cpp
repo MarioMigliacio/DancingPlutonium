@@ -4,8 +4,6 @@
 #include "Button.h"
 #include "enumTypes.h"
 
-#define RES1080P sf::VideoMode(1920, 1080)
-
 int main()
 {
 	sf::RenderWindow window(RES1080P, "Dancing Plutonium", sf::Style::Fullscreen);
@@ -67,7 +65,7 @@ int main()
 
 		for (int i = 0; i < (int)buttonContainer.size(); i++)
 		{
-			buttonContainer[i].Update(dt.asSeconds(), currentState);
+			buttonContainer[i].Update(dt.asSeconds());
 			buttonContainer[i].Draw(window);
 		}
 
