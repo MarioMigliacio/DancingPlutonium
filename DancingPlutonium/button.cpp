@@ -1,16 +1,18 @@
-#include "button.h"
+#include "Button.h"
 
-Button::Button(const sf::Vector2f& pos, const sf::String name, const sf::Color& fillColor, const sf::Color& boarderColor) 
-	: location(pos), buttonFillColor(fillColor), buttonBoarderColor(boarderColor)
+Button::Button(const sf::String name, const sf::Color& fillColor, const sf::Color& boarderColor)
+	: buttonFillColor(fillColor), buttonBoarderColor(boarderColor)
 {
 	name == "Welcome To Dancing Plutonium" ? isClickable = false : isClickable = true;
+	location = sf::Vector2f(0.0f, 0.0f);
 	isClicked = false;
 	isFading = false;
 	setColor(fillColor, boarderColor);
-	loadFont();	
-	
+	loadFont();
+
 	buttonName = sf::Text(name, font, 80);
 	buttonName.setPosition(location);
+	bounds = buttonName.getGlobalBounds();
 	alpha = 0;
 	accumulator = 0.0f;
 }
@@ -20,7 +22,7 @@ void Button::Draw(sf::RenderTarget& rt) const
 	rt.draw(buttonName);
 }
 
-void Button::Update(float dt)
+void Button::Update(float dt, GameState currentState)
 {
 	if (isClickable)
 	{
@@ -57,7 +59,7 @@ void Button::Update(float dt)
 
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 			{
-				OnClick();
+				OnClick(currentState);
 			}
 		}
 		else
@@ -72,11 +74,28 @@ void Button::Update(float dt)
 	}
 }
 
-bool Button::OnClick()
+bool Button::OnClick(GameState currentState) const
 {
 	if (isClickable)
 	{
 		// we need gamestate transition logic here.
+		switch (currentState)
+		{
+		case GameState::MainMenu:
+			if (buttonName.getString() == "Play")
+			{
+				currentState = GameState::Level1;
+			}
+			else if (buttonName.getString() == "Options")
+			{
+				currentState = GameState::Options;
+			}
+			else if (buttonName.getString() == "Scoreboard")
+			{
+				currentState = GameState::ScoreBoard;
+			}
+			break;
+		}
 	}
 
 	return false;
@@ -84,7 +103,7 @@ bool Button::OnClick()
 
 void Button::setPosition(const sf::Vector2f pos)
 {
-	location = pos;
+	buttonName.setPosition(pos);
 }
 
 sf::FloatRect Button::getBounds() const
@@ -95,7 +114,7 @@ sf::FloatRect Button::getBounds() const
 void Button::setColor(const sf::Color& fillColor, const sf::Color& boarderColor)
 {
 	buttonName.setFillColor(fillColor);
-	buttonName.setOutlineColor(boarderColor);	
+	buttonName.setOutlineColor(boarderColor);
 	buttonName.setOutlineThickness(2);
 }
 

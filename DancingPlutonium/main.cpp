@@ -1,28 +1,34 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
-#include "button.h"
+#include "Button.h"
+#include "enumTypes.h"
 
 #define RES1080P sf::VideoMode(1920, 1080)
 
 int main()
 {
 	sf::RenderWindow window(RES1080P, "Dancing Plutonium", sf::Style::Fullscreen);
-	sf::Texture texture;	
+	sf::Texture texture;
+	GameState currentState = GameState::MainMenu;
+	GameDifficulty gameDifficulty = GameDifficulty::Easy;
 
 	// current button testings:
 	std::vector<Button> buttonContainer;
-	Button welcomeButton = Button(sf::Vector2f((float)RES1080P.width / 5, (float)RES1080P.height / 10), "Welcome To Dancing Plutonium", sf::Color::Red, sf::Color::Blue);
-	Button playButton = Button(sf::Vector2f((float)RES1080P.width / 2 - 100, (float)RES1080P.height / 5), "Play", sf::Color::Yellow, sf::Color::Blue);
-	Button optionsButton = Button(sf::Vector2f((float)RES1080P.width / 2 - 170, (float)RES1080P.height / 5 + 100), "Options", sf::Color::Yellow, sf::Color::Blue);
-	
+	Button welcomeButton = Button("Welcome To Dancing Plutonium", sf::Color::Red, sf::Color::Blue);
+	Button playButton = Button("Play", sf::Color::Yellow, sf::Color::Blue);
+	Button optionsButton = Button("Options", sf::Color::Yellow, sf::Color::Blue);
+	Button scoreButton = Button("ScoreBoard", sf::Color::Yellow, sf::Color::Blue);
+
 	welcomeButton.setPosition(sf::Vector2f(RES1080P.width / 2 - welcomeButton.getBounds().width / 2, RES1080P.height / 10 - welcomeButton.getBounds().height / 2));
-	playButton.setPosition(sf::Vector2f(RES1080P.width / 2 - playButton.getBounds().width / 2, RES1080P.height / 5 - playButton.getBounds().height / 2));
-	optionsButton.setPosition(sf::Vector2f(RES1080P.width / 2 - optionsButton.getBounds().width / 2, RES1080P.height / 2 - optionsButton.getBounds().height / 2));
+	playButton.setPosition(sf::Vector2f(RES1080P.width / 2 - playButton.getBounds().width / 2, RES1080P.height / 4 - playButton.getBounds().height / 2));
+	optionsButton.setPosition(sf::Vector2f(RES1080P.width / 2 - optionsButton.getBounds().width / 2, RES1080P.height / 4 - optionsButton.getBounds().height / 2 + 85));
+	scoreButton.setPosition(sf::Vector2f(RES1080P.width / 2 - scoreButton.getBounds().width / 2, RES1080P.height / 4 - scoreButton.getBounds().height / 2 + 170));
 
 	buttonContainer.push_back(welcomeButton);
 	buttonContainer.push_back(playButton);
 	buttonContainer.push_back(optionsButton);
+	buttonContainer.push_back(scoreButton);
 
 	if (!texture.loadFromFile("Content/Images/TitleBackground.png"))
 	{
@@ -36,7 +42,7 @@ int main()
 	{
 		return EXIT_FAILURE;
 	}
-	
+
 	music.setLoop(true);
 	music.play();
 
@@ -55,13 +61,13 @@ int main()
 		}
 
 		dt = cock.restart();
-		
+
 		window.clear();
 		window.draw(background);
 
 		for (int i = 0; i < (int)buttonContainer.size(); i++)
 		{
-			buttonContainer[i].Update(dt.asSeconds());
+			buttonContainer[i].Update(dt.asSeconds(), currentState);
 			buttonContainer[i].Draw(window);
 		}
 

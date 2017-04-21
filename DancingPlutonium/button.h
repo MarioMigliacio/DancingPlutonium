@@ -1,14 +1,15 @@
 #pragma once
 
 #include<SFML/Graphics.hpp>
+#include "enumTypes.h"
 
 class Button
 {
 public:
-	Button(const sf::Vector2f& pos, const sf::String name, const sf::Color& fillColor, const sf::Color& boarderColor);
-	void Draw(sf::RenderTarget& rt) const;	
-	void Update(float dt);
-	bool OnClick();
+	Button(const sf::String name, const sf::Color& fillColor, const sf::Color& boarderColor);
+	void Draw(sf::RenderTarget& rt) const;
+	void Update(float dt, GameState currentState);
+	bool OnClick(GameState currentState) const;
 	void setPosition(const sf::Vector2f pos);
 	sf::FloatRect getBounds() const;
 

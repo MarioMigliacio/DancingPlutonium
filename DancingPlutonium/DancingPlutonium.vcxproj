@@ -113,11 +113,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="button.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="button.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="CurrentScene.h" />
+    <ClInclude Include="EnumTypes.h" />
+    <ClInclude Include="StarField.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
