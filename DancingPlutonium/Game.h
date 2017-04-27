@@ -20,7 +20,7 @@ private:
 	static void GameOver();
 	static void Options();
 	static void ScoreScreen();
-	static bool IsQuitter();
+	static bool Quitting();
 
 private:
 	enum current_state

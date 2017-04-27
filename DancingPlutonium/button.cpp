@@ -15,6 +15,7 @@ Button::Button(const sf::String name, const sf::Color& fillColor, const sf::Colo
 	bounds = buttonName.getGlobalBounds();
 	alpha = 0;
 	accumulator = 0.0f;
+	
 }
 
 void Button::Draw(sf::RenderTarget& rt) const
@@ -39,7 +40,7 @@ void Button::Update(float dt)
 					accumulator = 0.0f;
 				}
 			}
-			else if (alpha == 255 || isFading)
+			else if (alpha >= 254 || isFading)
 			{
 				if (accumulator >= 0.005f)
 				{
@@ -64,7 +65,8 @@ void Button::Update(float dt)
 		}
 		else
 		{
-			setColor(buttonFillColor, buttonBoarderColor);
+			setColor(sf::Color(buttonFillColor.r, buttonFillColor.g, buttonFillColor.b, alpha = 255),
+				sf::Color(buttonBoarderColor.r, buttonBoarderColor.g, buttonBoarderColor.b, alpha = 255));
 			accumulator = 0.0f;
 		}
 	}

@@ -18,7 +18,7 @@ void Game::Initialize()
 
 	m_state = current_state::s_menu;
 
-	while (!IsQuitter())
+	while (!Quitting())
 	{
 		Run();
 	}
@@ -89,7 +89,7 @@ void Game::ScoreScreen()
 	// get around to creating the scoreboard class.
 }
 
-bool Game::IsQuitter()
+bool Game::Quitting()
 {
 	return m_state == current_state::s_quit;
 }
