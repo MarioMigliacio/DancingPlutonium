@@ -1,11 +1,18 @@
 #pragma once
 
-#include<SFML/Graphics.hpp>
-#include "enumTypes.h"
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include "Button.h"
 
 class TitleMenu
 {
 public:
+	TitleMenu() {}
+	~TitleMenu() {};
+	void Show(sf::RenderTarget& window);
+	sf::Uint32 getMenuState() const;
+
+private:
 	enum menu_states
 	{
 		s_undecided,
@@ -14,12 +21,6 @@ public:
 		s_score,
 		s_quit
 	};
-
-public:
-	TitleMenu() {}
-	~TitleMenu() {};
-	void Show(sf::RenderTarget& window);
-	const sf::Uint32 menuState() const;
 
 private:
 	static menu_states m_state;

@@ -1,21 +1,20 @@
 #include "Button.h"
 
-Button::Button(const sf::String name, const sf::Color& fillColor, const sf::Color& boarderColor)
+Button::Button(const sf::String name, const sf::Color& fillColor, const sf::Color& boarderColor, int size, bool clickable)
 	: buttonFillColor(fillColor), buttonBoarderColor(boarderColor)
 {
-	name == "Welcome To Dancing Plutonium" ? isClickable = false : isClickable = true;
+	clickable ? isClickable = true : isClickable = false;
 	location = sf::Vector2f(0.0f, 0.0f);
 	isClicked = false;
 	isFading = false;
 	setColor(fillColor, boarderColor);
 	loadFont();
 
-	buttonName = sf::Text(name, font, 80);
+	buttonName = sf::Text(name, font, size);
 	buttonName.setPosition(location);
 	bounds = buttonName.getGlobalBounds();
 	alpha = 0;
-	accumulator = 0.0f;
-	
+	accumulator = 0.0f;	
 }
 
 void Button::Draw(sf::RenderTarget& rt) const
@@ -89,6 +88,40 @@ bool Button::IsClicked()
 void Button::setPosition(const sf::Vector2f pos)
 {
 	buttonName.setPosition(pos);
+}
+
+void Button::fadeIn(float dt)
+{
+	accumulator += dt;
+
+	if (alpha < 255)
+	{
+		if (accumulator >= 0.0025f)
+		{
+			alpha++;
+			accumulator = 0.0f;			
+		}
+	}
+
+	setColor(sf::Color(buttonFillColor.r, buttonFillColor.g, buttonFillColor.b, alpha),
+		sf::Color(buttonBoarderColor.r, buttonBoarderColor.g, buttonBoarderColor.b, alpha));
+}
+
+void Button::fadeOut(float dt)
+{
+	accumulator += dt;
+			
+	if (alpha > 0)
+	{
+		if (accumulator >= 0.0025f)
+		{			
+			alpha--;
+			accumulator = 0.0f;
+		}
+	}
+
+	setColor(sf::Color(buttonFillColor.r, buttonFillColor.g, buttonFillColor.b, alpha),
+		sf::Color(buttonBoarderColor.r, buttonBoarderColor.g, buttonBoarderColor.b, alpha));
 }
 
 sf::FloatRect Button::getBounds() const

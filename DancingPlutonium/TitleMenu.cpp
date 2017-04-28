@@ -11,7 +11,7 @@ void TitleMenu::Show(sf::RenderTarget & window)
 	float m_scale = scale;
 }
 
-const sf::Uint32 TitleMenu::menuState() const
+sf::Uint32 TitleMenu::getMenuState() const
 {
 	return sf::Uint32();
 }

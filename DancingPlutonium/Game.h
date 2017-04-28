@@ -2,7 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include <random>
 
 class Game
 {
@@ -14,6 +13,7 @@ public:
 
 private:
 	static void Run();
+	static void Introduction();
 	static void Menu();
 	static void Play();
 	static void WinLevel();
@@ -26,6 +26,7 @@ private:
 	enum current_state
 	{
 		s_uninitialized,
+		s_intro,
 		s_menu,
 		s_playing,
 		s_options,

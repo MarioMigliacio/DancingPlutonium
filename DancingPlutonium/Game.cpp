@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Intro.h"
 
 // Static variable declarations:
 sf::Uint32 Game::m_state = s_uninitialized;
@@ -16,7 +17,7 @@ void Game::Initialize()
 	sf::VideoMode mode = sf::VideoMode::getDesktopMode();
 	m_window.create(sf::VideoMode(mode.width, mode.height, mode.bitsPerPixel), "Dancing Plutonium", sf::Style::Fullscreen);
 
-	m_state = current_state::s_menu;
+	m_state = current_state::s_intro;
 
 	while (!Quitting())
 	{
@@ -30,8 +31,13 @@ void Game::Run()
 {
 	switch (m_state)
 	{
+		case current_state::s_intro:
+			Introduction();
+			m_state = current_state::s_menu;
+			break;
 		case current_state::s_menu:
 			Menu();
+			m_state = current_state::s_quit;
 			break;
 		case current_state::s_playing:
 			Play();
@@ -53,10 +59,17 @@ void Game::Run()
 	}
 }
 
+void Game::Introduction()
+{
+	Intro intro;
+	m_window.setTitle("Intro");	
+	intro.Show(m_window);
+}
+
 void Game::Menu()
 {
 	m_window.setTitle("Main Menu");
-	// get around to creating the menu class.
+	// get around to creating the menu class.	
 }
 
 void Game::Play()

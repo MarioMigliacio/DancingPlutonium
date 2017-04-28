@@ -1,16 +1,17 @@
 #pragma once
 
 #include<SFML/Graphics.hpp>
-#include "enumTypes.h"
 
 class Button
 {
 public:
-	Button(const sf::String name, const sf::Color& fillColor, const sf::Color& boarderColor);
+	Button(const sf::String name, const sf::Color& fillColor, const sf::Color& boarderColor, int size, bool clickable);
 	void Draw(sf::RenderTarget& rt) const;
 	void Update(float dt);
 	bool IsClicked();
 	void setPosition(const sf::Vector2f pos);
+	void fadeIn(float dt);
+	void fadeOut(float dt);
 	sf::FloatRect getBounds() const;
 
 private:
