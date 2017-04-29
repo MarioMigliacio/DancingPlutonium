@@ -35,15 +35,18 @@ void Button::Update(float dt)
 				if (accumulator >= 0.005f)
 				{
 					alpha++;
-					isFading = false;
 					accumulator = 0.0f;
+
+					if (alpha >= 255)
+					{
+						isFading = true;
+					}
 				}
 			}
-			else if (alpha >= 254 || isFading)
+			else if (isFading)
 			{
 				if (accumulator >= 0.005f)
 				{
-					isFading = true;
 					alpha--;
 					accumulator = 0.0f;
 
@@ -55,15 +58,21 @@ void Button::Update(float dt)
 			}
 
 			setColor(sf::Color(buttonFillColor.r, buttonFillColor.g, buttonFillColor.b, alpha),
-				sf::Color(buttonBoarderColor.r, buttonBoarderColor.g, buttonBoarderColor.b, alpha));
+				sf::Color(255, buttonBoarderColor.g, buttonBoarderColor.b, alpha));
 
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isClickable)
 			{
-				IsClicked();
+				isClicked = true;
+			}
+			else
+			{
+				isClicked = false;
 			}
 		}
 		else
 		{
+			isFading = true;
+
 			setColor(sf::Color(buttonFillColor.r, buttonFillColor.g, buttonFillColor.b, alpha = 255),
 				sf::Color(buttonBoarderColor.r, buttonBoarderColor.g, buttonBoarderColor.b, alpha = 255));
 			accumulator = 0.0f;
@@ -77,12 +86,17 @@ void Button::Update(float dt)
 
 bool Button::IsClicked() 
 {
-	if (isClickable)
-	{
-		isClicked = true;
-	}
-
 	return isClicked;
+}
+
+sf::String Button::getName() const
+{
+	return buttonName.getString();
+}
+
+void Button::setOrigin(const sf::Vector2f pos)
+{
+	buttonName.setOrigin(pos);
 }
 
 void Button::setPosition(const sf::Vector2f pos)

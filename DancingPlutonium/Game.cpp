@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "Intro.h"
 
 // Static variable declarations:
 sf::Uint32 Game::m_state = s_uninitialized;
@@ -12,7 +11,7 @@ void Game::Initialize()
 	{
 		return;
 	}
-
+	//, sf::Style::Fullscreen
 	// Create the Rendering Window.
 	sf::VideoMode mode = sf::VideoMode::getDesktopMode();
 	m_window.create(sf::VideoMode(mode.width, mode.height, mode.bitsPerPixel), "Dancing Plutonium", sf::Style::Fullscreen);
@@ -32,12 +31,10 @@ void Game::Run()
 	switch (m_state)
 	{
 		case current_state::s_intro:
-			Introduction();
-			m_state = current_state::s_menu;
+			Introduction();			
 			break;
 		case current_state::s_menu:
 			Menu();
-			m_state = current_state::s_quit;
 			break;
 		case current_state::s_playing:
 			Play();
@@ -64,12 +61,71 @@ void Game::Introduction()
 	Intro intro;
 	m_window.setTitle("Intro");	
 	intro.Show(m_window);
+
+	if (intro.getIntroState() == Intro::s_done)
+	{
+		m_state = current_state::s_menu;
+	}
 }
 
 void Game::Menu()
 {
+	TitleMenu menu;
 	m_window.setTitle("Main Menu");
-	// get around to creating the menu class.	
+	menu.Show(m_window);
+
+	if (menu.getMenuState() == TitleMenu::s_play)
+	{
+		sf::SoundBuffer sb;
+		sb.loadFromFile("Content/Sounds/PewPew.wav");
+
+		sf::Sound menusound;
+		menusound.setBuffer(sb);
+		menusound.setVolume(50);
+		menusound.play();
+
+		sf::Clock cockblock;
+
+		while (cockblock.getElapsedTime().asSeconds() < 1.0f){}
+
+		m_state = current_state::s_quit;
+	}
+	else if (menu.getMenuState() == TitleMenu::s_options)
+	{
+		sf::SoundBuffer sb;
+		sb.loadFromFile("Content/Sounds/Explosion.wav");
+
+		sf::Sound menusound;
+		menusound.setBuffer(sb);
+		menusound.setVolume(50);
+		menusound.play();
+
+		sf::Clock cockblock;
+
+		while (cockblock.getElapsedTime().asSeconds() < 1.0f) {}
+
+		m_state = current_state::s_quit;
+	}
+	else if (menu.getMenuState() == TitleMenu::s_score)
+	{
+		sf::SoundBuffer sb;
+		sb.loadFromFile("Content/Sounds/Bomb.wav");
+
+		sf::Sound menusound;
+		menusound.setBuffer(sb);
+		menusound.setVolume(50);
+		menusound.play();
+
+		sf::Clock cockblock;
+
+		while (cockblock.getElapsedTime().asSeconds() < 1.0f) {}
+
+		m_state = current_state::s_quit;
+	}
+	else if (menu.getMenuState() == TitleMenu::s_quit)
+	{
+		m_state = current_state::s_quit;
+	}
 }
 
 void Game::Play()

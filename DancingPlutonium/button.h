@@ -9,6 +9,8 @@ public:
 	void Draw(sf::RenderTarget& rt) const;
 	void Update(float dt);
 	bool IsClicked();
+	sf::String getName() const;
+	void setOrigin(const sf::Vector2f pos);
 	void setPosition(const sf::Vector2f pos);
 	void fadeIn(float dt);
 	void fadeOut(float dt);

@@ -3,18 +3,14 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "Button.h"
+#include <stdlib.h>
 
 class TitleMenu
 {
 public:
-	TitleMenu() {}
-	~TitleMenu() {};
-	void Show(sf::RenderTarget& window);
-	sf::Uint32 getMenuState() const;
-
-private:
-	enum menu_states
+	enum menu_state
 	{
+		s_uninitialized,
 		s_undecided,
 		s_play,
 		s_options,
@@ -22,6 +18,12 @@ private:
 		s_quit
 	};
 
+public:
+	TitleMenu() {}
+	~TitleMenu() {}
+	void Show(sf::RenderWindow& window);
+	sf::Uint32 getMenuState() const;
+	
 private:
-	static menu_states m_state;
+	static sf::Uint32 m_state;
 };

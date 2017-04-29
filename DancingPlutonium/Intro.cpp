@@ -11,6 +11,7 @@ void Intro::Show(sf::RenderWindow& window)
 		return;
 	}
 
+	// Set the State:
 	m_state = intro_state::s_playing;
 
 	// Set up the Timers.
@@ -40,7 +41,10 @@ void Intro::Show(sf::RenderWindow& window)
 
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			if (event.type == sf::Event::Closed 
+				|| sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)
+				|| sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)
+				|| sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{
 				m_state = intro_state::s_done;
 				return;
@@ -77,6 +81,11 @@ void Intro::Show(sf::RenderWindow& window)
 	}
 
 	m_state = intro_state::s_done;
+
+	if (menusound.getStatus() == sf::Sound::Playing)
+	{
+		menusound.stop();
+	}
 }
 
 sf::Uint32 Intro::getIntroState() const
