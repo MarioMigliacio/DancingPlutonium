@@ -68,7 +68,7 @@ void TitleMenu::Show(sf::RenderWindow& window)
 		dt = clock.restart();
 
 		window.clear();
-		window.draw(bgSprite);
+		window.draw(bgSprite);		
 
 		for (int i = 0; i < (int)buttonContainer.size(); i++)
 		{
