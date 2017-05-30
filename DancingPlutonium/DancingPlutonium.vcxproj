@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="BasicShip.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Intro.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="CurrentScene.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GenericEnemyUnit.h" />
     <ClInclude Include="Intro.h" />
     <ClInclude Include="StarField.h" />
     <ClInclude Include="TitleMenu.h" />
