@@ -126,7 +126,6 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GenericEnemyUnit.h" />
     <ClInclude Include="Intro.h" />
-    <ClInclude Include="StarField.h" />
     <ClInclude Include="TitleMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

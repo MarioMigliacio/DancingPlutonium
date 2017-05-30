@@ -41,9 +41,6 @@
     <ClInclude Include="CurrentScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StarField.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
