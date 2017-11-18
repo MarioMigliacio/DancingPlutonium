@@ -18,7 +18,7 @@ protected:
 
 public:
 	virtual int GetValue() const = 0;
-	virtual int GetHealth() const = 0;		
+	virtual int GetHealth() const = 0;
 	virtual float GetFireRate() const = 0;
 	virtual int GetFireDamage() const = 0;
 	virtual bool GetActiveState() const = 0;
