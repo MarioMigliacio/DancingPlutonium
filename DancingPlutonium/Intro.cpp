@@ -31,7 +31,7 @@ void Intro::Show(sf::RenderWindow& window)
 
 	sf::Sound menusound;
 	menusound.setBuffer(sb);
-	menusound.setVolume(50);
+	menusound.setVolume(85);
 	menusound.play();
 
 	// Perform the Introduction splash screen!

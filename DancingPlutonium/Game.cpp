@@ -81,7 +81,7 @@ void Game::Menu()
 
 		sf::Sound menusound;
 		menusound.setBuffer(sb);
-		menusound.setVolume(50);
+		menusound.setVolume(85);
 		menusound.play();
 
 		sf::Clock cockblock;
@@ -97,7 +97,7 @@ void Game::Menu()
 
 		sf::Sound menusound;
 		menusound.setBuffer(sb);
-		menusound.setVolume(50);
+		menusound.setVolume(85);
 		menusound.play();
 
 		sf::Clock cockblock;
@@ -113,7 +113,7 @@ void Game::Menu()
 
 		sf::Sound menusound;
 		menusound.setBuffer(sb);
-		menusound.setVolume(50);
+		menusound.setVolume(85);
 		menusound.play();
 
 		sf::Clock cockblock;

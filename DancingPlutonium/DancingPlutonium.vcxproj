@@ -119,7 +119,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
-    <ClInclude Include="CurrentScene.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GenericEnemyUnit.h" />
     <ClInclude Include="Intro.h" />

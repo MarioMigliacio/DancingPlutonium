@@ -45,6 +45,7 @@ void TitleMenu::Show(sf::RenderWindow& window)
 	sf::Music menuMusic;
 	menuMusic.openFromFile("Content/Sounds/RootMenu.wav");
 	menuMusic.setLoop(true);
+	menuMusic.setVolume(85);
 	menuMusic.play();
 
 	// Set up the Timers:

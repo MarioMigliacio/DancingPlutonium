@@ -57,6 +57,7 @@ void Button::Update(float dt)
 				}
 			}
 
+			// Make the button that is highlighted by the mouse RED color for the border.
 			setColor(sf::Color(buttonFillColor.r, buttonFillColor.g, buttonFillColor.b, alpha),
 				sf::Color(255, buttonBoarderColor.g, buttonBoarderColor.b, alpha));
 
