@@ -3,7 +3,7 @@
 // Static variable declarations:
 sf::Uint32 TitleMenu::m_state = s_uninitialized;
 
-void TitleMenu::Show(sf::RenderWindow& window)
+void TitleMenu::Show(sf::RenderWindow& _window)
 {
 	// Ensure that the initialization takes place correctly here and for the first time.
 	if (m_state != menu_state::s_uninitialized)
@@ -31,9 +31,9 @@ void TitleMenu::Show(sf::RenderWindow& window)
 	Button optionsButton = Button("Options", sf::Color::Yellow, sf::Color::Blue, 80, true);
 	Button scoreButton = Button("ScoreBoard", sf::Color::Yellow, sf::Color::Blue, 80, true);
 
-	playButton.setPosition(sf::Vector2f(window.getSize().x / 2.0f - playButton.getBounds().width / 2.0f, window.getSize().y / 6.0f - playButton.getBounds().height / 2.0f));
-	optionsButton.setPosition(sf::Vector2f(window.getSize().x / 2.0f - optionsButton.getBounds().width / 2.0f, window.getSize().y / 6.0f - optionsButton.getBounds().height / 2.0f + 85));
-	scoreButton.setPosition(sf::Vector2f(window.getSize().x / 2.0f - scoreButton.getBounds().width / 2.0f, window.getSize().y / 6.0f - scoreButton.getBounds().height / 2.0f + 170));
+	playButton.setPosition(sf::Vector2f(_window.getSize().x / 2.0f - playButton.getBounds().width / 2.0f, _window.getSize().y / 6.0f - playButton.getBounds().height / 2.0f));
+	optionsButton.setPosition(sf::Vector2f(_window.getSize().x / 2.0f - optionsButton.getBounds().width / 2.0f, _window.getSize().y / 6.0f - optionsButton.getBounds().height / 2.0f + 85));
+	scoreButton.setPosition(sf::Vector2f(_window.getSize().x / 2.0f - scoreButton.getBounds().width / 2.0f, _window.getSize().y / 6.0f - scoreButton.getBounds().height / 2.0f + 170));
 
 	// Put all the buttons in an iterable container:
 	std::vector<Button> buttonContainer;
@@ -57,7 +57,7 @@ void TitleMenu::Show(sf::RenderWindow& window)
 	{
 		sf::Event event;
 
-		while (window.pollEvent(event))
+		while (_window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
@@ -68,13 +68,13 @@ void TitleMenu::Show(sf::RenderWindow& window)
 
 		dt = clock.restart();
 
-		window.clear();
-		window.draw(bgSprite);		
+		_window.clear();
+		_window.draw(bgSprite);
 
 		for (int i = 0; i < (int)buttonContainer.size(); i++)
 		{
 			buttonContainer[i].Update(dt.asSeconds());
-			buttonContainer[i].Draw(window);
+			buttonContainer[i].Draw(_window);
 
 			if (buttonContainer[i].IsClicked())
 			{
@@ -96,7 +96,7 @@ void TitleMenu::Show(sf::RenderWindow& window)
 			}
 		}
 
-		window.display();
+		_window.display();
 	}
 }
 

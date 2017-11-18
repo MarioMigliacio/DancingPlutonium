@@ -88,7 +88,7 @@ void Game::Menu()
 
 		while (cockblock.getElapsedTime().asSeconds() < 1.0f){}
 
-		m_state = current_state::s_quit;
+		m_state = current_state::s_playing;
 	}
 	else if (menu.getMenuState() == TitleMenu::s_options)
 	{
@@ -131,7 +131,10 @@ void Game::Menu()
 void Game::Play()
 {
 	m_window.setTitle("Playing");
-	// get around to creating the playing class.
+	Playing playGame;
+
+	playGame.Show(m_window);
+	m_state = current_state::s_quit;
 }
 
 void Game::WinLevel()

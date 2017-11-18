@@ -115,6 +115,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Intro.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Playing.cpp" />
     <ClCompile Include="TitleMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +123,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GenericEnemyUnit.h" />
     <ClInclude Include="Intro.h" />
+    <ClInclude Include="Playing.h" />
     <ClInclude Include="TitleMenu.h" />
   </ItemGroup>
   <ItemGroup>

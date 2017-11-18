@@ -7,7 +7,7 @@
 int main()
 {
 	Game m_game;
-
+	
 	m_game.Initialize();
 
 	// begin the GHOST CODE! //

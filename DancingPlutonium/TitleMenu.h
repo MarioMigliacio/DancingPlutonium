@@ -21,7 +21,7 @@ public:
 public:
 	TitleMenu() {}
 	~TitleMenu() {}
-	void Show(sf::RenderWindow& window);
+	void Show(sf::RenderWindow& _window);
 	sf::Uint32 getMenuState() const;
 	
 private:

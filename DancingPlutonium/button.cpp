@@ -1,32 +1,32 @@
 #include "Button.h"
 
-Button::Button(const sf::String name, const sf::Color& fillColor, const sf::Color& boarderColor, int size, bool clickable)
-	: buttonFillColor(fillColor), buttonBoarderColor(boarderColor)
+Button::Button(const sf::String _name, const sf::Color& _fillColor, const sf::Color& _boarderColor, int _size, bool _clickable)
+	: buttonFillColor(_fillColor), buttonBoarderColor(_boarderColor)
 {
-	clickable ? isClickable = true : isClickable = false;
+	_clickable ? isClickable = true : isClickable = false;
 	location = sf::Vector2f(0.0f, 0.0f);
 	isClicked = false;
 	isFading = false;
-	setColor(fillColor, boarderColor);
+	setColor(_fillColor, _boarderColor);
 	loadFont();
 
-	buttonName = sf::Text(name, font, size);
+	buttonName = sf::Text(_name, font, _size);
 	buttonName.setPosition(location);
 	bounds = buttonName.getGlobalBounds();
 	alpha = 0;
 	accumulator = 0.0f;	
 }
 
-void Button::Draw(sf::RenderTarget& rt) const
+void Button::Draw(sf::RenderTarget& _rt) const
 {
-	rt.draw(buttonName);
+	_rt.draw(buttonName);
 }
 
-void Button::Update(float dt)
+void Button::Update(float _dt)
 {
 	if (isClickable)
 	{
-		accumulator += dt;
+		accumulator += _dt;
 
 		if (buttonName.getGlobalBounds().contains((float)sf::Mouse::getPosition().x, (float)sf::Mouse::getPosition().y))
 		{
@@ -95,19 +95,19 @@ sf::String Button::getName() const
 	return buttonName.getString();
 }
 
-void Button::setOrigin(const sf::Vector2f pos)
+void Button::setOrigin(const sf::Vector2f _pos)
 {
-	buttonName.setOrigin(pos);
+	buttonName.setOrigin(_pos);
 }
 
-void Button::setPosition(const sf::Vector2f pos)
+void Button::setPosition(const sf::Vector2f _pos)
 {
-	buttonName.setPosition(pos);
+	buttonName.setPosition(_pos);
 }
 
-void Button::fadeIn(float dt)
+void Button::fadeIn(float _dt)
 {
-	accumulator += dt;
+	accumulator += +_dt;
 
 	if (alpha < 255)
 	{
@@ -122,9 +122,9 @@ void Button::fadeIn(float dt)
 		sf::Color(buttonBoarderColor.r, buttonBoarderColor.g, buttonBoarderColor.b, alpha));
 }
 
-void Button::fadeOut(float dt)
+void Button::fadeOut(float _dt)
 {
-	accumulator += dt;
+	accumulator += _dt;
 			
 	if (alpha > 0)
 	{
@@ -144,10 +144,10 @@ sf::FloatRect Button::getBounds() const
 	return bounds;
 }
 
-void Button::setColor(const sf::Color& fillColor, const sf::Color& boarderColor)
+void Button::setColor(const sf::Color& _fillColor, const sf::Color& _boarderColor)
 {
-	buttonName.setFillColor(fillColor);
-	buttonName.setOutlineColor(boarderColor);
+	buttonName.setFillColor(_fillColor);
+	buttonName.setOutlineColor(_boarderColor);
 	buttonName.setOutlineThickness(2);
 }
 

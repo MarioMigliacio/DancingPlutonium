@@ -1,16 +1,19 @@
+#pragma once
+
 #include "GenericEnemyUnit.h"
 
 class BasicShip : GenericEnemyUnit
 {
+public:
 	BasicShip()
 	{
 		value = 50;
 		health = 100;
 		fireRate = 0.1f;
 		fireDamage = 1;
+		speed = 1.0f;
 		isActive = true;
 		SetSpriteImage();
-		SetDefaultPosition();
 	}
 
 	virtual int GetValue() const override
@@ -33,6 +36,11 @@ class BasicShip : GenericEnemyUnit
 		return fireDamage;
 	}
 
+	virtual float GetSpeed() const override
+	{
+		return speed;
+	}
+
 	virtual bool GetActiveState() const override
 	{
 		return isActive;
@@ -48,15 +56,22 @@ class BasicShip : GenericEnemyUnit
 		return sprite.getPosition();
 	}
 
+	virtual void Draw(sf::RenderTarget& _rt) const override
+	{
+		_rt.draw(sprite);
+	}
+
+	virtual void SetPosition(const sf::Vector2f& _pos) override
+	{
+		sprite.setPosition(_pos);
+	}
+
 private:
-	sf::Sprite SetSpriteImage()
+	void SetSpriteImage()
 	{
 		texture.loadFromFile("Content/Images/BasicShip.png");
 		sprite.setTexture(texture);
-	}
-
-	sf::Vector2f SetDefaultPosition()
-	{
-		sprite.setPosition(0.0f, 0.0f);
+		sprite.setOrigin(sf::Vector2f(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f));
+		sprite.setPosition(sf::Vector2f(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f));
 	}
 };

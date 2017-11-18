@@ -4,6 +4,7 @@
 #include <SFML/Audio.hpp>
 #include "Intro.h"
 #include "TitleMenu.h"
+#include "Playing.h"
 
 class Game
 {

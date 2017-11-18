@@ -5,15 +5,15 @@
 class Button
 {
 public:
-	Button(const sf::String name, const sf::Color& fillColor, const sf::Color& boarderColor, int size, bool clickable);
-	void Draw(sf::RenderTarget& rt) const;
-	void Update(float dt);
+	Button(const sf::String _name, const sf::Color& _fillColor, const sf::Color& _boarderColor, int _size, bool _clickable);
+	void Draw(sf::RenderTarget& _rt) const;
+	void Update(float _dt);
 	bool IsClicked();
 	sf::String getName() const;
-	void setOrigin(const sf::Vector2f pos);
-	void setPosition(const sf::Vector2f pos);
-	void fadeIn(float dt);
-	void fadeOut(float dt);
+	void setOrigin(const sf::Vector2f _pos);
+	void setPosition(const sf::Vector2f _pos);
+	void fadeIn(float _dt);
+	void fadeOut(float _dt);
 	sf::FloatRect getBounds() const;
 
 private:
@@ -31,6 +31,6 @@ private:
 	sf::Font font;
 
 private:
-	void setColor(const sf::Color& fillColor, const sf::Color& boarderColor);
+	void setColor(const sf::Color& _fillColor, const sf::Color& _boarderColor);
 	void loadFont();
 };
