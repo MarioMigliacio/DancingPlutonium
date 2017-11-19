@@ -16,7 +16,7 @@ void Game::Initialize()
 	sf::VideoMode mode = sf::VideoMode::getDesktopMode();
 	m_window.create(sf::VideoMode(mode.width, mode.height, mode.bitsPerPixel), "Dancing Plutonium");
 
-	m_state = current_state::s_playing;
+	m_state = current_state::s_intro;
 
 	while (!Quitting())
 	{

@@ -1,96 +1,91 @@
 #pragma once
 
-#include "GenericEnemyUnit.h"
+#include "BasicShip.h"
 
-class BasicShip : GenericEnemyUnit
+BasicShip::BasicShip(const sf::RenderTarget& _rt)
 {
-public:
-	BasicShip(const sf::RenderTarget& _rt)
-	{
-		value = 50;
-		health = 100;
-		fireRate = 0.1f;
-		fireDamage = 1;
-		speed = 1.0f;
-		isActive = true;
-		SetSpriteImage();
-		//EmplaceRandomly(_rt);
-		//SetPosition(sf::Vector2f(16.0f, 16.0f));
-	}
+	value = 50;
+	health = 100;
+	fireRate = 0.1f;
+	fireDamage = 1;
+	speed = 1.0f;
+	isActive = true;
+	SetSpriteImage();
+	//EmplaceRandomly(_rt);
+	//SetPosition(sf::Vector2f(16.0f, 16.0f));
+}
 
-	virtual int GetValue() const override
-	{
-		return value;
-	}
+int BasicShip::GetValue() const
+{
+	return value;
+}
 
-	virtual int GetHealth() const override
-	{
-		return health;
-	}
+int BasicShip::GetHealth() const
+{
+	return health;
+}
 
-	virtual float GetFireRate() const override
-	{
-		return fireRate;
-	}
+float BasicShip::GetFireRate() const
+{
+	return fireRate;
+}
 
-	virtual int GetFireDamage() const override
-	{
-		return fireDamage;
-	}
+int BasicShip::GetFireDamage() const
+{
+	return fireDamage;
+}
 
-	virtual float GetSpeed() const override
-	{
-		return speed;
-	}
+float BasicShip::GetSpeed() const
+{
+	return speed;
+}
 
-	virtual bool GetActiveState() const override
-	{
-		return isActive;
-	}
+bool BasicShip::GetActiveState() const
+{
+	return isActive;
+}
 
-	virtual sf::Sprite& GetSprite() override
-	{
-		return sprite;
-	}
+sf::Sprite & BasicShip::GetSprite()
+{
+	return sprite;
+}
 
-	virtual sf::Vector2f GetPosition() const override
-	{
-		return sprite.getPosition();
-	}
+sf::Vector2f BasicShip::GetPosition() const
+{
+	return sprite.getPosition();
+}
 
-	virtual sf::FloatRect GetBounds() const override
-	{
-		return sprite.getGlobalBounds();
-	}
+sf::FloatRect BasicShip::GetBounds() const
+{
+	return sprite.getGlobalBounds();
+}
 
-	virtual void SetPosition(const sf::Vector2f& _pos)
-	{
-		position = _pos;
-		sprite.setPosition(_pos);
-	}
+void BasicShip::SetPosition(const sf::Vector2f& _pos)
+{
+	position = _pos;
+	sprite.setPosition(_pos);
+}
 
-	virtual void Draw(sf::RenderTarget& _rt) override
-	{
-		_rt.draw(sprite);
-	}
+void BasicShip::Draw(sf::RenderTarget& _rt)
+{
+	_rt.draw(sprite);
+}
 
-	virtual void EmplaceRandomly(const sf::RenderTarget& _rt) override
-	{
-		int randomX = _rt.getSize().x - sprite.getGlobalBounds().width / 2.0f;
-		randomX = RandomIntRange(sprite.getGlobalBounds().width / 2.0f, randomX) % randomX;
+void BasicShip::EmplaceRandomly(const sf::RenderTarget& _rt)
+{
+	int randomX = _rt.getSize().x - sprite.getGlobalBounds().width / 2.0f;
+	randomX = RandomIntRange(sprite.getGlobalBounds().width / 2.0f, randomX) % randomX;
 
-		SetPosition(sf::Vector2f((float)randomX, 16.0f));
-	}
+	SetPosition(sf::Vector2f((float)randomX, 16.0f));
+}
 
-private:
-	void SetSpriteImage()
-	{
-		auto origin = sf::Vector2f(16.0f, 16.0f);
+void BasicShip::SetSpriteImage()
+{
+	auto origin = sf::Vector2f(16.0f, 16.0f);
 
-		texture.loadFromFile("Content/Images/BasicShip.png");
-		sprite.setTexture(texture);		
-		sprite.setOrigin(sf::Vector2f(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f));
-		sprite.setPosition(origin);
-		position = origin;
-	}
-};
+	texture.loadFromFile("Content/Images/BasicShip.png");
+	sprite.setTexture(texture);		
+	sprite.setOrigin(sf::Vector2f(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f));
+	sprite.setPosition(origin);
+	position = origin;
+}

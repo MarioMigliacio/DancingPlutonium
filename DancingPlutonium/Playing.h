@@ -2,8 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "GenericEnemyUnit.h"
-#include "BasicShip.cpp"
+#include "BasicShip.h"
 
 class Playing
 {
