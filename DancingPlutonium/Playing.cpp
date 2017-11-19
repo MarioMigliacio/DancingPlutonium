@@ -13,6 +13,7 @@ void Playing::Show(sf::RenderWindow & _window)
 
 	// Set the State:
 	m_state = play_state::s_playing;
+	BasicShip m_ship(_window);
 
 	// Scale screens with different computer screen resolutions: (the standard resolution in place is 720p: 1280wide x 720high, 60 fps)
 	sf::VideoMode mode = sf::VideoMode::getDesktopMode();
@@ -40,7 +41,8 @@ void Playing::Show(sf::RenderWindow & _window)
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{
-				SpawnShip(_window);
+				m_ship.EmplaceRandomly(_window);
+				//m_ship.GetSprite().move(sf::Vector2f(5.0f, 0.0));
 			}
 		}
 
@@ -48,15 +50,5 @@ void Playing::Show(sf::RenderWindow & _window)
 		_window.draw(bgSprite);
 		m_ship.Draw(_window);
 		_window.display();
-	}		
-}
-
-void Playing::SpawnShip(sf::RenderWindow& _window)
-{	
-	m_ship.SetPosition(this->Emplace(_window));
-}
-
-sf::Vector2f Playing::Emplace(sf::RenderWindow& _window)
-{	
-	return sf::Vector2f(_window.getSize().x / 2.0f, _window.getSize().y / 6.0f);
+	}
 }

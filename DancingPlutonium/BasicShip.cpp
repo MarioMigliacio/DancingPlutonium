@@ -5,7 +5,7 @@
 class BasicShip : GenericEnemyUnit
 {
 public:
-	BasicShip()
+	BasicShip(const sf::RenderTarget& _rt)
 	{
 		value = 50;
 		health = 100;
@@ -14,6 +14,8 @@ public:
 		speed = 1.0f;
 		isActive = true;
 		SetSpriteImage();
+		//EmplaceRandomly(_rt);
+		//SetPosition(sf::Vector2f(16.0f, 16.0f));
 	}
 
 	virtual int GetValue() const override
@@ -46,7 +48,7 @@ public:
 		return isActive;
 	}
 
-	virtual sf::Sprite GetSprite() const override
+	virtual sf::Sprite& GetSprite() override
 	{
 		return sprite;
 	}
@@ -56,22 +58,39 @@ public:
 		return sprite.getPosition();
 	}
 
-	virtual void Draw(sf::RenderTarget& _rt) const override
+	virtual sf::FloatRect GetBounds() const override
+	{
+		return sprite.getGlobalBounds();
+	}
+
+	virtual void SetPosition(const sf::Vector2f& _pos)
+	{
+		position = _pos;
+		sprite.setPosition(_pos);
+	}
+
+	virtual void Draw(sf::RenderTarget& _rt) override
 	{
 		_rt.draw(sprite);
 	}
 
-	virtual void SetPosition(const sf::Vector2f& _pos) override
+	virtual void EmplaceRandomly(const sf::RenderTarget& _rt) override
 	{
-		sprite.setPosition(_pos);
+		int randomX = _rt.getSize().x - sprite.getGlobalBounds().width / 2.0f;
+		randomX = RandomIntRange(sprite.getGlobalBounds().width / 2.0f, randomX) % randomX;
+
+		SetPosition(sf::Vector2f((float)randomX, 16.0f));
 	}
 
 private:
 	void SetSpriteImage()
 	{
+		auto origin = sf::Vector2f(16.0f, 16.0f);
+
 		texture.loadFromFile("Content/Images/BasicShip.png");
-		sprite.setTexture(texture);
+		sprite.setTexture(texture);		
 		sprite.setOrigin(sf::Vector2f(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f));
-		sprite.setPosition(sf::Vector2f(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f));
+		sprite.setPosition(origin);
+		position = origin;
 	}
 };

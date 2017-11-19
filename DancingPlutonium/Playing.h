@@ -18,10 +18,7 @@ public:
 	Playing() {}
 	~Playing() {}
 	void Show(sf::RenderWindow& _window);
-	void SpawnShip(sf::RenderWindow& _window);
-	BasicShip m_ship;
 
 private:
-	sf::Vector2f Emplace(sf::RenderWindow& _window);
 	static sf::Uint32 m_state;
 };

@@ -36,6 +36,9 @@
     <ClCompile Include="Playing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IRng.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h">
@@ -54,6 +57,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Playing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicShip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IRng.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
