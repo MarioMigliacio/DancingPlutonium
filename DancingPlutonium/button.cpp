@@ -17,6 +17,22 @@ Button::Button(const sf::String _name, const sf::Color& _fillColor, const sf::Co
 	accumulator = 0.0f;	
 }
 
+Button::Button(const Button & _ref)
+{
+	isFading = _ref.isFading;
+	isClickable = _ref.isClickable;
+	isClicked = _ref.isClicked;
+	accumulator = _ref.accumulator;
+
+	alpha = _ref.alpha;
+	buttonName = _ref.buttonName;
+	buttonFillColor = _ref.buttonFillColor;
+	buttonBoarderColor = _ref.buttonBoarderColor;
+	location = _ref.location;
+	bounds = _ref.bounds;
+	font = _ref.font;
+}
+
 void Button::Draw(sf::RenderTarget& _rt) const
 {
 	_rt.draw(buttonName);

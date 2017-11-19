@@ -16,6 +16,7 @@ public:
 
 public:
 	Intro() {}
+	Intro(const Intro& _ref) {}
 	~Intro() {}
 	void Show(sf::RenderWindow& _window);
 	sf::Uint32 getIntroState() const;

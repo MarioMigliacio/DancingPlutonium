@@ -20,6 +20,7 @@ public:
 
 public:
 	TitleMenu() {}
+	TitleMenu(const TitleMenu& _ref) {}
 	~TitleMenu() {}
 	void Show(sf::RenderWindow& _window);
 	sf::Uint32 getMenuState() const;

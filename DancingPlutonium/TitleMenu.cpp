@@ -19,7 +19,7 @@ void TitleMenu::Show(sf::RenderWindow& _window)
 	
 	// Set up the background:
 	sf::Texture bgTexture;
-	bgTexture.loadFromFile("Content/Images/TitleBackground.jpg");
+	bgTexture.loadFromFile("Content/Images/TitleBackground.png");
 
 	sf::Sprite bgSprite;
 	bgSprite.setTexture(bgTexture);
@@ -45,7 +45,7 @@ void TitleMenu::Show(sf::RenderWindow& _window)
 	sf::Music menuMusic;
 	menuMusic.openFromFile("Content/Sounds/RootMenu.wav");
 	menuMusic.setLoop(true);
-	menuMusic.setVolume(85);
+	menuMusic.setVolume(100);
 	menuMusic.play();
 
 	// Set up the Timers:

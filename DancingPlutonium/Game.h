@@ -10,6 +10,7 @@ class Game
 {
 public:
 	Game() {}
+	Game(const Game& _ref) {}
 	~Game() {}
 
 	static void Initialize();

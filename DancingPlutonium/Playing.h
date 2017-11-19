@@ -15,6 +15,7 @@ public:
 	};
 
 	Playing() {}
+	Playing(const Playing& _ref) {}
 	~Playing() {}
 	void Show(sf::RenderWindow& _window);
 

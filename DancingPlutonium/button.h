@@ -6,6 +6,7 @@ class Button
 {
 public:
 	Button(const sf::String _name, const sf::Color& _fillColor, const sf::Color& _boarderColor, int _size, bool _clickable);
+	Button(const Button& _ref);
 	~Button() {}
 	void Draw(sf::RenderTarget& _rt) const;
 	void Update(float _dt);

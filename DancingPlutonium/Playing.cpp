@@ -14,13 +14,17 @@ void Playing::Show(sf::RenderWindow & _window)
 	// Set the State:
 	m_state = play_state::s_playing;
 	BasicShip m_ship(_window);
+	
+	// this works!
+	std::vector<GenericEnemyUnit*> mm;
+	mm.push_back(&m_ship);
 
 	// Scale screens with different computer screen resolutions: (the standard resolution in place is 720p: 1280wide x 720high, 60 fps)
 	sf::VideoMode mode = sf::VideoMode::getDesktopMode();
 
 	// Set up the background:
 	sf::Texture bgTexture;
-	bgTexture.loadFromFile("Content/Images/TitleBackground.jpg");
+	bgTexture.loadFromFile("Content/Images/Space1.png");
 
 	sf::Sprite bgSprite;
 	bgSprite.setTexture(bgTexture);
@@ -40,15 +44,15 @@ void Playing::Show(sf::RenderWindow & _window)
 				return;
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
-			{
-				m_ship.EmplaceRandomly(_window);
+			{	
+				mm[0]->EmplaceRandomly(_window);
 				//m_ship.GetSprite().move(sf::Vector2f(5.0f, 0.0));
 			}
 		}
 
 		_window.clear();
 		_window.draw(bgSprite);
-		m_ship.Draw(_window);
+		mm[0]->Draw(_window);
 		_window.display();
 	}
 }
