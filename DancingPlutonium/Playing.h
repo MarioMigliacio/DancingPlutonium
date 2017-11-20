@@ -4,6 +4,7 @@
 #include <SFML/Audio.hpp>
 #include "BasicShip.h"
 #include "PlutoniumShip.h"
+#include "BasicBullet.h"
 
 class Playing
 {

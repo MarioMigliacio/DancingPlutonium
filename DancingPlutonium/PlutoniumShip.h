@@ -1,6 +1,6 @@
 #pragma once
 
-#include<SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 class PlutoniumShip
 {
@@ -17,6 +17,7 @@ public:
 
 public:
 	PlutoniumShip(const sf::RenderTarget& _rt);
+	~PlutoniumShip() {}
 	int LivesRemaining() const;
 	int GetScore() const;
 	void AddScore(const int _value);

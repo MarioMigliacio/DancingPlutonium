@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicBullet.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="BasicShip.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -127,6 +128,7 @@
     <ClCompile Include="TitleMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BasicBullet.h" />
     <ClInclude Include="BasicShip.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="EnemyContainer.h" />
