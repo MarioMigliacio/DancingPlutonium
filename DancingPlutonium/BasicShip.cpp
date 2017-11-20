@@ -6,8 +6,8 @@ BasicShip::BasicShip(const sf::RenderTarget& _rt)
 {
 	value = 50;
 	health = 100;
-	fireRate = 0.1f;
-	fireDamage = 1;
+	fireRate = 1.25f;
+	fireDamage = 10;
 	speed = 1.0f;
 	isActive = true;
 	SetSpriteImage();
@@ -45,7 +45,7 @@ bool BasicShip::GetActiveState() const
 	return isActive;
 }
 
-sf::Sprite & BasicShip::GetSprite()
+sf::Sprite& BasicShip::GetSprite()
 {
 	return sprite;
 }

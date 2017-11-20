@@ -123,6 +123,7 @@
     <ClCompile Include="IRng.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Playing.cpp" />
+    <ClCompile Include="PlutoniumShip.cpp" />
     <ClCompile Include="TitleMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +135,7 @@
     <ClInclude Include="Intro.h" />
     <ClInclude Include="IRng.h" />
     <ClInclude Include="Playing.h" />
+    <ClInclude Include="PlutoniumShip.h" />
     <ClInclude Include="TitleMenu.h" />
   </ItemGroup>
   <ItemGroup>

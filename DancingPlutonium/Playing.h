@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "BasicShip.h"
+#include "PlutoniumShip.h"
 
 class Playing
 {

@@ -14,6 +14,7 @@ void Playing::Show(sf::RenderWindow & _window)
 	// Set the State:
 	m_state = play_state::s_playing;
 	BasicShip m_ship(_window);
+	PlutoniumShip me(_window);
 	
 	// this works!
 	std::vector<GenericEnemyUnit*> mm;
@@ -45,14 +46,31 @@ void Playing::Show(sf::RenderWindow & _window)
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{	
-				mm[0]->EmplaceRandomly(_window);
+				mm[0]->EmplaceRandomly(_window);				
 				//m_ship.GetSprite().move(sf::Vector2f(5.0f, 0.0));
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			{
+				me.SetPosition(sf::Vector2f(me.GetPosition().x - 1.0f * me.GetSpeed(), me.GetPosition().y));
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			{
+				me.SetPosition(sf::Vector2f(me.GetPosition().x + 1.0f * me.GetSpeed(), me.GetPosition().y));
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			{
+				me.SetPosition(sf::Vector2f(me.GetPosition().x, me.GetPosition().y - 1.0f * me.GetSpeed()));
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			{
+				me.SetPosition(sf::Vector2f(me.GetPosition().x, me.GetPosition().y + 1.0f * me.GetSpeed()));
 			}
 		}
 
 		_window.clear();
 		_window.draw(bgSprite);
 		mm[0]->Draw(_window);
+		me.Draw(_window);
 		_window.display();
 	}
 }
