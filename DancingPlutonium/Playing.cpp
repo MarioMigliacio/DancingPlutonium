@@ -84,6 +84,7 @@ void Playing::Show(sf::RenderWindow & _window)
 
 				if (bullets[i]->GetActiveState() == false)
 				{
+					delete bullets[i];
 					bullets.erase(bullets.begin() + i);
 				}
 			}
