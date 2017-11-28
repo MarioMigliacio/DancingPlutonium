@@ -2,32 +2,47 @@
 
 #include<SFML/Graphics.hpp>
 #include "IRng.h"
+#include "BulletPattern.h"
+#include "Bullet.h"
 
 class GenericEnemyUnit
 {
 protected:
 	int value;
 	int health;	
-	float fireRate;
 	int fireDamage;
+	float fireRate;	
 	float speed;
 	bool isActive;
 	sf::String name;
 	sf::Sprite sprite;
 	sf::Texture texture;
 	sf::Vector2f position;
+	std::vector<BulletPattern::Pattern> bulletPatterns;
+	std::vector<Bullet*> shotsFired;
 	
 public:	
-	virtual int GetValue() const = 0;
-	virtual int GetHealth() const = 0;
-	virtual float GetFireRate() const = 0;
-	virtual int GetFireDamage() const = 0;
-	virtual float GetSpeed() const = 0;
-	virtual bool GetActiveState() const = 0;
-	virtual sf::Sprite& GetSprite() = 0;
-	virtual sf::Vector2f GetPosition() const = 0;
-	virtual sf::FloatRect GetBounds() const = 0;
-	virtual void SetPosition(const sf::Vector2f& _pos) = 0;
-	virtual void Draw(sf::RenderTarget& _rt) = 0;
-	virtual void EmplaceRandomly(const sf::RenderTarget& _rt) = 0;
+	virtual int GetValue() const;
+	virtual int GetHealth() const;
+	virtual int GetFireDamage() const;
+	virtual float GetFireRate() const;	
+	virtual float GetSpeed() const;
+	virtual bool GetActiveState(const sf::RenderTarget& _rt) const;
+	virtual bool CheckIfColliding(const Bullet& _shot) const;
+	virtual sf::String GetName() const;
+	virtual sf::Sprite GetSprite() const;
+	virtual sf::Texture GetTexture() const;
+	virtual sf::Vector2f GetPosition() const;
+	virtual sf::FloatRect GetBounds() const;
+
+	virtual void SetPosition(const sf::Vector2f& _pos);
+	virtual void SetHealth(const int _val);	
+	
+	virtual void SpawnRandomly();
+	virtual void Update(float _dt);
+	virtual void Draw(const sf::RenderTarget& _rt) const;
+	
+	virtual void SetSprite() = 0;
+	virtual void SetBulletPatterns() = 0;
+	virtual void ShootBullet() = 0;
 };

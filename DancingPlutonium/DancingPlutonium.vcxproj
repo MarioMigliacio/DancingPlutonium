@@ -117,9 +117,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BasicBullet.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="BasicShip.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GenericEnemyUnit.cpp" />
     <ClCompile Include="Intro.cpp" />
     <ClCompile Include="IRng.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -130,8 +132,9 @@
   <ItemGroup>
     <ClInclude Include="BasicBullet.h" />
     <ClInclude Include="BasicShip.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletPattern.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="EnemyContainer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GenericEnemyUnit.h" />
     <ClInclude Include="Intro.h" />

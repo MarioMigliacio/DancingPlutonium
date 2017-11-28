@@ -47,7 +47,7 @@ void Playing::Show(sf::RenderWindow & _window)
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{	
-				mm[0]->EmplaceRandomly(_window);				
+				//mm[0]->EmplaceRandomly(_window);				
 				//m_ship.GetSprite().move(sf::Vector2f(5.0f, 0.0));
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
@@ -68,7 +68,7 @@ void Playing::Show(sf::RenderWindow & _window)
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 			{
-				bullets.push_back(new BasicBullet(_window, me.GetPosition()));				
+				//bullets.push_back(new BasicBullet(_window, me.GetPosition()));				
 			}
 		}
 
@@ -78,7 +78,7 @@ void Playing::Show(sf::RenderWindow & _window)
 		me.Draw(_window);
 		if (bullets.size() != 0)
 		{
-			for (int i = 0; i < bullets.size(); i++)
+			/*for (int i = 0; i < bullets.size(); i++)
 			{
 				bullets[i]->SetPosition(sf::Vector2f(bullets[i]->GetPosition().x, bullets[i]->GetPosition().y - 1.0f * bullets[i]->GetSpeed()));
 
@@ -87,12 +87,12 @@ void Playing::Show(sf::RenderWindow & _window)
 					delete bullets[i];
 					bullets.erase(bullets.begin() + i);
 				}
-			}
+			}*/
 
-			for (int i = 0; i < bullets.size(); i++)
+			/*for (int i = 0; i < bullets.size(); i++)
 			{
 				bullets[i]->Draw(_window);
-			}
+			}*/
 		}
 		_window.display();
 	}

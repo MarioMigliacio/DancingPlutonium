@@ -45,6 +45,12 @@
     <ClCompile Include="BasicBullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GenericEnemyUnit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h">
@@ -71,13 +77,16 @@
     <ClInclude Include="IRng.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyContainer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PlutoniumShip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BasicBullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletPattern.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
