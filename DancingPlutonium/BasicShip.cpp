@@ -73,10 +73,10 @@ void BasicShip::Draw(sf::RenderTarget& _rt)
 
 void BasicShip::EmplaceRandomly(const sf::RenderTarget& _rt)
 {
-	float randomX = _rt.getSize().x - sprite.getGlobalBounds().width / 2.0f;
-	randomX = RandomIntRange(sprite.getGlobalBounds().width / 2.0f, randomX) % (int)randomX;
+	int randomX = static_cast<int>(_rt.getSize().x - sprite.getGlobalBounds().width / 2.0f);
+	randomX = RandomIntRange(static_cast<int>(sprite.getGlobalBounds().width / 2.0f), randomX) % randomX;
 
-	SetPosition(sf::Vector2f(randomX, 16.0f));
+	SetPosition(sf::Vector2f((float)randomX, 16.0f));
 }
 
 void BasicShip::SetSpriteImage()
