@@ -14,7 +14,12 @@ void Game::Initialize()
 	// sf::Style::Fullscreen
 	// Create the Rendering Window.
 	sf::VideoMode mode = sf::VideoMode::getDesktopMode();
-	m_window.create(sf::VideoMode(mode.width, mode.height, mode.bitsPerPixel), "Dancing Plutonium");
+
+	// non full screen
+	//m_window.create(sf::VideoMode(mode.width, mode.height, mode.bitsPerPixel), "Dancing Plutonium");
+
+	// full screen
+	m_window.create(sf::VideoMode(mode.width, mode.height, mode.bitsPerPixel), "Dancing Plutonium", sf::Style::Fullscreen);
 
 	m_state = current_state::s_intro;
 
