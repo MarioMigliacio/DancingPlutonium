@@ -78,14 +78,20 @@ void GenericEnemyUnit::SetHealth(const int _val)
 	health -= _val;
 }
 
-void GenericEnemyUnit::SpawnRandomly()
+void GenericEnemyUnit::SpawnRandomly(const sf::RenderTarget& _rt)
 {
+	int randomX = _rt.getSize().x - sprite.getGlobalBounds().width / 2.0f;
+	randomX = RandomIntRange(sprite.getGlobalBounds().width / 2.0f, randomX) % randomX;
+	
+	SetPosition(sf::Vector2f((float)randomX, 16.0f));
 }
 
+// IMPORTANT DO THIS "SOON"
 void GenericEnemyUnit::Update(float _dt)
 {
 }
 
+// IMPORTANT DO THIS "SOON"
 void GenericEnemyUnit::Draw(const sf::RenderTarget & _rt) const
 {
 }

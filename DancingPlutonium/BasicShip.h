@@ -9,7 +9,8 @@ public:
 	BasicShip(const BasicShip& _ref) {}
 	~BasicShip() {}
 
-	void SetSpriteImage();
+	// do I need this?!
+	//void SetSpriteImage();
 
 
 	// Inherited via GenericEnemyUnit

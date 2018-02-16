@@ -38,7 +38,7 @@ public:
 	virtual void SetPosition(const sf::Vector2f& _pos);
 	virtual void SetHealth(const int _val);	
 	
-	virtual void SpawnRandomly();
+	virtual void SpawnRandomly(const sf::RenderTarget& _rt);
 	virtual void Update(float _dt);
 	virtual void Draw(const sf::RenderTarget& _rt) const;
 	

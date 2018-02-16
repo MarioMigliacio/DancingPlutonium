@@ -15,11 +15,13 @@ void Game::Initialize()
 	// Create the Rendering Window.
 	sf::VideoMode mode = sf::VideoMode::getDesktopMode();
 
+	// OMG debugging causes huge errors when running in full screen mode! Toggle the below to non full screen if u want to step into breakpoints!!
+
 	// non full screen
-	//m_window.create(sf::VideoMode(mode.width, mode.height, mode.bitsPerPixel), "Dancing Plutonium");
+	m_window.create(sf::VideoMode(mode.width, mode.height, mode.bitsPerPixel), "Dancing Plutonium");
 
 	// full screen
-	m_window.create(sf::VideoMode(mode.width, mode.height, mode.bitsPerPixel), "Dancing Plutonium", sf::Style::Fullscreen);
+	//m_window.create(sf::VideoMode(mode.width, mode.height, mode.bitsPerPixel), "Dancing Plutonium", sf::Style::Fullscreen);
 
 	m_state = current_state::s_intro;
 
