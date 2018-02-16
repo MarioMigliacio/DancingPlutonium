@@ -3,7 +3,7 @@
 // Static variable declarations:
 sf::Uint32 Playing::m_state = s_uninitialized;
 
-void Playing::Show(sf::RenderWindow & _window)
+void Playing::Show(sf::RenderWindow& _window)
 {
 	// Ensure that the initialization takes place correctly here and for the first time.
 	if (m_state != play_state::s_uninitialized)
@@ -47,7 +47,7 @@ void Playing::Show(sf::RenderWindow & _window)
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{	
-				//mm[0]->EmplaceRandomly(_window);				
+				mm[0]->SpawnRandomly(_window);
 				//m_ship.GetSprite().move(sf::Vector2f(5.0f, 0.0));
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
