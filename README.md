@@ -3,7 +3,8 @@ The old Glory of Dancing Plutonium shall be restored, in C++ using the SFML fram
 
 Useful hyperlinks:
 
-Simple and Fast Multimedia Library, the lightweight library for gaming functionality in C++. https://www.sfml-dev.org/tutorials/2.4/
+// Simple and Fast Multimedia Library, the lightweight library for gaming functionality in C++. 
+https://www.sfml-dev.org/tutorials/2.4/
 
 // this is for creating sprites!
 https://www.piskelapp.com/
