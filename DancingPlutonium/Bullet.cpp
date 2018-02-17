@@ -42,11 +42,14 @@ sf::Vector2f Bullet::GetPosition() const
 void Bullet::SetPosition(const sf::Vector2f& _pos)
 {
 	position = _pos;
+	sprite.setPosition(_pos);
 }
 
 void Bullet::Update(float _dt)
 {
-
+	// LATER logic: you need to use the state of the bullet to consider the direction of the bullet (friendly or foe)
+	// and also use the clock to make it mooove properly
+	SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - 1.0f * speed));
 }
 
 void Bullet::Draw(sf::RenderTarget& _rt) const

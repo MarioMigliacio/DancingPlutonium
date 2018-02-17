@@ -14,7 +14,9 @@ protected:
 	BulletPattern::Pattern pattern;
 	
 public:
+	Bullet() {}
 	Bullet(sf::RenderTarget& _rt, sf::Vector2f& _pos);
+	Bullet(const Bullet& _ref) {}
 	~Bullet() {}
 
 	float GetSpeed() const;

@@ -50,11 +50,20 @@
 //	}
 //}
 //
-//void BasicBullet::SetSprite(const sf::Vector2f& _origin)
-//{
-//	texture.loadFromFile("Content/Images/BulletBlue.png");
-//	sprite.setTexture(texture);
-//	sprite.setOrigin(sf::Vector2f(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f));
-//	sprite.setPosition(_origin);
-//	position = _origin;
-//}
+
+BasicBullet::BasicBullet(const sf::RenderTarget& _rt, const sf::Vector2f& _pos)
+{
+	position = _pos;
+	speed = 0.1f;
+	SetSprite(position);
+}
+
+void BasicBullet::SetSprite(const sf::Vector2f& _origin)
+{
+	texture.loadFromFile("Content/Images/BulletBlue.png");
+	sprite.setTexture(texture);
+	sprite.setOrigin(sf::Vector2f(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f));
+	sprite.setPosition(_origin);
+	position = _origin;
+}
+

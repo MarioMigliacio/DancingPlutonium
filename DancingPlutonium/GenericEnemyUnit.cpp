@@ -92,6 +92,6 @@ void GenericEnemyUnit::Update(float _dt)
 }
 
 // IMPORTANT DO THIS "SOON"
-void GenericEnemyUnit::Draw(const sf::RenderTarget & _rt) const
+void GenericEnemyUnit::Draw(const sf::RenderTarget& _rt) const
 {
 }
