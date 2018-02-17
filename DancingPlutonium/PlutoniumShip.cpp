@@ -138,7 +138,7 @@ void PlutoniumShip::InitializeWeaponry()
 
 void PlutoniumShip::SetSprite(const sf::RenderTarget& _rt)
 {
-	auto origin = sf::Vector2f(_rt.getSize().x / 2.0f, _rt.getSize().y - 32.0f);
+	sf::Vector2f origin = sf::Vector2f(_rt.getSize().x / 2.0f, _rt.getSize().y - 32.0f);
 
 	texture.loadFromFile("Content/Images/PlayerShip.png");
 	sprite.setTexture(texture);
