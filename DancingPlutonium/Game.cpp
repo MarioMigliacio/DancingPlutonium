@@ -15,13 +15,16 @@ void Game::Initialize()
 	// Create the Rendering Window.
 	sf::VideoMode mode = sf::VideoMode::getDesktopMode();
 
-	// OMG debugging causes huge errors when running in full screen mode! Toggle the below to non full screen if u want to step into breakpoints!!
+	// 720p resolution: 1280 x 720
+	const int gameWidth = 1280;
+	const int gameHeight = 720;
+	sf::View gameView;
+	gameView.reset(sf::FloatRect(0.f, 0.f, gameWidth, gameHeight));
+	gameView.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
 
-	// non full screen
-	m_window.create(sf::VideoMode(mode.width, mode.height, mode.bitsPerPixel), "Dancing Plutonium");
-
-	// full screen
-	//m_window.create(sf::VideoMode(mode.width, mode.height, mode.bitsPerPixel), "Dancing Plutonium", sf::Style::Fullscreen);
+	// use the sf::Style to change the window's options. Fullscreen makes debugging a nightmare, the Titlebar + close styles prevent resizing window.
+	m_window.create(sf::VideoMode(gameWidth, gameHeight, mode.bitsPerPixel), "Dancing Plutonium", sf::Style::Titlebar | sf::Style::Close);
+	m_window.setView(gameView);
 
 	m_state = current_state::s_intro;
 

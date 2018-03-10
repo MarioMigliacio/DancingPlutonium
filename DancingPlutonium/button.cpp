@@ -14,10 +14,10 @@ Button::Button(const sf::String _name, const sf::Color& _fillColor, const sf::Co
 	buttonName.setPosition(location);
 	bounds = buttonName.getGlobalBounds();
 	alpha = 0;
-	accumulator = 0.0f;	
+	accumulator = 0.0f;
 }
 
-Button::Button(const Button & _ref)
+Button::Button(const Button& _ref)
 {
 	isFading = _ref.isFading;
 	isClickable = _ref.isClickable;
@@ -38,13 +38,14 @@ void Button::Draw(sf::RenderTarget& _rt) const
 	_rt.draw(buttonName);
 }
 
-void Button::Update(float _dt)
+void Button::Update(float _dt, sf::RenderWindow& _window)
 {
 	if (isClickable)
 	{
 		accumulator += _dt;
 
-		if (buttonName.getGlobalBounds().contains((float)sf::Mouse::getPosition().x, (float)sf::Mouse::getPosition().y))
+		// special note: do NOT use Mouse::getPosition(), it goes with GLOBAL desktop coords, keep it relative to the window!
+		if (buttonName.getGlobalBounds().contains((float)sf::Mouse::getPosition(_window).x, (float)sf::Mouse::getPosition(_window).y))
 		{
 			if (alpha < 255 && isFading == false)
 			{

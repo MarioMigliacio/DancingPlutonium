@@ -14,32 +14,27 @@ void TitleMenu::Show(sf::RenderWindow& _window)
 	// Set the State:
 	m_state = menu_state::s_undecided;
 	
-	// Scale screens with different computer screen resolutions: (the standard resolution in place is 720p: 1280wide x 720high, 60 fps)
-	sf::VideoMode mode = sf::VideoMode::getDesktopMode();
-	
 	// Set up the background:
 	sf::Texture bgTexture;
 	bgTexture.loadFromFile("Content/Images/TitleBackground.png");
 
+	const float widthScale = static_cast<float>(_window.getSize().x) / static_cast<float>(bgTexture.getSize().x);
+	const float heightScale = static_cast<float>(_window.getSize().y) / static_cast<float>(bgTexture.getSize().y);
+
 	sf::Sprite bgSprite;
 	bgSprite.setTexture(bgTexture);
-	bgSprite.setOrigin(bgSprite.getGlobalBounds().width / 2.0f, bgSprite.getGlobalBounds().height / 2.0f);
-	bgSprite.setPosition(bgSprite.getGlobalBounds().width / 2.0f, bgSprite.getGlobalBounds().height / 2.0f);
+	bgSprite.setScale(sf::Vector2f(widthScale, heightScale));
+	bgSprite.setOrigin(0.f, 0.f);
+	bgSprite.setPosition(0.f, 0.f);
 
-	// Set up the Button locations:
-	Button playButton = Button("Play", sf::Color::Yellow, sf::Color::Blue, 80, true);
-	Button optionsButton = Button("Options", sf::Color::Yellow, sf::Color::Blue, 80, true);
-	Button scoreButton = Button("ScoreBoard", sf::Color::Yellow, sf::Color::Blue, 80, true);
-
-	playButton.setPosition(sf::Vector2f(_window.getSize().x / 2.0f - playButton.getBounds().width / 2.0f, _window.getSize().y / 6.0f - playButton.getBounds().height / 2.0f));
-	optionsButton.setPosition(sf::Vector2f(_window.getSize().x / 2.0f - optionsButton.getBounds().width / 2.0f, _window.getSize().y / 6.0f - optionsButton.getBounds().height / 2.0f + 85));
-	scoreButton.setPosition(sf::Vector2f(_window.getSize().x / 2.0f - scoreButton.getBounds().width / 2.0f, _window.getSize().y / 6.0f - scoreButton.getBounds().height / 2.0f + 170));
-
-	// Put all the buttons in an iterable container:
-	std::vector<Button> buttonContainer;
-	buttonContainer.push_back(playButton);
-	buttonContainer.push_back(optionsButton);
-	buttonContainer.push_back(scoreButton);
+	// Put all the buttons in an iterable container which makes cleanup easy.
+	std::vector<Button*> buttonContainer;
+	buttonContainer.push_back(new Button("Play", sf::Color::Yellow, sf::Color::Blue, 80, true));
+	buttonContainer[0]->setPosition(sf::Vector2f(_window.getSize().x / 2.0f - buttonContainer[0]->getBounds().width / 2.0f, _window.getSize().y / 6.0f - buttonContainer[0]->getBounds().height / 2.0f));
+	buttonContainer.push_back(new Button("Options", sf::Color::Yellow, sf::Color::Blue, 80, true));
+	buttonContainer[1]->setPosition(sf::Vector2f(_window.getSize().x / 2.0f - buttonContainer[1]->getBounds().width / 2.0f, _window.getSize().y / 6.0f - buttonContainer[1]->getBounds().height / 2.0f + 85));
+	buttonContainer.push_back(new Button("ScoreBoard", sf::Color::Yellow, sf::Color::Blue, 80, true));
+	buttonContainer[2]->setPosition(sf::Vector2f(_window.getSize().x / 2.0f - buttonContainer[2]->getBounds().width / 2.0f, _window.getSize().y / 6.0f - buttonContainer[2]->getBounds().height / 2.0f + 170));
 
 	// Set up the Music: 
 	sf::Music menuMusic;
@@ -73,24 +68,27 @@ void TitleMenu::Show(sf::RenderWindow& _window)
 
 		for (int i = 0; i < (int)buttonContainer.size(); i++)
 		{
-			buttonContainer[i].Update(dt.asSeconds());
-			buttonContainer[i].Draw(_window);
+			buttonContainer[i]->Update(dt.asSeconds(), _window);
+			buttonContainer[i]->Draw(_window);
 
-			if (buttonContainer[i].IsClicked())
+			if (buttonContainer[i]->IsClicked())
 			{
-				if (buttonContainer[i].getName() == "Play")
+				if (buttonContainer[i]->getName() == "Play")
 				{
 					m_state = menu_state::s_play;
+					cleanup(buttonContainer);
 					break;
 				}
-				else if (buttonContainer[i].getName() == "Options")
+				else if (buttonContainer[i]->getName() == "Options")
 				{
 					m_state = menu_state::s_options;
+					cleanup(buttonContainer);
 					break;
 				}
-				else if (buttonContainer[i].getName() == "ScoreBoard")
+				else if (buttonContainer[i]->getName() == "ScoreBoard")
 				{
 					m_state = menu_state::s_score;
+					cleanup(buttonContainer);
 					break;
 				}
 			}
@@ -103,4 +101,15 @@ void TitleMenu::Show(sf::RenderWindow& _window)
 sf::Uint32 TitleMenu::getMenuState() const
 {
 	return m_state;
+}
+
+void TitleMenu::cleanup(std::vector<Button*>& _container)
+{
+	int iter = _container.size() - 1;
+
+	for (iter; iter >= 0; iter--)
+	{
+		delete _container[iter];
+		_container.erase(_container.end() - 1);
+	}
 }

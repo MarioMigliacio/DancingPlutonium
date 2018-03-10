@@ -9,7 +9,7 @@ public:
 	Button(const Button& _ref);
 	~Button() {}
 	void Draw(sf::RenderTarget& _rt) const;
-	void Update(float _dt);
+	void Update(float _dt, sf::RenderWindow& _window);
 	bool IsClicked();
 	sf::String getName() const;
 	void setOrigin(const sf::Vector2f _pos);

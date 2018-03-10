@@ -27,4 +27,5 @@ public:
 	
 private:
 	static sf::Uint32 m_state;
+	static void cleanup(std::vector<Button*>& _container);
 };
