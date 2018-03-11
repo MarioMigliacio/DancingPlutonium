@@ -1,9 +1,9 @@
 #include "TitleMenu.h"
 
 // Static variable declarations:
-sf::Uint32 TitleMenu::m_state = s_uninitialized;
+sf::Uint32 DancingPlutonium::TitleMenu::m_state = s_uninitialized;
 
-void TitleMenu::Show(sf::RenderWindow& _window)
+void DancingPlutonium::TitleMenu::Show(sf::RenderWindow& _window)
 {
 	// Ensure that the initialization takes place correctly here and for the first time.
 	if (m_state != menu_state::s_uninitialized)
@@ -98,14 +98,14 @@ void TitleMenu::Show(sf::RenderWindow& _window)
 	}
 }
 
-sf::Uint32 TitleMenu::getMenuState() const
+sf::Uint32 DancingPlutonium::TitleMenu::getMenuState() const
 {
 	return m_state;
 }
 
-void TitleMenu::cleanup(std::vector<Button*>& _container)
+void DancingPlutonium::TitleMenu::cleanup(std::vector<Button*>& _container)
 {
-	int iter = _container.size() - 1;
+	int iter = static_cast<int>(_container.size() - 1);
 
 	for (iter; iter >= 0; iter--)
 	{

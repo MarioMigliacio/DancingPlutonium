@@ -137,6 +137,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GenericEnemyUnit.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Intro.h" />
     <ClInclude Include="IRng.h" />
     <ClInclude Include="Playing.h" />

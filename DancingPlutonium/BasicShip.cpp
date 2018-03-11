@@ -2,7 +2,7 @@
 
 #include "BasicShip.h"
 
-BasicShip::BasicShip(const sf::RenderTarget& _rt)
+DancingPlutonium::BasicShip::BasicShip(const sf::RenderTarget& _rt)
 {
 	name = "BasicShip";
 	value = 50;
@@ -16,7 +16,7 @@ BasicShip::BasicShip(const sf::RenderTarget& _rt)
 	SetPosition(sf::Vector2f(16.0f, 16.0f));
 }
 
-void BasicShip::SetSprite()
+void DancingPlutonium::BasicShip::SetSprite()
 {
 	sf::Vector2f origin = sf::Vector2f(16.0f, 16.0f);
 
@@ -27,12 +27,12 @@ void BasicShip::SetSprite()
 	position = origin;
 }
 
-void BasicShip::SetBulletPatterns()
+void DancingPlutonium::BasicShip::SetBulletPatterns()
 {
 	bulletPatterns.push_back(BulletPattern::Pattern::s_enemyStandard);
 }
 
-void BasicShip::ShootBullet()
+void DancingPlutonium::BasicShip::ShootBullet()
 {
 }
 

@@ -1,16 +1,16 @@
 #include "Bullet.h"
 
-Bullet::Bullet(sf::RenderTarget& _rt, sf::Vector2f& _pos)
+DancingPlutonium::Bullet::Bullet(sf::RenderTarget& _rt, sf::Vector2f& _pos)
 {
 	position = _pos;
 }
 
-float Bullet::GetSpeed() const
+float DancingPlutonium::Bullet::GetSpeed() const
 {
 	return speed;
 }
 
-bool Bullet::GetActiveState(const sf::RenderTarget& _rt) const
+bool DancingPlutonium::Bullet::GetActiveState(const sf::RenderTarget& _rt) const
 {
 	// check to see if it is possible to get the _rt as a rectangle and use the contains() logic?..
 	if (sprite.getPosition().y < 0 || sprite.getPosition().x < 0 ||
@@ -24,35 +24,35 @@ bool Bullet::GetActiveState(const sf::RenderTarget& _rt) const
 	}
 }
 
-sf::Sprite& Bullet::GetSprite()
+sf::Sprite& DancingPlutonium::Bullet::GetSprite()
 {
 	return sprite;
 }
 
-sf::FloatRect Bullet::GetBounds() const
+sf::FloatRect DancingPlutonium::Bullet::GetBounds() const
 {
 	return sprite.getGlobalBounds();
 }
 
-sf::Vector2f Bullet::GetPosition() const
+sf::Vector2f DancingPlutonium::Bullet::GetPosition() const
 {
 	return position;
 }
 
-void Bullet::SetPosition(const sf::Vector2f& _pos)
+void DancingPlutonium::Bullet::SetPosition(const sf::Vector2f& _pos)
 {
 	position = _pos;
 	sprite.setPosition(_pos);
 }
 
-void Bullet::Update(float _dt)
+void DancingPlutonium::Bullet::Update(float _dt)
 {
 	// LATER logic: you need to use the state of the bullet to consider the direction of the bullet (friendly or foe)
 	// and also use the clock to make it mooove properly
 	SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - 1.0f * speed));
 }
 
-void Bullet::Draw(sf::RenderTarget& _rt) const
+void DancingPlutonium::Bullet::Draw(sf::RenderTarget& _rt) const
 {
 	_rt.draw(sprite);
 }

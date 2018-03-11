@@ -6,41 +6,44 @@
 #include "TitleMenu.h"
 #include "Playing.h"
 
-class Game
+namespace DancingPlutonium
 {
-public:
-	Game() {}
-	Game(const Game& _ref) {}
-	~Game() {}
-
-	static void Initialize();
-
-private:
-	static void Run();
-	static void Introduction();
-	static void Menu();
-	static void Play();
-	static void WinLevel();
-	static void GameOver();
-	static void Options();
-	static void ScoreScreen();
-	static bool Quitting();
-
-private:
-	enum current_state
+	class Game
 	{
-		s_uninitialized,
-		s_intro,
-		s_menu,
-		s_playing,
-		s_options,
-		s_scoreboard,
-		s_levelwin,
-		s_gameover,
-		s_quit
-	};
+	public:
+		Game() {}
+		Game(const Game& _ref) {}
+		~Game() {}
 
-private:
-	static sf::RenderWindow m_window;
-	static sf::Uint32 m_state;
-};
+		static void Initialize();
+
+	private:
+		static void Run();
+		static void Introduction();
+		static void Menu();
+		static void Play();
+		static void WinLevel();
+		static void GameOver();
+		static void Options();
+		static void ScoreScreen();
+		static bool Quitting();
+
+	private:
+		enum current_state
+		{
+			s_uninitialized,
+			s_intro,
+			s_menu,
+			s_playing,
+			s_options,
+			s_scoreboard,
+			s_levelwin,
+			s_gameover,
+			s_quit
+		};
+
+	private:
+		static sf::RenderWindow m_window;
+		static sf::Uint32 m_state;
+	};
+}

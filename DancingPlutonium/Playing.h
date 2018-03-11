@@ -6,21 +6,24 @@
 #include "PlutoniumShip.h"
 #include "BasicBullet.h"
 
-class Playing
+namespace DancingPlutonium
 {
-public:
-	enum play_state
+	class Playing
 	{
-		s_uninitialized,
-		s_playing,
-		s_quit
+	public:
+		enum play_state
+		{
+			s_uninitialized,
+			s_playing,
+			s_quit
+		};
+
+		Playing() {}
+		Playing(const Playing& _ref) {}
+		~Playing() {}
+		void Show(sf::RenderWindow& _window);
+
+	private:
+		static sf::Uint32 m_state;
 	};
-
-	Playing() {}
-	Playing(const Playing& _ref) {}
-	~Playing() {}
-	void Show(sf::RenderWindow& _window);
-
-private:
-	static sf::Uint32 m_state;
-};
+}

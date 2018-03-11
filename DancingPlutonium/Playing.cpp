@@ -1,9 +1,9 @@
 #include "Playing.h"
 
 // Static variable declarations:
-sf::Uint32 Playing::m_state = s_uninitialized;
+sf::Uint32 DancingPlutonium::Playing::m_state = s_uninitialized;
 
-void Playing::Show(sf::RenderWindow& _window)
+void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 {
 	// Ensure that the initialization takes place correctly here and for the first time.
 	if (m_state != play_state::s_uninitialized)

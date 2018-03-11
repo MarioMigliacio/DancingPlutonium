@@ -1,9 +1,9 @@
 #include "PlutoniumShip.h"
 
 // Static variable declarations:
-sf::Uint32 PlutoniumShip::m_weapon = s_uninitialized;
+sf::Uint32 DancingPlutonium::PlutoniumShip::m_weapon = s_uninitialized;
 
-PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
+DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
 {
 	lives = 3;
 	bombs = 0;
@@ -15,42 +15,42 @@ PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
 	SetSprite(_rt);
 }
 
-int PlutoniumShip::LivesRemaining() const
+int DancingPlutonium::PlutoniumShip::LivesRemaining() const
 {
 	return lives;
 }
 
-int PlutoniumShip::GetScore() const
+int DancingPlutonium::PlutoniumShip::GetScore() const
 {
 	return score;
 }
 
-void PlutoniumShip::AddScore(const int _value)
+void DancingPlutonium::PlutoniumShip::AddScore(const int _value)
 {
 	score += _value;
 }
 
-int PlutoniumShip::GetHealth() const
+int DancingPlutonium::PlutoniumShip::GetHealth() const
 {
 	return health;
 }
 
-void PlutoniumShip::ModifyHealth(const int _value)
+void DancingPlutonium::PlutoniumShip::ModifyHealth(const int _value)
 {
 	health += _value;
 }
 
-float PlutoniumShip::GetFireRate() const
+float DancingPlutonium::PlutoniumShip::GetFireRate() const
 {
 	return fireRate;
 }
 
-int PlutoniumShip::GetFireDamage() const
+int DancingPlutonium::PlutoniumShip::GetFireDamage() const
 {
 	return fireDamage;
 }
 
-void PlutoniumShip::UpgradeWeapon()
+void DancingPlutonium::PlutoniumShip::UpgradeWeapon()
 {
 	switch (m_weapon)
 	{
@@ -85,48 +85,48 @@ void PlutoniumShip::UpgradeWeapon()
 	return;
 }
 
-float PlutoniumShip::GetSpeed() const
+float DancingPlutonium::PlutoniumShip::GetSpeed() const
 {
 	return speed;
 }
 
-bool PlutoniumShip::GetActiveState() const
+bool DancingPlutonium::PlutoniumShip::GetActiveState() const
 {
 	return isActive;
 }
 
-sf::Sprite& PlutoniumShip::GetSprite()
+sf::Sprite& DancingPlutonium::PlutoniumShip::GetSprite()
 {
 	return sprite;
 }
 
-sf::Vector2f PlutoniumShip::GetPosition() const
+sf::Vector2f DancingPlutonium::PlutoniumShip::GetPosition() const
 {
 	return sprite.getPosition();
 }
 
-sf::FloatRect PlutoniumShip::GetBounds() const
+sf::FloatRect DancingPlutonium::PlutoniumShip::GetBounds() const
 {
 	return sprite.getGlobalBounds();
 }
 
-sf::Uint32 PlutoniumShip::getWeaponState() const
+sf::Uint32 DancingPlutonium::PlutoniumShip::getWeaponState() const
 {
 	return m_weapon;
 }
 
-void PlutoniumShip::SetPosition(const sf::Vector2f& _pos)
+void DancingPlutonium::PlutoniumShip::SetPosition(const sf::Vector2f& _pos)
 {
 	position = _pos;
 	sprite.setPosition(_pos);
 }
 
-void PlutoniumShip::Draw(sf::RenderTarget& _rt)
+void DancingPlutonium::PlutoniumShip::Draw(sf::RenderTarget& _rt)
 {
 	_rt.draw(sprite);
 }
 
-void PlutoniumShip::InitializeWeaponry()
+void DancingPlutonium::PlutoniumShip::InitializeWeaponry()
 {
 	if (m_weapon == WeaponState::s_uninitialized)
 	{
@@ -136,12 +136,13 @@ void PlutoniumShip::InitializeWeaponry()
 	}
 }
 
-void PlutoniumShip::SetSprite(const sf::RenderTarget& _rt)
+void DancingPlutonium::PlutoniumShip::SetSprite(const sf::RenderTarget& _rt)
 {
 	sf::Vector2f origin = sf::Vector2f(_rt.getSize().x / 2.0f, _rt.getSize().y - 32.0f);
 
 	texture.loadFromFile("Content/Images/PlayerShip.png");
 	sprite.setTexture(texture);
+	sprite.setScale(sf::Vector2f(0.75f, 0.75f));
 	sprite.setOrigin(sf::Vector2f(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f));
 	sprite.setPosition(origin);
 	position = origin;

@@ -1,10 +1,10 @@
 #include "Game.h"
 
 // Static variable declarations:
-sf::Uint32 Game::m_state = s_uninitialized;
-sf::RenderWindow Game::m_window;
+sf::Uint32 DancingPlutonium::Game::m_state = s_uninitialized;
+sf::RenderWindow DancingPlutonium::Game::m_window;
 
-void Game::Initialize()
+void DancingPlutonium::Game::Initialize()
 {
 	// Ensure that the initialization takes place correctly here and for the first time.
 	if (m_state != current_state::s_uninitialized)
@@ -19,7 +19,7 @@ void Game::Initialize()
 	const int gameWidth = 1280;
 	const int gameHeight = 720;
 	sf::View gameView;
-	gameView.reset(sf::FloatRect(0.f, 0.f, gameWidth, gameHeight));
+	gameView.reset(sf::FloatRect(0.f, 0.f, static_cast<float>(gameWidth), static_cast<float>(gameHeight)));
 	gameView.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
 
 	// use the sf::Style to change the window's options. Fullscreen makes debugging a nightmare, the Titlebar + close styles prevent resizing window.
@@ -36,7 +36,7 @@ void Game::Initialize()
 	m_window.close();
 }
 
-void Game::Run()
+void DancingPlutonium::Game::Run()
 {
 	switch (m_state)
 	{
@@ -66,7 +66,7 @@ void Game::Run()
 	}
 }
 
-void Game::Introduction()
+void DancingPlutonium::Game::Introduction()
 {
 	Intro intro;
 	m_window.setTitle("Intro");	
@@ -78,7 +78,7 @@ void Game::Introduction()
 	}
 }
 
-void Game::Menu()
+void DancingPlutonium::Game::Menu()
 {
 	TitleMenu menu;
 	m_window.setTitle("Main Menu");
@@ -138,7 +138,7 @@ void Game::Menu()
 	}
 }
 
-void Game::Play()
+void DancingPlutonium::Game::Play()
 {
 	m_window.setTitle("Playing");
 	Playing playGame;
@@ -147,31 +147,31 @@ void Game::Play()
 	m_state = current_state::s_quit;
 }
 
-void Game::WinLevel()
+void DancingPlutonium::Game::WinLevel()
 {
 	m_window.setTitle("Mission Success");
 	// get around to creating the mission class.
 }
 
-void Game::GameOver()
+void DancingPlutonium::Game::GameOver()
 {
 	m_window.setTitle("Game Over");
 	// get around to creating the gameover class.
 }
 
-void Game::Options()
+void DancingPlutonium::Game::Options()
 {
 	m_window.setTitle("Options");
 	// get around to creating the options class.
 }
 
-void Game::ScoreScreen()
+void DancingPlutonium::Game::ScoreScreen()
 {
 	m_window.setTitle("Scoreboard");
 	// get around to creating the scoreboard class.
 }
 
-bool Game::Quitting()
+bool DancingPlutonium::Game::Quitting()
 {
 	return m_state == current_state::s_quit;
 }

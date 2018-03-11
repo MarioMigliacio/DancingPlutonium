@@ -6,7 +6,7 @@
 
 int main()
 {
-	Game m_game;
+	DancingPlutonium::Game m_game;
 	
 	m_game.Initialize();
 }

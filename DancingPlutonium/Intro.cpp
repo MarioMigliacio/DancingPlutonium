@@ -1,9 +1,9 @@
 #include "Intro.h"
 
 // Static variable declarations:
-sf::Uint32 Intro::m_state = s_uninitialized;
+sf::Uint32 DancingPlutonium::Intro::m_state = s_uninitialized;
 
-void Intro::Show(sf::RenderWindow& _window)
+void DancingPlutonium::Intro::Show(sf::RenderWindow& _window)
 {
 	// Ensure that the initialization takes place correctly here and for the first time.
 	if (m_state != intro_state::s_uninitialized)
@@ -88,7 +88,7 @@ void Intro::Show(sf::RenderWindow& _window)
 	}
 }
 
-sf::Uint32 Intro::getIntroState() const
+sf::Uint32 DancingPlutonium::Intro::getIntroState() const
 {
 	return m_state;
 }

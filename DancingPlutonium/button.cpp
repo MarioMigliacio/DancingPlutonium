@@ -1,6 +1,6 @@
 #include "Button.h"
 
-Button::Button(const sf::String _name, const sf::Color& _fillColor, const sf::Color& _boarderColor, int _size, bool _clickable)
+DancingPlutonium::Button::Button(const sf::String _name, const sf::Color& _fillColor, const sf::Color& _boarderColor, int _size, bool _clickable)
 	: buttonFillColor(_fillColor), buttonBoarderColor(_boarderColor)
 {
 	_clickable ? isClickable = true : isClickable = false;
@@ -17,7 +17,7 @@ Button::Button(const sf::String _name, const sf::Color& _fillColor, const sf::Co
 	accumulator = 0.0f;
 }
 
-Button::Button(const Button& _ref)
+DancingPlutonium::Button::Button(const Button& _ref)
 {
 	isFading = _ref.isFading;
 	isClickable = _ref.isClickable;
@@ -33,12 +33,12 @@ Button::Button(const Button& _ref)
 	font = _ref.font;
 }
 
-void Button::Draw(sf::RenderTarget& _rt) const
+void DancingPlutonium::Button::Draw(sf::RenderTarget& _rt) const
 {
 	_rt.draw(buttonName);
 }
 
-void Button::Update(float _dt, sf::RenderWindow& _window)
+void DancingPlutonium::Button::Update(float _dt, sf::RenderWindow& _window)
 {
 	if (isClickable)
 	{
@@ -102,27 +102,27 @@ void Button::Update(float _dt, sf::RenderWindow& _window)
 	}
 }
 
-bool Button::IsClicked() 
+bool DancingPlutonium::Button::IsClicked()
 {
 	return isClicked;
 }
 
-sf::String Button::getName() const
+sf::String DancingPlutonium::Button::getName() const
 {
 	return buttonName.getString();
 }
 
-void Button::setOrigin(const sf::Vector2f _pos)
+void DancingPlutonium::Button::setOrigin(const sf::Vector2f _pos)
 {
 	buttonName.setOrigin(_pos);
 }
 
-void Button::setPosition(const sf::Vector2f _pos)
+void DancingPlutonium::Button::setPosition(const sf::Vector2f _pos)
 {
 	buttonName.setPosition(_pos);
 }
 
-void Button::fadeIn(float _dt)
+void DancingPlutonium::Button::fadeIn(float _dt)
 {
 	accumulator += +_dt;
 
@@ -139,7 +139,7 @@ void Button::fadeIn(float _dt)
 		sf::Color(buttonBoarderColor.r, buttonBoarderColor.g, buttonBoarderColor.b, alpha));
 }
 
-void Button::fadeOut(float _dt)
+void DancingPlutonium::Button::fadeOut(float _dt)
 {
 	accumulator += _dt;
 			
@@ -156,19 +156,19 @@ void Button::fadeOut(float _dt)
 		sf::Color(buttonBoarderColor.r, buttonBoarderColor.g, buttonBoarderColor.b, alpha));
 }
 
-sf::FloatRect Button::getBounds() const
+sf::FloatRect DancingPlutonium::Button::getBounds() const
 {
 	return bounds;
 }
 
-void Button::setColor(const sf::Color& _fillColor, const sf::Color& _boarderColor)
+void DancingPlutonium::Button::setColor(const sf::Color& _fillColor, const sf::Color& _boarderColor)
 {
 	buttonName.setFillColor(_fillColor);
 	buttonName.setOutlineColor(_boarderColor);
 	buttonName.setOutlineThickness(2);
 }
 
-void Button::loadFont()
+void DancingPlutonium::Button::loadFont()
 {
 	font.loadFromFile("Content/Fonts/Arial.ttf");
 }

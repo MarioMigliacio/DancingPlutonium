@@ -1,6 +1,6 @@
 #include "IRng.h"
 
-int RandomIntRange(const int& A, const int& B)
+int DancingPlutonium::RandomIntRange(const int& A, const int& B)
 {
 	static std::random_device randDev;
 	static std::mt19937 twister(randDev());

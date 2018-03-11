@@ -2,4 +2,7 @@
 
 #include <random>
 
-int RandomIntRange(const int& A, const int& B);
+namespace DancingPlutonium
+{
+	int RandomIntRange(const int& A, const int& B);
+}
