@@ -2,6 +2,7 @@
 
 // Static variable declarations:
 sf::Uint32 DancingPlutonium::PlutoniumShip::m_weapon = s_uninitialized;
+sf::Uint32 DancingPlutonium::PlutoniumShip::m_movement = s_noMovement;
 
 DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
 {
@@ -9,7 +10,7 @@ DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
 	bombs = 0;
 	score = 0;
 	health = 100;
-	speed = 5.0f;
+	speed = 50.0f;
 	isActive = true;
 	InitializeWeaponry();
 	SetSprite(_rt);
@@ -110,15 +111,61 @@ sf::FloatRect DancingPlutonium::PlutoniumShip::GetBounds() const
 	return sprite.getGlobalBounds();
 }
 
-sf::Uint32 DancingPlutonium::PlutoniumShip::getWeaponState() const
+sf::Uint32 DancingPlutonium::PlutoniumShip::GetWeaponState() const
 {
 	return m_weapon;
+}
+
+sf::Uint32 DancingPlutonium::PlutoniumShip::GetMoveState() const
+{
+	return m_movement;
+}
+
+void DancingPlutonium::PlutoniumShip::SetMoveState(const sf::Uint32 _state)
+{
+	m_movement = _state;
 }
 
 void DancingPlutonium::PlutoniumShip::SetPosition(const sf::Vector2f& _pos)
 {
 	position = _pos;
 	sprite.setPosition(_pos);
+}
+
+void DancingPlutonium::PlutoniumShip::Update(float dt)
+{
+	if (isActive)
+	{
+		switch (m_movement)
+		{
+		case MoveState::s_north:
+			SetPosition(sf::Vector2f(position.x, position.y - speed * dt));
+			break;
+		case MoveState::s_east:
+			SetPosition(sf::Vector2f(position.x + speed * dt, position.y));
+			break;
+		case MoveState::s_south:
+			SetPosition(sf::Vector2f(position.x, position.y + speed * dt));
+			break;
+		case MoveState::s_west:
+			SetPosition(sf::Vector2f(position.x - speed * dt, position.y));
+			break;
+		case MoveState::s_northWest:
+			SetPosition(sf::Vector2f(position.x - speed * dt, position.y - speed * dt));
+			break;
+		case MoveState::s_northEast:
+			SetPosition(sf::Vector2f(position.x + speed * dt, position.y - speed * dt));
+			break;
+		case MoveState::s_southEast:
+			SetPosition(sf::Vector2f(position.x + speed * dt, position.y + speed * dt));
+			break;
+		case MoveState::s_southWest:
+			SetPosition(sf::Vector2f(position.x - speed * dt, position.y + speed * dt));
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 void DancingPlutonium::PlutoniumShip::Draw(sf::RenderTarget& _rt)

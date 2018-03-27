@@ -122,6 +122,7 @@
     <ClCompile Include="BasicShip.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GenericEnemyUnit.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Intro.cpp" />
     <ClCompile Include="IRng.cpp" />
     <ClCompile Include="Main.cpp" />

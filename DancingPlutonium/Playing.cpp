@@ -33,6 +33,10 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 	bgSprite.setOrigin(bgSprite.getGlobalBounds().width / 2.0f, bgSprite.getGlobalBounds().height / 2.0f);
 	bgSprite.setPosition(bgSprite.getGlobalBounds().width / 2.0f, bgSprite.getGlobalBounds().height / 2.0f);
 
+	// Set up the Timers.
+	sf::Clock clock;
+	sf::Time dt;
+
 	// Perform the Main Menu screen display!
 	while (m_state == play_state::s_playing)
 	{
@@ -50,31 +54,75 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 				mm[0]->SpawnRandomly(_window);
 				//m_ship.GetSprite().move(sf::Vector2f(5.0f, 0.0));
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			if (InputManager::GetAction(event) == InputManager::Movement::s_northWest)
 			{
-				me.SetPosition(sf::Vector2f(me.GetPosition().x - 1.0f * me.GetSpeed(), me.GetPosition().y));
+				me.SetMoveState(PlutoniumShip::MoveState::s_northWest);
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			if (InputManager::GetAction(event) == InputManager::Movement::s_northEast)
 			{
-				me.SetPosition(sf::Vector2f(me.GetPosition().x + 1.0f * me.GetSpeed(), me.GetPosition().y));
+				me.SetMoveState(PlutoniumShip::MoveState::s_northEast);
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			if (InputManager::GetAction(event) == InputManager::Movement::s_southEast)
 			{
-				me.SetPosition(sf::Vector2f(me.GetPosition().x, me.GetPosition().y - 1.0f * me.GetSpeed()));
+				me.SetMoveState(PlutoniumShip::MoveState::s_southEast);
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			if (InputManager::GetAction(event) == InputManager::Movement::s_southWest)
 			{
-				me.SetPosition(sf::Vector2f(me.GetPosition().x, me.GetPosition().y + 1.0f * me.GetSpeed()));
+				me.SetMoveState(PlutoniumShip::MoveState::s_southWest);
 			}
+			if (InputManager::GetAction(event) == InputManager::Movement::s_north)
+			{
+				me.SetMoveState(PlutoniumShip::MoveState::s_north);
+			}
+			if (InputManager::GetAction(event) == InputManager::Movement::s_east)
+			{
+				me.SetMoveState(PlutoniumShip::MoveState::s_east);
+			}
+			if (InputManager::GetAction(event) == InputManager::Movement::s_south)
+			{
+				me.SetMoveState(PlutoniumShip::MoveState::s_south);
+			}
+			if (InputManager::GetAction(event) == InputManager::Movement::s_west)
+			{
+				me.SetMoveState(PlutoniumShip::MoveState::s_west);
+			}
+			if (InputManager::GetAction(event) == InputManager::Movement::s_noMovement)
+			{
+				me.SetMoveState(PlutoniumShip::MoveState::s_noMovement);
+			}
+			
+			/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+			{
+				me.SetMoveState(PlutoniumShip::MoveState::s_north);
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			{
+				me.SetMoveState(PlutoniumShip::MoveState::s_east);
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+			{
+				me.SetMoveState(PlutoniumShip::MoveState::s_south);
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			{
+				me.SetMoveState(PlutoniumShip::MoveState::s_west);
+			}
+			else if (event.type == sf::Event::KeyReleased)
+			{
+				me.SetMoveState(PlutoniumShip::MoveState::s_noMovement);
+			}*/
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 			{
 				bullets.push_back(new BasicBullet(_window, me.GetPosition()));				
 			}
+
 		}
 
+		dt = clock.restart();
 		_window.clear();
 		_window.draw(bgSprite);
-		mm[0]->Draw(_window);
+		_window.draw(mm[0]->GetSprite());
+		me.Update(dt.asSeconds());
 		me.Draw(_window);
 		if (bullets.size() != 0)
 		{
@@ -95,6 +143,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 				bullets[i]->Draw(_window);
 			}
 		}
+		
 		_window.display();
 	}
 }

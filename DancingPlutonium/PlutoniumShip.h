@@ -18,6 +18,20 @@ namespace DancingPlutonium
 		};
 
 	public:
+		enum MoveState
+		{
+			s_noMovement,
+			s_north,
+			s_northEast,
+			s_east,
+			s_southEast,
+			s_south,
+			s_southWest,
+			s_west,
+			s_northWest,
+		};
+
+	public:
 		PlutoniumShip(const sf::RenderTarget& _rt);
 		~PlutoniumShip() {}
 		int LivesRemaining() const;
@@ -33,10 +47,13 @@ namespace DancingPlutonium
 		sf::Sprite& GetSprite();
 		sf::Vector2f GetPosition() const;
 		sf::FloatRect GetBounds() const;
-		sf::Uint32 getWeaponState() const;
+		sf::Uint32 GetWeaponState() const;
+		sf::Uint32 GetMoveState() const;
+		void SetMoveState(const sf::Uint32 _state);
 		void SetPosition(const sf::Vector2f& _pos);
+		void Update(float dt);
 		void Draw(sf::RenderTarget& _rt);
-
+		
 	private:
 		int bombs;
 		int lives;
@@ -56,6 +73,7 @@ namespace DancingPlutonium
 
 	private:
 		static sf::Uint32 m_weapon;
+		static sf::Uint32 m_movement;
 	};
 
 }

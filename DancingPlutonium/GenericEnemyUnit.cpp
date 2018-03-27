@@ -71,6 +71,7 @@ sf::FloatRect DancingPlutonium::GenericEnemyUnit::GetBounds() const
 void DancingPlutonium::GenericEnemyUnit::SetPosition(const sf::Vector2f& _pos)
 {
 	position = _pos;
+	sprite.setPosition(_pos);
 }
 
 void DancingPlutonium::GenericEnemyUnit::SetHealth(const int _val)
@@ -83,7 +84,7 @@ void DancingPlutonium::GenericEnemyUnit::SpawnRandomly(const sf::RenderTarget& _
 	int randomX = static_cast<int>(_rt.getSize().x - sprite.getGlobalBounds().width / 2.0f);
 	randomX = RandomIntRange(static_cast<int>(sprite.getGlobalBounds().width / 2.0f), randomX) % randomX;
 	
-	SetPosition(sf::Vector2f((float)randomX, 16.0f));
+	SetPosition(sf::Vector2f(static_cast<float>(randomX), 16.0f));
 }
 
 // IMPORTANT DO THIS "SOON"
@@ -91,7 +92,3 @@ void DancingPlutonium::GenericEnemyUnit::Update(float _dt)
 {
 }
 
-// IMPORTANT DO THIS "SOON"
-void DancingPlutonium::GenericEnemyUnit::Draw(const sf::RenderTarget& _rt) const
-{
-}

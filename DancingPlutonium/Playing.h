@@ -5,6 +5,7 @@
 #include "BasicShip.h"
 #include "PlutoniumShip.h"
 #include "BasicBullet.h"
+#include "InputManager.h"
 
 namespace DancingPlutonium
 {

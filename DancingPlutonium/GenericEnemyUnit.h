@@ -42,7 +42,6 @@ namespace DancingPlutonium
 
 		virtual void SpawnRandomly(const sf::RenderTarget& _rt);
 		virtual void Update(float _dt);
-		virtual void Draw(const sf::RenderTarget& _rt) const;
 
 		virtual void SetSprite() = 0;
 		virtual void SetBulletPatterns() = 0;
