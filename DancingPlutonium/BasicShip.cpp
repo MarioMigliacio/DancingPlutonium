@@ -4,11 +4,10 @@
 
 DancingPlutonium::BasicShip::BasicShip(const sf::RenderTarget& _rt)
 {
-	name = "BasicShip";
 	value = 50;
 	health = 100;
 	fireRate = 1.25f;
-	fireDamage = 10;
+	damageMultiplier = 10;
 	speed = 1.0f;
 	isActive = true;
 	SetSprite();

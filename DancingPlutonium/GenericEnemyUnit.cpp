@@ -10,9 +10,9 @@ int DancingPlutonium::GenericEnemyUnit::GetHealth() const
 	return health;
 }
 
-int DancingPlutonium::GenericEnemyUnit::GetFireDamage() const
+float DancingPlutonium::GenericEnemyUnit::GetDamageMultiplier() const
 {
-	return fireDamage;
+	return damageMultiplier;
 }
 
 float DancingPlutonium::GenericEnemyUnit::GetFireRate() const
@@ -41,11 +41,6 @@ bool DancingPlutonium::GenericEnemyUnit::CheckIfColliding(const Bullet& _shot) c
 	bool check = GetBounds().contains(_shot.GetPosition());
 
 	return (GetBounds().contains(_shot.GetPosition()));
-}
-
-sf::String DancingPlutonium::GenericEnemyUnit::GetName() const
-{
-	return name;
 }
 
 sf::Sprite DancingPlutonium::GenericEnemyUnit::GetSprite() const
