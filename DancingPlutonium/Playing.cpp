@@ -3,6 +3,7 @@
 // Static variable declarations:
 sf::Uint32 DancingPlutonium::Playing::m_state = s_uninitialized;
 
+//Playgrounds for testing
 void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 {
 	// Ensure that the initialization takes place correctly here and for the first time.
@@ -54,68 +55,25 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 				mm[0]->SpawnRandomly(_window);
 				//m_ship.GetSprite().move(sf::Vector2f(5.0f, 0.0));
 			}
-			if (InputManager::GetAction(event) == InputManager::Movement::s_northWest)
-			{
-				me.SetMoveState(PlutoniumShip::MoveState::s_northWest);
-			}
-			if (InputManager::GetAction(event) == InputManager::Movement::s_northEast)
-			{
-				me.SetMoveState(PlutoniumShip::MoveState::s_northEast);
-			}
-			if (InputManager::GetAction(event) == InputManager::Movement::s_southEast)
-			{
-				me.SetMoveState(PlutoniumShip::MoveState::s_southEast);
-			}
-			if (InputManager::GetAction(event) == InputManager::Movement::s_southWest)
-			{
-				me.SetMoveState(PlutoniumShip::MoveState::s_southWest);
-			}
-			if (InputManager::GetAction(event) == InputManager::Movement::s_north)
-			{
-				me.SetMoveState(PlutoniumShip::MoveState::s_north);
-			}
-			if (InputManager::GetAction(event) == InputManager::Movement::s_east)
-			{
-				me.SetMoveState(PlutoniumShip::MoveState::s_east);
-			}
-			if (InputManager::GetAction(event) == InputManager::Movement::s_south)
-			{
-				me.SetMoveState(PlutoniumShip::MoveState::s_south);
-			}
-			if (InputManager::GetAction(event) == InputManager::Movement::s_west)
-			{
-				me.SetMoveState(PlutoniumShip::MoveState::s_west);
-			}
-			if (InputManager::GetAction(event) == InputManager::Movement::s_noMovement)
-			{
-				me.SetMoveState(PlutoniumShip::MoveState::s_noMovement);
-			}
-			
-			/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-			{
-				me.SetMoveState(PlutoniumShip::MoveState::s_north);
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			{
-				me.SetMoveState(PlutoniumShip::MoveState::s_east);
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-			{
-				me.SetMoveState(PlutoniumShip::MoveState::s_south);
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-			{
-				me.SetMoveState(PlutoniumShip::MoveState::s_west);
-			}
-			else if (event.type == sf::Event::KeyReleased)
-			{
-				me.SetMoveState(PlutoniumShip::MoveState::s_noMovement);
-			}*/
+						
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 			{
 				bullets.push_back(new BasicBullet(_window, me.GetPosition()));				
 			}
+		}
 
+		// Movement check outside of the event loop polls game at any time anyway, screw events - they weren't working smoothly anyway
+		bool isPlayerMoving = InputManager::IsMoving();
+		me.SetMovingState(isPlayerMoving);
+
+		if (isPlayerMoving)
+		{
+			sf::Uint32 whichDirection = InputManager::GetDirection();
+			me.SetMoveState(whichDirection);
+		}
+		else
+		{
+			me.SetMoveState(Movement::s_noMovement);
 		}
 
 		dt = clock.restart();
@@ -124,6 +82,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		_window.draw(mm[0]->GetSprite());
 		me.Update(dt.asSeconds());
 		me.Draw(_window);
+
 		if (bullets.size() != 0)
 		{
 			for (int i = 0; i < bullets.size(); i++)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "Enums.h"
 
 namespace DancingPlutonium
 {
@@ -16,21 +17,7 @@ namespace DancingPlutonium
 			s_widelazer,
 			s_homing
 		};
-
-	public:
-		enum MoveState
-		{
-			s_noMovement,
-			s_north,
-			s_northEast,
-			s_east,
-			s_southEast,
-			s_south,
-			s_southWest,
-			s_west,
-			s_northWest,
-		};
-
+		
 	public:
 		PlutoniumShip(const sf::RenderTarget& _rt);
 		~PlutoniumShip() {}
@@ -44,11 +31,11 @@ namespace DancingPlutonium
 		void UpgradeWeapon();
 		float GetSpeed() const;
 		bool GetActiveState() const;
+		void SetMovingState(bool _state);
 		sf::Sprite& GetSprite();
 		sf::Vector2f GetPosition() const;
 		sf::FloatRect GetBounds() const;
 		sf::Uint32 GetWeaponState() const;
-		sf::Uint32 GetMoveState() const;
 		void SetMoveState(const sf::Uint32 _state);
 		void SetPosition(const sf::Vector2f& _pos);
 		void Update(float dt);
@@ -63,6 +50,7 @@ namespace DancingPlutonium
 		int fireDamage;
 		float speed;
 		bool isActive;
+		bool isMoving;
 		sf::String name;
 		sf::Sprite sprite;
 		sf::Texture texture;

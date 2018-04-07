@@ -141,6 +141,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Intro.h" />
     <ClInclude Include="IRng.h" />
+    <ClInclude Include="Enums.h" />
     <ClInclude Include="Playing.h" />
     <ClInclude Include="PlutoniumShip.h" />
     <ClInclude Include="TitleMenu.h" />

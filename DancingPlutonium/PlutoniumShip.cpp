@@ -10,7 +10,7 @@ DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
 	bombs = 0;
 	score = 0;
 	health = 100;
-	speed = 50.0f;
+	speed = 100.0f;
 	isActive = true;
 	InitializeWeaponry();
 	SetSprite(_rt);
@@ -51,6 +51,8 @@ int DancingPlutonium::PlutoniumShip::GetFireDamage() const
 	return fireDamage;
 }
 
+//TODO: when finished with projectile classes, use a pointer to a basic bullet and figure out based on factory types.
+// idk, maybe enum is appropriate. Need to discuss this.
 void DancingPlutonium::PlutoniumShip::UpgradeWeapon()
 {
 	switch (m_weapon)
@@ -86,6 +88,7 @@ void DancingPlutonium::PlutoniumShip::UpgradeWeapon()
 	return;
 }
 
+// is this really needed?
 float DancingPlutonium::PlutoniumShip::GetSpeed() const
 {
 	return speed;
@@ -94,6 +97,11 @@ float DancingPlutonium::PlutoniumShip::GetSpeed() const
 bool DancingPlutonium::PlutoniumShip::GetActiveState() const
 {
 	return isActive;
+}
+
+void DancingPlutonium::PlutoniumShip::SetMovingState(bool _state)
+{
+	isMoving = _state;
 }
 
 sf::Sprite& DancingPlutonium::PlutoniumShip::GetSprite()
@@ -116,11 +124,6 @@ sf::Uint32 DancingPlutonium::PlutoniumShip::GetWeaponState() const
 	return m_weapon;
 }
 
-sf::Uint32 DancingPlutonium::PlutoniumShip::GetMoveState() const
-{
-	return m_movement;
-}
-
 void DancingPlutonium::PlutoniumShip::SetMoveState(const sf::Uint32 _state)
 {
 	m_movement = _state;
@@ -136,34 +139,37 @@ void DancingPlutonium::PlutoniumShip::Update(float dt)
 {
 	if (isActive)
 	{
-		switch (m_movement)
+		if (isMoving)
 		{
-		case MoveState::s_north:
-			SetPosition(sf::Vector2f(position.x, position.y - speed * dt));
-			break;
-		case MoveState::s_east:
-			SetPosition(sf::Vector2f(position.x + speed * dt, position.y));
-			break;
-		case MoveState::s_south:
-			SetPosition(sf::Vector2f(position.x, position.y + speed * dt));
-			break;
-		case MoveState::s_west:
-			SetPosition(sf::Vector2f(position.x - speed * dt, position.y));
-			break;
-		case MoveState::s_northWest:
-			SetPosition(sf::Vector2f(position.x - speed * dt, position.y - speed * dt));
-			break;
-		case MoveState::s_northEast:
-			SetPosition(sf::Vector2f(position.x + speed * dt, position.y - speed * dt));
-			break;
-		case MoveState::s_southEast:
-			SetPosition(sf::Vector2f(position.x + speed * dt, position.y + speed * dt));
-			break;
-		case MoveState::s_southWest:
-			SetPosition(sf::Vector2f(position.x - speed * dt, position.y + speed * dt));
-			break;
-		default:
-			break;
+			switch (m_movement)
+			{
+				case Movement::s_north:
+					SetPosition(sf::Vector2f(position.x, position.y - speed * dt));
+					break;
+				case Movement::s_east:
+					SetPosition(sf::Vector2f(position.x + speed * dt, position.y));
+					break;
+				case Movement::s_south:
+					SetPosition(sf::Vector2f(position.x, position.y + speed * dt));
+					break;
+				case Movement::s_west:
+					SetPosition(sf::Vector2f(position.x - speed * dt, position.y));
+					break;
+				case Movement::s_northWest:
+					SetPosition(sf::Vector2f(position.x - speed * dt, position.y - speed * dt));
+					break;
+				case Movement::s_northEast:
+					SetPosition(sf::Vector2f(position.x + speed * dt, position.y - speed * dt));
+					break;
+				case Movement::s_southEast:
+					SetPosition(sf::Vector2f(position.x + speed * dt, position.y + speed * dt));
+					break;
+				case Movement::s_southWest:
+					SetPosition(sf::Vector2f(position.x - speed * dt, position.y + speed * dt));
+					break;
+				default:
+					break;
+			}
 		}
 	}
 }
