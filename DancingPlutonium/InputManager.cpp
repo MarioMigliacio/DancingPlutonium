@@ -18,6 +18,14 @@ sf::Uint32 DancingPlutonium::InputManager::GetDirection()
 	{
 		return Movement::s_southWest;
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		return Movement::s_noMovement;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	{
+		return Movement::s_noMovement;
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		return Movement::s_north;
@@ -34,6 +42,8 @@ sf::Uint32 DancingPlutonium::InputManager::GetDirection()
 	{
 		return Movement::s_east;
 	}
+	
+	return Movement::s_noMovement;
 }
 
 bool DancingPlutonium::InputManager::IsMoving()
