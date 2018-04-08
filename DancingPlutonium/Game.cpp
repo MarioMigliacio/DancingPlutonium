@@ -94,9 +94,9 @@ void DancingPlutonium::Game::Menu()
 		menusound.setVolume(85);
 		menusound.play();
 
-		sf::Clock cockblock;
+		sf::Clock timer;
 
-		while (cockblock.getElapsedTime().asSeconds() < 1.0f){}
+		while (timer.getElapsedTime().asSeconds() < 1.0f){}
 
 		m_state = CurrentState::s_playing;
 	}
@@ -110,9 +110,9 @@ void DancingPlutonium::Game::Menu()
 		menusound.setVolume(85);
 		menusound.play();
 
-		sf::Clock cockblock;
+		sf::Clock timer;
 
-		while (cockblock.getElapsedTime().asSeconds() < 1.0f) {}
+		while (timer.getElapsedTime().asSeconds() < 1.0f) {}
 
 		m_state = CurrentState::s_quit;
 	}
@@ -126,9 +126,9 @@ void DancingPlutonium::Game::Menu()
 		menusound.setVolume(85);
 		menusound.play();
 
-		sf::Clock cockblock;
+		sf::Clock timer;
 
-		while (cockblock.getElapsedTime().asSeconds() < 1.0f) {}
+		while (timer.getElapsedTime().asSeconds() < 1.0f) {}
 
 		m_state = CurrentState::s_quit;
 	}

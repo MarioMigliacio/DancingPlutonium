@@ -14,6 +14,7 @@ DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
 	isActive = true;
 	InitializeWeaponry();
 	SetSprite(_rt);
+	ammunition = std::vector<Bullet*>();
 }
 
 int DancingPlutonium::PlutoniumShip::LivesRemaining() const
@@ -177,6 +178,10 @@ void DancingPlutonium::PlutoniumShip::Update(float dt)
 void DancingPlutonium::PlutoniumShip::Draw(sf::RenderTarget& _rt)
 {
 	_rt.draw(sprite);
+}
+
+void DancingPlutonium::PlutoniumShip::Shoot()
+{
 }
 
 void DancingPlutonium::PlutoniumShip::InitializeWeaponry()

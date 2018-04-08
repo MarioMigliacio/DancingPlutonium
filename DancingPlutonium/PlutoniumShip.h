@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "Bullet.h"
 #include "Enums.h"
 
 namespace DancingPlutonium
@@ -73,24 +74,26 @@ namespace DancingPlutonium
 		void Update(float dt);
 		/* Draw this PlutoniumShip sprite onto the render window _rt */
 		void Draw(sf::RenderTarget& _rt);
-
+		/* Shoot a projectile  */
+		void Shoot();
 		#pragma endregion
 	private:
 		#pragma region Members
 
-		int bombs;				/* Represents the bombs count for this PlutoniumShip object */
-		int lives;				/* Represents the lives count for this PlutoniumShip object */
-		int score;				/* Represents the score for this PlutoniumShip object */
-		int health;				/* Represents the health of this PlutoniumShip object */
-		float fireRate;			/* Represents the fireRate of this PlutoniumShip object */
-		int fireDamage;			/* Represents the fireDamage of this PlutoniumShip object */
-		float speed;			/* Represents the speed of this PlutoniumShip object */
-		bool isActive;			/* Represents the isActive state for this PlutoniumShip object */
-		bool isMoving;			/* Represents the isMoving state for this PlutoniumShip object */
-		sf::String name;		/* Represents the name of this PlutoniumShip object */
-		sf::Sprite sprite;		/* Represents the sprite for this PlutoniumShip object */
-		sf::Texture texture;	/* Represents the texture for this PlutoniumShip object */
-		sf::Vector2f position;	/* Represents the position of this PlutoniumShip object */
+		int bombs;							/* Represents the bombs count for this PlutoniumShip object */
+		int lives;							/* Represents the lives count for this PlutoniumShip object */
+		int score;							/* Represents the score for this PlutoniumShip object */
+		int health;							/* Represents the health of this PlutoniumShip object */
+		float fireRate;						/* Represents the fireRate of this PlutoniumShip object */
+		int fireDamage;						/* Represents the fireDamage of this PlutoniumShip object */
+		float speed;						/* Represents the speed of this PlutoniumShip object */
+		bool isActive;						/* Represents the isActive state for this PlutoniumShip object */
+		bool isMoving;						/* Represents the isMoving state for this PlutoniumShip object */
+		std::vector<Bullet*> ammunition;	/* Represents the ammunition container of bullets for this PlutoniumShip object */
+		sf::String name;					/* Represents the name of this PlutoniumShip object */
+		sf::Sprite sprite;					/* Represents the sprite for this PlutoniumShip object */
+		sf::Texture texture;				/* Represents the texture for this PlutoniumShip object */
+		sf::Vector2f position;				/* Represents the position of this PlutoniumShip object */
 
 		#pragma endregion
 

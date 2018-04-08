@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "Button.h"
-#include <stdlib.h>
 
 namespace DancingPlutonium
 {
