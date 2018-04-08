@@ -5,15 +5,34 @@
 
 namespace DancingPlutonium
 {
+	/* 
+	   InputManager class can be queried at any time for static access to what kind of input the user is attempting to access.
+	   Including and not limited to: Player movement, actions, commands etc.
+	*/
 	class InputManager
 	{
 	public:
+		#pragma region Dtor
+
+		/* InputManager deconstructor */
 		~InputManager() { }
 
+		#pragma endregion
+
+		#pragma region Static Methods
+
+		/* GetDirection should be used once it is known the player is moving (Query IsMoving 1st).  */
 		static sf::Uint32 GetDirection();
+		/* Returns true if player is attempting to move, false otherwise */
 		static bool IsMoving();
 
+		#pragma endregion
 	private:
+		#pragma region Ctor
+
+		/* Disallow access to creating the InputManager class. It holds useful static methods which can be queried by using syntax: InputManager::<member name> */
 		InputManager() { }
+
+		#pragma endregion
 	};
 }

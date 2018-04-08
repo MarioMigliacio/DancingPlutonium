@@ -66,6 +66,6 @@ namespace DancingPlutonium
 		/* Abstract method ShootBullet must be implemented by inheriting children */
 		virtual void ShootBullet() = 0;
 
-		#pragma endregion				
+		#pragma endregion
 	};
 }

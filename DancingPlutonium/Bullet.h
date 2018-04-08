@@ -6,7 +6,7 @@
 namespace DancingPlutonium
 {
 	/* Bullet class represents an abstract base projectile for which to inherit from */
-	class Bullet 
+	class Bullet
 	{
 	protected:
 		#pragma region Members
@@ -19,7 +19,7 @@ namespace DancingPlutonium
 		BulletPattern::Pattern pattern; /* Represents the pattern this projectile will spawn with */
 
 		#pragma endregion
-	public:		
+	public:
 		#pragma region Methods
 
 		/* Returns the speed for this projectile */

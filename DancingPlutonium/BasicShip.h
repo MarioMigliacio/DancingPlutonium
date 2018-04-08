@@ -17,7 +17,7 @@ namespace DancingPlutonium
 		/* BasicShip deconstructor */
 		~BasicShip() {}
 
-		#pragma endregion		
+		#pragma endregion
 
 		#pragma region Methods
 

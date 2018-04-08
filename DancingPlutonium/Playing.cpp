@@ -7,13 +7,13 @@ sf::Uint32 DancingPlutonium::Playing::m_state = s_uninitialized;
 void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 {
 	// Ensure that the initialization takes place correctly here and for the first time.
-	if (m_state != play_state::s_uninitialized)
+	if (m_state != PlayState::s_uninitialized)
 	{
 		return;
 	}
 
 	// Set the State:
-	m_state = play_state::s_playing;
+	m_state = PlayState::s_playing;
 	BasicShip m_ship(_window);
 	PlutoniumShip me(_window);
 	
@@ -39,7 +39,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 	sf::Time dt;
 
 	// Perform the Main Menu screen display!
-	while (m_state == play_state::s_playing)
+	while (m_state == PlayState::s_playing)
 	{
 		sf::Event event;
 
@@ -47,7 +47,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		{
 			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
-				m_state = play_state::s_quit;
+				m_state = PlayState::s_quit;
 				return;
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))

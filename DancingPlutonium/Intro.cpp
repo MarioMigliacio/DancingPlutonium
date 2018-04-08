@@ -6,13 +6,13 @@ sf::Uint32 DancingPlutonium::Intro::m_state = s_uninitialized;
 void DancingPlutonium::Intro::Show(sf::RenderWindow& _window)
 {
 	// Ensure that the initialization takes place correctly here and for the first time.
-	if (m_state != intro_state::s_uninitialized)
+	if (m_state != IntroState::s_uninitialized)
 	{
 		return;
 	}
 
 	// Set the State:
-	m_state = intro_state::s_playing;
+	m_state = IntroState::s_playing;
 
 	// Set up the Timers.
 	sf::Clock clock1, clock2;
@@ -35,7 +35,7 @@ void DancingPlutonium::Intro::Show(sf::RenderWindow& _window)
 	menusound.play();
 
 	// Perform the Introduction splash screen!
-	while (m_state == intro_state::s_playing && clock1.getElapsedTime().asSeconds() <= 6.0f)
+	while (m_state == IntroState::s_playing && clock1.getElapsedTime().asSeconds() <= 6.0f)
 	{
 		sf::Event event;
 
@@ -46,7 +46,7 @@ void DancingPlutonium::Intro::Show(sf::RenderWindow& _window)
 				|| sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)
 				|| sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{
-				m_state = intro_state::s_done;
+				m_state = IntroState::s_done;
 				return;
 			}
 		}
@@ -80,7 +80,7 @@ void DancingPlutonium::Intro::Show(sf::RenderWindow& _window)
 		_window.display();
 	}
 
-	m_state = intro_state::s_done;
+	m_state = IntroState::s_done;
 
 	if (menusound.getStatus() == sf::Sound::Playing)
 	{

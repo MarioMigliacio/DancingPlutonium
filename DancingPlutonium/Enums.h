@@ -2,6 +2,7 @@
 
 namespace DancingPlutonium
 {
+	/* Movement enum encapsulates the 8-direction style possible movements from the WASD (or potentially configurable ULDR) keys */
 	enum Movement
 	{
 		s_noMovement,

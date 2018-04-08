@@ -7,7 +7,7 @@ sf::RenderWindow DancingPlutonium::Game::m_window;
 void DancingPlutonium::Game::Initialize()
 {
 	// Ensure that the initialization takes place correctly here and for the first time.
-	if (m_state != current_state::s_uninitialized)
+	if (m_state != CurrentState::s_uninitialized)
 	{
 		return;
 	}
@@ -26,7 +26,7 @@ void DancingPlutonium::Game::Initialize()
 	m_window.create(sf::VideoMode(gameWidth, gameHeight, mode.bitsPerPixel), "Dancing Plutonium", sf::Style::Titlebar | sf::Style::Close);
 	m_window.setView(gameView);
 
-	m_state = current_state::s_intro;
+	m_state = CurrentState::s_intro;
 
 	while (!Quitting())
 	{
@@ -40,25 +40,25 @@ void DancingPlutonium::Game::Run()
 {
 	switch (m_state)
 	{
-		case current_state::s_intro:
+		case CurrentState::s_intro:
 			Introduction();			
 			break;
-		case current_state::s_menu:
+		case CurrentState::s_menu:
 			Menu();
 			break;
-		case current_state::s_playing:
+		case CurrentState::s_playing:
 			Play();
 			break;
-		case current_state::s_options:
+		case CurrentState::s_options:
 			Options();
 			break;
-		case current_state::s_scoreboard:
+		case CurrentState::s_scoreboard:
 			ScoreScreen();
 			break;
-		case current_state::s_levelwin:
+		case CurrentState::s_levelwin:
 			WinLevel();
 			break;
-		case current_state::s_gameover:
+		case CurrentState::s_gameover:
 			GameOver();
 			break;
 		default:
@@ -74,7 +74,7 @@ void DancingPlutonium::Game::Introduction()
 
 	if (intro.getIntroState() == Intro::s_done)
 	{
-		m_state = current_state::s_menu;
+		m_state = CurrentState::s_menu;
 	}
 }
 
@@ -98,7 +98,7 @@ void DancingPlutonium::Game::Menu()
 
 		while (cockblock.getElapsedTime().asSeconds() < 1.0f){}
 
-		m_state = current_state::s_playing;
+		m_state = CurrentState::s_playing;
 	}
 	else if (menu.getMenuState() == TitleMenu::s_options)
 	{
@@ -114,7 +114,7 @@ void DancingPlutonium::Game::Menu()
 
 		while (cockblock.getElapsedTime().asSeconds() < 1.0f) {}
 
-		m_state = current_state::s_quit;
+		m_state = CurrentState::s_quit;
 	}
 	else if (menu.getMenuState() == TitleMenu::s_score)
 	{
@@ -130,11 +130,11 @@ void DancingPlutonium::Game::Menu()
 
 		while (cockblock.getElapsedTime().asSeconds() < 1.0f) {}
 
-		m_state = current_state::s_quit;
+		m_state = CurrentState::s_quit;
 	}
 	else if (menu.getMenuState() == TitleMenu::s_quit)
 	{
-		m_state = current_state::s_quit;
+		m_state = CurrentState::s_quit;
 	}
 }
 
@@ -144,7 +144,7 @@ void DancingPlutonium::Game::Play()
 	Playing playGame;
 
 	playGame.Show(m_window);
-	m_state = current_state::s_quit;
+	m_state = CurrentState::s_quit;
 }
 
 void DancingPlutonium::Game::WinLevel()
@@ -173,5 +173,5 @@ void DancingPlutonium::Game::ScoreScreen()
 
 bool DancingPlutonium::Game::Quitting()
 {
-	return m_state == current_state::s_quit;
+	return m_state == CurrentState::s_quit;
 }

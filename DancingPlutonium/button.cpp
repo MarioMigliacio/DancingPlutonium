@@ -128,6 +128,7 @@ void DancingPlutonium::Button::fadeIn(float _dt)
 
 	if (alpha < 255)
 	{
+		// this value updates the alpha value every 2.5 ms clock time
 		if (accumulator >= 0.0025f)
 		{
 			alpha++;
@@ -145,6 +146,7 @@ void DancingPlutonium::Button::fadeOut(float _dt)
 			
 	if (alpha > 0)
 	{
+		// this value updates the alpha value every 2.5 ms clock time
 		if (accumulator >= 0.0025f)
 		{			
 			alpha--;

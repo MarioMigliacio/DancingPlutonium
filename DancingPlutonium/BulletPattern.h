@@ -2,9 +2,11 @@
 
 namespace DancingPlutonium
 {
+	/* BulletPattern class contains enums specific to projectile flight patterns */
 	class BulletPattern
 	{
 	public:
+		/* Angle enum represents the type of angle that will influence the projectiles flight path */
 		enum Angle
 		{
 			s_uninitialized,
@@ -56,8 +58,8 @@ namespace DancingPlutonium
 			s_350Degree,
 			s_355Degree
 		};
-
 	public:
+		/* Pattern enum represents how a unit will fire projectiles */
 		enum Pattern
 		{
 			s_noPattern,
@@ -81,13 +83,12 @@ namespace DancingPlutonium
 			s_playerHoming,
 			s_enemyExpanding
 		};
-
 	public:
+		/* Source enum represents where the projectile originates from */
 		enum Source
 		{
 			s_enemy,
 			s_player
 		};
-
 	};
 }

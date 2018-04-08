@@ -18,7 +18,7 @@ namespace DancingPlutonium
 		/* BasicBullet deconstructor */
 		~BasicBullet() {}
 
-		#pragma endregion		
+		#pragma endregion
 
 		#pragma region Methods
 
@@ -28,6 +28,6 @@ namespace DancingPlutonium
 		/* Update this projectile in the world based on the clock */
 		virtual void Update(float _dt) override;
 
-		#pragma endregion				
+		#pragma endregion
 	};
 }

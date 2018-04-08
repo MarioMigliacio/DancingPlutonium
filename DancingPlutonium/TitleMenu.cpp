@@ -6,13 +6,13 @@ sf::Uint32 DancingPlutonium::TitleMenu::m_state = s_uninitialized;
 void DancingPlutonium::TitleMenu::Show(sf::RenderWindow& _window)
 {
 	// Ensure that the initialization takes place correctly here and for the first time.
-	if (m_state != menu_state::s_uninitialized)
+	if (m_state != MenuState::s_uninitialized)
 	{
 		return;
 	}
 
 	// Set the State:
-	m_state = menu_state::s_undecided;
+	m_state = MenuState::s_undecided;
 	
 	// Set up the background:
 	sf::Texture bgTexture;
@@ -48,7 +48,7 @@ void DancingPlutonium::TitleMenu::Show(sf::RenderWindow& _window)
 	sf::Time dt;
 
 	// Perform the Main Menu screen display!
-	while (m_state == menu_state::s_undecided)
+	while (m_state == MenuState::s_undecided)
 	{
 		sf::Event event;
 
@@ -56,7 +56,7 @@ void DancingPlutonium::TitleMenu::Show(sf::RenderWindow& _window)
 		{
 			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
-				m_state = menu_state::s_quit;
+				m_state = MenuState::s_quit;
 				return;
 			}
 		}
@@ -75,19 +75,19 @@ void DancingPlutonium::TitleMenu::Show(sf::RenderWindow& _window)
 			{
 				if (buttonContainer[i]->getName() == "Play")
 				{
-					m_state = menu_state::s_play;
+					m_state = MenuState::s_play;
 					cleanup(buttonContainer);
 					break;
 				}
 				else if (buttonContainer[i]->getName() == "Options")
 				{
-					m_state = menu_state::s_options;
+					m_state = MenuState::s_options;
 					cleanup(buttonContainer);
 					break;
 				}
 				else if (buttonContainer[i]->getName() == "ScoreBoard")
 				{
-					m_state = menu_state::s_score;
+					m_state = MenuState::s_score;
 					cleanup(buttonContainer);
 					break;
 				}
