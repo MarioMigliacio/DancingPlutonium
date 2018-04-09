@@ -136,40 +136,58 @@ void DancingPlutonium::PlutoniumShip::SetPosition(const sf::Vector2f& _pos)
 	sprite.setPosition(_pos);
 }
 
-void DancingPlutonium::PlutoniumShip::Update(float dt)
+void DancingPlutonium::PlutoniumShip::Update(float dt, const sf::RenderTarget& _rt)
 {
 	if (isActive)
 	{
 		if (isMoving)
 		{
+			if (InputManager::IsUsingBoost())
+			{
+				speed = 300.0f;
+			}
+			else
+			{
+				speed = 100.0f;
+			}
+
+			// perform bounds checking to make sure the player is within the render window limits before calling SetPosition().
 			switch (m_movement)
 			{
-				case Movement::s_north:
-					SetPosition(sf::Vector2f(position.x, position.y - speed * dt));
+				if (position.y > texture.getSize().y / 2.0f && (position.y < _rt.getSize().y - texture.getSize().y / 2.0f) &&
+					position.x > texture.getSize().x / 2.0f && (position.x < _rt.getSize().x - texture.getSize().x / 2.0f))
+				{
+					case Movement::s_north:
+							SetPosition(sf::Vector2f(position.x, position.y - speed * dt));					
+						break;
+					case Movement::s_east:
+							SetPosition(sf::Vector2f(position.x + speed * dt, position.y));
+						break;
+					case Movement::s_south:
+							SetPosition(sf::Vector2f(position.x, position.y + speed * dt));
+						break;
+					case Movement::s_west:
+							SetPosition(sf::Vector2f(position.x - speed * dt, position.y));
+						break;
+					case Movement::s_northWest:
+							SetPosition(sf::Vector2f(position.x - speed * dt, position.y - speed * dt));
+						break;
+					case Movement::s_northEast:
+							SetPosition(sf::Vector2f(position.x + speed * dt, position.y - speed * dt));										
+						break;
+					case Movement::s_southEast:
+							SetPosition(sf::Vector2f(position.x + speed * dt, position.y + speed * dt));					
+						break;
+					case Movement::s_southWest:
+							SetPosition(sf::Vector2f(position.x - speed * dt, position.y + speed * dt));
+						break;
+					default:
+						break;
+				}
+				else
+				{
 					break;
-				case Movement::s_east:
-					SetPosition(sf::Vector2f(position.x + speed * dt, position.y));
-					break;
-				case Movement::s_south:
-					SetPosition(sf::Vector2f(position.x, position.y + speed * dt));
-					break;
-				case Movement::s_west:
-					SetPosition(sf::Vector2f(position.x - speed * dt, position.y));
-					break;
-				case Movement::s_northWest:
-					SetPosition(sf::Vector2f(position.x - speed * dt, position.y - speed * dt));
-					break;
-				case Movement::s_northEast:
-					SetPosition(sf::Vector2f(position.x + speed * dt, position.y - speed * dt));
-					break;
-				case Movement::s_southEast:
-					SetPosition(sf::Vector2f(position.x + speed * dt, position.y + speed * dt));
-					break;
-				case Movement::s_southWest:
-					SetPosition(sf::Vector2f(position.x - speed * dt, position.y + speed * dt));
-					break;
-				default:
-					break;
+				}
 			}
 		}
 	}
@@ -196,7 +214,7 @@ void DancingPlutonium::PlutoniumShip::InitializeWeaponry()
 
 void DancingPlutonium::PlutoniumShip::SetSprite(const sf::RenderTarget& _rt)
 {
-	sf::Vector2f origin = sf::Vector2f(_rt.getSize().x / 2.0f, _rt.getSize().y - 32.0f);
+	sf::Vector2f origin = sf::Vector2f(_rt.getSize().x / 2.0f, _rt.getSize().y - 16.0f);
 
 	texture.loadFromFile("Content/Images/PlayerShip.png");
 	sprite.setTexture(texture);

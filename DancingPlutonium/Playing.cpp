@@ -65,7 +65,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		// Movement check outside of the event loop polls game at any time anyway, screw events - they weren't working smoothly anyway
 		bool isPlayerMoving = InputManager::IsMoving();
 		me.SetMovingState(isPlayerMoving);
-
+		
 		if (isPlayerMoving)
 		{
 			sf::Uint32 whichDirection = InputManager::GetDirection();
@@ -80,7 +80,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		_window.clear();
 		_window.draw(bgSprite);
 		_window.draw(mm[0]->GetSprite());
-		me.Update(dt.asSeconds());
+		me.Update(dt.asSeconds(), _window);
 		me.Draw(_window);
 
 		if (bullets.size() != 0)

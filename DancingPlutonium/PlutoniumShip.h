@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "InputManager.h"
 #include "Bullet.h"
 #include "Enums.h"
 
@@ -70,8 +71,8 @@ namespace DancingPlutonium
 		void SetMoveState(const sf::Uint32 _state);
 		/* Sets the position for this PlutoniumShip object based on the _pos input parameter */
 		void SetPosition(const sf::Vector2f& _pos);
-		/* Update this PlutoniumShip in the world based on the clock input parameter  */
-		void Update(float dt);
+		/* Update this PlutoniumShip in the world based on the clock and render winder input parameters */
+		void Update(float dt, const sf::RenderTarget& _rt);
 		/* Draw this PlutoniumShip sprite onto the render window _rt */
 		void Draw(sf::RenderTarget& _rt);
 		/* Shoot a projectile  */

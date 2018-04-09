@@ -58,3 +58,14 @@ bool DancingPlutonium::InputManager::IsMoving()
 
 	return false;
 }
+
+bool DancingPlutonium::InputManager::IsUsingBoost()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+	{
+		return true;
+	}
+	
+	return false;
+}
