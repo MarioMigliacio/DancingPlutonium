@@ -57,6 +57,8 @@ namespace DancingPlutonium
 		float GetSpeed() const;
 		/* Returns true if this PlutoniumShip object is alive, false otherwise */
 		bool GetActiveState() const;
+		/* Returns true if this PlutoniumShip is within the bounds of the game window, false otherwise */
+		bool IsWithinBounds(const sf::RenderTarget& _rt);
 		/* Modifies this PlutoniumShip object's movement state based on _state input parameter*/
 		void SetMovingState(bool _state);
 		/* Returns the sprite for this PlutoniumShip object */
@@ -77,6 +79,7 @@ namespace DancingPlutonium
 		void Draw(sf::RenderTarget& _rt);
 		/* Shoot a projectile  */
 		void Shoot();
+
 		#pragma endregion
 	private:
 		#pragma region Members

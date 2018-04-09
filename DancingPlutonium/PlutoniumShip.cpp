@@ -100,6 +100,17 @@ bool DancingPlutonium::PlutoniumShip::GetActiveState() const
 	return isActive;
 }
 
+bool DancingPlutonium::PlutoniumShip::IsWithinBounds(const sf::RenderTarget& _rt)
+{
+	if (position.y > texture.getSize().y / 2.0f - 4.0f && (position.y <= _rt.getSize().y - texture.getSize().y / 2.0f) &&
+		position.x > texture.getSize().x / 2.0f - 4.0f && (position.x <= _rt.getSize().x - texture.getSize().x / 2.0f))
+	{
+		return true;
+	}
+
+	return false;
+}
+
 void DancingPlutonium::PlutoniumShip::SetMovingState(bool _state)
 {
 	isMoving = _state;
@@ -151,44 +162,99 @@ void DancingPlutonium::PlutoniumShip::Update(float dt, const sf::RenderTarget& _
 				speed = 100.0f;
 			}
 
+			auto tempPosition = position;
+
 			// perform bounds checking to make sure the player is within the render window limits before calling SetPosition().
 			// This is Nehemiah's edit to fix everything that Mario couldn't.
 			switch (m_movement)
 			{
-				if (position.y > texture.getSize().y / 2.0f && (position.y < _rt.getSize().y - texture.getSize().y / 2.0f) &&
-					position.x > texture.getSize().x / 2.0f && (position.x < _rt.getSize().x - texture.getSize().x / 2.0f))
-				{
-					case Movement::s_north:
-							SetPosition(sf::Vector2f(position.x, position.y - speed * dt));					
-						break;
-					case Movement::s_east:
-							SetPosition(sf::Vector2f(position.x + speed * dt, position.y));
-						break;
-					case Movement::s_south:
-							SetPosition(sf::Vector2f(position.x, position.y + speed * dt));
-						break;
-					case Movement::s_west:
-							SetPosition(sf::Vector2f(position.x - speed * dt, position.y));
-						break;
-					case Movement::s_northWest:
-							SetPosition(sf::Vector2f(position.x - speed * dt, position.y - speed * dt));
-						break;
-					case Movement::s_northEast:
-							SetPosition(sf::Vector2f(position.x + speed * dt, position.y - speed * dt));										
-						break;
-					case Movement::s_southEast:
-							SetPosition(sf::Vector2f(position.x + speed * dt, position.y + speed * dt));					
-						break;
-					case Movement::s_southWest:
-							SetPosition(sf::Vector2f(position.x - speed * dt, position.y + speed * dt));
-						break;
-					default:
-						break;
-				}
-				else
-				{
+				case Movement::s_north:
+						SetPosition(sf::Vector2f(position.x, position.y - speed * dt));
 					break;
-				}
+				case Movement::s_east:
+						SetPosition(sf::Vector2f(position.x + speed * dt, position.y));
+					break;
+				case Movement::s_south:
+						SetPosition(sf::Vector2f(position.x, position.y + speed * dt));
+					break;
+				case Movement::s_west:
+						SetPosition(sf::Vector2f(position.x - speed * dt, position.y));
+					break;
+				case Movement::s_northWest:
+						SetPosition(sf::Vector2f(position.x - speed * dt, position.y - speed * dt));
+						if (!IsWithinBounds(_rt))
+						{
+							SetPosition(tempPosition);
+							SetPosition(sf::Vector2f(position.x - speed * dt, position.y));
+						}
+						if (!IsWithinBounds(_rt))
+						{
+							SetPosition(tempPosition);
+							SetPosition(sf::Vector2f(position.x, position.y - speed * dt));
+						}
+						if (!IsWithinBounds(_rt))
+						{
+							SetPosition(tempPosition);
+						}
+					break;
+				case Movement::s_northEast:
+						SetPosition(sf::Vector2f(position.x + speed * dt, position.y - speed * dt));
+						if (!IsWithinBounds(_rt))
+						{
+							SetPosition(tempPosition);
+							SetPosition(sf::Vector2f(position.x + speed * dt, position.y));
+						}
+						if (!IsWithinBounds(_rt))
+						{
+							SetPosition(tempPosition);
+							SetPosition(sf::Vector2f(position.x, position.y - speed * dt));
+						}
+						if (!IsWithinBounds(_rt))
+						{
+							SetPosition(tempPosition);
+						}
+					break;
+				case Movement::s_southEast:
+						SetPosition(sf::Vector2f(position.x + speed * dt, position.y + speed * dt));
+						if (!IsWithinBounds(_rt))
+						{
+							SetPosition(tempPosition);
+							SetPosition(sf::Vector2f(position.x + speed * dt, position.y));
+						}
+						if (!IsWithinBounds(_rt))
+						{
+							SetPosition(tempPosition);
+							SetPosition(sf::Vector2f(position.x, position.y + speed * dt));
+						}
+						if (!IsWithinBounds(_rt))
+						{
+							SetPosition(tempPosition);
+						}
+					break;
+				case Movement::s_southWest:
+						SetPosition(sf::Vector2f(position.x - speed * dt, position.y + speed * dt));
+						if (!IsWithinBounds(_rt))
+						{
+							SetPosition(tempPosition);
+							SetPosition(sf::Vector2f(position.x - speed * dt, position.y));
+						}
+						if (!IsWithinBounds(_rt))
+						{
+							SetPosition(tempPosition);
+							SetPosition(sf::Vector2f(position.x, position.y + speed * dt));
+						}
+						if (!IsWithinBounds(_rt))
+						{
+							SetPosition(tempPosition);
+						}
+					break;
+				default:
+					break;				
+			}
+
+			if (!IsWithinBounds(_rt))
+			{
+				position = tempPosition;
 			}
 		}
 	}
