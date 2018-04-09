@@ -275,7 +275,7 @@ void DancingPlutonium::PlutoniumShip::Update(float dt, const sf::RenderTarget& _
 		{
 			CleanAmmunition(_rt);
 
-			for (int i = 0; i < ammunition.size(); i++)
+			for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
 			{
 				ammunition[i]->Update(dt);
 			}
@@ -289,7 +289,7 @@ void DancingPlutonium::PlutoniumShip::Draw(sf::RenderTarget& _rt)
 	_rt.draw(sprite);
 
 	// draw our projectiles
-	for (int i = 0; i < ammunition.size(); i++)
+	for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
 	{
 		ammunition[i]->Draw(_rt);
 	}
@@ -311,7 +311,7 @@ void DancingPlutonium::PlutoniumShip::CleanAmmunition(const sf::RenderTarget & _
 {
 	if (ammunition.size() != 0)
 	{
-		for (int i = 0; i < ammunition.size(); i++)
+		for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
 		{
 			if (ammunition[i]->GetActiveState(_rt) == false)
 			{
