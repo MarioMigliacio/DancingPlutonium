@@ -25,8 +25,10 @@ namespace DancingPlutonium
 		static sf::Uint32 GetDirection();
 		/* Returns true if player is attempting to move, false otherwise */
 		static bool IsMoving();
-		/* Returns true if player is pressing Left Shift or Right Shift to try to make player move faster */
+		/* Returns true if player is pressing Left Shift or Right Shift to try to make player move faster, false otherwise */
 		static bool IsUsingBoost();
+		/* Returns true if player is pressing Space bar, false otherwise */
+		static bool IsShooting();
 
 		#pragma endregion
 	private:

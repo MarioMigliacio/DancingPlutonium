@@ -3,7 +3,7 @@
 DancingPlutonium::BasicBullet::BasicBullet(const sf::RenderTarget& _rt, const sf::Vector2f& _pos)
 {
 	position = _pos;
-	speed = 0.1f;
+	speed = 100.0f;
 	SetSprite(position);
 }
 
@@ -18,5 +18,6 @@ void DancingPlutonium::BasicBullet::SetSprite(const sf::Vector2f& _origin)
 
 void DancingPlutonium::BasicBullet::Update(float _dt)
 {
+	SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - _dt * speed));
 }
 

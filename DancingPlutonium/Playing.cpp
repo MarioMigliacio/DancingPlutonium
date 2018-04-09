@@ -53,12 +53,6 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{	
 				mm[0]->SpawnRandomly(_window);
-				//m_ship.GetSprite().move(sf::Vector2f(5.0f, 0.0));
-			}
-						
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-			{
-				bullets.push_back(new BasicBullet(_window, me.GetPosition()));				
 			}
 		}
 
@@ -81,28 +75,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		_window.draw(bgSprite);
 		_window.draw(mm[0]->GetSprite());
 		me.Update(dt.asSeconds(), _window);
-		me.Draw(_window);
-
-		if (bullets.size() != 0)
-		{
-			for (int i = 0; i < bullets.size(); i++)
-			{
-				bullets[i]->SetPosition(sf::Vector2f(bullets[i]->GetPosition().x, bullets[i]->GetPosition().y - 1.0f * bullets[i]->GetSpeed()));
-
-				if (bullets[i]->GetActiveState(_window) == false)
-				{
-					delete bullets[i];
-					bullets.erase(bullets.begin() + i);
-				}
-			}
-
-			for (int i = 0; i < bullets.size(); i++)
-			{
-				bullets[i]->Update(1.0f);
-				bullets[i]->Draw(_window);
-			}
-		}
-		
+		me.Draw(_window);		
 		_window.display();
 	}
 }

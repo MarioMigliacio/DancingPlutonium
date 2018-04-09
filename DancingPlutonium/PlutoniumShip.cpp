@@ -10,6 +10,7 @@ DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
 	bombs = 0;
 	score = 0;
 	health = 100;
+	accumulator = 0.0f;
 	speed = 100.0f;
 	isActive = true;
 	InitializeWeaponry();
@@ -149,8 +150,11 @@ void DancingPlutonium::PlutoniumShip::SetPosition(const sf::Vector2f& _pos)
 
 void DancingPlutonium::PlutoniumShip::Update(float dt, const sf::RenderTarget& _rt)
 {
+	accumulator += dt;
+
 	if (isActive)
 	{
+		// update movement
 		if (isMoving)
 		{
 			if (InputManager::IsUsingBoost())
@@ -256,16 +260,67 @@ void DancingPlutonium::PlutoniumShip::Update(float dt, const sf::RenderTarget& _
 				position = tempPosition;
 			}
 		}
+
+		// update bullets
+		if (InputManager::IsShooting())
+		{
+			if (accumulator >= fireRate)
+			{
+				Shoot(_rt);
+				accumulator = 0.0f;
+			}
+		}
+
+		if (ammunition.size() != 0)
+		{
+			CleanAmmunition(_rt);
+
+			for (int i = 0; i < ammunition.size(); i++)
+			{
+				ammunition[i]->Update(dt);
+			}
+		}
 	}
 }
 
 void DancingPlutonium::PlutoniumShip::Draw(sf::RenderTarget& _rt)
 {
+	// draw our ship
 	_rt.draw(sprite);
+
+	// draw our projectiles
+	for (int i = 0; i < ammunition.size(); i++)
+	{
+		ammunition[i]->Draw(_rt);
+	}
 }
 
-void DancingPlutonium::PlutoniumShip::Shoot()
+void DancingPlutonium::PlutoniumShip::Shoot(const sf::RenderTarget& _rt)
 {
+	switch (m_weapon)
+	{
+		case WeaponState::s_basic:
+			ammunition.push_back(new BasicBullet(_rt, sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f)));
+		break;
+	default:
+		break;
+	}
+}
+
+void DancingPlutonium::PlutoniumShip::CleanAmmunition(const sf::RenderTarget & _rt)
+{
+	if (ammunition.size() != 0)
+	{
+		for (int i = 0; i < ammunition.size(); i++)
+		{
+			if (ammunition[i]->GetActiveState(_rt) == false)
+			{
+				delete ammunition[i];
+				ammunition.erase(ammunition.begin() + i);
+			}
+		}
+	}
+
 }
 
 void DancingPlutonium::PlutoniumShip::InitializeWeaponry()

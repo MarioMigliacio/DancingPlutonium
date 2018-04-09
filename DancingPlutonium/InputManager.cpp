@@ -69,3 +69,13 @@ bool DancingPlutonium::InputManager::IsUsingBoost()
 	
 	return false;
 }
+
+bool DancingPlutonium::InputManager::IsShooting()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		return true;
+	}
+
+	return false;
+}

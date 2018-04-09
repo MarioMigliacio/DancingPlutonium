@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "InputManager.h"
 #include "Bullet.h"
+#include "BasicBullet.h"
 #include "Enums.h"
 
 namespace DancingPlutonium
@@ -78,7 +79,9 @@ namespace DancingPlutonium
 		/* Draw this PlutoniumShip sprite onto the render window _rt */
 		void Draw(sf::RenderTarget& _rt);
 		/* Shoot a projectile  */
-		void Shoot();
+		void Shoot(const sf::RenderTarget& _rt);
+		/* Free up lost bullets if they go out of bounds */
+		void CleanAmmunition(const sf::RenderTarget& _rt);
 
 		#pragma endregion
 	private:
@@ -89,6 +92,7 @@ namespace DancingPlutonium
 		int score;							/* Represents the score for this PlutoniumShip object */
 		int health;							/* Represents the health of this PlutoniumShip object */
 		float fireRate;						/* Represents the fireRate of this PlutoniumShip object */
+		float accumulator;					/* Represents the accumulation of clock time, for special use with fireRate */
 		int fireDamage;						/* Represents the fireDamage of this PlutoniumShip object */
 		float speed;						/* Represents the speed of this PlutoniumShip object */
 		bool isActive;						/* Represents the isActive state for this PlutoniumShip object */
