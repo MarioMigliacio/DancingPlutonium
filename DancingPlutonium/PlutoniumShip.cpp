@@ -152,6 +152,7 @@ void DancingPlutonium::PlutoniumShip::Update(float dt, const sf::RenderTarget& _
 			}
 
 			// perform bounds checking to make sure the player is within the render window limits before calling SetPosition().
+			// This is Nehemiah's edit to fix everything that Mario couldn't.
 			switch (m_movement)
 			{
 				if (position.y > texture.getSize().y / 2.0f && (position.y < _rt.getSize().y - texture.getSize().y / 2.0f) &&
