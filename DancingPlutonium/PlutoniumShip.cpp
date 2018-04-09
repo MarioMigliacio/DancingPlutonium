@@ -165,7 +165,6 @@ void DancingPlutonium::PlutoniumShip::Update(float dt, const sf::RenderTarget& _
 			auto tempPosition = position;
 
 			// perform bounds checking to make sure the player is within the render window limits before calling SetPosition().
-			// This is Nehemiah's edit to fix everything that Mario couldn't.
 			switch (m_movement)
 			{
 				case Movement::s_north:
