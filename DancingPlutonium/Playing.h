@@ -4,7 +4,7 @@
 #include <SFML/Audio.hpp>
 #include "BasicShip.h"
 #include "PlutoniumShip.h"
-#include "BasicBullet.h"
+#include "BasicBulletPlayer.h"
 #include "InputManager.h"
 
 namespace DancingPlutonium

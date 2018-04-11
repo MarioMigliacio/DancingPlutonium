@@ -300,7 +300,8 @@ void DancingPlutonium::PlutoniumShip::Shoot(const sf::RenderTarget& _rt)
 	switch (m_weapon)
 	{
 		case WeaponState::s_basic:
-			ammunition.push_back(new BasicBullet(_rt, sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f)));
+			//ammunition.push_back(new BasicBulletPlayer(_rt, sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f)));
+			ammunition.push_back(new TripleBulletPlayer(_rt, sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f)));
 		break;
 	default:
 		break;

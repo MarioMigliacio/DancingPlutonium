@@ -11,7 +11,6 @@ DancingPlutonium::BasicShip::BasicShip(const sf::RenderTarget& _rt)
 	speed = 1.0f;
 	isActive = true;
 	SetSprite();
-	SetBulletPatterns();
 	SetPosition(sf::Vector2f(16.0f, 16.0f));
 }
 
@@ -26,13 +25,7 @@ void DancingPlutonium::BasicShip::SetSprite()
 	position = origin;
 }
 
-void DancingPlutonium::BasicShip::SetBulletPatterns()
-{
-	bulletPatterns.push_back(BulletPattern::Pattern::s_enemyStandard);
-}
-
 void DancingPlutonium::BasicShip::ShootBullet()
 {
 }
-
 

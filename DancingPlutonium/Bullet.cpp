@@ -38,8 +38,3 @@ void DancingPlutonium::Bullet::SetPosition(const sf::Vector2f& _pos)
 	position = _pos;
 	sprite.setPosition(_pos);
 }
-
-void DancingPlutonium::Bullet::Draw(sf::RenderTarget& _rt) const
-{
-	_rt.draw(sprite);
-}

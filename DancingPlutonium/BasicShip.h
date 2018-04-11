@@ -23,8 +23,6 @@ namespace DancingPlutonium
 
 		/* Sets this ships sprite, texture and default position */
 		virtual void SetSprite() override;
-		/* Sets the projectile pattern and angle for this Ships projectiles */
-		virtual void SetBulletPatterns() override;
 		/* Activate a projectile that spawns from this ship */
 		virtual void ShootBullet() override;
 

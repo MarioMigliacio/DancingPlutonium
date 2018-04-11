@@ -1,7 +1,6 @@
 #pragma once
 
 #include<SFML/Graphics.hpp>
-#include "BulletPattern.h"
 
 namespace DancingPlutonium
 {
@@ -15,8 +14,6 @@ namespace DancingPlutonium
 		sf::Sprite sprite;				/* Represents the sprite for this projectile */
 		sf::Texture texture;			/* Represents the texture for this projectile */
 		sf::Vector2f position;			/* Represents the position for this projectile */
-		BulletPattern::Angle angle;		/* Represents the angle this projectile will spawn with */
-		BulletPattern::Pattern pattern; /* Represents the pattern this projectile will spawn with */
 
 		#pragma endregion
 	public:
@@ -35,7 +32,7 @@ namespace DancingPlutonium
 		/* Sets the position and sprite of this projectile to the value of _pos */
 		virtual void SetPosition(const sf::Vector2f& _pos);
 		/* Draw this projectiles sprite onto the render window _rt */
-		virtual void Draw(sf::RenderTarget& _rt) const;
+		virtual void Draw(sf::RenderTarget& _rt) = 0;
 		/* Abstract method Update must be implemented by inheriting children */
 		virtual void Update(float _dt) = 0;
 		/* Abstract method SetSprite must be implemented by inheriting children */

@@ -2,7 +2,6 @@
 
 #include<SFML/Graphics.hpp>
 #include "IRng.h"
-#include "BulletPattern.h"
 #include "Bullet.h"
 
 namespace DancingPlutonium
@@ -22,7 +21,6 @@ namespace DancingPlutonium
 		sf::Sprite sprite;										/* Represents the sprite for this unit */
 		sf::Texture texture;									/* Represents the texture for this unit */
 		sf::Vector2f position;									/* Represents the position for this unit */
-		std::vector<BulletPattern::Pattern> bulletPatterns;		/* Represents the collection of bullet patterns available to this unit */
 		std::vector<Bullet*> shotsFired;						/* Represents this units active projectile container */
 
 		#pragma endregion
@@ -61,8 +59,6 @@ namespace DancingPlutonium
 		virtual void Update(float _dt);
 		/* Abstract method SetSprite must be implemented by inheriting children */
 		virtual void SetSprite() = 0;
-		/* Abstract method SetBulletPatterns must be implemented by inheriting children */
-		virtual void SetBulletPatterns() = 0;
 		/* Abstract method ShootBullet must be implemented by inheriting children */
 		virtual void ShootBullet() = 0;
 

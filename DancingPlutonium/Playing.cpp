@@ -19,7 +19,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 	
 	// this works!
 	std::vector<GenericEnemyUnit*> mm;
-	std::vector<BasicBullet*> bullets;
+	std::vector<BasicBulletPlayer*> bullets;
 	mm.push_back(&m_ship);
 
 	// Scale screens with different computer screen resolutions: (the standard resolution in place is 720p: 1280wide x 720high, 60 fps)

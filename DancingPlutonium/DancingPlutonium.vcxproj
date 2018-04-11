@@ -129,12 +129,12 @@
     <ClCompile Include="Playing.cpp" />
     <ClCompile Include="PlutoniumShip.cpp" />
     <ClCompile Include="TitleMenu.cpp" />
+    <ClCompile Include="TripleBulletPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BasicBullet.h" />
+    <ClInclude Include="BasicBulletPlayer.h" />
     <ClInclude Include="BasicShip.h" />
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="BulletPattern.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GenericEnemyUnit.h" />
@@ -145,6 +145,7 @@
     <ClInclude Include="Playing.h" />
     <ClInclude Include="PlutoniumShip.h" />
     <ClInclude Include="TitleMenu.h" />
+    <ClInclude Include="TripleBulletPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -3,7 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include "InputManager.h"
 #include "Bullet.h"
-#include "BasicBullet.h"
+#include "BasicBulletPlayer.h"
+#include "TripleBulletPlayer.h"
 #include "Enums.h"
 
 namespace DancingPlutonium

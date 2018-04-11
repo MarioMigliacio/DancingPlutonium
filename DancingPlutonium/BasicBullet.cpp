@@ -1,13 +1,13 @@
-#include "BasicBullet.h"
+#include "BasicBulletPlayer.h"
 
-DancingPlutonium::BasicBullet::BasicBullet(const sf::RenderTarget& _rt, const sf::Vector2f& _pos)
+DancingPlutonium::BasicBulletPlayer::BasicBulletPlayer(const sf::RenderTarget& _rt, const sf::Vector2f& _pos)
 {
 	position = _pos;
 	speed = 100.0f;
 	SetSprite(position);
 }
 
-void DancingPlutonium::BasicBullet::SetSprite(const sf::Vector2f& _origin)
+void DancingPlutonium::BasicBulletPlayer::SetSprite(const sf::Vector2f& _origin)
 {
 	texture.loadFromFile("Content/Images/BulletBlue.png");
 	sprite.setTexture(texture);
@@ -16,8 +16,13 @@ void DancingPlutonium::BasicBullet::SetSprite(const sf::Vector2f& _origin)
 	position = _origin;
 }
 
-void DancingPlutonium::BasicBullet::Update(float _dt)
+void DancingPlutonium::BasicBulletPlayer::Update(float _dt)
 {
 	SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - _dt * speed));
+}
+
+void DancingPlutonium::BasicBulletPlayer::Draw(sf::RenderTarget& _rt)
+{
+	_rt.draw(sprite);
 }
 
