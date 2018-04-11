@@ -6,21 +6,24 @@
 
 namespace DancingPlutonium
 {
-	/* BasicBulletPlayer class is the 1st stage bullet object which has a very 'basic' pattern trajectory */
+	/* TripleBulletPlayer class is a specialized bullet object which has a triple shot action trajectory */
 	class TripleBulletPlayer : public Bullet
 	{
 	private:
-		Bullet* leftProjectile;
-		Bullet* rightProjectile;
+		#pragma region Extra projectile objects
 
+		Bullet* leftProjectile;		/* Represents a left side trajectory bullet object off the main shot */
+		Bullet* rightProjectile;	/* Represents a right side trajectory bullet object off the main shot */
+
+		#pragma endregion		
 	public:
 		#pragma region Ctor/Dtors
 
-		/* BasicBulletPlayer constructor accepting RenderTarget, and Position input parameters */
+		/* TripleBulletPlayer constructor accepting RenderTarget, and Position input parameters */
 		TripleBulletPlayer(const sf::RenderTarget& _rt, const sf::Vector2f& _pos);
-		/* BasicBulletPlayer copy constructor */
+		/* TripleBulletPlayer copy constructor */
 		TripleBulletPlayer(const TripleBulletPlayer& _ref) {}
-		/* BasicBulletPlayer deconstructor */
+		/* TripleBulletPlayer deconstructor */
 		~TripleBulletPlayer();
 
 		#pragma endregion
