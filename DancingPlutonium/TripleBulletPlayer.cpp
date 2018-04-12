@@ -1,4 +1,5 @@
 #include "TripleBulletPlayer.h"
+#include <iostream>
 
 DancingPlutonium::TripleBulletPlayer::TripleBulletPlayer(const sf::RenderTarget& _rt, const sf::Vector2f& _pos)
 {
@@ -11,14 +12,8 @@ DancingPlutonium::TripleBulletPlayer::TripleBulletPlayer(const sf::RenderTarget&
 
 DancingPlutonium::TripleBulletPlayer::~TripleBulletPlayer()
 {
-	if (leftProjectile)
-	{
-		delete leftProjectile;
-	}
-	if (rightProjectile)
-	{
-		delete rightProjectile;
-	}
+	delete leftProjectile;
+	delete rightProjectile;
 }
 
 void DancingPlutonium::TripleBulletPlayer::SetSprite(const sf::Vector2f& _origin)

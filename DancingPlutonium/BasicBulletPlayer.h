@@ -15,7 +15,7 @@ namespace DancingPlutonium
 		BasicBulletPlayer(const sf::RenderTarget& _rt, const sf::Vector2f& _pos);
 		/* BasicBulletPlayer copy constructor */
 		BasicBulletPlayer(const BasicBulletPlayer& _ref) {}
-		/* BasicBulletPlayer deconstructor */
+		/* BasicBulletPlayer destructor */
 		~BasicBulletPlayer() {}
 
 		#pragma endregion

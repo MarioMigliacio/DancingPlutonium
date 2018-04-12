@@ -17,6 +17,9 @@ namespace DancingPlutonium
 
 		#pragma endregion
 	public:
+		/* The virtual Bullet Destructor */
+		virtual ~Bullet() {}
+
 		#pragma region Methods
 
 		/* Returns the speed for this projectile */

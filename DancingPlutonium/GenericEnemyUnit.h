@@ -25,6 +25,10 @@ namespace DancingPlutonium
 
 		#pragma endregion
 	public:
+
+		/* The virtual GenericEnemyUnit destructor */
+		virtual ~GenericEnemyUnit() {}
+
 		#pragma region Methods
 
 		/* Returns the value of this unit */

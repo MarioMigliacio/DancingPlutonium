@@ -22,7 +22,7 @@ namespace DancingPlutonium
 		Game() {}
 		/* Game copy constructor */
 		Game(const Game& _ref) {}
-		/* Game deconstructor*/
+		/* Game destructor*/
 		~Game() {}
 
 		#pragma endregion

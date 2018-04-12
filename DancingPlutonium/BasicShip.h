@@ -14,7 +14,7 @@ namespace DancingPlutonium
 		BasicShip(const sf::RenderTarget& _rt);
 		/* BasicShip copy constructor */
 		BasicShip(const BasicShip& _ref) {}
-		/* BasicShip deconstructor */
+		/* BasicShip destructor */
 		~BasicShip() {}
 
 		#pragma endregion
