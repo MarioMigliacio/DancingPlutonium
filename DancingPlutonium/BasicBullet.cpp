@@ -1,6 +1,6 @@
 #include "BasicBulletPlayer.h"
 
-DancingPlutonium::BasicBulletPlayer::BasicBulletPlayer(const sf::RenderTarget& _rt, const sf::Vector2f& _pos)
+DancingPlutonium::BasicBulletPlayer::BasicBulletPlayer(const sf::Vector2f& _pos)
 {
 	position = _pos;
 	speed = 100.0f;

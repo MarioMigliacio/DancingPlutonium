@@ -15,4 +15,12 @@ namespace DancingPlutonium
 		s_west,
 		s_northWest,
 	};
+
+	enum ProjectileTypes
+	{
+		NoBullet,
+		BasicBullet,
+		TripleBullet,
+		MacaroniNCheese
+	};
 }

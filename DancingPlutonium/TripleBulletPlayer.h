@@ -20,7 +20,7 @@ namespace DancingPlutonium
 		#pragma region Ctor/Dtors
 
 		/* TripleBulletPlayer constructor accepting RenderTarget, and Position input parameters */
-		TripleBulletPlayer(const sf::RenderTarget& _rt, const sf::Vector2f& _pos);
+		TripleBulletPlayer(const sf::Vector2f& _pos);
 		/* TripleBulletPlayer copy constructor */
 		TripleBulletPlayer(const TripleBulletPlayer& _ref) {}
 		/* TripleBulletPlayer deconstructor */

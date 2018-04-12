@@ -297,11 +297,15 @@ void DancingPlutonium::PlutoniumShip::Draw(sf::RenderTarget& _rt)
 
 void DancingPlutonium::PlutoniumShip::Shoot(const sf::RenderTarget& _rt)
 {
+	Bullet* omgDoesThisWork;
+
 	switch (m_weapon)
 	{
 		case WeaponState::s_basic:
 			//ammunition.push_back(new BasicBulletPlayer(_rt, sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f)));
-			ammunition.push_back(new TripleBulletPlayer(_rt, sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f)));
+			//auto pos = sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f);
+			omgDoesThisWork = BulletFactory::GetProjectile(ProjectileTypes::TripleBullet, sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f));
+			ammunition.push_back(omgDoesThisWork);
 		break;
 	default:
 		break;
@@ -321,7 +325,6 @@ void DancingPlutonium::PlutoniumShip::CleanAmmunition(const sf::RenderTarget & _
 			}
 		}
 	}
-
 }
 
 void DancingPlutonium::PlutoniumShip::InitializeWeaponry()

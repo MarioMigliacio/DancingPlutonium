@@ -2,6 +2,7 @@
 
 #include<SFML/Graphics.hpp>
 #include "Bullet.h"
+#include "BasicShip.h"
 
 namespace DancingPlutonium
 {
@@ -12,7 +13,7 @@ namespace DancingPlutonium
 		#pragma region Ctor/Dtors
 
 		/* BasicBulletPlayer constructor accepting RenderTarget, and Position input parameters */
-		BasicBulletPlayer(const sf::RenderTarget& _rt, const sf::Vector2f& _pos);
+		BasicBulletPlayer(const sf::Vector2f& _pos);
 		/* BasicBulletPlayer copy constructor */
 		BasicBulletPlayer(const BasicBulletPlayer& _ref) {}
 		/* BasicBulletPlayer destructor */
