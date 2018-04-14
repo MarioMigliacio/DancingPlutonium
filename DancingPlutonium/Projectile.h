@@ -4,7 +4,7 @@
 
 namespace DancingPlutonium
 {
-	/* Bullet class represents an abstract base projectile for which to inherit from */
+	/* Projectile class represents an abstract base projectile for which to inherit from */
 	class Projectile
 	{
 	protected:
@@ -14,16 +14,26 @@ namespace DancingPlutonium
 		sf::Sprite sprite;				/* Represents the sprite for this projectile */
 		sf::Texture texture;			/* Represents the texture for this projectile */
 		sf::Vector2f position;			/* Represents the position for this projectile */
+		bool friendly;					/* Represents the allegiance of this projectile */
+		bool innert;					/* Represents if this projectile can hurt or not */
 
 		#pragma endregion
 	public:
+		#pragma region Virtual Dtor
+
 		/* The virtual Bullet Destructor */
 		virtual ~Projectile() {}
+
+		#pragma endregion
 
 		#pragma region Methods
 
 		/* Returns the speed for this projectile */
 		float GetSpeed() const;
+		/* Returns true if this projectile is fired by the player, false otherwise */
+		bool IsFriendly() const;
+		/* Returns true if this projectile has not yet hurt a unit, it is said to be active or 'innert', false otherwise */
+		bool IsInnert() const;
 		/* Returns true if this projectile is active, false otherwise */
 		bool GetActiveState(const sf::RenderTarget& _rt) const;
 		/* Returns a reference to this projectiles sprite */

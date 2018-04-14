@@ -1,42 +1,36 @@
 #include "BulletFactory.h"
 
-DancingPlutonium::Projectile* DancingPlutonium::BulletFactory::GetProjectile(ProjectileTypes _toMake, sf::Vector2f& _pos)
+DancingPlutonium::Projectile* DancingPlutonium::BulletFactory::GetProjectile(ProjectileType _toMake, sf::Vector2f& _pos)
 {
+	Projectile* retVal;
+
 	switch (_toMake)
 	{
-	case DancingPlutonium::NoBullet:
-		return nullptr;
-		break;
-	case DancingPlutonium::BasicBullet:
-		return new BasicBulletPlayer(_pos);
-		break;
-	case DancingPlutonium::TripleBullet:
-		return new TripleBulletPlayer(_pos);
-		break;
-	case DancingPlutonium::MacaroniNCheese:
-		return nullptr;
-		break;
-	default:
-		return nullptr;
-		break;
+		case DancingPlutonium::ProjectileType::None:
+			retVal = nullptr;
+			break;
+		case DancingPlutonium::ProjectileType::BasicBullet:
+			retVal = new BasicProjectile(_pos);
+			break;
+		case DancingPlutonium::ProjectileType::AimedBullet:
+			retVal = nullptr;
+			break;
+		case DancingPlutonium::ProjectileType::HomingBullet:
+			retVal = nullptr;
+			break;
+		case DancingPlutonium::ProjectileType::IncendiaryBullet:
+			retVal = nullptr;
+			break;
+		case DancingPlutonium::ProjectileType::Lazer:
+			retVal = nullptr;
+			break;
+		case DancingPlutonium::ProjectileType::RealLazer:
+			retVal = nullptr;
+			break;
+		default:
+			retVal = nullptr;
+			break;
 	}
-	return nullptr;
+
+	return retVal;
 }
-
-/*
-BasicBullet,
-AimedBullet,(upon origin, aims at target)
-HomingBullet,(alters trajectory while updating)
-StandardLazer,
-JoesLazer(the one thats not gay)
-[ExplodingDistance optional parameter]
-PURPLEBULLET
-*/
-
-/*
-BasicCannon,
-DoubleShot_straight,
-TripleShot_gay,
-PacketWeapon_SUPERGAY,
-PhotonBeam,
-*/

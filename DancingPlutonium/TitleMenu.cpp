@@ -1,18 +1,18 @@
 #include "TitleMenu.h"
 
 // Static variable declarations:
-sf::Uint32 DancingPlutonium::TitleMenu::m_state = s_uninitialized;
+sf::Uint32 DancingPlutonium::TitleMenu::menuState = s_uninitialized;
 
 void DancingPlutonium::TitleMenu::Show(sf::RenderWindow& _window)
 {
 	// Ensure that the initialization takes place correctly here and for the first time.
-	if (m_state != MenuState::s_uninitialized)
+	if (menuState != MenuState::s_uninitialized)
 	{
 		return;
 	}
 
 	// Set the State:
-	m_state = MenuState::s_undecided;
+	menuState = MenuState::s_undecided;
 	
 	// Set up the background:
 	sf::Texture bgTexture;
@@ -48,7 +48,7 @@ void DancingPlutonium::TitleMenu::Show(sf::RenderWindow& _window)
 	sf::Time dt;
 
 	// Perform the Main Menu screen display!
-	while (m_state == MenuState::s_undecided)
+	while (menuState == MenuState::s_undecided)
 	{
 		sf::Event event;
 
@@ -56,7 +56,7 @@ void DancingPlutonium::TitleMenu::Show(sf::RenderWindow& _window)
 		{
 			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
-				m_state = MenuState::s_quit;
+				menuState = MenuState::s_quit;
 				return;
 			}
 		}
@@ -75,19 +75,19 @@ void DancingPlutonium::TitleMenu::Show(sf::RenderWindow& _window)
 			{
 				if (buttonContainer[i]->getName() == "Play")
 				{
-					m_state = MenuState::s_play;
+					menuState = MenuState::s_play;
 					cleanup(buttonContainer);
 					break;
 				}
 				else if (buttonContainer[i]->getName() == "Options")
 				{
-					m_state = MenuState::s_options;
+					menuState = MenuState::s_options;
 					cleanup(buttonContainer);
 					break;
 				}
 				else if (buttonContainer[i]->getName() == "ScoreBoard")
 				{
-					m_state = MenuState::s_score;
+					menuState = MenuState::s_score;
 					cleanup(buttonContainer);
 					break;
 				}
@@ -100,7 +100,7 @@ void DancingPlutonium::TitleMenu::Show(sf::RenderWindow& _window)
 
 sf::Uint32 DancingPlutonium::TitleMenu::getMenuState() const
 {
-	return m_state;
+	return menuState;
 }
 
 void DancingPlutonium::TitleMenu::cleanup(std::vector<Button*>& _container)

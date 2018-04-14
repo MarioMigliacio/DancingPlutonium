@@ -14,8 +14,8 @@ namespace DancingPlutonium
 	public:
 		#pragma region Dtor
 
-		/* InputManager deconstructor */
-		~InputManager() { }
+		/* InputManager destructor */
+		~InputManager() {}
 
 		#pragma endregion
 

@@ -2,7 +2,7 @@
 
 #include<SFML/Graphics.hpp>
 #include "Projectile.h"
-#include "BasicBulletPlayer.h"
+#include "BasicProjectile.h"
 
 namespace DancingPlutonium
 {
@@ -32,10 +32,8 @@ namespace DancingPlutonium
 
 		/* Sets this projectiles sprite, texture and default position */
 		virtual void SetSprite(const sf::Vector2f & _origin) override;
-
 		/* Update this projectile in the world based on the clock */
 		virtual void Update(float _dt) override;
-
 		// Draw this projectile in the world
 		virtual void Draw(sf::RenderTarget& _rt) override;
 

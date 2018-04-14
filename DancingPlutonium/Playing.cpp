@@ -19,7 +19,6 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 	
 	// this works!
 	std::vector<GenericEnemyUnit*> mm;
-	std::vector<BasicBulletPlayer*> bullets;
 	mm.push_back(&m_ship);
 
 	// Scale screens with different computer screen resolutions: (the standard resolution in place is 720p: 1280wide x 720high, 60 fps)
@@ -65,10 +64,10 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			sf::Uint32 whichDirection = InputManager::GetDirection();
 			me.SetMoveState(whichDirection);
 		}
-		else
+		/*else
 		{
 			me.SetMoveState(Movement::s_noMovement);
-		}
+		}*/
 
 		dt = clock.restart();
 		_window.clear();

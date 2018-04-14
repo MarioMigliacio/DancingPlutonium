@@ -116,7 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BasicBullet.cpp" />
+    <ClCompile Include="BasicProjectile.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="BulletFactory.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -131,9 +131,10 @@
     <ClCompile Include="PlutoniumShip.cpp" />
     <ClCompile Include="TitleMenu.cpp" />
     <ClCompile Include="TripleBulletPlayer.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BasicBulletPlayer.h" />
+    <ClInclude Include="BasicProjectile.h" />
     <ClInclude Include="BasicShip.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="BulletFactory.h" />
@@ -148,6 +149,7 @@
     <ClInclude Include="PlutoniumShip.h" />
     <ClInclude Include="TitleMenu.h" />
     <ClInclude Include="TripleBulletPlayer.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

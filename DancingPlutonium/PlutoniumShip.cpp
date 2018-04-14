@@ -301,7 +301,7 @@ void DancingPlutonium::PlutoniumShip::Shoot(const sf::RenderTarget& _rt)
 	switch (m_weapon)
 	{
 		case WeaponState::s_basic:
-			omgDoesThisWork = BulletFactory::GetProjectile(ProjectileTypes::BasicBullet, sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f));
+			omgDoesThisWork = BulletFactory::GetProjectile(ProjectileType::BasicBullet, sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f));
 			ammunition.push_back(omgDoesThisWork);
 		break;
 	default:

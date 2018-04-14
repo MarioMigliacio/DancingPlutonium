@@ -1,10 +1,9 @@
 #include "TripleBulletPlayer.h"
-#include <iostream>
 
 DancingPlutonium::TripleBulletPlayer::TripleBulletPlayer(const sf::Vector2f& _pos)
 {
-	leftProjectile = new BasicBulletPlayer(_pos);
-	rightProjectile = new BasicBulletPlayer(_pos);
+	leftProjectile = new BasicProjectile(_pos);
+	rightProjectile = new BasicProjectile(_pos);
 	position = _pos;
 	speed = 100.0f;
 	SetSprite(position);

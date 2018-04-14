@@ -52,6 +52,6 @@ namespace DancingPlutonium
 
 		#pragma endregion
 	private:
-		static sf::Uint32 m_state;	/* Static variable which maintains the state for this Playing object */
+		static sf::Uint32 menuState;	/* Static variable which maintains the state for this Playing object */
 	};
 }

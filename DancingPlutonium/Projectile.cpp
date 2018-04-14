@@ -5,6 +5,16 @@ float DancingPlutonium::Projectile::GetSpeed() const
 	return speed;
 }
 
+bool DancingPlutonium::Projectile::IsFriendly() const
+{
+	return friendly;
+}
+
+bool DancingPlutonium::Projectile::IsInnert() const
+{
+	return innert;
+}
+
 bool DancingPlutonium::Projectile::GetActiveState(const sf::RenderTarget& _rt) const
 {
 	if (sprite.getPosition().y < 0 || sprite.getPosition().x < 0 ||
