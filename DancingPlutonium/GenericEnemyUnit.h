@@ -2,7 +2,7 @@
 
 #include<SFML/Graphics.hpp>
 #include "IRng.h"
-#include "Bullet.h"
+#include "Projectile.h"
 
 namespace DancingPlutonium
 {
@@ -21,7 +21,7 @@ namespace DancingPlutonium
 		sf::Sprite sprite;										/* Represents the sprite for this unit */
 		sf::Texture texture;									/* Represents the texture for this unit */
 		sf::Vector2f position;									/* Represents the position for this unit */
-		std::vector<Bullet*> shotsFired;						/* Represents this units active projectile container */
+		std::vector<Projectile*> shotsFired;					/* Represents this units active projectile container */
 
 		#pragma endregion
 	public:
@@ -44,7 +44,7 @@ namespace DancingPlutonium
 		/* Returns true if this unit is active, false otherwise */
 		virtual bool GetActiveState(const sf::RenderTarget& _rt) const;
 		/* Returns true if this unit is colliding with a player projectile, false otherwise */
-		virtual bool CheckIfColliding(const Bullet& _shot) const;
+		virtual bool CheckIfColliding(const Projectile& _shot) const;
 		/* Returns the sprite of this unit */
 		virtual sf::Sprite GetSprite() const;
 		/* Returns the texture of this unit */

@@ -1,19 +1,19 @@
 #pragma once
 
 #include<SFML/Graphics.hpp>
-#include "Bullet.h"
+#include "Projectile.h"
 #include "BasicBulletPlayer.h"
 
 namespace DancingPlutonium
 {
 	/* TripleBulletPlayer class is a specialized bullet object which has a triple shot action trajectory */
-	class TripleBulletPlayer : public Bullet
+	class TripleBulletPlayer : public Projectile
 	{
 	private:
 		#pragma region Extra projectile objects
 
-		Bullet* leftProjectile;		/* Represents a left side trajectory bullet object off the main shot */
-		Bullet* rightProjectile;	/* Represents a right side trajectory bullet object off the main shot */
+		Projectile* leftProjectile;		/* Represents a left side trajectory bullet object off the main shot */
+		Projectile* rightProjectile;	/* Represents a right side trajectory bullet object off the main shot */
 
 		#pragma endregion		
 	public:

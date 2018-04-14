@@ -36,7 +36,7 @@ bool DancingPlutonium::GenericEnemyUnit::GetActiveState(const sf::RenderTarget& 
 }
 
 // test this method!
-bool DancingPlutonium::GenericEnemyUnit::CheckIfColliding(const Bullet& _shot) const
+bool DancingPlutonium::GenericEnemyUnit::CheckIfColliding(const Projectile& _shot) const
 {
 	bool check = GetBounds().contains(_shot.GetPosition());
 

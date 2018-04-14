@@ -1,6 +1,6 @@
 #include "BulletFactory.h"
 
-DancingPlutonium::Bullet* DancingPlutonium::BulletFactory::GetProjectile(ProjectileTypes _toMake, sf::Vector2f& _pos)
+DancingPlutonium::Projectile* DancingPlutonium::BulletFactory::GetProjectile(ProjectileTypes _toMake, sf::Vector2f& _pos)
 {
 	switch (_toMake)
 	{

@@ -117,7 +117,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BasicBullet.cpp" />
-    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="BulletFactory.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="BasicShip.cpp" />
@@ -135,7 +135,7 @@
   <ItemGroup>
     <ClInclude Include="BasicBulletPlayer.h" />
     <ClInclude Include="BasicShip.h" />
-    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="BulletFactory.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Game.h" />

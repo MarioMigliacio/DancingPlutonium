@@ -5,7 +5,7 @@
 namespace DancingPlutonium
 {
 	/* Bullet class represents an abstract base projectile for which to inherit from */
-	class Bullet
+	class Projectile
 	{
 	protected:
 		#pragma region Members
@@ -18,7 +18,7 @@ namespace DancingPlutonium
 		#pragma endregion
 	public:
 		/* The virtual Bullet Destructor */
-		virtual ~Bullet() {}
+		virtual ~Projectile() {}
 
 		#pragma region Methods
 

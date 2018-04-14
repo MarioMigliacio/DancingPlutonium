@@ -15,7 +15,7 @@ DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
 	isActive = true;
 	InitializeWeaponry();
 	SetSprite(_rt);
-	ammunition = std::vector<Bullet*>();
+	ammunition = std::vector<Projectile*>();
 }
 
 int DancingPlutonium::PlutoniumShip::LivesRemaining() const
@@ -53,8 +53,6 @@ int DancingPlutonium::PlutoniumShip::GetFireDamage() const
 	return fireDamage;
 }
 
-//TODO: when finished with projectile classes, use a pointer to a basic bullet and figure out based on factory types.
-// idk, maybe enum is appropriate. Need to discuss this.
 void DancingPlutonium::PlutoniumShip::UpgradeWeapon()
 {
 	switch (m_weapon)
@@ -297,14 +295,13 @@ void DancingPlutonium::PlutoniumShip::Draw(sf::RenderTarget& _rt)
 
 void DancingPlutonium::PlutoniumShip::Shoot(const sf::RenderTarget& _rt)
 {
-	Bullet* omgDoesThisWork;
+	/* it did */
+	Projectile* omgDoesThisWork;
 
 	switch (m_weapon)
 	{
 		case WeaponState::s_basic:
-			//ammunition.push_back(new BasicBulletPlayer(_rt, sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f)));
-			//auto pos = sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f);
-			omgDoesThisWork = BulletFactory::GetProjectile(ProjectileTypes::TripleBullet, sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f));
+			omgDoesThisWork = BulletFactory::GetProjectile(ProjectileTypes::BasicBullet, sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f));
 			ammunition.push_back(omgDoesThisWork);
 		break;
 	default:
