@@ -19,7 +19,7 @@ void DancingPlutonium::BasicProjectile::SetSprite(const sf::Vector2f& _origin)
 void DancingPlutonium::BasicProjectile::Update(float _dt)
 {
 	// bullet growing test. it works!
-	// sprite.setScale(sf::Vector2f(sprite.getScale().x + _dt, sprite.getScale().y + _dt));
+	sprite.setScale(sf::Vector2f(sprite.getScale().x + _dt, sprite.getScale().y + _dt));
 	SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - _dt * speed));
 }
 
