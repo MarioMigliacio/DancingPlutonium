@@ -10,17 +10,52 @@ namespace DancingPlutonium
 	class Weapon
 	{		
 	public:
-		Weapon(sf::RenderTarget& _rt);
-		
-		sf::Uint32 GetWeaponType();
-		sf::Uint32 GetWeaponPattern();
+		#pragma region Ctor / Dtor
 
+		/* The Weapon default constructor */
+		Weapon();
+		/* The Weapon default destructor */
+		~Weapon();
+
+		#pragma endregion
 	public:
-		void Fire();
+		#pragma region Ammunition Access
 
+		/* Returns the projectile object at the index input parameter */
+		Projectile* GetIndexOfAmmunition(int _index);
+		/* Returns the size of the projectile container for the units' Weapon */
+		int GetSizeOfAmmunition();
+
+		#pragma endregion
+	public:
+		#pragma region Methods
+
+		/* Sets the Projectile Pattern based on the _wepPattern input parameter for this weapon */
+		void SetPattern(ProjectilePattern _wepPattern);
+		/* Upgrade this weapon objects Projectile Pattern to the next logical stage */
+		void UpgradeWeaponry();
+		/* Adds a projectile to the ammunition container for this weapon, spawning a projectile from the _pos input parameter */
+		void AddMunition(sf::Vector2f& _pos);
+		/* Calls for an update on every projectile object within the ammunition container of this weapon */
+		void Update(sf::RenderTarget& _rt, float _dt);
+		/* Calls for a draw on every projectile object within the ammunition container of this weapon */
+		void Draw(sf::RenderTarget& _rt);
+		
+		#pragma endregion
 	private:
-		std::vector<Projectile*> ammunition;
-		static sf::Uint32 weaponType;
+		#pragma region Cleanup
+
+		/* Deletes newly created projectile objects from the ammunition vector, based on active states of each projectile */
+		void CleanAmmunition(sf::RenderTarget& _rt);
+
+		#pragma endregion
+
+		#pragma region Member Variables
+
+		std::vector<Projectile*> ammunition;	/* Represents the container for the projectiles that this weapon object maintains */
+		float accumulator;						/*  */
 		static sf::Uint32 weaponPattern;
+
+		#pragma endregion
 	};
 }

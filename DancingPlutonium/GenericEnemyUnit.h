@@ -12,16 +12,16 @@ namespace DancingPlutonium
 	protected:
 		#pragma region Members
 
-		int value;												/* Represents the point value for the player upon killing this unit */
-		int health;												/* Represents the health points this unit has */
-		float damageMultiplier;									/* Represents the additional damage multiplier this unit can deal */
-		float fireRate;											/* Represents the rate of fire this unit is allowed to shoot projectiles */
-		float speed;											/* Represents the speed that this unit may move at */
-		bool isActive;											/* Represents the state of whether this unit is active or dead */
-		sf::Sprite sprite;										/* Represents the sprite for this unit */
-		sf::Texture texture;									/* Represents the texture for this unit */
-		sf::Vector2f position;									/* Represents the position for this unit */
-		std::vector<Projectile*> shotsFired;					/* Represents this units active projectile container */
+		int value;								/* Represents the point value for the player upon killing this unit */
+		int health;								/* Represents the health points this unit has */
+		float damageMultiplier;					/* Represents the additional damage multiplier this unit can deal */
+		float fireRate;							/* Represents the rate of fire this unit is allowed to shoot projectiles */
+		float speed;							/* Represents the speed that this unit may move at */
+		bool isActive;							/* Represents the state of whether this unit is active or dead */
+		sf::Sprite sprite;						/* Represents the sprite for this unit */
+		sf::Texture texture;					/* Represents the texture for this unit */
+		sf::Vector2f position;					/* Represents the position for this unit */
+		std::vector<Projectile*> shotsFired;	/* Represents this units active projectile container */
 
 		#pragma endregion
 	public:

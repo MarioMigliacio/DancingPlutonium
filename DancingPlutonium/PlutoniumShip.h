@@ -5,6 +5,7 @@
 #include "Projectile.h"
 #include "BulletFactory.h"
 #include "Enums.h"
+#include "Weapon.h"
 
 namespace DancingPlutonium
 {
@@ -12,27 +13,12 @@ namespace DancingPlutonium
 	class PlutoniumShip
 	{
 	public:
-		#pragma region WeaponState enum
-
-		/* WeaponState maintains the state of this PlutoniumShip object's projectile when player shoots */
-		enum WeaponState
-		{
-			s_uninitialized,
-			s_basic,
-			s_sidecannons,
-			s_lazerstream,
-			s_widelazer,
-			s_homing
-		};
-
-		#pragma endregion
-	public:
 		#pragma region Ctor/Dtors
 
 		/* PlutoniumShip constructor that accepts a RenderTarget as input parameter */
 		PlutoniumShip(const sf::RenderTarget& _rt);
 		/* PlutoniumShip deconstructor */
-		~PlutoniumShip() {}
+		~PlutoniumShip();
 
 		#pragma endregion
 
@@ -52,8 +38,6 @@ namespace DancingPlutonium
 		float GetFireRate() const;
 		/* Returns the fireDamage for this PlutoniumShip object */
 		int GetFireDamage() const;
-		/* Modifies this PlutoniumShip object's weaponry to the next state */
-		void UpgradeWeapon();
 		/* Returns the speed for this PlutoniumShip object */
 		float GetSpeed() const;
 		/* Returns true if this PlutoniumShip object is alive, false otherwise */
@@ -75,7 +59,7 @@ namespace DancingPlutonium
 		/* Sets the position for this PlutoniumShip object based on the _pos input parameter */
 		void SetPosition(const sf::Vector2f& _pos);
 		/* Update this PlutoniumShip in the world based on the clock and render winder input parameters */
-		void Update(float dt, const sf::RenderTarget& _rt);
+		void Update(float dt, sf::RenderTarget& _rt);
 		/* Draw this PlutoniumShip sprite onto the render window _rt */
 		void Draw(sf::RenderTarget& _rt);
 		/* Shoot a projectile  */
@@ -102,6 +86,7 @@ namespace DancingPlutonium
 		sf::Sprite sprite;						/* Represents the sprite for this PlutoniumShip object */
 		sf::Texture texture;					/* Represents the texture for this PlutoniumShip object */
 		sf::Vector2f position;					/* Represents the position of this PlutoniumShip object */
+		Weapon* weapon;							/* Represents the weapon of this PlutoniumShip object */
 
 		#pragma endregion
 
@@ -116,7 +101,6 @@ namespace DancingPlutonium
 	private:
 		#pragma region Static State Members
 
-		static sf::Uint32 m_weapon;			/* Static variable which maintains the state for this PlutoniumShips weaponry */
 		static sf::Uint32 m_movement;		/* Static variable which maintains the state for this PlutoniumShips movement */
 
 		#pragma endregion

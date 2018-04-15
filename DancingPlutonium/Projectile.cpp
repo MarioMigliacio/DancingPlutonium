@@ -5,6 +5,11 @@ float DancingPlutonium::Projectile::GetSpeed() const
 	return speed;
 }
 
+void DancingPlutonium::Projectile::SetSpeed(const float _speed)
+{
+	speed = _speed;
+}
+
 bool DancingPlutonium::Projectile::IsFriendly() const
 {
 	return friendly;

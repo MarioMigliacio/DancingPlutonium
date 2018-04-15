@@ -16,18 +16,6 @@ namespace DancingPlutonium
 		s_northWest,
 	};
 
-	/* ProjectileType enum encapsulates the Projectile types that are native to DancingPlutonium (the basic bullet objects) */
-	enum ProjectileType
-	{
-		None,
-		BasicBullet,
-		AimedBullet,
-		HomingBullet,
-		IncendiaryBullet,
-		Lazer,
-		RealLazer
-	};
-
 	/* ProjectilePatterns enum encapsulates the types of projectile PATTERNS that can be found in DancingPlutonium (the advanced bullet patterns) */
 	enum ProjectilePattern
 	{
@@ -37,6 +25,7 @@ namespace DancingPlutonium
 		TripleShot,
 		QuadShot,
 		AimedShot,
+		GrowingShot,
 		HomingShot,
 		IncendiaryShot,
 		PhotonPacket,

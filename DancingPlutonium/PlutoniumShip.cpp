@@ -1,8 +1,6 @@
 #include "PlutoniumShip.h"
 
-// Static variable declarations:
-sf::Uint32 DancingPlutonium::PlutoniumShip::m_weapon = s_uninitialized;
-sf::Uint32 DancingPlutonium::PlutoniumShip::m_movement = s_noMovement;
+sf::Uint32 DancingPlutonium::PlutoniumShip::m_movement = Movement::s_noMovement;
 
 DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
 {
@@ -13,9 +11,15 @@ DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
 	accumulator = 0.0f;
 	speed = 100.0f;
 	isActive = true;
-	InitializeWeaponry();
 	SetSprite(_rt);
 	ammunition = std::vector<Projectile*>();
+	weapon = new Weapon();
+	fireRate = 0.33f;
+}
+
+DancingPlutonium::PlutoniumShip::~PlutoniumShip()
+{
+	delete weapon;
 }
 
 int DancingPlutonium::PlutoniumShip::LivesRemaining() const
@@ -51,41 +55,6 @@ float DancingPlutonium::PlutoniumShip::GetFireRate() const
 int DancingPlutonium::PlutoniumShip::GetFireDamage() const
 {
 	return fireDamage;
-}
-
-void DancingPlutonium::PlutoniumShip::UpgradeWeapon()
-{
-	switch (m_weapon)
-	{
-		case WeaponState::s_uninitialized: 
-			m_weapon = WeaponState::s_basic;
-			fireDamage = 15;
-			fireRate = 0.33f; 
-			break;
-		case WeaponState::s_basic:
-			m_weapon = WeaponState::s_sidecannons;
-			fireDamage = 25;
-			fireRate = 0.33f;
-			break;
-		case WeaponState::s_sidecannons: 
-			m_weapon = WeaponState::s_lazerstream; 
-			fireDamage = 25;
-			fireRate = 0.25f;
-			break;
-		case WeaponState::s_lazerstream:
-			m_weapon = WeaponState::s_widelazer; 
-			fireDamage = 35;
-			fireRate = 0.25f;
-			break;
-		case WeaponState::s_widelazer: 
-			m_weapon = WeaponState::s_homing; 
-			fireDamage = 40;
-			fireRate = 0.175f;
-			break;
-		default: break;
-	}
-
-	return;
 }
 
 // is this really needed?
@@ -130,11 +99,6 @@ sf::FloatRect DancingPlutonium::PlutoniumShip::GetBounds() const
 	return sprite.getGlobalBounds();
 }
 
-sf::Uint32 DancingPlutonium::PlutoniumShip::GetWeaponState() const
-{
-	return m_weapon;
-}
-
 void DancingPlutonium::PlutoniumShip::SetMoveState(const sf::Uint32 _state)
 {
 	m_movement = _state;
@@ -146,9 +110,9 @@ void DancingPlutonium::PlutoniumShip::SetPosition(const sf::Vector2f& _pos)
 	sprite.setPosition(_pos);
 }
 
-void DancingPlutonium::PlutoniumShip::Update(float dt, const sf::RenderTarget& _rt)
+void DancingPlutonium::PlutoniumShip::Update(float _dt, sf::RenderTarget& _rt)
 {
-	accumulator += dt;
+	accumulator += _dt;
 
 	if (isActive)
 	{
@@ -170,28 +134,28 @@ void DancingPlutonium::PlutoniumShip::Update(float dt, const sf::RenderTarget& _
 			switch (m_movement)
 			{
 				case Movement::s_north:
-						SetPosition(sf::Vector2f(position.x, position.y - speed * dt));
+						SetPosition(sf::Vector2f(position.x, position.y - speed * _dt));
 					break;
 				case Movement::s_east:
-						SetPosition(sf::Vector2f(position.x + speed * dt, position.y));
+						SetPosition(sf::Vector2f(position.x + speed * _dt, position.y));
 					break;
 				case Movement::s_south:
-						SetPosition(sf::Vector2f(position.x, position.y + speed * dt));
+						SetPosition(sf::Vector2f(position.x, position.y + speed * _dt));
 					break;
 				case Movement::s_west:
-						SetPosition(sf::Vector2f(position.x - speed * dt, position.y));
+						SetPosition(sf::Vector2f(position.x - speed * _dt, position.y));
 					break;
 				case Movement::s_northWest:
-						SetPosition(sf::Vector2f(position.x - speed * dt, position.y - speed * dt));
+						SetPosition(sf::Vector2f(position.x - speed * _dt, position.y - speed * _dt));
 						if (!IsWithinBounds(_rt))
 						{
 							SetPosition(tempPosition);
-							SetPosition(sf::Vector2f(position.x - speed * dt, position.y));
+							SetPosition(sf::Vector2f(position.x - speed * _dt, position.y));
 						}
 						if (!IsWithinBounds(_rt))
 						{
 							SetPosition(tempPosition);
-							SetPosition(sf::Vector2f(position.x, position.y - speed * dt));
+							SetPosition(sf::Vector2f(position.x, position.y - speed * _dt));
 						}
 						if (!IsWithinBounds(_rt))
 						{
@@ -199,16 +163,16 @@ void DancingPlutonium::PlutoniumShip::Update(float dt, const sf::RenderTarget& _
 						}
 					break;
 				case Movement::s_northEast:
-						SetPosition(sf::Vector2f(position.x + speed * dt, position.y - speed * dt));
+						SetPosition(sf::Vector2f(position.x + speed * _dt, position.y - speed * _dt));
 						if (!IsWithinBounds(_rt))
 						{
 							SetPosition(tempPosition);
-							SetPosition(sf::Vector2f(position.x + speed * dt, position.y));
+							SetPosition(sf::Vector2f(position.x + speed * _dt, position.y));
 						}
 						if (!IsWithinBounds(_rt))
 						{
 							SetPosition(tempPosition);
-							SetPosition(sf::Vector2f(position.x, position.y - speed * dt));
+							SetPosition(sf::Vector2f(position.x, position.y - speed * _dt));
 						}
 						if (!IsWithinBounds(_rt))
 						{
@@ -216,16 +180,16 @@ void DancingPlutonium::PlutoniumShip::Update(float dt, const sf::RenderTarget& _
 						}
 					break;
 				case Movement::s_southEast:
-						SetPosition(sf::Vector2f(position.x + speed * dt, position.y + speed * dt));
+						SetPosition(sf::Vector2f(position.x + speed * _dt, position.y + speed * _dt));
 						if (!IsWithinBounds(_rt))
 						{
 							SetPosition(tempPosition);
-							SetPosition(sf::Vector2f(position.x + speed * dt, position.y));
+							SetPosition(sf::Vector2f(position.x + speed * _dt, position.y));
 						}
 						if (!IsWithinBounds(_rt))
 						{
 							SetPosition(tempPosition);
-							SetPosition(sf::Vector2f(position.x, position.y + speed * dt));
+							SetPosition(sf::Vector2f(position.x, position.y + speed * _dt));
 						}
 						if (!IsWithinBounds(_rt))
 						{
@@ -233,16 +197,16 @@ void DancingPlutonium::PlutoniumShip::Update(float dt, const sf::RenderTarget& _
 						}
 					break;
 				case Movement::s_southWest:
-						SetPosition(sf::Vector2f(position.x - speed * dt, position.y + speed * dt));
+						SetPosition(sf::Vector2f(position.x - speed * _dt, position.y + speed * _dt));
 						if (!IsWithinBounds(_rt))
 						{
 							SetPosition(tempPosition);
-							SetPosition(sf::Vector2f(position.x - speed * dt, position.y));
+							SetPosition(sf::Vector2f(position.x - speed * _dt, position.y));
 						}
 						if (!IsWithinBounds(_rt))
 						{
 							SetPosition(tempPosition);
-							SetPosition(sf::Vector2f(position.x, position.y + speed * dt));
+							SetPosition(sf::Vector2f(position.x, position.y + speed * _dt));
 						}
 						if (!IsWithinBounds(_rt))
 						{
@@ -262,54 +226,29 @@ void DancingPlutonium::PlutoniumShip::Update(float dt, const sf::RenderTarget& _
 		// update bullets
 		if (InputManager::IsShooting())
 		{
-			if (accumulator >= fireRate)
-			{
-				Shoot(_rt);
-				accumulator = 0.0f;
-			}
+			Shoot(_rt);
 		}
 
-		if (ammunition.size() != 0)
-		{
-			CleanAmmunition(_rt);
-
-			for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
-			{
-				ammunition[i]->Update(dt);
-			}
-		}
+		weapon->Update(_rt, _dt);
 	}
 }
 
 void DancingPlutonium::PlutoniumShip::Draw(sf::RenderTarget& _rt)
 {
-	// draw our ship
 	_rt.draw(sprite);
-
-	// draw our projectiles
-	for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
-	{
-		ammunition[i]->Draw(_rt);
-	}
+	weapon->Draw(_rt);
 }
 
 void DancingPlutonium::PlutoniumShip::Shoot(const sf::RenderTarget& _rt)
 {
-	/* it did */
-	Projectile* omgDoesThisWork;
-
-	switch (m_weapon)
+	if (accumulator >= fireRate)
 	{
-		case WeaponState::s_basic:
-			omgDoesThisWork = BulletFactory::GetProjectile(ProjectileType::BasicBullet, sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f));
-			ammunition.push_back(omgDoesThisWork);
-		break;
-	default:
-		break;
+		weapon->AddMunition(sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f));
+		accumulator = 0.0f;
 	}
 }
 
-void DancingPlutonium::PlutoniumShip::CleanAmmunition(const sf::RenderTarget & _rt)
+void DancingPlutonium::PlutoniumShip::CleanAmmunition(const sf::RenderTarget& _rt)
 {
 	if (ammunition.size() != 0)
 	{
@@ -321,16 +260,6 @@ void DancingPlutonium::PlutoniumShip::CleanAmmunition(const sf::RenderTarget & _
 				ammunition.erase(ammunition.begin() + i);
 			}
 		}
-	}
-}
-
-void DancingPlutonium::PlutoniumShip::InitializeWeaponry()
-{
-	if (m_weapon == WeaponState::s_uninitialized)
-	{
-		m_weapon = WeaponState::s_basic;
-		fireDamage = 15;
-		fireRate = 0.33f;
 	}
 }
 
