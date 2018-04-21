@@ -38,102 +38,102 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="Source\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BasicProjectile.cpp">
+    <ClCompile Include="Source\Projectiles\BasicProjectile.cpp">
       <Filter>Source Files\Weaponry Cpp Files</Filter>
     </ClCompile>
-    <ClCompile Include="BulletFactory.cpp">
-      <Filter>Source Files\Weaponry Cpp Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projectile.cpp">
-      <Filter>Source Files\Weaponry Cpp Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>Source Files\Weaponry Cpp Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon_TripleShot.cpp">
-      <Filter>Source Files\Weaponry Cpp Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
+    <ClCompile Include="Source\Utility\Button.cpp">
       <Filter>Source Files\Utility Cpp Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
+    <ClCompile Include="Source\Projectiles\BulletFactory.cpp">
+      <Filter>Source Files\Weaponry Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Projectiles\Weapon.cpp">
+      <Filter>Source Files\Weaponry Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Projectiles\Weapon_TripleShot.cpp">
+      <Filter>Source Files\Weaponry Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Projectiles\Projectile.cpp">
+      <Filter>Source Files\Weaponry Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Units\BasicShip.cpp">
+      <Filter>Source Files\Unit Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Units\PlutoniumShip.cpp">
+      <Filter>Source Files\Unit Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Units\GenericEnemyUnit.cpp">
+      <Filter>Source Files\Unit Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game States\Game.cpp">
+      <Filter>Source Files\GameState Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game States\Intro.cpp">
+      <Filter>Source Files\GameState Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game States\Playing.cpp">
+      <Filter>Source Files\GameState Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game States\TitleMenu.cpp">
+      <Filter>Source Files\GameState Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\InputManager.cpp">
       <Filter>Source Files\Utility Cpp Files</Filter>
     </ClCompile>
-    <ClCompile Include="IRng.cpp">
+    <ClCompile Include="Source\Utility\IRng.cpp">
       <Filter>Source Files\Utility Cpp Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicShip.cpp">
-      <Filter>Source Files\Unit Cpp Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GenericEnemyUnit.cpp">
-      <Filter>Source Files\Unit Cpp Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlutoniumShip.cpp">
-      <Filter>Source Files\Unit Cpp Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files\GameState Cpp Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Intro.cpp">
-      <Filter>Source Files\GameState Cpp Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Playing.cpp">
-      <Filter>Source Files\GameState Cpp Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleMenu.cpp">
-      <Filter>Source Files\GameState Cpp Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Weapon_TripleShot.h">
+    <ClInclude Include="Header\Projectiles\BasicProjectile.h">
       <Filter>Header\Weaponry Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>Header\Weaponry Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Header\Weaponry Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BulletFactory.h">
-      <Filter>Header\Weaponry Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicProjectile.h">
-      <Filter>Header\Weaponry Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleMenu.h">
+    <ClInclude Include="Header\Game States\Game.h">
       <Filter>Header\GameState Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Playing.h">
+    <ClInclude Include="Header\Utility\Enums.h">
+      <Filter>Header\Utility Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Utility\Button.h">
+      <Filter>Header\Utility Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Utility\InputManager.h">
+      <Filter>Header\Utility Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Utility\IRng.h">
+      <Filter>Header\Utility Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Units\BasicShip.h">
+      <Filter>Header\Unit Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Units\GenericEnemyUnit.h">
+      <Filter>Header\Unit Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Units\PlutoniumShip.h">
+      <Filter>Header\Unit Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Projectiles\Weapon_TripleShot.h">
+      <Filter>Header\Weaponry Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Projectiles\Weapon.h">
+      <Filter>Header\Weaponry Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Projectiles\Projectile.h">
+      <Filter>Header\Weaponry Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Projectiles\BulletFactory.h">
+      <Filter>Header\Weaponry Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Game States\Intro.h">
       <Filter>Header\GameState Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Intro.h">
+    <ClInclude Include="Header\Game States\Playing.h">
       <Filter>Header\GameState Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlutoniumShip.h">
-      <Filter>Header\Unit Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GenericEnemyUnit.h">
-      <Filter>Header\Unit Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicShip.h">
-      <Filter>Header\Unit Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Header\Utility Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Enums.h">
-      <Filter>Header\Utility Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header\Utility Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IRng.h">
-      <Filter>Header\Utility Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="Header\Game States\TitleMenu.h">
       <Filter>Header\GameState Header Files</Filter>
     </ClInclude>
   </ItemGroup>
