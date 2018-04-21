@@ -5,113 +5,136 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{df5fa30a-9fe9-4f8b-baf6-e2ca1c7a8a6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Utility Header Files">
+      <UniqueIdentifier>{eed868e2-1f5c-4201-9bfd-e59687196db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\GameState Header Files">
+      <UniqueIdentifier>{aa517e95-5417-4fc2-aceb-d9a99bd3227c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Unit Header Files">
+      <UniqueIdentifier>{ee1df216-5aa4-48df-828f-cce153b8718a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Weaponry Header Files">
+      <UniqueIdentifier>{2481a54e-ef32-4912-a2a8-0e0dff34060f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Weaponry Cpp Files">
+      <UniqueIdentifier>{c40f6827-2e23-4ffe-8098-de87ea3e2696}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility Cpp Files">
+      <UniqueIdentifier>{edaaabe4-3cfb-43e2-a6fc-f48578fc9963}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Unit Cpp Files">
+      <UniqueIdentifier>{7cb1b38a-fb85-4d08-9c4b-72f3d4cd15d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameState Cpp Files">
+      <UniqueIdentifier>{3ba155a2-12e1-4396-a155-867b7f6d3f1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TitleMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Intro.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicShip.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Playing.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IRng.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlutoniumShip.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GenericEnemyUnit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="BasicProjectile.cpp">
+      <Filter>Source Files\Weaponry Cpp Files</Filter>
     </ClCompile>
     <ClCompile Include="BulletFactory.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Weaponry Cpp Files</Filter>
     </ClCompile>
     <ClCompile Include="Projectile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicProjectile.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Weaponry Cpp Files</Filter>
     </ClCompile>
     <ClCompile Include="Weapon.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Weaponry Cpp Files</Filter>
     </ClCompile>
     <ClCompile Include="Weapon_TripleShot.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Weaponry Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\Utility Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\Utility Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IRng.cpp">
+      <Filter>Source Files\Utility Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicShip.cpp">
+      <Filter>Source Files\Unit Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericEnemyUnit.cpp">
+      <Filter>Source Files\Unit Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlutoniumShip.cpp">
+      <Filter>Source Files\Unit Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\GameState Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro.cpp">
+      <Filter>Source Files\GameState Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Playing.cpp">
+      <Filter>Source Files\GameState Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleMenu.cpp">
+      <Filter>Source Files\GameState Cpp Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Intro.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GenericEnemyUnit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Playing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicShip.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IRng.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlutoniumShip.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Enums.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BulletFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Weapon_TripleShot.h">
+      <Filter>Header\Weaponry Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Weapon.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header\Weaponry Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Header\Weaponry Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletFactory.h">
+      <Filter>Header\Weaponry Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BasicProjectile.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header\Weaponry Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Weapon_TripleShot.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="TitleMenu.h">
+      <Filter>Header\GameState Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Playing.h">
+      <Filter>Header\GameState Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro.h">
+      <Filter>Header\GameState Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlutoniumShip.h">
+      <Filter>Header\Unit Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericEnemyUnit.h">
+      <Filter>Header\Unit Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicShip.h">
+      <Filter>Header\Unit Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header\Utility Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>Header\Utility Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header\Utility Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IRng.h">
+      <Filter>Header\Utility Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header\GameState Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
