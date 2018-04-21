@@ -32,6 +32,8 @@ namespace DancingPlutonium
 
 		/* Sets the Projectile Pattern based on the _wepPattern input parameter for this weapon */
 		void SetPattern(ProjectilePattern _wepPattern);
+		/* Allow access to the pattern type this weapon wwill fire*/
+		sf::Uint32 GetPattern();
 		/* Upgrade this weapon objects Projectile Pattern to the next logical stage */
 		void UpgradeWeaponry();
 		/* Adds a projectile to the ammunition container for this weapon, spawning a projectile from the _pos input parameter */
@@ -40,6 +42,8 @@ namespace DancingPlutonium
 		void Update(sf::RenderTarget& _rt, float _dt);
 		/* Calls for a draw on every projectile object within the ammunition container of this weapon */
 		void Draw(sf::RenderTarget& _rt);
+
+		void InitializeWeaponry();
 		
 		#pragma endregion
 	private:
@@ -53,8 +57,8 @@ namespace DancingPlutonium
 		#pragma region Member Variables
 
 		std::vector<Projectile*> ammunition;	/* Represents the container for the projectiles that this weapon object maintains */
-		float accumulator;						/*  */
-		static sf::Uint32 weaponPattern;
+		float accumulator;						/* Something used to calculate time distances */
+		static sf::Uint32 weaponPattern;		/* This weapons current pattern */
 
 		#pragma endregion
 	};

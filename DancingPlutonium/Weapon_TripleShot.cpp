@@ -1,6 +1,6 @@
-#include "TripleBulletPlayer.h"
+#include "Weapon_TripleShot.h"
 
-DancingPlutonium::TripleBulletPlayer::TripleBulletPlayer(const sf::Vector2f& _pos)
+DancingPlutonium::Weapon_TripleShot::Weapon_TripleShot(const sf::Vector2f& _pos)
 {
 	leftProjectile = new BasicProjectile(_pos);
 	rightProjectile = new BasicProjectile(_pos);
@@ -9,13 +9,13 @@ DancingPlutonium::TripleBulletPlayer::TripleBulletPlayer(const sf::Vector2f& _po
 	SetSprite(position);
 }
 
-DancingPlutonium::TripleBulletPlayer::~TripleBulletPlayer()
+DancingPlutonium::Weapon_TripleShot::~Weapon_TripleShot()
 {
 	delete leftProjectile;
 	delete rightProjectile;
 }
 
-void DancingPlutonium::TripleBulletPlayer::SetSprite(const sf::Vector2f& _origin)
+void DancingPlutonium::Weapon_TripleShot::SetSprite(const sf::Vector2f& _origin)
 {
 	texture.loadFromFile("Content/Images/BulletGreen.png");
 	sprite.setTexture(texture);
@@ -24,7 +24,7 @@ void DancingPlutonium::TripleBulletPlayer::SetSprite(const sf::Vector2f& _origin
 	position = _origin;
 }
 
-void DancingPlutonium::TripleBulletPlayer::Update(float _dt)
+void DancingPlutonium::Weapon_TripleShot::Update(float _dt)
 {
 	SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - _dt * speed));
 
@@ -39,7 +39,7 @@ void DancingPlutonium::TripleBulletPlayer::Update(float _dt)
 	rightProjectile->SetPosition(rightboi);
 }
 
-void DancingPlutonium::TripleBulletPlayer::Draw(sf::RenderTarget& _rt)
+void DancingPlutonium::Weapon_TripleShot::Draw(sf::RenderTarget& _rt)
 {
 	_rt.draw(sprite);
 	_rt.draw(leftProjectile->GetSprite());

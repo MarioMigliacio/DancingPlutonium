@@ -12,9 +12,7 @@ DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
 	speed = 100.0f;
 	isActive = true;
 	SetSprite(_rt);
-	ammunition = std::vector<Projectile*>();
-	weapon = new Weapon();
-	fireRate = 0.33f;
+	InitializeWeaponry();
 }
 
 DancingPlutonium::PlutoniumShip::~PlutoniumShip()
@@ -97,6 +95,16 @@ sf::Vector2f DancingPlutonium::PlutoniumShip::GetPosition() const
 sf::FloatRect DancingPlutonium::PlutoniumShip::GetBounds() const
 {
 	return sprite.getGlobalBounds();
+}
+
+sf::Uint32 DancingPlutonium::PlutoniumShip::GetWeaponState() const
+{
+	return weapon->GetPattern();
+}
+
+DancingPlutonium::Weapon* DancingPlutonium::PlutoniumShip::GetWeaponEquipped()
+{
+	return weapon;
 }
 
 void DancingPlutonium::PlutoniumShip::SetMoveState(const sf::Uint32 _state)
@@ -261,6 +269,13 @@ void DancingPlutonium::PlutoniumShip::CleanAmmunition(const sf::RenderTarget& _r
 			}
 		}
 	}
+}
+
+void DancingPlutonium::PlutoniumShip::InitializeWeaponry()
+{
+	ammunition = std::vector<Projectile*>();
+	weapon = new Weapon();
+	fireRate = 0.33f;
 }
 
 void DancingPlutonium::PlutoniumShip::SetSprite(const sf::RenderTarget& _rt)

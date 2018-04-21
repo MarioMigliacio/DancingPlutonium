@@ -53,6 +53,11 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			{	
 				mm[0]->SpawnRandomly(_window);
 			}
+			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LControl ||
+				event.key.code == sf::Keyboard::RControl))
+			{
+				me.GetWeaponEquipped()->UpgradeWeaponry();
+			}
 		}
 
 		// Movement check outside of the event loop polls game at any time anyway, screw events - they weren't working smoothly anyway

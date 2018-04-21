@@ -6,8 +6,8 @@
 
 namespace DancingPlutonium
 {
-	/* TripleBulletPlayer class is a specialized bullet object which has a triple shot action trajectory */
-	class TripleBulletPlayer : public Projectile
+	/* Weapon_TripleShot class is a specialized bullet object which has a triple shot action trajectory */
+	class Weapon_TripleShot : public Projectile
 	{
 	private:
 		#pragma region Extra projectile objects
@@ -19,12 +19,12 @@ namespace DancingPlutonium
 	public:
 		#pragma region Ctor/Dtors
 
-		/* TripleBulletPlayer constructor accepting RenderTarget, and Position input parameters */
-		TripleBulletPlayer(const sf::Vector2f& _pos);
-		/* TripleBulletPlayer copy constructor */
-		TripleBulletPlayer(const TripleBulletPlayer& _ref) {}
-		/* TripleBulletPlayer deconstructor */
-		~TripleBulletPlayer();
+		/* Weapon_TripleShot constructor accepting RenderTarget, and Position input parameters */
+		Weapon_TripleShot(const sf::Vector2f& _pos);
+		/* Weapon_TripleShot copy constructor */
+		Weapon_TripleShot(const Weapon_TripleShot& _ref) {}
+		/* Weapon_TripleShot destructor */
+		~Weapon_TripleShot();
 
 		#pragma endregion
 

@@ -40,6 +40,8 @@ void DancingPlutonium::Weapon::AddMunition(sf::Vector2f& _pos)
 		case ProjectilePattern::HomingShot:
 			break;
 		case ProjectilePattern::TripleShot:
+			omgDoesThisWork = BulletFactory::GetProjectile(ProjectilePattern::TripleShot, _pos);
+			ammunition.push_back(omgDoesThisWork);
 			break;
 		case ProjectilePattern::StandardLazer:
 			break;
@@ -72,7 +74,7 @@ DancingPlutonium::Projectile* DancingPlutonium::Weapon::GetIndexOfAmmunition(int
 
 int DancingPlutonium::Weapon::GetSizeOfAmmunition()
 {
-	return ammunition.size();
+	return static_cast<int>(ammunition.size());
 }
 
 void DancingPlutonium::Weapon::Update(sf::RenderTarget& _rt, float _dt)
@@ -96,9 +98,21 @@ void DancingPlutonium::Weapon::Draw(sf::RenderTarget& _rt)
 	}
 }
 
+void DancingPlutonium::Weapon::InitializeWeaponry()
+{
+	SetPattern(ProjectilePattern::BasicShot);
+	ammunition = std::vector<Projectile*>();
+	accumulator = 0.0f;
+}
+
 void DancingPlutonium::Weapon::SetPattern(ProjectilePattern _wepPattern)
 {
 	weaponPattern = _wepPattern;
+}
+
+sf::Uint32 DancingPlutonium::Weapon::GetPattern()
+{
+	return weaponPattern;
 }
 
 void DancingPlutonium::Weapon::UpgradeWeaponry()
@@ -106,7 +120,8 @@ void DancingPlutonium::Weapon::UpgradeWeaponry()
 	switch (weaponPattern)
 	{
 		case ProjectilePattern::BasicShot:
-			weaponPattern = ProjectilePattern::GrowingShot;
+			weaponPattern = ProjectilePattern::TripleShot;
+			//weaponPattern = ProjectilePattern::GrowingShot;
 			break;
 		case ProjectilePattern::GrowingShot:
 			weaponPattern = ProjectilePattern::IncendiaryShot;
@@ -123,7 +138,8 @@ void DancingPlutonium::Weapon::UpgradeWeaponry()
 			weaponPattern = ProjectilePattern::TripleShot;
 			break;
 		case ProjectilePattern::TripleShot:
-			weaponPattern = ProjectilePattern::StandardLazer;
+			weaponPattern = ProjectilePattern::BasicShot;
+			//weaponPattern = ProjectilePattern::StandardLazer;
 			break;
 		case ProjectilePattern::StandardLazer:
 			weaponPattern = ProjectilePattern::JoesLazer;

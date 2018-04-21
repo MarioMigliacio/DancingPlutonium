@@ -3,7 +3,7 @@
 #include <SFML\Graphics.hpp>
 #include "Projectile.h"
 #include "BasicProjectile.h"
-#include "TripleBulletPlayer.h"
+#include "Weapon_TripleShot.h"
 #include "Enums.h"
 
 namespace DancingPlutonium

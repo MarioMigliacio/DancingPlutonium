@@ -130,7 +130,7 @@
     <ClCompile Include="Playing.cpp" />
     <ClCompile Include="PlutoniumShip.cpp" />
     <ClCompile Include="TitleMenu.cpp" />
-    <ClCompile Include="TripleBulletPlayer.cpp" />
+    <ClCompile Include="Weapon_TripleShot.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,7 +148,7 @@
     <ClInclude Include="Playing.h" />
     <ClInclude Include="PlutoniumShip.h" />
     <ClInclude Include="TitleMenu.h" />
-    <ClInclude Include="TripleBulletPlayer.h" />
+    <ClInclude Include="Weapon_TripleShot.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>

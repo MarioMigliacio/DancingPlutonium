@@ -54,6 +54,8 @@ namespace DancingPlutonium
 		sf::FloatRect GetBounds() const;
 		/* Returns the current weaponry state for this PlutoniumShip object */
 		sf::Uint32 GetWeaponState() const;
+		/* Allows access to this PlutoniumShip objects weapon pointer */
+		Weapon* GetWeaponEquipped();
 		/* Sets the movement state for this PlutoniumShip object based on the _state input parameter */
 		void SetMoveState(const sf::Uint32 _state);
 		/* Sets the position for this PlutoniumShip object based on the _pos input parameter */
