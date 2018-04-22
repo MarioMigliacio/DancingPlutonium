@@ -32,6 +32,8 @@ void DancingPlutonium::Weapon::AddMunition(sf::Vector2f& _pos)
 		case ProjectilePattern::IncendiaryShot:
 			break;
 		case ProjectilePattern::GrowingShot:
+			omgDoesThisWork = BulletFactory::GetProjectile(ProjectilePattern::GrowingShot, _pos);
+			ammunition.push_back(omgDoesThisWork);
 			break;
 		case ProjectilePattern::AimedShot:
 			break;
@@ -120,11 +122,12 @@ void DancingPlutonium::Weapon::UpgradeWeaponry()
 	switch (weaponPattern)
 	{
 		case ProjectilePattern::BasicShot:
-			weaponPattern = ProjectilePattern::TripleShot;
+			weaponPattern = ProjectilePattern::GrowingShot;
 			//weaponPattern = ProjectilePattern::GrowingShot;
 			break;
 		case ProjectilePattern::GrowingShot:
-			weaponPattern = ProjectilePattern::IncendiaryShot;
+			weaponPattern = ProjectilePattern::TripleShot;
+			break;
 		case ProjectilePattern::IncendiaryShot:
 			weaponPattern = ProjectilePattern::AimedShot;
 			break;

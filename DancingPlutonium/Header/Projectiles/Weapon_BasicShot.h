@@ -2,22 +2,21 @@
 
 #include<SFML/Graphics.hpp>
 #include "Projectile.h"
-#include "BasicShip.h"
 
 namespace DancingPlutonium
 {
-	/* BasicProjectile class is the 1st stage bullet object which has a very 'basic' pattern trajectory */
-	class BasicProjectile : public Projectile
+	/* Weapon_BasicShot class is the 1st stage bullet object which has a very 'basic' pattern trajectory */
+	class Weapon_BasicShot : public Projectile
 	{		
 	public:
 		#pragma region Ctor/Dtors
 
 		/* BasicBullet constructor accepting RenderTarget, and Position input parameters */
-		BasicProjectile(const sf::Vector2f& _pos);
+		Weapon_BasicShot(const sf::Vector2f& _pos);
 		/* BasicBullet copy constructor */
-		BasicProjectile(const BasicProjectile& _ref) {}
+		Weapon_BasicShot(const Weapon_BasicShot& _ref) {}
 		/* BasicBullet destructor */
-		~BasicProjectile() {}
+		~Weapon_BasicShot() {}
 
 		#pragma endregion
 

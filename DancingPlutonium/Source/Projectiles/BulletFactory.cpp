@@ -6,10 +6,13 @@ DancingPlutonium::Projectile* DancingPlutonium::BulletFactory::GetProjectile(Pro
 
 	switch (_toMake)
 	{
-	case DancingPlutonium::ProjectilePattern::BasicShot:
-			retVal = new BasicProjectile(_pos);
+		case DancingPlutonium::ProjectilePattern::BasicShot:
+			retVal = new Weapon_BasicShot(_pos);
 			break;
-	case DancingPlutonium::ProjectilePattern::TripleShot:
+		case DancingPlutonium::ProjectilePattern::GrowingShot:
+			retVal = new Weapon_GrowingShot(_pos);
+			break;
+		case DancingPlutonium::ProjectilePattern::TripleShot:
 			retVal = new Weapon_TripleShot(_pos);
 			break;
 		default:

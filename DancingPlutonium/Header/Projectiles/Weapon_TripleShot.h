@@ -2,7 +2,7 @@
 
 #include<SFML/Graphics.hpp>
 #include "Projectile.h"
-#include "BasicProjectile.h"
+#include "Weapon_BasicShot.h"
 
 namespace DancingPlutonium
 {

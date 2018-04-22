@@ -2,8 +2,8 @@
 
 DancingPlutonium::Weapon_TripleShot::Weapon_TripleShot(const sf::Vector2f& _pos)
 {
-	leftProjectile = new BasicProjectile(_pos);
-	rightProjectile = new BasicProjectile(_pos);
+	leftProjectile = new Weapon_BasicShot(_pos);
+	rightProjectile = new Weapon_BasicShot(_pos);
 	position = _pos;
 	speed = 100.0f;
 	SetSprite(position);

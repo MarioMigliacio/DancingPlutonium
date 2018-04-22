@@ -96,40 +96,46 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Projectiles\BasicProjectile.cpp" />
+    <ClCompile Include="Source\Projectiles\Weapon_GrowingShot.cpp" />
+    <ClCompile Include="Source\Projectiles\Weapon_BasicShot.cpp" />
     <ClCompile Include="Source\Projectiles\Projectile.cpp" />
     <ClCompile Include="Source\Projectiles\BulletFactory.cpp" />
-    <ClCompile Include="Source\Utility\Button.cpp" />
-    <ClCompile Include="Source\Units\BasicShip.cpp" />
-    <ClCompile Include="Source\Game States\Game.cpp" />
-    <ClCompile Include="Source\Units\GenericEnemyUnit.cpp" />
-    <ClCompile Include="Source\Utility\InputManager.cpp" />
-    <ClCompile Include="Source\Game States\Intro.cpp" />
-    <ClCompile Include="Source\Utility\IRng.cpp" />
-    <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\Game States\Playing.cpp" />
-    <ClCompile Include="Source\Units\PlutoniumShip.cpp" />
-    <ClCompile Include="Source\Game States\TitleMenu.cpp" />
     <ClCompile Include="Source\Projectiles\Weapon_TripleShot.cpp" />
-    <ClCompile Include="Source\Projectiles\Weapon.cpp" />
+    <ClCompile Include="Source\Projectiles\Weapon.cpp" />    
+    <ClCompile Include="Source\Units\BasicShip.cpp" />
+    <ClCompile Include="Source\Units\PlutoniumShip.cpp" />
+    <ClCompile Include="Source\Units\GenericEnemyUnit.cpp" />
+    <ClCompile Include="Source\Game States\Playing.cpp" />
+    <ClCompile Include="Source\Game States\Game.cpp" />
+    <ClCompile Include="Source\Game States\Intro.cpp" />
+    <ClCompile Include="Source\Game States\TitleMenu.cpp" />
+    <ClCompile Include="Source\Utility\IRng.cpp" />
+    <ClCompile Include="Source\Utility\Button.cpp" />
+    <ClCompile Include="Source\Utility\InputManager.cpp" />
+    <ClCompile Include="Source\Main.cpp" />
+    
+    
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header\Projectiles\BasicProjectile.h" />
-    <ClInclude Include="Header\Units\BasicShip.h" />
+    <ClInclude Include="Header\Projectiles\Weapon.h" />
     <ClInclude Include="Header\Projectiles\Projectile.h" />
+    <ClInclude Include="Header\Projectiles\Weapon_BasicShot.h" />
+    <ClInclude Include="Header\Projectiles\Weapon_GrowingShot.h" />
+    <ClInclude Include="Header\Projectiles\Weapon_TripleShot.h" />
     <ClInclude Include="Header\Projectiles\BulletFactory.h" />
-    <ClInclude Include="Header\Utility\Button.h" />
-    <ClInclude Include="Header\Game States\Game.h" />
+    <ClInclude Include="Header\Units\BasicShip.h" />
+    <ClInclude Include="Header\Units\PlutoniumShip.h" />
     <ClInclude Include="Header\Units\GenericEnemyUnit.h" />
-    <ClInclude Include="Header\Utility\InputManager.h" />
+    <ClInclude Include="Header\Game States\Playing.h" />
+    <ClInclude Include="Header\Game States\TitleMenu.h" />
+    <ClInclude Include="Header\Game States\Game.h" />    
     <ClInclude Include="Header\Game States\Intro.h" />
     <ClInclude Include="Header\Utility\IRng.h" />
     <ClInclude Include="Header\Utility\Enums.h" />
-    <ClInclude Include="Header\Game States\Playing.h" />
-    <ClInclude Include="Header\Units\PlutoniumShip.h" />
-    <ClInclude Include="Header\Game States\TitleMenu.h" />
-    <ClInclude Include="Header\Projectiles\Weapon_TripleShot.h" />
-    <ClInclude Include="Header\Projectiles\Weapon.h" />
+    <ClInclude Include="Header\Utility\Button.h" />
+    <ClInclude Include="Header\Utility\InputManager.h" />
+    
+    
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

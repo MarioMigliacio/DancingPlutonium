@@ -41,9 +41,6 @@
     <ClCompile Include="Source\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Projectiles\BasicProjectile.cpp">
-      <Filter>Source Files\Weaponry Cpp Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Utility\Button.cpp">
       <Filter>Source Files\Utility Cpp Files</Filter>
     </ClCompile>
@@ -86,11 +83,14 @@
     <ClCompile Include="Source\Utility\IRng.cpp">
       <Filter>Source Files\Utility Cpp Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Projectiles\Weapon_BasicShot.cpp">
+      <Filter>Source Files\Weaponry Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Projectiles\Weapon_GrowingShot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header\Projectiles\BasicProjectile.h">
-      <Filter>Header\Weaponry Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Header\Game States\Game.h">
       <Filter>Header\GameState Header Files</Filter>
     </ClInclude>
@@ -136,6 +136,10 @@
     <ClInclude Include="Header\Game States\TitleMenu.h">
       <Filter>Header\GameState Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Header\Projectiles\Weapon_BasicShot.h">
+      <Filter>Header\Weaponry Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Projectiles\Weapon_GrowingShot.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
