@@ -38,6 +38,8 @@ namespace DancingPlutonium
 		void UpgradeWeaponPattern();
 		/* Takes projectile damage to an increased logical state */
 		void UpgradeWeaponDamage();
+		/* Allows for the weapon to alter the fire rate of ammunition */
+		void UpgradeWeaponFireRate();
 		/* If time allows for a projectile to be fired, adds a projectile to the ammunition container for this weapon, 
 		spawning a projectile from the _pos input parameter. Returns 0.0f if a projectile was able to be fired. */
 		float AddMunition(sf::Vector2f& _pos, float _dt);
@@ -85,8 +87,6 @@ namespace DancingPlutonium
 		void InitializeWeaponSystem();
 		/* Allows for the weapon to alter the projectile shot damage */
 		void SetWeaponDamageState(Projectile* _shot);
-		/* Allows for the weapon to alter the fire rate of ammunition */
-		void SetWeaponFireRate();
 
 		#pragma endregion
 

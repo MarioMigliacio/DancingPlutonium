@@ -30,6 +30,7 @@ float DancingPlutonium::Weapon::AddMunition(sf::Vector2f& _pos, float _dt)
 		{
 			case ProjectilePattern::BasicShot:
 				omgDoesThisWork = BulletFactory::GetProjectile(ProjectilePattern::BasicShot, _pos);
+				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 4/22/2018 - alter the bullet based on damage state
 				ammunition.push_back(omgDoesThisWork);
 				accumulator = 0.0f;
 				break;
@@ -37,6 +38,7 @@ float DancingPlutonium::Weapon::AddMunition(sf::Vector2f& _pos, float _dt)
 				break;
 			case ProjectilePattern::GrowingShot:
 				omgDoesThisWork = BulletFactory::GetProjectile(ProjectilePattern::GrowingShot, _pos);
+				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 4/22/2018 - alter the bullet based on damage state
 				ammunition.push_back(omgDoesThisWork);
 				accumulator = 0.0f;
 				break;
@@ -51,6 +53,7 @@ float DancingPlutonium::Weapon::AddMunition(sf::Vector2f& _pos, float _dt)
 				break;
 			case ProjectilePattern::TripleShot:
 				omgDoesThisWork = BulletFactory::GetProjectile(ProjectilePattern::TripleShot, _pos);
+				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 4/22/2018 - alter the bullet based on damage state
 				ammunition.push_back(omgDoesThisWork);
 				accumulator = 0.0f;
 				break;
@@ -119,34 +122,34 @@ void DancingPlutonium::Weapon::Draw(sf::RenderTarget& _rt)
 	}
 }
 
-void DancingPlutonium::Weapon::SetWeaponFireRate()
+void DancingPlutonium::Weapon::UpgradeWeaponFireRate()
 {
 	switch (weaponFireRateState)
 	{
-	case WeaponFireRateState::r_Normal:
-		weaponDamageState = WeaponFireRateState::r_One;
-		fireRate *= 0.8f;
-		break;
-	case WeaponFireRateState::r_One:
-		weaponDamageState = WeaponFireRateState::r_Two;
-		fireRate *= 0.8f;
-		break;
-	case WeaponFireRateState::r_Two:
-		weaponDamageState = WeaponFireRateState::r_Three;
-		fireRate *= 0.8f;
-		break;
-	case WeaponFireRateState::r_Three:
-		weaponDamageState = WeaponFireRateState::r_Four;
-		fireRate *= 0.8f;
-		break;
-	case WeaponFireRateState::r_Four:
-		weaponDamageState = WeaponFireRateState::r_Max;
-		fireRate *= 0.8f;
-		break;
-	case WeaponFireRateState::r_Max:
-		break;
-	default:
-		break;
+		case WeaponFireRateState::r_Normal:
+			weaponFireRateState = WeaponFireRateState::r_One;
+			fireRate *= 0.8f;
+			break;
+		case WeaponFireRateState::r_One:
+			weaponFireRateState = WeaponFireRateState::r_Two;
+			fireRate *= 0.8f;
+			break;
+		case WeaponFireRateState::r_Two:
+			weaponFireRateState = WeaponFireRateState::r_Three;
+			fireRate *= 0.8f;
+			break;
+		case WeaponFireRateState::r_Three:
+			weaponFireRateState = WeaponFireRateState::r_Four;
+			fireRate *= 0.8f;
+			break;
+		case WeaponFireRateState::r_Four:
+			weaponFireRateState = WeaponFireRateState::r_Max;
+			fireRate *= 0.8f;
+			break;
+		case WeaponFireRateState::r_Max:
+			break;
+		default:
+			break;
 	}
 }
 
@@ -154,26 +157,26 @@ void DancingPlutonium::Weapon::SetWeaponDamageState(Projectile* _shot)
 {
 	switch (weaponDamageState)
 	{
-	case WeaponDamageState::d_Normal:
-		_shot->SetDamage(_shot->GetDamage() * 1.0f);
-		break;
-	case WeaponDamageState::d_One:
-		_shot->SetDamage(_shot->GetDamage() * 1.2f);
-		break;
-	case WeaponDamageState::d_Two:
-		_shot->SetDamage(_shot->GetDamage() * 1.4f);
-		break;
-	case WeaponDamageState::d_Three:
-		_shot->SetDamage(_shot->GetDamage() * 1.6f);
-		break;
-	case WeaponDamageState::d_Four:
-		_shot->SetDamage(_shot->GetDamage() * 1.8f);
-		break;
-	case WeaponDamageState::d_Max:
-		_shot->SetDamage(_shot->GetDamage() * 2.0f);
-		break;
-	default:
-		break;
+		case WeaponDamageState::d_Normal:
+			_shot->SetDamage(_shot->GetDamage() * 1.0f);
+			break;
+		case WeaponDamageState::d_One:
+			_shot->SetDamage(_shot->GetDamage() * 1.2f);
+			break;
+		case WeaponDamageState::d_Two:
+			_shot->SetDamage(_shot->GetDamage() * 1.4f);
+			break;
+		case WeaponDamageState::d_Three:
+			_shot->SetDamage(_shot->GetDamage() * 1.6f);
+			break;
+		case WeaponDamageState::d_Four:
+			_shot->SetDamage(_shot->GetDamage() * 1.8f);
+			break;
+		case WeaponDamageState::d_Max:
+			_shot->SetDamage(_shot->GetDamage() * 2.0f);
+			break;
+		default:
+			break;
 	}
 }
 
@@ -183,7 +186,7 @@ void DancingPlutonium::Weapon::InitializeWeaponSystem()
 	weaponDamageState = WeaponDamageState::d_Normal;
 	weaponFireRateState = WeaponFireRateState::r_Normal;
 	fireRate = 0.5f;
-	accumulator = 0.0f;
+	accumulator = 1.0f;
 	ammunition = std::vector<Projectile*>();
 }
 
