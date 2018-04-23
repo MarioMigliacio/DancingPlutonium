@@ -182,17 +182,12 @@ void DancingPlutonium::Weapon::SetWeaponDamageState(Projectile* _shot)
 
 void DancingPlutonium::Weapon::InitializeWeaponSystem()
 {
-	SetPattern(ProjectilePattern::BasicShot);
+	weaponPattern = ProjectilePattern::BasicShot;
 	weaponDamageState = WeaponDamageState::d_Normal;
 	weaponFireRateState = WeaponFireRateState::r_Normal;
 	fireRate = 0.5f;
 	accumulator = 1.0f;
 	ammunition = std::vector<Projectile*>();
-}
-
-void DancingPlutonium::Weapon::SetPattern(ProjectilePattern _wepPattern)
-{
-	weaponPattern = _wepPattern;
 }
 
 sf::Uint32 DancingPlutonium::Weapon::GetPattern()

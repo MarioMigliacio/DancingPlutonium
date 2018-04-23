@@ -30,8 +30,6 @@ namespace DancingPlutonium
 	public:
 		#pragma region Methods
 
-		/* Sets the Projectile Pattern based on the _wepPattern input parameter for this weapon */
-		void SetPattern(ProjectilePattern _wepPattern);
 		/* Allow access to the pattern type this weapon will fire*/
 		sf::Uint32 GetPattern();
 		/* Upgrade this weapon objects Projectile Pattern to the next logical stage */
