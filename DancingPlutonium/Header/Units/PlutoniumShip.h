@@ -65,7 +65,7 @@ namespace DancingPlutonium
 		/* Draw this PlutoniumShip sprite onto the render window _rt */
 		void Draw(sf::RenderTarget& _rt);
 		/* Shoot a projectile  */
-		void Shoot(const sf::RenderTarget& _rt);
+		void Shoot(const float _dt);
 		/* Free up lost bullets if they go out of bounds */
 		void CleanAmmunition(const sf::RenderTarget& _rt);
 

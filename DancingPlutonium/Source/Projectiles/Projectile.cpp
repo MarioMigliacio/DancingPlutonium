@@ -20,6 +20,16 @@ bool DancingPlutonium::Projectile::IsInnert() const
 	return innert;
 }
 
+float DancingPlutonium::Projectile::GetDamage() const
+{
+	return damage;
+}
+
+void DancingPlutonium::Projectile::SetDamage(const float _damage)
+{
+	damage = _damage;
+}
+
 bool DancingPlutonium::Projectile::GetActiveState(const sf::RenderTarget& _rt) const
 {
 	if (sprite.getPosition().y < 0 || sprite.getPosition().x < 0 ||

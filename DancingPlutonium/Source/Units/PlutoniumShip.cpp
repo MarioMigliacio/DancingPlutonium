@@ -234,7 +234,7 @@ void DancingPlutonium::PlutoniumShip::Update(float _dt, sf::RenderTarget& _rt)
 		// update bullets
 		if (InputManager::IsShooting())
 		{
-			Shoot(_rt);
+			Shoot(_dt);
 		}
 
 		weapon->Update(_rt, _dt);
@@ -247,13 +247,9 @@ void DancingPlutonium::PlutoniumShip::Draw(sf::RenderTarget& _rt)
 	weapon->Draw(_rt);
 }
 
-void DancingPlutonium::PlutoniumShip::Shoot(const sf::RenderTarget& _rt)
+void DancingPlutonium::PlutoniumShip::Shoot(const float _dt)
 {
-	if (accumulator >= fireRate)
-	{
-		weapon->AddMunition(sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f));
-		accumulator = 0.0f;
-	}
+	weapon->AddMunition(sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f), _dt);
 }
 
 void DancingPlutonium::PlutoniumShip::CleanAmmunition(const sf::RenderTarget& _rt)
@@ -275,7 +271,7 @@ void DancingPlutonium::PlutoniumShip::InitializeWeaponry()
 {
 	ammunition = std::vector<Projectile*>();
 	weapon = new Weapon();
-	fireRate = 0.33f;
+	//fireRate = 0.33f;
 }
 
 void DancingPlutonium::PlutoniumShip::SetSprite(const sf::RenderTarget& _rt)

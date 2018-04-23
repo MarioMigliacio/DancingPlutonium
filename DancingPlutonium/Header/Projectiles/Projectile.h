@@ -15,7 +15,8 @@ namespace DancingPlutonium
 		sf::Vector2f position;			/* Represents the position for this projectile */
 		bool friendly;					/* Represents the allegiance of this projectile */
 		bool innert;					/* Represents if this projectile can hurt or not */
-		float speed;					/* Represents the speed that the projectile will travel at */
+		float speed;					/* Represents the speed that this projectile will travel at */
+		float damage;					/* Represents the damage that this proctile will do upon impact */
 
 		#pragma endregion
 	public:
@@ -36,6 +37,10 @@ namespace DancingPlutonium
 		bool IsFriendly() const;
 		/* Returns true if this projectile has not yet hurt a unit, it is said to be active or 'innert', false otherwise */
 		bool IsInnert() const;
+		/* Returns the damage from this projectile */
+		float GetDamage() const;
+		/* Sets the damage for this projectile */
+		void SetDamage(const float _damage);
 		/* Returns true if this projectile is active, false otherwise */
 		bool GetActiveState(const sf::RenderTarget& _rt) const;
 		/* Returns a reference to this projectiles sprite */
