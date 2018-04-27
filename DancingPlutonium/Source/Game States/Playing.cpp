@@ -49,21 +49,24 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 				m_state = PlayState::s_quit;
 				return;
 			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+ 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{	
 				mm[0]->SpawnRandomly(_window);
 			}
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LControl ||
 				event.key.code == sf::Keyboard::RControl))
 			{
- 				me.GetWeaponEquipped()->UpgradeWeaponPattern();
+  				me.GetWeaponEquipped()->UpgradeWeaponPattern();
 			}
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LAlt ||
 				event.key.code == sf::Keyboard::RAlt))
 			{
 				me.GetWeaponEquipped()->UpgradeWeaponFireRate();
 			}
-			
+			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::Up))
+ 			{
+				me.GetWeaponEquipped()->UpgradeWeaponVelocityRate();
+			}
 		}
 
 		// Movement check outside of the event loop polls game at any time anyway, screw events - they weren't working smoothly anyway

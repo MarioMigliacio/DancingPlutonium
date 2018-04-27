@@ -3,10 +3,14 @@
 sf::Uint32 DancingPlutonium::Weapon::weaponPattern = Projectile::ProjectilePattern::NoBullet;
 sf::Uint32 DancingPlutonium::Weapon::weaponDamageState = WeaponDamageState::d_Uninitialized;
 sf::Uint32 DancingPlutonium::Weapon::weaponFireRateState = WeaponFireRateState::r_Uninitialized;
+sf::Uint32 DancingPlutonium::Weapon::weaponVelocityRateState = WeaponVelocityState::v_Uninitialized;
 
 DancingPlutonium::Weapon::Weapon()
 {
 	InitializeWeaponSystem();
+	baseDamage = 1.0f;
+	baseFireRate = 1.0f;
+	baseVelocity = 1.0f;
 }
 
 DancingPlutonium::Weapon::~Weapon()
@@ -31,6 +35,7 @@ float DancingPlutonium::Weapon::AddMunition(sf::Vector2f& _pos, float _dt)
 			case Projectile::ProjectilePattern::BasicShot:
 				omgDoesThisWork = BulletFactory::GetProjectile(Projectile::ProjectilePattern::BasicShot, _pos);
 				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 
+				SetWeaponVelocityState(omgDoesThisWork);
 				ammunition.push_back(omgDoesThisWork);
 				accumulator = 0.0f;
 				break;
@@ -39,6 +44,7 @@ float DancingPlutonium::Weapon::AddMunition(sf::Vector2f& _pos, float _dt)
 			case Projectile::ProjectilePattern::GrowingShot:
 				omgDoesThisWork = BulletFactory::GetProjectile(Projectile::ProjectilePattern::GrowingShot, _pos);
 				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 
+				SetWeaponVelocityState(omgDoesThisWork);
 				ammunition.push_back(omgDoesThisWork);
 				accumulator = 0.0f;
 				break;
@@ -48,6 +54,7 @@ float DancingPlutonium::Weapon::AddMunition(sf::Vector2f& _pos, float _dt)
 			case Projectile::ProjectilePattern::DoubleShot:
 				omgDoesThisWork = BulletFactory::GetProjectile(Projectile::ProjectilePattern::DoubleShot, _pos);
 				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 
+				SetWeaponVelocityState(omgDoesThisWork);
 				ammunition.push_back(omgDoesThisWork);
 				accumulator = 0.0f;
 				break;
@@ -57,6 +64,7 @@ float DancingPlutonium::Weapon::AddMunition(sf::Vector2f& _pos, float _dt)
 			case Projectile::ProjectilePattern::TripleShot:
 				omgDoesThisWork = BulletFactory::GetProjectile(Projectile::ProjectilePattern::TripleShot, _pos);
 				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 
+				SetWeaponVelocityState(omgDoesThisWork);
 				ammunition.push_back(omgDoesThisWork);
 				accumulator = 0.0f;
 				break;
@@ -156,6 +164,37 @@ void DancingPlutonium::Weapon::UpgradeWeaponFireRate()
 	}
 }
 
+void DancingPlutonium::Weapon::UpgradeWeaponVelocityRate()
+{
+	switch (weaponVelocityRateState)
+	{
+		case WeaponVelocityState::v_Normal:
+			weaponVelocityRateState = WeaponVelocityState::v_One;
+			baseVelocity *= 2.0;
+			break;
+		case WeaponVelocityState::v_One:
+			weaponVelocityRateState = WeaponVelocityState::v_Two;
+			baseVelocity *= 3.0f;
+			break;
+		case WeaponVelocityState::v_Two:
+			weaponVelocityRateState = WeaponVelocityState::v_Three;
+			baseVelocity *= 5.0f;
+			break;
+		case WeaponVelocityState::v_Three:
+			weaponVelocityRateState = WeaponVelocityState::v_Four;
+			baseVelocity *= 7.5f;
+			break;
+		case WeaponVelocityState::v_Four:
+			weaponVelocityRateState = WeaponVelocityState::v_Max;
+			baseVelocity *= 10.0f;
+			break;
+		case WeaponVelocityState::v_Max:
+			break;
+		default:
+			break;
+	}
+}
+
 void DancingPlutonium::Weapon::SetWeaponDamageState(Projectile* _shot)
 {
 	switch (weaponDamageState)
@@ -183,11 +222,39 @@ void DancingPlutonium::Weapon::SetWeaponDamageState(Projectile* _shot)
 	}
 }
 
+void DancingPlutonium::Weapon::SetWeaponVelocityState(Projectile* _shot)
+{
+	switch (weaponVelocityRateState)
+	{
+	case WeaponVelocityState::v_Normal:
+		_shot->SetSpeed(_shot->GetSpeed() * 1.0f);
+		break;
+	case WeaponVelocityState::v_One:
+		_shot->SetSpeed(_shot->GetSpeed() * 1.2f);
+		break;
+	case WeaponVelocityState::v_Two:
+		_shot->SetSpeed(_shot->GetSpeed() * 1.4f);
+		break;
+	case WeaponVelocityState::v_Three:
+		_shot->SetSpeed(_shot->GetSpeed() * 1.6f);
+		break;
+	case WeaponVelocityState::v_Four:
+		_shot->SetSpeed(_shot->GetSpeed() * 1.8f);
+		break;
+	case WeaponVelocityState::v_Max:
+		_shot->SetSpeed(_shot->GetSpeed() * 2.0f);
+		break;
+	default:
+		break;
+	}
+}
+
 void DancingPlutonium::Weapon::InitializeWeaponSystem()
 {
 	weaponPattern = Projectile::ProjectilePattern::BasicShot;
 	weaponDamageState = WeaponDamageState::d_Normal;
 	weaponFireRateState = WeaponFireRateState::r_Normal;
+	weaponVelocityRateState = WeaponVelocityState::v_Normal;
 	fireRate = 0.5f;
 	accumulator = 1.0f;
 	ammunition = std::vector<Projectile*>();
@@ -275,6 +342,8 @@ void DancingPlutonium::Weapon::UpgradeWeaponDamage()
 			break;
 	}
 }
+
+
 
 void DancingPlutonium::Weapon::CleanAmmunition(sf::RenderTarget& _rt)
 {

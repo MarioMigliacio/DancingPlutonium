@@ -38,6 +38,8 @@ namespace DancingPlutonium
 		void UpgradeWeaponDamage();
 		/* Allows for the weapon to alter the fire rate of ammunition */
 		void UpgradeWeaponFireRate();
+		/* Takes projectile velocity to an increased logical state */
+		void UpgradeWeaponVelocityRate();
 		/* If time allows for a projectile to be fired, adds a projectile to the ammunition container for this weapon, 
 		spawning a projectile from the _pos input parameter. Returns 0.0f if a projectile was able to be fired. */
 		float AddMunition(sf::Vector2f& _pos, float _dt);
@@ -74,6 +76,18 @@ namespace DancingPlutonium
 			r_Max
 		};
 
+		/* An enumeration particular to the weapon velocity rate state */
+		enum WeaponVelocityState
+		{
+			v_Uninitialized,
+			v_Normal,
+			v_One,
+			v_Two,
+			v_Three,
+			v_Four,
+			v_Max
+		};
+
 		#pragma endregion
 	private:
 		#pragma region Cleanup
@@ -84,17 +98,23 @@ namespace DancingPlutonium
 		void InitializeWeaponSystem();
 		/* Allows for the weapon to alter the projectile shot damage */
 		void SetWeaponDamageState(Projectile* _shot);
+		/* Allows for the weapon to alter the projectile velocity rate */
+		void SetWeaponVelocityState(Projectile* _shot);
 
 		#pragma endregion
 
 		#pragma region Member Variables
 
-		std::vector<Projectile*> ammunition;	/* Represents the container for the projectiles that this weapon object maintains */
-		float accumulator;						/* Something used to calculate time distances */
-		float fireRate;							/* Something used to space time between valid projectile shots */
-		static sf::Uint32 weaponPattern;		/* This weapons current pattern */
-		static sf::Uint32 weaponDamageState;	/* A state which determines bonus damage of projectile shots */
-		static sf::Uint32 weaponFireRateState;	/* A state which determines bonus fire rate of projectile shots */
+		std::vector<Projectile*> ammunition;		/* Represents the container for the projectiles that this weapon object maintains */
+		float accumulator;							/* Something used to calculate time distances */
+		float fireRate;								/* Something used to space time between valid projectile shots */
+		float baseDamage;							/* test */
+		float baseFireRate;							/* test */
+		float baseVelocity;							/* test */
+		static sf::Uint32 weaponPattern;			/* This weapons current pattern */
+		static sf::Uint32 weaponDamageState;		/* A state which determines bonus damage of projectile shots */
+		static sf::Uint32 weaponFireRateState;		/* A state which determines bonus fire rate of projectile shots */
+		static sf::Uint32 weaponVelocityRateState;	/* A state which determines bonus velocity rate of projectile shots */
 
 		#pragma endregion
 	};
