@@ -15,25 +15,4 @@ namespace DancingPlutonium
 		s_west,
 		s_northWest,
 	};
-
-	/* ProjectilePatterns enum encapsulates the types of projectile PATTERNS that can be found in DancingPlutonium (the advanced bullet patterns) */
-	enum ProjectilePattern
-	{
-		NoBullet,
-		BasicShot,
-		DoubleShot,
-		TripleShot,
-		QuadShot,
-		AimedShot,
-		GrowingShot,
-		HomingShot,
-		IncendiaryShot,
-		PhotonPacket,
-		PhotonStream,
-		PhotonTriplet,
-		PhotonQuartet,
-		StandardLazer,
-		JoesLazer,
-		IMMAFIRINMAHLAZOR,
-	};
 }

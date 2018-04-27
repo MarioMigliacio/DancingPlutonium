@@ -7,6 +7,31 @@ namespace DancingPlutonium
 	/* Projectile class represents an abstract base projectile for which to inherit from */
 	class Projectile
 	{
+	public:
+		#pragma region Patterns enum
+
+		/* ProjectilePatterns enum encapsulates the types of projectile PATTERNS that can be found in DancingPlutonium (the advanced bullet patterns) */
+		enum ProjectilePattern
+		{
+			NoBullet,
+			BasicShot,
+			DoubleShot,
+			TripleShot,
+			QuadShot,
+			AimedShot,
+			GrowingShot,
+			HomingShot,
+			IncendiaryShot,
+			PhotonPacket,
+			PhotonStream,
+			PhotonTriplet,
+			PhotonQuartet,
+			StandardLazer,
+			JoesLazer,
+			IMMAFIRINMAHLAZOR,
+		};
+		#pragma endregion
+
 	protected:
 		#pragma region Members
 

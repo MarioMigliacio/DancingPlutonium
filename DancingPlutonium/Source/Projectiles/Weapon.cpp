@@ -1,6 +1,6 @@
 #include "Weapon.h"
 
-sf::Uint32 DancingPlutonium::Weapon::weaponPattern = ProjectilePattern::NoBullet;
+sf::Uint32 DancingPlutonium::Weapon::weaponPattern = Projectile::ProjectilePattern::NoBullet;
 sf::Uint32 DancingPlutonium::Weapon::weaponDamageState = WeaponDamageState::d_Uninitialized;
 sf::Uint32 DancingPlutonium::Weapon::weaponFireRateState = WeaponFireRateState::r_Uninitialized;
 
@@ -28,54 +28,54 @@ float DancingPlutonium::Weapon::AddMunition(sf::Vector2f& _pos, float _dt)
 	{
 		switch (weaponPattern)
 		{
-			case ProjectilePattern::BasicShot:
-				omgDoesThisWork = BulletFactory::GetProjectile(ProjectilePattern::BasicShot, _pos);
+			case Projectile::ProjectilePattern::BasicShot:
+				omgDoesThisWork = BulletFactory::GetProjectile(Projectile::ProjectilePattern::BasicShot, _pos);
 				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 4/22/2018 - alter the bullet based on damage state
 				ammunition.push_back(omgDoesThisWork);
 				accumulator = 0.0f;
 				break;
-			case ProjectilePattern::IncendiaryShot:
+			case Projectile::ProjectilePattern::IncendiaryShot:
 				break;
-			case ProjectilePattern::GrowingShot:
-				omgDoesThisWork = BulletFactory::GetProjectile(ProjectilePattern::GrowingShot, _pos);
+			case Projectile::ProjectilePattern::GrowingShot:
+				omgDoesThisWork = BulletFactory::GetProjectile(Projectile::ProjectilePattern::GrowingShot, _pos);
 				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 4/22/2018 - alter the bullet based on damage state
 				ammunition.push_back(omgDoesThisWork);
 				accumulator = 0.0f;
 				break;
-			case ProjectilePattern::AimedShot:
+			case Projectile::ProjectilePattern::AimedShot:
 				accumulator = 0.0f;
 				break;
-			case ProjectilePattern::DoubleShot:
+			case Projectile::ProjectilePattern::DoubleShot:
 				accumulator = 0.0f;
 				break;
-			case ProjectilePattern::HomingShot:
+			case Projectile::ProjectilePattern::HomingShot:
 				accumulator = 0.0f;
 				break;
-			case ProjectilePattern::TripleShot:
-				omgDoesThisWork = BulletFactory::GetProjectile(ProjectilePattern::TripleShot, _pos);
+			case Projectile::ProjectilePattern::TripleShot:
+				omgDoesThisWork = BulletFactory::GetProjectile(Projectile::ProjectilePattern::TripleShot, _pos);
 				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 4/22/2018 - alter the bullet based on damage state
 				ammunition.push_back(omgDoesThisWork);
 				accumulator = 0.0f;
 				break;
-			case ProjectilePattern::StandardLazer:
+			case Projectile::ProjectilePattern::StandardLazer:
 				accumulator = 0.0f;
 				break;
-			case ProjectilePattern::JoesLazer:
+			case Projectile::ProjectilePattern::JoesLazer:
 				accumulator = 0.0f;
 				break;
-			case ProjectilePattern::QuadShot:
+			case Projectile::ProjectilePattern::QuadShot:
 				accumulator = 0.0f;
 				break;
-			case ProjectilePattern::PhotonPacket:
+			case Projectile::ProjectilePattern::PhotonPacket:
 				accumulator = 0.0f;
 				break;
-			case ProjectilePattern::PhotonStream:
+			case Projectile::ProjectilePattern::PhotonStream:
 				accumulator = 0.0f;
 				break;
-			case ProjectilePattern::PhotonTriplet:
+			case Projectile::ProjectilePattern::PhotonTriplet:
 				accumulator = 0.0f;
 				break;
-			case ProjectilePattern::PhotonQuartet:
+			case Projectile::ProjectilePattern::PhotonQuartet:
 				accumulator = 0.0f;
 				break;
 			default:
@@ -182,7 +182,7 @@ void DancingPlutonium::Weapon::SetWeaponDamageState(Projectile* _shot)
 
 void DancingPlutonium::Weapon::InitializeWeaponSystem()
 {
-	weaponPattern = ProjectilePattern::BasicShot;
+	weaponPattern = Projectile::ProjectilePattern::BasicShot;
 	weaponDamageState = WeaponDamageState::d_Normal;
 	weaponFireRateState = WeaponFireRateState::r_Normal;
 	fireRate = 0.5f;
@@ -199,47 +199,47 @@ void DancingPlutonium::Weapon::UpgradeWeaponPattern()
 {
 	switch (weaponPattern)
 	{
-		case ProjectilePattern::BasicShot:
-			weaponPattern = ProjectilePattern::GrowingShot;
+		case Projectile::ProjectilePattern::BasicShot:
+			weaponPattern = Projectile::ProjectilePattern::GrowingShot;
 			break;
-		case ProjectilePattern::GrowingShot:
-			weaponPattern = ProjectilePattern::TripleShot;
+		case Projectile::ProjectilePattern::GrowingShot:
+			weaponPattern = Projectile::ProjectilePattern::TripleShot;
 			break;
-		case ProjectilePattern::IncendiaryShot:
-			weaponPattern = ProjectilePattern::AimedShot;
+		case Projectile::ProjectilePattern::IncendiaryShot:
+			weaponPattern = Projectile::ProjectilePattern::AimedShot;
 			break;
-		case ProjectilePattern::AimedShot:
-			weaponPattern = ProjectilePattern::DoubleShot;
+		case Projectile::ProjectilePattern::AimedShot:
+			weaponPattern = Projectile::ProjectilePattern::DoubleShot;
 			break;
-		case ProjectilePattern::DoubleShot:
-			weaponPattern = ProjectilePattern::HomingShot;
+		case Projectile::ProjectilePattern::DoubleShot:
+			weaponPattern = Projectile::ProjectilePattern::HomingShot;
 			break;
-		case ProjectilePattern::HomingShot:
-			weaponPattern = ProjectilePattern::TripleShot;
+		case Projectile::ProjectilePattern::HomingShot:
+			weaponPattern = Projectile::ProjectilePattern::TripleShot;
 			break;
-		case ProjectilePattern::TripleShot:
-			weaponPattern = ProjectilePattern::BasicShot;
+		case Projectile::ProjectilePattern::TripleShot:
+			weaponPattern = Projectile::ProjectilePattern::BasicShot;
 			break;
-		case ProjectilePattern::StandardLazer:
-			weaponPattern = ProjectilePattern::JoesLazer;
+		case Projectile::ProjectilePattern::StandardLazer:
+			weaponPattern = Projectile::ProjectilePattern::JoesLazer;
 			break;
-		case ProjectilePattern::JoesLazer:
-			weaponPattern = ProjectilePattern::QuadShot;
+		case Projectile::ProjectilePattern::JoesLazer:
+			weaponPattern = Projectile::ProjectilePattern::QuadShot;
 			break;
-		case ProjectilePattern::QuadShot:
-			weaponPattern = ProjectilePattern::PhotonPacket;
+		case Projectile::ProjectilePattern::QuadShot:
+			weaponPattern = Projectile::ProjectilePattern::PhotonPacket;
 			break;
-		case ProjectilePattern::PhotonPacket:
-			weaponPattern = ProjectilePattern::PhotonStream;
+		case Projectile::ProjectilePattern::PhotonPacket:
+			weaponPattern = Projectile::ProjectilePattern::PhotonStream;
 			break;
-		case ProjectilePattern::PhotonStream:
-			weaponPattern = ProjectilePattern::PhotonTriplet;
+		case Projectile::ProjectilePattern::PhotonStream:
+			weaponPattern = Projectile::ProjectilePattern::PhotonTriplet;
 			break;
-		case ProjectilePattern::PhotonTriplet:
-			weaponPattern = ProjectilePattern::PhotonQuartet;
+		case Projectile::ProjectilePattern::PhotonTriplet:
+			weaponPattern = Projectile::ProjectilePattern::PhotonQuartet;
 			break;
-		case ProjectilePattern::PhotonQuartet:
-			weaponPattern = ProjectilePattern::IMMAFIRINMAHLAZOR;
+		case Projectile::ProjectilePattern::PhotonQuartet:
+			weaponPattern = Projectile::ProjectilePattern::IMMAFIRINMAHLAZOR;
 			break;
 		default:
 			break;
