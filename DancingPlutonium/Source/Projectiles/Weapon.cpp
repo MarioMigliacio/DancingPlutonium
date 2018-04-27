@@ -30,7 +30,7 @@ float DancingPlutonium::Weapon::AddMunition(sf::Vector2f& _pos, float _dt)
 		{
 			case Projectile::ProjectilePattern::BasicShot:
 				omgDoesThisWork = BulletFactory::GetProjectile(Projectile::ProjectilePattern::BasicShot, _pos);
-				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 4/22/2018 - alter the bullet based on damage state
+				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 
 				ammunition.push_back(omgDoesThisWork);
 				accumulator = 0.0f;
 				break;
@@ -38,7 +38,7 @@ float DancingPlutonium::Weapon::AddMunition(sf::Vector2f& _pos, float _dt)
 				break;
 			case Projectile::ProjectilePattern::GrowingShot:
 				omgDoesThisWork = BulletFactory::GetProjectile(Projectile::ProjectilePattern::GrowingShot, _pos);
-				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 4/22/2018 - alter the bullet based on damage state
+				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 
 				ammunition.push_back(omgDoesThisWork);
 				accumulator = 0.0f;
 				break;
@@ -46,6 +46,9 @@ float DancingPlutonium::Weapon::AddMunition(sf::Vector2f& _pos, float _dt)
 				accumulator = 0.0f;
 				break;
 			case Projectile::ProjectilePattern::DoubleShot:
+				omgDoesThisWork = BulletFactory::GetProjectile(Projectile::ProjectilePattern::DoubleShot, _pos);
+				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 
+				ammunition.push_back(omgDoesThisWork);
 				accumulator = 0.0f;
 				break;
 			case Projectile::ProjectilePattern::HomingShot:
@@ -53,7 +56,7 @@ float DancingPlutonium::Weapon::AddMunition(sf::Vector2f& _pos, float _dt)
 				break;
 			case Projectile::ProjectilePattern::TripleShot:
 				omgDoesThisWork = BulletFactory::GetProjectile(Projectile::ProjectilePattern::TripleShot, _pos);
-				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 4/22/2018 - alter the bullet based on damage state
+				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 
 				ammunition.push_back(omgDoesThisWork);
 				accumulator = 0.0f;
 				break;
@@ -203,7 +206,7 @@ void DancingPlutonium::Weapon::UpgradeWeaponPattern()
 			weaponPattern = Projectile::ProjectilePattern::GrowingShot;
 			break;
 		case Projectile::ProjectilePattern::GrowingShot:
-			weaponPattern = Projectile::ProjectilePattern::TripleShot;
+			weaponPattern = Projectile::ProjectilePattern::DoubleShot;
 			break;
 		case Projectile::ProjectilePattern::IncendiaryShot:
 			weaponPattern = Projectile::ProjectilePattern::AimedShot;
@@ -212,7 +215,7 @@ void DancingPlutonium::Weapon::UpgradeWeaponPattern()
 			weaponPattern = Projectile::ProjectilePattern::DoubleShot;
 			break;
 		case Projectile::ProjectilePattern::DoubleShot:
-			weaponPattern = Projectile::ProjectilePattern::HomingShot;
+			weaponPattern = Projectile::ProjectilePattern::TripleShot;
 			break;
 		case Projectile::ProjectilePattern::HomingShot:
 			weaponPattern = Projectile::ProjectilePattern::TripleShot;

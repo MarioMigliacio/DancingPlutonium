@@ -4,6 +4,7 @@
 #include "Projectile.h"
 #include "Weapon_BasicShot.h"
 #include "Weapon_GrowingShot.h"
+#include "Weapon_DoubleShot.h"
 #include "Weapon_TripleShot.h"
 #include "Enums.h"
 

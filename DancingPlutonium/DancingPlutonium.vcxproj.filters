@@ -89,6 +89,9 @@
     <ClCompile Include="Source\Projectiles\Weapon_GrowingShot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Projectiles\Weapon_DoubleShot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\Game States\Game.h">
@@ -140,6 +143,7 @@
       <Filter>Header\Weaponry Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Header\Projectiles\Weapon_GrowingShot.h" />
+    <ClInclude Include="Header\Projectiles\Weapon_DoubleShot.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

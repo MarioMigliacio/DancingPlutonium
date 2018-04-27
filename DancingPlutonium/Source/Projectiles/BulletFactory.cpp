@@ -12,6 +12,9 @@ DancingPlutonium::Projectile* DancingPlutonium::BulletFactory::GetProjectile(Pro
 		case DancingPlutonium::Projectile::ProjectilePattern::GrowingShot:
 			retVal = new Weapon_GrowingShot(_pos);
 			break;
+		case DancingPlutonium::Projectile::ProjectilePattern::DoubleShot:
+			retVal = new Weapon_DoubleShot(_pos);
+			break;
 		case DancingPlutonium::Projectile::ProjectilePattern::TripleShot:
 			retVal = new Weapon_TripleShot(_pos);
 			break;

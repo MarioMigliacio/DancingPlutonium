@@ -45,11 +45,10 @@ namespace DancingPlutonium
 		void Update(sf::RenderTarget& _rt, float _dt);
 		/* Calls for a draw on every projectile object within the ammunition container of this weapon */
 		void Draw(sf::RenderTarget& _rt);
-		
-		
+
 		#pragma endregion
 	private:
-		#pragma region
+		#pragma region Enumerations
 		
 		/* An enumeration particular to the weapon damage state */
 		enum WeaponDamageState
