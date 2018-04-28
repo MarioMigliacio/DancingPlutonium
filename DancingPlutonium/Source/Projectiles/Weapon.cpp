@@ -226,26 +226,26 @@ void DancingPlutonium::Weapon::SetWeaponVelocityState(Projectile* _shot)
 {
 	switch (weaponVelocityRateState)
 	{
-	case WeaponVelocityState::v_Normal:
-		_shot->SetSpeed(_shot->GetSpeed() * 1.0f);
-		break;
-	case WeaponVelocityState::v_One:
-		_shot->SetSpeed(_shot->GetSpeed() * 1.2f);
-		break;
-	case WeaponVelocityState::v_Two:
-		_shot->SetSpeed(_shot->GetSpeed() * 1.4f);
-		break;
-	case WeaponVelocityState::v_Three:
-		_shot->SetSpeed(_shot->GetSpeed() * 1.6f);
-		break;
-	case WeaponVelocityState::v_Four:
-		_shot->SetSpeed(_shot->GetSpeed() * 1.8f);
-		break;
-	case WeaponVelocityState::v_Max:
-		_shot->SetSpeed(_shot->GetSpeed() * 2.0f);
-		break;
-	default:
-		break;
+		case WeaponVelocityState::v_Normal:
+			_shot->SetSpeed(_shot->GetSpeed() * 1.0f);
+			break;
+		case WeaponVelocityState::v_One:
+			_shot->SetSpeed(_shot->GetSpeed() * 1.2f);
+			break;
+		case WeaponVelocityState::v_Two:
+			_shot->SetSpeed(_shot->GetSpeed() * 1.4f);
+			break;
+		case WeaponVelocityState::v_Three:
+			_shot->SetSpeed(_shot->GetSpeed() * 1.6f);
+			break;
+		case WeaponVelocityState::v_Four:
+			_shot->SetSpeed(_shot->GetSpeed() * 1.8f);
+			break;
+		case WeaponVelocityState::v_Max:
+			_shot->SetSpeed(_shot->GetSpeed() * 2.0f);
+			break;
+		default:
+			break;
 	}
 }
 

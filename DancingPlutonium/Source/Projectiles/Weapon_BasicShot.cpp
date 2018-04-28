@@ -3,7 +3,7 @@
 DancingPlutonium::Weapon_BasicShot::Weapon_BasicShot(const sf::Vector2f& _pos)
 {
 	position = _pos;
-	speed = 125.0f;
+	speed = 200.0f;
 	SetSprite(position);
 }
 

@@ -5,7 +5,7 @@ DancingPlutonium::Weapon_DoubleShot::Weapon_DoubleShot(const sf::Vector2f& _pos)
 	leftProjectile = new Weapon_BasicShot(_pos);
 	rightProjectile = new Weapon_BasicShot(_pos);
 	position = _pos;
-	speed = 115.0f;
+	speed = 190.0f;
 	SetSprite(_pos);
 }
 

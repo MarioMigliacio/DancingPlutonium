@@ -9,7 +9,7 @@ DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
 	score = 0;
 	health = 100;
 	accumulator = 0.0f;
-	speed = 100.0f;
+	speed = 175.0f;
 	isActive = true;
 	SetSprite(_rt);
 	InitializeWeaponry();
@@ -129,11 +129,11 @@ void DancingPlutonium::PlutoniumShip::Update(float _dt, sf::RenderTarget& _rt)
 		{
 			if (InputManager::IsUsingBoost())
 			{
-				speed = 300.0f;
+				speed = 425.0f;
 			}
 			else
 			{
-				speed = 100.0f;
+				speed = 175.0f;
 			}
 
 			auto tempPosition = position;
