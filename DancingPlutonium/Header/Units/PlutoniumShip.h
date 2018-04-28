@@ -76,19 +76,19 @@ namespace DancingPlutonium
 		int bombs;								/* Represents the bombs count for this PlutoniumShip object */
 		int lives;								/* Represents the lives count for this PlutoniumShip object */
 		int score;								/* Represents the score for this PlutoniumShip object */
-		int health;								/* Represents the health of this PlutoniumShip object */
-		float fireRate;							/* Represents the fireRate of this PlutoniumShip object */
+		int health;								/* Represents the health for this PlutoniumShip object */
+		float fireRate;							/* Represents the fireRate for this PlutoniumShip object */
 		float accumulator;						/* Represents the accumulation of clock time, for special use with fireRate */
-		int fireDamage;							/* Represents the fireDamage of this PlutoniumShip object */
-		float speed;							/* Represents the speed of this PlutoniumShip object */
+		int fireDamage;							/* Represents the fireDamage for this PlutoniumShip object */
+		float speed;							/* Represents the speed for this PlutoniumShip object */
 		bool isActive;							/* Represents the isActive state for this PlutoniumShip object */
 		bool isMoving;							/* Represents the isMoving state for this PlutoniumShip object */
 		std::vector<Projectile*> ammunition;	/* Represents the ammunition container of bullets for this PlutoniumShip object */
-		sf::String name;						/* Represents the name of this PlutoniumShip object */
+		sf::String name;						/* Represents the name for this PlutoniumShip object */
 		sf::Sprite sprite;						/* Represents the sprite for this PlutoniumShip object */
 		sf::Texture texture;					/* Represents the texture for this PlutoniumShip object */
-		sf::Vector2f position;					/* Represents the position of this PlutoniumShip object */
-		Weapon* weapon;							/* Represents the weapon of this PlutoniumShip object */
+		sf::Vector2f position;					/* Represents the position for this PlutoniumShip object */
+		Weapon* weapon;							/* Represents the weapon for this PlutoniumShip object */
 
 		#pragma endregion
 

@@ -3,6 +3,7 @@
 #include<SFML/Graphics.hpp>
 #include "IRng.h"
 #include "Projectile.h"
+#include "Weapon.h"
 
 namespace DancingPlutonium
 {
@@ -18,9 +19,11 @@ namespace DancingPlutonium
 		float fireRate;							/* Represents the rate of fire this unit is allowed to shoot projectiles */
 		float speed;							/* Represents the speed that this unit may move at */
 		bool isActive;							/* Represents the state of whether this unit is active or dead */
+		bool isFriendly;						/* Represents the friendly/foe status for this unit */
 		sf::Sprite sprite;						/* Represents the sprite for this unit */
 		sf::Texture texture;					/* Represents the texture for this unit */
 		sf::Vector2f position;					/* Represents the position for this unit */
+		Weapon* weapon;							/* Represents the weapon for this unit */
 		std::vector<Projectile*> shotsFired;	/* Represents this units active projectile container */
 
 		#pragma endregion
@@ -60,7 +63,7 @@ namespace DancingPlutonium
 		/* Sets the position of this unit to random area */
 		virtual void SpawnRandomly(const sf::RenderTarget& _rt);
 		/* Update this unit in the world based on the clock */
-		virtual void Update(float _dt);
+		virtual void Update(float _dt) = 0;
 		/* Abstract method SetSprite must be implemented by inheriting children */
 		virtual void SetSprite() = 0;
 		/* Abstract method ShootBullet must be implemented by inheriting children */

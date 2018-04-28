@@ -72,6 +72,8 @@ void DancingPlutonium::GenericEnemyUnit::SetPosition(const sf::Vector2f& _pos)
 void DancingPlutonium::GenericEnemyUnit::SetHealth(const int _val)
 {
 	health -= _val;
+
+	health > 0.0f ? isActive = true : isActive = false;
 }
 
 void DancingPlutonium::GenericEnemyUnit::SpawnRandomly(const sf::RenderTarget& _rt)
@@ -81,9 +83,3 @@ void DancingPlutonium::GenericEnemyUnit::SpawnRandomly(const sf::RenderTarget& _
 	
 	SetPosition(sf::Vector2f(static_cast<float>(randomX), 16.0f));
 }
-
-// IMPORTANT DO THIS "SOON"
-void DancingPlutonium::GenericEnemyUnit::Update(float _dt)
-{
-}
-

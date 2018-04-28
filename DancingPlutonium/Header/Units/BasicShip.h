@@ -25,6 +25,8 @@ namespace DancingPlutonium
 		virtual void SetSprite() override;
 		/* Activate a projectile that spawns from this ship */
 		virtual void ShootBullet() override;
+		/* Updates this unit in the world */
+		virtual void Update(float _dt) override;
 
 		#pragma endregion
 	};
