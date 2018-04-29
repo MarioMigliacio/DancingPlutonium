@@ -1,10 +1,5 @@
 #include "Weapon.h"
 
-sf::Uint32 DancingPlutonium::Weapon::weaponPattern = AbstractBaseProjectile::ProjectilePattern::NoBullet;
-sf::Uint32 DancingPlutonium::Weapon::weaponDamageState = WeaponDamageState::d_Uninitialized;
-sf::Uint32 DancingPlutonium::Weapon::weaponFireRateState = WeaponFireRateState::r_Uninitialized;
-sf::Uint32 DancingPlutonium::Weapon::weaponVelocityRateState = WeaponVelocityState::v_Uninitialized;
-
 DancingPlutonium::Weapon::Weapon(const float _fireRate, short _allegiance)
 {
 	InitializeWeaponSystem(_fireRate);

@@ -56,7 +56,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LControl ||
 				event.key.code == sf::Keyboard::RControl))
 			{
- 				me.GetWeaponEquipped()->UpgradeWeaponPattern();
+				me.GetWeaponEquipped()->UpgradeWeaponPattern();
 			}
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LAlt ||
 				event.key.code == sf::Keyboard::RAlt))

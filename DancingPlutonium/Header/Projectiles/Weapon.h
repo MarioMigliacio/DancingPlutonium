@@ -109,14 +109,14 @@ namespace DancingPlutonium
 
 		std::vector<AbstractBaseProjectile*> ammunition;		/* Represents the container for the projectiles that this weapon object maintains */
 		float fireRate;											/* Something used to space time between valid projectile shots */
-		short allegiance;										/* test */
-		float baseDamage;										/* test */
-		float baseFireRate;										/* test */
-		float baseVelocity;										/* test */
-		static sf::Uint32 weaponPattern;						/* This weapons current pattern */
-		static sf::Uint32 weaponDamageState;					/* A state which determines bonus damage of projectile shots */
-		static sf::Uint32 weaponFireRateState;					/* A state which determines bonus fire rate of projectile shots */
-		static sf::Uint32 weaponVelocityRateState;				/* A state which determines bonus velocity rate of projectile shots */
+		short allegiance;										/* Represents the friendly or hostile state of the projectiles that this weapon fires */
+		float baseDamage;										/* Represents the base damage bonus for a projectile */
+		float baseFireRate;										/* Represents the base fire rate this weapon is allowed to add projectiles to the munition container */
+		float baseVelocity;										/* Represents the base velocity a projectile may travel at */
+		sf::Uint32 weaponPattern;								/* This weapons current pattern */
+		sf::Uint32 weaponDamageState;							/* A state which determines bonus damage of projectile shots */
+		sf::Uint32 weaponFireRateState;							/* A state which determines bonus fire rate of projectile shots */
+		sf::Uint32 weaponVelocityRateState;						/* A state which determines bonus velocity rate of projectile shots */
 
 		#pragma endregion
 	};
