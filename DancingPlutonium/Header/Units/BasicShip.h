@@ -22,7 +22,7 @@ namespace DancingPlutonium
 		#pragma region Methods
 
 		/* Sets this ships sprite, texture and default position */
-		virtual void SetSprite() override;
+		virtual void SetSprite(const sf::RenderTarget& _rt) override;
 		/* Activate a projectile that spawns from this ship */
 		virtual void ShootBullet(const float _dt) override;
 		/* Updates this unit in the world */

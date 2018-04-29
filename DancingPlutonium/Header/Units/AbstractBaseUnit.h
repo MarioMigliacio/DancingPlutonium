@@ -14,18 +14,17 @@ namespace DancingPlutonium
 		#pragma region Members
 
 		int value;											/* Represents the point value for the player upon killing this unit */
-		int health;											/* Represents the health points this unit has */
+		float health;										/* Represents the health points this unit has */
 		float damageMultiplier;								/* Represents the additional damage multiplier this unit can deal */
 		float fireRate;										/* Represents the rate of fire this unit is allowed to shoot projectiles */
 		float speed;										/* Represents the speed that this unit may move at */
 		float accumulator;									/* Represents the accumulation of clock time, for special use with fireRate */
 		bool isActive;										/* Represents the state of whether this unit is active or dead */
-		bool isFriendly;									/* Represents the friendly/foe status for this unit */
+		short allegiance;									/* Represents the friendly/foe status for this unit */
 		sf::Sprite sprite;									/* Represents the sprite for this unit */
 		sf::Texture texture;								/* Represents the texture for this unit */
 		sf::Vector2f position;								/* Represents the position for this unit */
 		Weapon* weapon;										/* Represents the weapon for this unit */
-		std::vector<AbstractBaseProjectile*> ammunition;	/* Represents this units active projectile container */
 
 		#pragma endregion
 	public:
@@ -42,7 +41,7 @@ namespace DancingPlutonium
 		/* Returns the value of this unit */
 		virtual int GetValue() const;
 		/* Returns the health of this unit */
-		virtual int GetHealth() const;
+		virtual float GetHealth() const;
 		/* Returns the damageMultiplier of this unit */
 		virtual float GetDamageMultiplier() const;
 		/* Returns the fireRate of this unit */
@@ -51,6 +50,8 @@ namespace DancingPlutonium
 		virtual float GetSpeed() const;
 		/* Returns true if this unit is active, false otherwise */
 		virtual bool GetActiveState(const sf::RenderTarget& _rt) const;
+		/* Allows access to this PlutoniumShip objects weapon pointer */
+		virtual Weapon* GetWeaponEquipped() const;
 		/* Returns the sprite of this unit */
 		virtual sf::Sprite GetSprite() const;
 		/* Returns the texture of this unit */
@@ -72,7 +73,7 @@ namespace DancingPlutonium
 		/* Update this unit in the world based on the clock */
 		virtual void Update(float _dt, sf::RenderTarget& _rt) = 0;
 		/* Abstract method SetSprite must be implemented by inheriting children */
-		virtual void SetSprite() = 0;
+		virtual void SetSprite(const sf::RenderTarget& _rt) = 0;
 		/* Abstract method ShootBullet must be implemented by inheriting children */
 		virtual void ShootBullet(const float _dt) = 0;
 

@@ -11,9 +11,10 @@ DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
 	accumulator = 0.0f;
 	speed = 175.0f;
 	isActive = true;
+	allegiance = 1;
 	SetSprite(_rt);
 	fireRate = 0.5;
-	InitializeWeaponry(fireRate);
+	InitializeWeaponry();
 }
 
 DancingPlutonium::PlutoniumShip::~PlutoniumShip()
@@ -36,37 +37,6 @@ void DancingPlutonium::PlutoniumShip::AddScore(const int _value)
 	score += _value;
 }
 
-int DancingPlutonium::PlutoniumShip::GetHealth() const
-{
-	return health;
-}
-
-void DancingPlutonium::PlutoniumShip::ModifyHealth(const int _value)
-{
-	health += _value;
-}
-
-float DancingPlutonium::PlutoniumShip::GetFireRate() const
-{
-	return fireRate;
-}
-
-int DancingPlutonium::PlutoniumShip::GetFireDamage() const
-{
-	return fireDamage;
-}
-
-// is this really needed?
-float DancingPlutonium::PlutoniumShip::GetSpeed() const
-{
-	return speed;
-}
-
-bool DancingPlutonium::PlutoniumShip::GetActiveState() const
-{
-	return isActive;
-}
-
 bool DancingPlutonium::PlutoniumShip::IsWithinBounds(const sf::RenderTarget& _rt)
 {
 	auto us = sprite.getGlobalBounds();
@@ -83,21 +53,6 @@ bool DancingPlutonium::PlutoniumShip::IsWithinBounds(const sf::RenderTarget& _rt
 void DancingPlutonium::PlutoniumShip::SetMovingState(bool _state)
 {
 	isMoving = _state;
-}
-
-sf::Sprite& DancingPlutonium::PlutoniumShip::GetSprite()
-{
-	return sprite;
-}
-
-sf::Vector2f DancingPlutonium::PlutoniumShip::GetPosition() const
-{
-	return sprite.getPosition();
-}
-
-sf::FloatRect DancingPlutonium::PlutoniumShip::GetBounds() const
-{
-	return sprite.getGlobalBounds();
 }
 
 sf::Uint32 DancingPlutonium::PlutoniumShip::GetWeaponState() const
@@ -237,7 +192,7 @@ void DancingPlutonium::PlutoniumShip::Update(float _dt, sf::RenderTarget& _rt)
 		// update bullets
 		if (InputManager::IsShooting())
 		{
-			Shoot(accumulator);
+			ShootBullet(accumulator);
 		}
 
 		weapon->Update(_rt, _dt);
@@ -250,7 +205,7 @@ void DancingPlutonium::PlutoniumShip::Draw(sf::RenderTarget& _rt)
 	weapon->Draw(_rt);
 }
 
-void DancingPlutonium::PlutoniumShip::Shoot(const float _dt)
+void DancingPlutonium::PlutoniumShip::ShootBullet(const float _dt)
 {
 	if (weapon->AddMunition(sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f), _dt))
 	{
@@ -258,34 +213,20 @@ void DancingPlutonium::PlutoniumShip::Shoot(const float _dt)
 	}
 }
 
-void DancingPlutonium::PlutoniumShip::CleanAmmunition(const sf::RenderTarget& _rt)
-{
-	if (ammunition.size() != 0)
-	{
-		for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
-		{
-			if (ammunition[i]->GetActiveState(_rt) == false)
-			{
-				delete ammunition[i];
-				ammunition.erase(ammunition.begin() + i);
-			}
-		}
-	}
-}
 
-void DancingPlutonium::PlutoniumShip::InitializeWeaponry(const float _fireRate)
+void DancingPlutonium::PlutoniumShip::InitializeWeaponry()
 {
-	ammunition = std::vector<AbstractBaseProjectile*>();
-	weapon = new Weapon(_fireRate, 1);
-	//fireRate = 0.33f;
+	weapon = new Weapon(fireRate, allegiance);
 }
 
 void DancingPlutonium::PlutoniumShip::SetSprite(const sf::RenderTarget& _rt)
 {
-	sf::Vector2f origin = sf::Vector2f(_rt.getSize().x / 2.0f, _rt.getSize().y - 16.0f);
-
 	texture.loadFromFile("Content/Images/PlayerShip.png");
 	sprite.setTexture(texture);
+
+	auto width = sprite.getGlobalBounds();
+	sf::Vector2f origin = sf::Vector2f(_rt.getSize().x / 2.0f, _rt.getSize().y - width.width / 2.0f);
+
 	sprite.setScale(sf::Vector2f(0.75f, 0.75f));
 	sprite.setOrigin(sf::Vector2f(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f));
 	sprite.setPosition(origin);

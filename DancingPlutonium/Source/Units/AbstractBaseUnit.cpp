@@ -5,7 +5,7 @@ int DancingPlutonium::AbstractBaseUnit::GetValue() const
 	return value;
 }
 
-int DancingPlutonium::AbstractBaseUnit::GetHealth() const
+float DancingPlutonium::AbstractBaseUnit::GetHealth() const
 {
 	return health;
 }
@@ -25,7 +25,6 @@ float DancingPlutonium::AbstractBaseUnit::GetSpeed() const
 	return speed;
 }
 
-// test this method!
 bool DancingPlutonium::AbstractBaseUnit::GetActiveState(const sf::RenderTarget& _rt) const
 {
 	auto rect = sprite.getGlobalBounds();
@@ -40,6 +39,10 @@ bool DancingPlutonium::AbstractBaseUnit::GetActiveState(const sf::RenderTarget& 
 	return check;
 }
 
+DancingPlutonium::Weapon* DancingPlutonium::AbstractBaseUnit::GetWeaponEquipped() const
+{
+	return weapon;
+}
 
 sf::Sprite DancingPlutonium::AbstractBaseUnit::GetSprite() const
 {

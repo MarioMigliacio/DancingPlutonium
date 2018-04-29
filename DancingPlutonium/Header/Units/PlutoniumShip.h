@@ -2,15 +2,15 @@
 
 #include <SFML/Graphics.hpp>
 #include "InputManager.h"
-#include "AbstractBaseProjectile.h"
-#include "BulletFactory.h"
+#include "AbstractBaseUnit.h"
+//#include "AbstractBaseProjectile.h"
 #include "Enums.h"
 #include "Weapon.h"
 
 namespace DancingPlutonium
 {
 	/* PlutoniumShip represents the player in this game */
-	class PlutoniumShip
+	class PlutoniumShip : AbstractBaseUnit
 	{
 	public:
 		#pragma region Ctor/Dtors
@@ -30,28 +30,10 @@ namespace DancingPlutonium
 		int GetScore() const;
 		/* Adds score to the this PlutoniumShip object based on the _value input parameter */
 		void AddScore(const int _value);
-		/* Returns the health for this PlutoniumShip object */
-		int GetHealth() const;
-		/* Modifies this PlutoniumShip object's health value based on the _value input parameter */
-		void ModifyHealth(const int _value);
-		/* Returns the fireRate for this PlutoniumShip object */
-		float GetFireRate() const;
-		/* Returns the fireDamage for this PlutoniumShip object */
-		int GetFireDamage() const;
-		/* Returns the speed for this PlutoniumShip object */
-		float GetSpeed() const;
-		/* Returns true if this PlutoniumShip object is alive, false otherwise */
-		bool GetActiveState() const;
 		/* Returns true if this PlutoniumShip is within the bounds of the game window, false otherwise */
 		bool IsWithinBounds(const sf::RenderTarget& _rt);
 		/* Modifies this PlutoniumShip object's movement state based on _state input parameter*/
 		void SetMovingState(bool _state);
-		/* Returns the sprite for this PlutoniumShip object */
-		sf::Sprite& GetSprite();
-		/* Returns the position for this PlutoniumShip object */
-		sf::Vector2f GetPosition() const;
-		/* Returns the global bounds rectangle for this PlutoniumShip object */
-		sf::FloatRect GetBounds() const;
 		/* Returns the current weaponry state for this PlutoniumShip object */
 		sf::Uint32 GetWeaponState() const;
 		/* Allows access to this PlutoniumShip objects weapon pointer */
@@ -64,8 +46,8 @@ namespace DancingPlutonium
 		void Update(float dt, sf::RenderTarget& _rt);
 		/* Draw this PlutoniumShip sprite onto the render window _rt */
 		void Draw(sf::RenderTarget& _rt);
-		/* Shoot a projectile  */
-		void Shoot(const float _dt);
+		/* If a projectile is allowed to be fired, ShootBullet adds the ammunition to the Weapon container */
+		virtual void ShootBullet(const float _dt) override;
 		/* Free up lost bullets if they go out of bounds */
 		void CleanAmmunition(const sf::RenderTarget& _rt);
 
@@ -73,17 +55,10 @@ namespace DancingPlutonium
 	private:
 		#pragma region Members
 
-		int bombs;											/* Represents the bombs count for this PlutoniumShip object */
-		int lives;											/* Represents the lives count for this PlutoniumShip object */
+		short bombs;										/* Represents the bombs count for this PlutoniumShip object */
+		short lives;										/* Represents the lives count for this PlutoniumShip object */
 		int score;											/* Represents the score for this PlutoniumShip object */
-		int health;											/* Represents the health for this PlutoniumShip object */
-		float fireRate;										/* Represents the fireRate for this PlutoniumShip object */
-		float accumulator;									/* Represents the accumulation of clock time, for special use with fireRate */
-		float fireDamage;									/* Represents the fireDamage for this PlutoniumShip object */
-		float speed;										/* Represents the speed for this PlutoniumShip object */
-		bool isActive;										/* Represents the isActive state for this PlutoniumShip object */
 		bool isMoving;										/* Represents the isMoving state for this PlutoniumShip object */
-		std::vector<AbstractBaseProjectile*> ammunition;	/* Represents the ammunition container of bullets for this PlutoniumShip object */
 		sf::String name;									/* Represents the name for this PlutoniumShip object */
 		sf::Sprite sprite;									/* Represents the sprite for this PlutoniumShip object */
 		sf::Texture texture;								/* Represents the texture for this PlutoniumShip object */
@@ -95,7 +70,7 @@ namespace DancingPlutonium
 		#pragma region Private Methods
 
 		/* Sets the Weaponry state for this PlutoniumShip to a safe default state */
-		void InitializeWeaponry(const float _fireRate);
+		virtual void InitializeWeaponry() override;
 		/* Sets this PlutoniumShips sprite, texture and default position */
 		void SetSprite(const sf::RenderTarget& _rt);
 
@@ -103,7 +78,7 @@ namespace DancingPlutonium
 	private:
 		#pragma region Static State Members
 
-		static sf::Uint32 m_movement;		/* Static variable which maintains the state for this PlutoniumShips movement */
+		static sf::Uint32 m_movement;						/* Static variable which maintains the state for this PlutoniumShips movement */
 
 		#pragma endregion
 	};

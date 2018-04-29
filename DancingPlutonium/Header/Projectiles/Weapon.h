@@ -25,6 +25,8 @@ namespace DancingPlutonium
 		AbstractBaseProjectile* GetIndexOfAmmunition(int _index);
 		/* Returns the size of the projectile container for the units' Weapon */
 		int GetSizeOfAmmunition();
+		/* Returns the Weapon Ammunition container itself */
+		std::vector<AbstractBaseProjectile*> GetAmmunitionContainer();
 
 		#pragma endregion
 	public:

@@ -103,6 +103,11 @@ int DancingPlutonium::Weapon::GetSizeOfAmmunition()
 	return static_cast<int>(ammunition.size());
 }
 
+std::vector<DancingPlutonium::AbstractBaseProjectile*> DancingPlutonium::Weapon::GetAmmunitionContainer()
+{
+	return ammunition;
+}
+
 void DancingPlutonium::Weapon::Update(sf::RenderTarget& _rt, float _dt)
 {
 	if (ammunition.size() != 0)

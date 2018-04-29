@@ -1,18 +1,18 @@
 #pragma once
 
 #include "BasicShip.h"
-#include <iostream>
 
 DancingPlutonium::BasicShip::BasicShip(const sf::RenderTarget& _rt)
 {
-	value = 50.0f;
+	value = 50;
 	health = 100.0f;
 	fireRate = 1.25f;
 	damageMultiplier = 10.0f;
 	accumulator = 0.0f;
 	speed = 50.0f;
 	isActive = true;
-	SetSprite();
+	allegiance = -1;
+	SetSprite(_rt);
 	InitializeWeaponry();
 }
 
@@ -21,7 +21,7 @@ DancingPlutonium::BasicShip::~BasicShip()
 	delete weapon;
 }
 
-void DancingPlutonium::BasicShip::SetSprite()
+void DancingPlutonium::BasicShip::SetSprite(const sf::RenderTarget& _rt)
 {
 	texture.loadFromFile("Content/Images/BasicShip.png");
 	auto width = texture.getSize().x;
@@ -42,7 +42,6 @@ void DancingPlutonium::BasicShip::ShootBullet(float _dt)
 	}
 }
 
-// TODO this stuff maybe some day
 void DancingPlutonium::BasicShip::Update(float _dt, sf::RenderTarget& _rt)
 {
 	accumulator += _dt;
@@ -57,7 +56,6 @@ void DancingPlutonium::BasicShip::Update(float _dt, sf::RenderTarget& _rt)
 
 void DancingPlutonium::BasicShip::InitializeWeaponry()
 {
-	ammunition = std::vector<AbstractBaseProjectile*>();
-	weapon = new Weapon(fireRate, -1);
+	weapon = new Weapon(fireRate, allegiance);
 }
 
