@@ -4,8 +4,8 @@
 
 namespace DancingPlutonium
 {
-	/* Projectile class represents an abstract base projectile for which to inherit from */
-	class Projectile
+	/* AbstractBaseProjectile class represents an abstract base projectile for which to inherit from */
+	class AbstractBaseProjectile
 	{
 	public:
 		#pragma region Patterns enum
@@ -38,7 +38,7 @@ namespace DancingPlutonium
 		sf::Sprite sprite;				/* Represents the sprite for this projectile */
 		sf::Texture texture;			/* Represents the texture for this projectile */
 		sf::Vector2f position;			/* Represents the position for this projectile */
-		bool friendly;					/* Represents the allegiance of this projectile */
+		short allegiance;				/* Represents the allegiance of this projectile */
 		bool innert;					/* Represents if this projectile can hurt or not */
 		float speed;					/* Represents the speed that this projectile will travel at */
 		float damage;					/* Represents the damage that this proctile will do upon impact */
@@ -47,19 +47,21 @@ namespace DancingPlutonium
 	public:
 		#pragma region Virtual Dtor
 
-		/* The virtual Bullet Destructor */
-		virtual ~Projectile() {}
+		/* The virtual Projectile Destructor */
+		virtual ~AbstractBaseProjectile() {}
 
 		#pragma endregion
 
 		#pragma region Methods
 
+		/* Sets the allegiance state for this projectile */
+		void SetAllegiance(short _allegiance);
+		/* Returns the allegiance state for this projectile */
+		short GetAllegiance() const;
 		/* Returns the speed for this projectile */
 		float GetSpeed() const;
 		/* Sets the speed for this projectile */
 		void SetSpeed(const float _speed);
-		/* Returns true if this projectile is fired by the player, false otherwise */
-		bool IsFriendly() const;
 		/* Returns true if this projectile has not yet hurt a unit, it is said to be active or 'innert', false otherwise */
 		bool IsInnert() const;
 		/* Returns the damage from this projectile */

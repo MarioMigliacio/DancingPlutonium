@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "InputManager.h"
-#include "Projectile.h"
+#include "AbstractBaseProjectile.h"
 #include "BulletFactory.h"
 #include "Enums.h"
 #include "Weapon.h"
@@ -73,29 +73,29 @@ namespace DancingPlutonium
 	private:
 		#pragma region Members
 
-		int bombs;								/* Represents the bombs count for this PlutoniumShip object */
-		int lives;								/* Represents the lives count for this PlutoniumShip object */
-		int score;								/* Represents the score for this PlutoniumShip object */
-		int health;								/* Represents the health for this PlutoniumShip object */
-		float fireRate;							/* Represents the fireRate for this PlutoniumShip object */
-		float accumulator;						/* Represents the accumulation of clock time, for special use with fireRate */
-		int fireDamage;							/* Represents the fireDamage for this PlutoniumShip object */
-		float speed;							/* Represents the speed for this PlutoniumShip object */
-		bool isActive;							/* Represents the isActive state for this PlutoniumShip object */
-		bool isMoving;							/* Represents the isMoving state for this PlutoniumShip object */
-		std::vector<Projectile*> ammunition;	/* Represents the ammunition container of bullets for this PlutoniumShip object */
-		sf::String name;						/* Represents the name for this PlutoniumShip object */
-		sf::Sprite sprite;						/* Represents the sprite for this PlutoniumShip object */
-		sf::Texture texture;					/* Represents the texture for this PlutoniumShip object */
-		sf::Vector2f position;					/* Represents the position for this PlutoniumShip object */
-		Weapon* weapon;							/* Represents the weapon for this PlutoniumShip object */
+		int bombs;											/* Represents the bombs count for this PlutoniumShip object */
+		int lives;											/* Represents the lives count for this PlutoniumShip object */
+		int score;											/* Represents the score for this PlutoniumShip object */
+		int health;											/* Represents the health for this PlutoniumShip object */
+		float fireRate;										/* Represents the fireRate for this PlutoniumShip object */
+		float accumulator;									/* Represents the accumulation of clock time, for special use with fireRate */
+		float fireDamage;									/* Represents the fireDamage for this PlutoniumShip object */
+		float speed;										/* Represents the speed for this PlutoniumShip object */
+		bool isActive;										/* Represents the isActive state for this PlutoniumShip object */
+		bool isMoving;										/* Represents the isMoving state for this PlutoniumShip object */
+		std::vector<AbstractBaseProjectile*> ammunition;	/* Represents the ammunition container of bullets for this PlutoniumShip object */
+		sf::String name;									/* Represents the name for this PlutoniumShip object */
+		sf::Sprite sprite;									/* Represents the sprite for this PlutoniumShip object */
+		sf::Texture texture;								/* Represents the texture for this PlutoniumShip object */
+		sf::Vector2f position;								/* Represents the position for this PlutoniumShip object */
+		Weapon* weapon;										/* Represents the weapon for this PlutoniumShip object */
 
 		#pragma endregion
 
 		#pragma region Private Methods
 
 		/* Sets the Weaponry state for this PlutoniumShip to a safe default state */
-		void InitializeWeaponry();
+		void InitializeWeaponry(const float _fireRate);
 		/* Sets this PlutoniumShips sprite, texture and default position */
 		void SetSprite(const sf::RenderTarget& _rt);
 

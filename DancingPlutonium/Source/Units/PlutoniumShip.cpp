@@ -12,7 +12,8 @@ DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
 	speed = 175.0f;
 	isActive = true;
 	SetSprite(_rt);
-	InitializeWeaponry();
+	fireRate = 0.5;
+	InitializeWeaponry(fireRate);
 }
 
 DancingPlutonium::PlutoniumShip::~PlutoniumShip()
@@ -68,8 +69,10 @@ bool DancingPlutonium::PlutoniumShip::GetActiveState() const
 
 bool DancingPlutonium::PlutoniumShip::IsWithinBounds(const sf::RenderTarget& _rt)
 {
-	if (position.y > texture.getSize().y / 2.0f - 4.0f && (position.y <= _rt.getSize().y - texture.getSize().y / 2.0f) &&
-		position.x > texture.getSize().x / 2.0f - 4.0f && (position.x <= _rt.getSize().x - texture.getSize().x / 2.0f))
+	auto us = sprite.getGlobalBounds();
+	auto getRect = sf::FloatRect(us.width, us.height, _rt.getSize().x - 2.0f * us.width, _rt.getSize().y - 2.0f * us.height);
+
+	if (getRect.intersects(us))
 	{
 		return true;
 	}
@@ -234,7 +237,7 @@ void DancingPlutonium::PlutoniumShip::Update(float _dt, sf::RenderTarget& _rt)
 		// update bullets
 		if (InputManager::IsShooting())
 		{
-			Shoot(_dt);
+			Shoot(accumulator);
 		}
 
 		weapon->Update(_rt, _dt);
@@ -249,7 +252,10 @@ void DancingPlutonium::PlutoniumShip::Draw(sf::RenderTarget& _rt)
 
 void DancingPlutonium::PlutoniumShip::Shoot(const float _dt)
 {
-	weapon->AddMunition(sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f), _dt);
+	if (weapon->AddMunition(sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f), _dt))
+	{
+		accumulator = 0.0f;
+	}
 }
 
 void DancingPlutonium::PlutoniumShip::CleanAmmunition(const sf::RenderTarget& _rt)
@@ -267,10 +273,10 @@ void DancingPlutonium::PlutoniumShip::CleanAmmunition(const sf::RenderTarget& _r
 	}
 }
 
-void DancingPlutonium::PlutoniumShip::InitializeWeaponry()
+void DancingPlutonium::PlutoniumShip::InitializeWeaponry(const float _fireRate)
 {
-	ammunition = std::vector<Projectile*>();
-	weapon = new Weapon();
+	ammunition = std::vector<AbstractBaseProjectile*>();
+	weapon = new Weapon(_fireRate, 1);
 	//fireRate = 0.33f;
 }
 

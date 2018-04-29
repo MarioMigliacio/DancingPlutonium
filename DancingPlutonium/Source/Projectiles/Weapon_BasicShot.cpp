@@ -18,7 +18,7 @@ void DancingPlutonium::Weapon_BasicShot::SetSprite(const sf::Vector2f& _origin)
 
 void DancingPlutonium::Weapon_BasicShot::Update(float _dt)
 {
-	SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - _dt * speed));
+	SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - _dt * speed * allegiance));
 }
 
 void DancingPlutonium::Weapon_BasicShot::Draw(sf::RenderTarget& _rt)

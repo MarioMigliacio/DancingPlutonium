@@ -27,14 +27,14 @@ void DancingPlutonium::Weapon_DoubleShot::SetSprite(const sf::Vector2f& _origin)
 
 void DancingPlutonium::Weapon_DoubleShot::Update(float _dt)
 {
-	SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - _dt * speed));
+	//SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - _dt * speed));
 
 	// get that double shot action boiyee
 	auto leftboi = leftProjectile->GetPosition();
-	leftboi.y -= _dt * speed;
+	leftboi.y -= _dt * speed * allegiance;
 	leftProjectile->SetPosition(leftboi);
 	auto rightboi = rightProjectile->GetPosition();
-	rightboi.y -= _dt * speed;
+	rightboi.y -= _dt * speed * allegiance;
 	rightProjectile->SetPosition(rightboi);
 }
 

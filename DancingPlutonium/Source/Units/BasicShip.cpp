@@ -1,16 +1,24 @@
 #pragma once
 
 #include "BasicShip.h"
+#include <iostream>
 
 DancingPlutonium::BasicShip::BasicShip(const sf::RenderTarget& _rt)
 {
-	value = 50;
-	health = 100;
+	value = 50.0f;
+	health = 100.0f;
 	fireRate = 1.25f;
-	damageMultiplier = 10;
-	speed = 1.0f;
+	damageMultiplier = 10.0f;
+	accumulator = 0.0f;
+	speed = 50.0f;
 	isActive = true;
 	SetSprite();
+	InitializeWeaponry();
+}
+
+DancingPlutonium::BasicShip::~BasicShip()
+{
+	delete weapon;
 }
 
 void DancingPlutonium::BasicShip::SetSprite()
@@ -24,15 +32,32 @@ void DancingPlutonium::BasicShip::SetSprite()
 	sprite.setPosition(origin);
 	position = origin;
 	SetPosition(origin);
-	auto getRect = GetBounds();
 }
 
-void DancingPlutonium::BasicShip::ShootBullet()
+void DancingPlutonium::BasicShip::ShootBullet(float _dt)
 {
+	if (weapon->AddMunition(sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f), _dt))
+	{
+		accumulator = 0.0f;
+	}
 }
 
 // TODO this stuff maybe some day
-void DancingPlutonium::BasicShip::Update(float _dt)
+void DancingPlutonium::BasicShip::Update(float _dt, sf::RenderTarget& _rt)
 {
+	accumulator += _dt;
+
+	if (GetActiveState(_rt))
+	{
+		SetPosition(sf::Vector2f(position.x, position.y + speed * _dt));
+		ShootBullet(accumulator);
+		weapon->Update(_rt, _dt);
+	}
+}
+
+void DancingPlutonium::BasicShip::InitializeWeaponry()
+{
+	ammunition = std::vector<AbstractBaseProjectile*>();
+	weapon = new Weapon(fireRate, -1);
 }
 

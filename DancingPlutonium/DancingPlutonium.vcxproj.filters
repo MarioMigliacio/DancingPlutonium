@@ -53,16 +53,10 @@
     <ClCompile Include="Source\Projectiles\Weapon_TripleShot.cpp">
       <Filter>Source Files\Weaponry Cpp Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Projectiles\Projectile.cpp">
-      <Filter>Source Files\Weaponry Cpp Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Units\BasicShip.cpp">
       <Filter>Source Files\Unit Cpp Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Units\PlutoniumShip.cpp">
-      <Filter>Source Files\Unit Cpp Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Units\GenericEnemyUnit.cpp">
       <Filter>Source Files\Unit Cpp Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game States\Game.cpp">
@@ -92,6 +86,12 @@
     <ClCompile Include="Source\Projectiles\Weapon_DoubleShot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Units\AbstractBaseUnit.cpp">
+      <Filter>Source Files\Unit Cpp Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Projectiles\AbstractBaseProjectile.cpp">
+      <Filter>Source Files\Weaponry Cpp Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\Game States\Game.h">
@@ -112,9 +112,6 @@
     <ClInclude Include="Header\Units\BasicShip.h">
       <Filter>Header\Unit Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header\Units\GenericEnemyUnit.h">
-      <Filter>Header\Unit Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Header\Units\PlutoniumShip.h">
       <Filter>Header\Unit Header Files</Filter>
     </ClInclude>
@@ -122,9 +119,6 @@
       <Filter>Header\Weaponry Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Header\Projectiles\Weapon.h">
-      <Filter>Header\Weaponry Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Header\Projectiles\Projectile.h">
       <Filter>Header\Weaponry Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Header\Projectiles\BulletFactory.h">
@@ -144,6 +138,12 @@
     </ClInclude>
     <ClInclude Include="Header\Projectiles\Weapon_GrowingShot.h" />
     <ClInclude Include="Header\Projectiles\Weapon_DoubleShot.h" />
+    <ClInclude Include="Header\Units\AbstractBaseUnit.h">
+      <Filter>Header\Unit Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Projectiles\AbstractBaseProjectile.h">
+      <Filter>Header\Weaponry Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

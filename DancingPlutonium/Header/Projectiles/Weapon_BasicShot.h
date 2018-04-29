@@ -1,12 +1,12 @@
 #pragma once
 
 #include<SFML/Graphics.hpp>
-#include "Projectile.h"
+#include "AbstractBaseProjectile.h"
 
 namespace DancingPlutonium
 {
 	/* Weapon_BasicShot class is the 1st stage bullet object which has a very 'basic' pattern trajectory */
-	class Weapon_BasicShot : public Projectile
+	class Weapon_BasicShot : public AbstractBaseProjectile
 	{		
 	public:
 		#pragma region Ctor/Dtors

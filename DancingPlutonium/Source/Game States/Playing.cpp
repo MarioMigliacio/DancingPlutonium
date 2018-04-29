@@ -18,7 +18,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 	PlutoniumShip me(_window);
 	
 	// this works!
-	std::vector<GenericEnemyUnit*> mm;
+	std::vector<AbstractBaseUnit*> mm;
 	mm.push_back(&m_ship);
 
 	// Scale screens with different computer screen resolutions: (the standard resolution in place is 720p: 1280wide x 720high, 60 fps)
@@ -56,7 +56,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LControl ||
 				event.key.code == sf::Keyboard::RControl))
 			{
-				me.GetWeaponEquipped()->UpgradeWeaponPattern();
+ 				me.GetWeaponEquipped()->UpgradeWeaponPattern();
 			}
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LAlt ||
 				event.key.code == sf::Keyboard::RAlt))
@@ -86,9 +86,11 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		dt = clock.restart();
 		_window.clear();
 		_window.draw(bgSprite);
-		_window.draw(mm[0]->GetSprite());
+		//_window.draw(mm[0]->GetSprite());
 		me.Update(dt.asSeconds(), _window);
-		me.Draw(_window);		
+		me.Draw(_window);
+		mm[0]->Update(dt.asSeconds(), _window);
+		mm[0]->Draw(_window);		
 		_window.display();
 	}
 }

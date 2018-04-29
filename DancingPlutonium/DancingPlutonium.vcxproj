@@ -125,13 +125,13 @@
     <ClCompile Include="Source\Projectiles\Weapon_DoubleShot.cpp" />
     <ClCompile Include="Source\Projectiles\Weapon_GrowingShot.cpp" />
     <ClCompile Include="Source\Projectiles\Weapon_BasicShot.cpp" />
-    <ClCompile Include="Source\Projectiles\Projectile.cpp" />
+    <ClCompile Include="Source\Projectiles\AbstractBaseProjectile.cpp" />
     <ClCompile Include="Source\Projectiles\BulletFactory.cpp" />
     <ClCompile Include="Source\Projectiles\Weapon_TripleShot.cpp" />
     <ClCompile Include="Source\Projectiles\Weapon.cpp" />
     <ClCompile Include="Source\Units\BasicShip.cpp" />
     <ClCompile Include="Source\Units\PlutoniumShip.cpp" />
-    <ClCompile Include="Source\Units\GenericEnemyUnit.cpp" />
+    <ClCompile Include="Source\Units\AbstractBaseUnit.cpp" />
     <ClCompile Include="Source\Game States\Playing.cpp" />
     <ClCompile Include="Source\Game States\Game.cpp" />
     <ClCompile Include="Source\Game States\Intro.cpp" />
@@ -143,7 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\Projectiles\Weapon.h" />
-    <ClInclude Include="Header\Projectiles\Projectile.h" />
+    <ClInclude Include="Header\Projectiles\AbstractBaseProjectile.h" />
     <ClInclude Include="Header\Projectiles\Weapon_BasicShot.h" />
     <ClInclude Include="Header\Projectiles\Weapon_DoubleShot.h" />
     <ClInclude Include="Header\Projectiles\Weapon_GrowingShot.h" />
@@ -151,7 +151,7 @@
     <ClInclude Include="Header\Projectiles\BulletFactory.h" />
     <ClInclude Include="Header\Units\BasicShip.h" />
     <ClInclude Include="Header\Units\PlutoniumShip.h" />
-    <ClInclude Include="Header\Units\GenericEnemyUnit.h" />
+    <ClInclude Include="Header\Units\AbstractBaseUnit.h" />
     <ClInclude Include="Header\Game States\Playing.h" />
     <ClInclude Include="Header\Game States\TitleMenu.h" />
     <ClInclude Include="Header\Game States\Game.h" />

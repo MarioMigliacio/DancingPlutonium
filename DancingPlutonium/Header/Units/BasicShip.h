@@ -1,11 +1,11 @@
 #pragma once
 
-#include "GenericEnemyUnit.h"
+#include "AbstractBaseUnit.h"
 
 namespace DancingPlutonium
 {
 	/* BasicShip class is the most basic stage enemy object which has a very simple behavior */
-	class BasicShip : public GenericEnemyUnit
+	class BasicShip : public AbstractBaseUnit
 	{
 	public:
 		#pragma region Ctor/Dtors
@@ -15,7 +15,7 @@ namespace DancingPlutonium
 		/* BasicShip copy constructor */
 		BasicShip(const BasicShip& _ref) {}
 		/* BasicShip destructor */
-		~BasicShip() {}
+		~BasicShip();
 
 		#pragma endregion
 
@@ -24,10 +24,12 @@ namespace DancingPlutonium
 		/* Sets this ships sprite, texture and default position */
 		virtual void SetSprite() override;
 		/* Activate a projectile that spawns from this ship */
-		virtual void ShootBullet() override;
+		virtual void ShootBullet(const float _dt) override;
 		/* Updates this unit in the world */
-		virtual void Update(float _dt) override;
+		virtual void Update(float _dt, sf::RenderTarget& _rt) override;
+		/* Initialize the weaponry system for this unit */
+		virtual void InitializeWeaponry() override;
 
-		#pragma endregion
+		#pragma endregion		
 	};
 }

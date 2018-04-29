@@ -1,19 +1,19 @@
 #pragma once
 
 #include<SFML/Graphics.hpp>
-#include "Projectile.h"
+#include "AbstractBaseProjectile.h"
 #include "Weapon_BasicShot.h"
 
 namespace DancingPlutonium
 {
 	/* Weapon_DoubleShot class is the 1st stage bullet object which has a very 'basic' pattern trajectory */
-	class Weapon_DoubleShot : public Projectile
+	class Weapon_DoubleShot : public AbstractBaseProjectile
 	{
 	private:
 		#pragma region Extra projectile objects
 
-		Projectile* leftProjectile;		/* Represents a left side trajectory bullet object off the main shot */
-		Projectile* rightProjectile;	/* Represents a right side trajectory bullet object off the main shot */
+		AbstractBaseProjectile* leftProjectile;		/* Represents a left side trajectory bullet object off the main shot */
+		AbstractBaseProjectile* rightProjectile;	/* Represents a right side trajectory bullet object off the main shot */
 
 		#pragma endregion		
 	public:

@@ -3,6 +3,7 @@
 DancingPlutonium::Weapon_TripleShot::Weapon_TripleShot(const sf::Vector2f& _pos)
 {
 	leftProjectile = new Weapon_BasicShot(_pos);
+	centerProjectile = new Weapon_BasicShot(_pos);
 	rightProjectile = new Weapon_BasicShot(_pos);
 	position = _pos;
 	speed = 200.0f;
@@ -12,36 +13,42 @@ DancingPlutonium::Weapon_TripleShot::Weapon_TripleShot(const sf::Vector2f& _pos)
 DancingPlutonium::Weapon_TripleShot::~Weapon_TripleShot()
 {
 	delete leftProjectile;
+	delete centerProjectile;
 	delete rightProjectile;
 }
 
 void DancingPlutonium::Weapon_TripleShot::SetSprite(const sf::Vector2f& _origin)
 {
-	texture.loadFromFile("Content/Images/BulletGreen.png");
-	sprite.setTexture(texture);
-	sprite.setOrigin(sf::Vector2f(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f));
-	sprite.setPosition(_origin);
-	position = _origin;
+	/*auto leftBoi = leftProjectile->GetPosition();
+	leftBoi.x -= 5.0f;
+	leftProjectile->SetPosition(leftBoi);
+	auto centerboi = centerProjectile->GetPosition();
+	centerboi.x = 0.0f;
+	centerProjectile->SetPosition(leftBoi);
+	auto rightBoi = rightProjectile->GetPosition();
+	rightBoi.x += 5.0f;
+	rightProjectile->SetPosition(rightBoi);*/
 }
 
 void DancingPlutonium::Weapon_TripleShot::Update(float _dt)
 {
-	SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - _dt * speed));
-
 	// get that side shot action boiyee
 	auto leftboi = leftProjectile->GetPosition();
 	leftboi.x -= (_dt * speed) * .33f;
-	leftboi.y -= _dt * speed;
+	leftboi.y -= _dt * speed * allegiance;
 	leftProjectile->SetPosition(leftboi);
+	auto centerboi = centerProjectile->GetPosition();
+	centerboi.y -= _dt * speed * allegiance;
+	centerProjectile->SetPosition(centerboi);
 	auto rightboi = rightProjectile->GetPosition();
 	rightboi.x += (_dt * speed) * .33f;
-	rightboi.y -= _dt * speed;
+	rightboi.y -= _dt * speed * allegiance;
 	rightProjectile->SetPosition(rightboi);
 }
 
 void DancingPlutonium::Weapon_TripleShot::Draw(sf::RenderTarget& _rt)
 {
-	_rt.draw(sprite);
 	_rt.draw(leftProjectile->GetSprite());
+	_rt.draw(centerProjectile->GetSprite());
 	_rt.draw(rightProjectile->GetSprite());
 }

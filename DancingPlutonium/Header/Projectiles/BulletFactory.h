@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML\Graphics.hpp>
-#include "Projectile.h"
+#include "AbstractBaseProjectile.h"
 #include "Weapon_BasicShot.h"
 #include "Weapon_GrowingShot.h"
 #include "Weapon_DoubleShot.h"
@@ -32,7 +32,7 @@ namespace DancingPlutonium
 		#pragma region Factory Method
 
 		/* Gets a reference to a Projectile based on enum type, and position input parameters */
-		static Projectile* GetProjectile(Projectile::ProjectilePattern _toMake, sf::Vector2f& _pos);
+		static AbstractBaseProjectile* GetProjectile(AbstractBaseProjectile::ProjectilePattern _toMake, sf::Vector2f& _pos);
 
 		#pragma endregion
 	};		

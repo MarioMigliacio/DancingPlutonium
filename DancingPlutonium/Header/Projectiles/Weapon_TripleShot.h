@@ -1,19 +1,20 @@
 #pragma once
 
 #include<SFML/Graphics.hpp>
-#include "Projectile.h"
+#include "AbstractBaseProjectile.h"
 #include "Weapon_BasicShot.h"
 
 namespace DancingPlutonium
 {
 	/* Weapon_TripleShot class is a specialized bullet object which has a triple shot action trajectory */
-	class Weapon_TripleShot : public Projectile
+	class Weapon_TripleShot : public AbstractBaseProjectile
 	{
 	private:
 		#pragma region Extra projectile objects
 
-		Projectile* leftProjectile;		/* Represents a left side trajectory bullet object off the main shot */
-		Projectile* rightProjectile;	/* Represents a right side trajectory bullet object off the main shot */
+		AbstractBaseProjectile* leftProjectile;		/* Represents a left side trajectory bullet object off the main shot */
+		AbstractBaseProjectile* centerProjectile;	/* Represents a center trajectory bullet object */
+		AbstractBaseProjectile* rightProjectile;	/* Represents a right side trajectory bullet object off the main shot */
 
 		#pragma endregion		
 	public:
