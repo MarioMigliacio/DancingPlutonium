@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include "InputManager.h"
 #include "AbstractBaseUnit.h"
-//#include "AbstractBaseProjectile.h"
 #include "Enums.h"
 #include "Weapon.h"
 
@@ -17,6 +16,8 @@ namespace DancingPlutonium
 
 		/* PlutoniumShip constructor that accepts a RenderTarget as input parameter */
 		PlutoniumShip(const sf::RenderTarget& _rt);
+		/* PlutoniumShip copy constructor */
+		PlutoniumShip(const PlutoniumShip& _ref) {}
 		/* PlutoniumShip deconstructor */
 		~PlutoniumShip();
 

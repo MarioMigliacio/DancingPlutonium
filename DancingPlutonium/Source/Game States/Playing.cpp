@@ -19,7 +19,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 	
 	// this works!
 	std::vector<AbstractBaseUnit*> mm;
-	//std::vector<AbstractBaseProjectile*> alladembulletsMmHmm;
+	std::vector<AbstractBaseProjectile*> alladembulletsMmHmm;
 	mm.push_back(&m_ship);
 
 
@@ -80,10 +80,8 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			sf::Uint32 whichDirection = InputManager::GetDirection();
 			me.SetMoveState(whichDirection);
 		}
-		/*else
-		{
-			me.SetMoveState(Movement::s_noMovement);
-		}*/
+		//auto what = alladembulletsMmHmm.size();
+		alladembulletsMmHmm = mm[0]->GetWeaponEquipped()->GetAmmunitionContainer();
 
 		dt = clock.restart();
 		_window.clear();
