@@ -52,3 +52,17 @@ void DancingPlutonium::Weapon_TripleShot::Draw(sf::RenderTarget& _rt)
 	_rt.draw(centerProjectile->GetSprite());
 	_rt.draw(rightProjectile->GetSprite());
 }
+
+std::vector<sf::FloatRect> DancingPlutonium::Weapon_TripleShot::GetBounds()
+{
+	auto leftBounds = leftProjectile->GetSprite();
+	auto midBounds = centerProjectile->GetSprite();
+	auto rightBounds = rightProjectile->GetSprite();
+
+	std::vector<sf::FloatRect> retVal = std::vector<sf::FloatRect>();
+	retVal.push_back(leftBounds.getGlobalBounds());
+	retVal.push_back(midBounds.getGlobalBounds());
+	retVal.push_back(rightBounds.getGlobalBounds());
+
+	return retVal;
+}

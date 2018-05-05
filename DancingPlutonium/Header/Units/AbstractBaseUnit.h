@@ -53,7 +53,7 @@ namespace DancingPlutonium
 		/* Allows access to this PlutoniumShip objects weapon pointer */
 		virtual Weapon* GetWeaponEquipped() const;
 		/* Returns the sprite of this unit */
-		virtual sf::Sprite GetSprite() const;
+		virtual sf::Sprite& GetSprite();
 		/* Returns the texture of this unit */
 		virtual sf::Texture GetTexture() const;
 		/* Returns the position of this unit */

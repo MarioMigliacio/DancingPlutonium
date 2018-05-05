@@ -1,4 +1,5 @@
 #include "Playing.h"
+#include <iostream>
 
 // Static variable declarations:
 sf::Uint32 DancingPlutonium::Playing::m_state = s_uninitialized;
@@ -15,12 +16,13 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 	// Set the State:
 	m_state = PlayState::s_playing;
 	BasicShip m_ship(_window);
-	PlutoniumShip me(_window);
-	
-	// this works!
-	std::vector<AbstractBaseUnit*> mm;
+	PlutoniumShip* me;
+	me = new PlutoniumShip(_window);
+
+	std::vector<AbstractBaseUnit*> enemyShips;
 	std::vector<AbstractBaseProjectile*> alladembulletsMmHmm;
-	mm.push_back(&m_ship);
+	std::vector<AbstractBaseProjectile*> allademeEnemybulletsMmHmm;
+	enemyShips.push_back(&m_ship);
 
 
 	// Scale screens with different computer screen resolutions: (the standard resolution in place is 720p: 1280wide x 720high, 60 fps)
@@ -53,44 +55,112 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{	
-				mm[0]->SpawnRandomly(_window);
+				enemyShips[0]->SpawnRandomly(_window);
 			}
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LControl ||
 				event.key.code == sf::Keyboard::RControl))
 			{
-				me.GetWeaponEquipped()->UpgradeWeaponPattern();
+				me->GetWeaponEquipped()->UpgradeWeaponPattern();
 			}
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LAlt ||
 				event.key.code == sf::Keyboard::RAlt))
 			{
-				me.GetWeaponEquipped()->UpgradeWeaponFireRate();
+				me->GetWeaponEquipped()->UpgradeWeaponFireRate();
 			}
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::Up))
 			{
-				me.GetWeaponEquipped()->UpgradeWeaponVelocityRate();
+				me->GetWeaponEquipped()->UpgradeWeaponVelocityRate();
 			}
 		}
 
 		// Movement check outside of the event loop polls game at any time anyway, screw events - they weren't working smoothly anyway
 		bool isPlayerMoving = InputManager::IsMoving();
-		me.SetMovingState(isPlayerMoving);
+		me->SetMovingState(isPlayerMoving);
 		
 		if (isPlayerMoving)
 		{
 			sf::Uint32 whichDirection = InputManager::GetDirection();
-			me.SetMoveState(whichDirection);
-		}
-		//auto what = alladembulletsMmHmm.size();
-		alladembulletsMmHmm = mm[0]->GetWeaponEquipped()->GetAmmunitionContainer();
+			me->SetMoveState(whichDirection);
 
+			// this proves level has access to the coords of player and able to get bounding rectangle
+			//auto playerRect = me->GetRect();
+			//std::cout << " our rect bounds are at (L: " << playerRect.left << ", T: " << playerRect.top <<
+			//	", W: " << playerRect.width << ", H: " << playerRect.height << std::endl;
+		}
+		
 		dt = clock.restart();
 		_window.clear();
 		_window.draw(bgSprite);
-		//_window.draw(mm[0]->GetSprite());
-		me.Update(dt.asSeconds(), _window);
-		me.Draw(_window);
-		mm[0]->Update(dt.asSeconds(), _window);
-		mm[0]->Draw(_window);		
+		me->Update(dt.asSeconds(), _window);
+		me->Draw(_window);
+
+		
+
+		// this would be a simple check for Unit to Unit collision.
+		if (enemyShips.size() > 0)
+		{
+			sf::FloatRect npcRect = sf::FloatRect();
+
+			for (int i = 0; i < static_cast<int>(enemyShips.size()); i++)
+			{
+				enemyShips[i]->Update(dt.asSeconds(), _window);
+				enemyShips[i]->Draw(_window);
+				npcRect = enemyShips[i]->GetBounds();
+
+				auto temp = me->GetRect();
+
+				if (temp.intersects(npcRect))
+				{
+					// this is where you would trade damages, render objects innert for a time period. etc.
+					std::cout << " You have crashed into an enemy ship! " << std::endl;
+				}
+			}
+		}
+
+		alladembulletsMmHmm = me->GetWeaponEquipped()->GetAmmunitionContainer();
+		std::vector<sf::FloatRect> playerBullet = std::vector<sf::FloatRect>();
+
+		if (alladembulletsMmHmm.size() > 0)
+		{
+			for (int j = 0; j < static_cast<int>(alladembulletsMmHmm.size()); j++)
+			{
+				playerBullet = alladembulletsMmHmm[j]->GetBounds();
+
+				if (playerBullet.size() > 0)
+				{
+					for (int k = 0; k < static_cast<int>(playerBullet.size()); k++)
+					{
+						std::cout << " Projectile HOT at (L: " << playerBullet[k].left << ", T: " << playerBullet[k].top <<
+							", W: " << playerBullet[k].width << ", H: " << playerBullet[k].height << std::endl;
+					}
+				}
+				
+				
+			}
+		}
+
+		/*if (enemyShips.size() > 0)
+		{
+			sf::FloatRect npcRect = sf::FloatRect();
+			sf::FloatRect playerBullet = sf::FloatRect();
+
+			for (int i = 0; i < static_cast<int>(enemyShips.size()); i++)
+			{
+				if (alladembulletsMmHmm.size() > 0)
+				{
+					for (int j = 0; j < static_cast<int>(alladembulletsMmHmm.size()); j++)
+					{
+						playerBullet = alladembulletsMmHmm[j]->GetBounds();
+
+						if (npcRect.intersects(playerBullet))
+						{
+							std::cout << " You have SHOT an enemy ship! " << std::endl;
+						}
+					}
+				}
+			}
+		}*/
+
 		_window.display();
 	}
 }

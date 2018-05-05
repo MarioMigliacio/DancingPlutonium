@@ -44,7 +44,7 @@ DancingPlutonium::Weapon* DancingPlutonium::AbstractBaseUnit::GetWeaponEquipped(
 	return weapon;
 }
 
-sf::Sprite DancingPlutonium::AbstractBaseUnit::GetSprite() const
+sf::Sprite& DancingPlutonium::AbstractBaseUnit::GetSprite()
 {
 	return sprite;
 }

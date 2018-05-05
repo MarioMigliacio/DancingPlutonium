@@ -27,3 +27,12 @@ void DancingPlutonium::Weapon_GrowingShot::Draw(sf::RenderTarget& _rt)
 	_rt.draw(sprite);
 }
 
+std::vector<sf::FloatRect> DancingPlutonium::Weapon_GrowingShot::GetBounds()
+{
+	auto growingBounds = sprite.getGlobalBounds();
+	std::vector<sf::FloatRect> retVal = std::vector<sf::FloatRect>();
+	retVal.push_back(growingBounds);
+
+	return retVal;
+}
+

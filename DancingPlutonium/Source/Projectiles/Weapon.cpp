@@ -325,7 +325,7 @@ void DancingPlutonium::Weapon::UpgradeWeaponDamage()
 
 void DancingPlutonium::Weapon::CleanAmmunition(sf::RenderTarget& _rt)
 {
-	if (ammunition.size() != 0)
+	if (ammunition.size() > 0)
 	{
 		for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
 		{

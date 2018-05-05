@@ -43,3 +43,15 @@ void DancingPlutonium::Weapon_DoubleShot::Draw(sf::RenderTarget& _rt)
 	_rt.draw(leftProjectile->GetSprite());
 	_rt.draw(rightProjectile->GetSprite());
 }
+
+std::vector<sf::FloatRect> DancingPlutonium::Weapon_DoubleShot::GetBounds()
+{
+	auto leftBounds = leftProjectile->GetSprite();
+	auto rightBounds = rightProjectile->GetSprite();
+
+	std::vector<sf::FloatRect> retVal = std::vector<sf::FloatRect>();
+	retVal.push_back(leftBounds.getGlobalBounds());
+	retVal.push_back(rightBounds.getGlobalBounds());
+
+	return retVal;
+}

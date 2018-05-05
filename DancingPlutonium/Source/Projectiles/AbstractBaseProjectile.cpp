@@ -53,11 +53,6 @@ sf::Sprite& DancingPlutonium::AbstractBaseProjectile::GetSprite()
 	return sprite;
 }
 
-sf::FloatRect DancingPlutonium::AbstractBaseProjectile::GetBounds() const
-{
-	return sprite.getGlobalBounds();
-}
-
 sf::Vector2f DancingPlutonium::AbstractBaseProjectile::GetPosition() const
 {
 	return position;

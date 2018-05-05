@@ -30,5 +30,8 @@ namespace DancingPlutonium
 		virtual void Draw(sf::RenderTarget& _rt) override;
 
 #pragma endregion
+
+		// Inherited via AbstractBaseProjectile
+		virtual std::vector<sf::FloatRect> GetBounds() override;
 	};
 }

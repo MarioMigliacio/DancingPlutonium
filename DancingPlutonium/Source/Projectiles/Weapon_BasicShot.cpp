@@ -26,3 +26,12 @@ void DancingPlutonium::Weapon_BasicShot::Draw(sf::RenderTarget& _rt)
 	_rt.draw(sprite);
 }
 
+std::vector<sf::FloatRect> DancingPlutonium::Weapon_BasicShot::GetBounds()
+{
+	auto basicBounds = sprite.getGlobalBounds();
+	std::vector<sf::FloatRect> retVal = std::vector<sf::FloatRect>();
+	retVal.push_back(basicBounds);
+
+	return retVal;
+}
+

@@ -25,6 +25,7 @@ namespace DancingPlutonium
 
 		#pragma region Public Methods
 
+		sf::FloatRect GetRect() const;
 		/* Returns the amount lives remaining for this PlutoniumShip object */
 		int LivesRemaining() const;
 		/* Returns the score the player has amassed for this PlutoniumShip object */

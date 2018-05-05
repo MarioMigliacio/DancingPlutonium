@@ -1,4 +1,5 @@
 #include "PlutoniumShip.h"
+#include <iostream>
 
 sf::Uint32 DancingPlutonium::PlutoniumShip::m_movement = Movement::s_noMovement;
 
@@ -20,6 +21,11 @@ DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
 DancingPlutonium::PlutoniumShip::~PlutoniumShip()
 {
 	delete weapon;
+}
+
+sf::FloatRect DancingPlutonium::PlutoniumShip::GetRect() const
+{
+	return sprite.getGlobalBounds();
 }
 
 int DancingPlutonium::PlutoniumShip::LivesRemaining() const
@@ -210,6 +216,10 @@ void DancingPlutonium::PlutoniumShip::ShootBullet(const float _dt)
 	if (weapon->AddMunition(sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f), _dt))
 	{
 		accumulator = 0.0f;
+		//std::cout << " Torpedo Fired! " << std::endl;
+		//std::cout << " we are at POS: (" << position.x << ", " << position.y << ")" << std::endl;
+		//std::cout << " our rect bounds are at (L: " << sprite.getGlobalBounds().left << ", T: " << sprite.getGlobalBounds().top <<
+		//	", W: " << sprite.getGlobalBounds().width << ", H: " << sprite.getGlobalBounds().height << std::endl;
 	}
 }
 
