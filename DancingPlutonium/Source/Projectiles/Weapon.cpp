@@ -327,7 +327,8 @@ void DancingPlutonium::Weapon::CleanAmmunition(sf::RenderTarget& _rt)
 {
 	if (ammunition.size() > 0)
 	{
-		for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
+		// backwards iterators for vectors more efficient
+		for (int i = static_cast<int>(ammunition.size() - 1); i >= 0; i--)
 		{
 			if (ammunition[i]->GetActiveState(_rt) == false)
 			{

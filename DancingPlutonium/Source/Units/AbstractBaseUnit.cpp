@@ -25,18 +25,21 @@ float DancingPlutonium::AbstractBaseUnit::GetSpeed() const
 	return speed;
 }
 
-bool DancingPlutonium::AbstractBaseUnit::GetActiveState(const sf::RenderTarget& _rt) const
+bool DancingPlutonium::AbstractBaseUnit::GetActiveState(const sf::RenderTarget& _rt)
 {
 	auto rect = sprite.getGlobalBounds();
 	sf::FloatRect holdUp = sf::FloatRect(0.0f, 0.0f, static_cast<float>(_rt.getSize().x), static_cast<float>(_rt.getSize().y));
-	bool check = false;
 
 	if (holdUp.intersects(rect))
 	{
-		check = true;
+		isActive = true;
+	}
+	else
+	{
+		isActive = false;
 	}
 
-	return check;
+	return isActive;
 }
 
 DancingPlutonium::Weapon* DancingPlutonium::AbstractBaseUnit::GetWeaponEquipped() const

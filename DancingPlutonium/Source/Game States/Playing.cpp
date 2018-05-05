@@ -15,14 +15,15 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 
 	// Set the State:
 	m_state = PlayState::s_playing;
-	BasicShip m_ship(_window);
+	BasicShip* m_ship;
+	m_ship = new BasicShip(_window);
 	PlutoniumShip* me;
 	me = new PlutoniumShip(_window);
 
 	std::vector<AbstractBaseUnit*> enemyShips;
 	std::vector<AbstractBaseProjectile*> alladembulletsMmHmm;
 	std::vector<AbstractBaseProjectile*> allademeEnemybulletsMmHmm;
-	enemyShips.push_back(&m_ship);
+	enemyShips.push_back(m_ship);
 
 
 	// Scale screens with different computer screen resolutions: (the standard resolution in place is 720p: 1280wide x 720high, 60 fps)
@@ -41,7 +42,6 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 	sf::Clock clock;
 	sf::Time dt;
 
-	// Perform the Main Menu screen display!
 	while (m_state == PlayState::s_playing)
 	{
 		sf::Event event;
@@ -55,7 +55,10 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{	
-				enemyShips[0]->SpawnRandomly(_window);
+				auto tempShip = new BasicShip(_window);
+				tempShip->SpawnRandomly(_window);
+				enemyShips.push_back(tempShip);
+				//enemyShips[0]->SpawnRandomly(_window);
 			}
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LControl ||
 				event.key.code == sf::Keyboard::RControl))
@@ -72,8 +75,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 				me->GetWeaponEquipped()->UpgradeWeaponVelocityRate();
 			}
 		}
-
-		// Movement check outside of the event loop polls game at any time anyway, screw events - they weren't working smoothly anyway
+		
 		bool isPlayerMoving = InputManager::IsMoving();
 		me->SetMovingState(isPlayerMoving);
 		
@@ -95,24 +97,36 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		me->Draw(_window);
 
 		
-
+		// EXPERIMENT REGION BE WARNED
+		//
+		//
 		// this would be a simple check for Unit to Unit collision.
 		if (enemyShips.size() > 0)
 		{
 			sf::FloatRect npcRect = sf::FloatRect();
 
-			for (int i = 0; i < static_cast<int>(enemyShips.size()); i++)
+			// backwards iterator for vectors are more efficient, because the elements after the removed item are always shifted left and re-evaluate capacity.
+			for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
 			{
-				enemyShips[i]->Update(dt.asSeconds(), _window);
-				enemyShips[i]->Draw(_window);
-				npcRect = enemyShips[i]->GetBounds();
-
-				auto temp = me->GetRect();
-
-				if (temp.intersects(npcRect))
+				if (enemyShips[i]->GetActiveState(_window))
 				{
-					// this is where you would trade damages, render objects innert for a time period. etc.
-					std::cout << " You have crashed into an enemy ship! " << std::endl;
+					enemyShips[i]->Update(dt.asSeconds(), _window);
+					enemyShips[i]->Draw(_window);
+					npcRect = enemyShips[i]->GetBounds();
+
+					auto temp = me->GetRect();
+
+					if (temp.intersects(npcRect))
+					{
+						// this is where you would trade damages, render objects innert for a time period. etc.
+						std::cout << " You have crashed into an enemy ship! " << std::endl;
+					}
+				}
+				else
+				{
+					std::cout << " ship " << i << " has been destroyed" << std::endl;
+					delete enemyShips[i];
+					enemyShips.erase(enemyShips.begin() + i);
 				}
 			}
 		}
@@ -133,9 +147,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 						std::cout << " Projectile HOT at (L: " << playerBullet[k].left << ", T: " << playerBullet[k].top <<
 							", W: " << playerBullet[k].width << ", H: " << playerBullet[k].height << std::endl;
 					}
-				}
-				
-				
+				}				
 			}
 		}
 

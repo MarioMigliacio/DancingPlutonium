@@ -49,7 +49,7 @@ namespace DancingPlutonium
 		/* Returns the speed of this unit */
 		virtual float GetSpeed() const;
 		/* Returns true if this unit is active, false otherwise */
-		virtual bool GetActiveState(const sf::RenderTarget& _rt) const;
+		virtual bool GetActiveState(const sf::RenderTarget& _rt);
 		/* Allows access to this PlutoniumShip objects weapon pointer */
 		virtual Weapon* GetWeaponEquipped() const;
 		/* Returns the sprite of this unit */
