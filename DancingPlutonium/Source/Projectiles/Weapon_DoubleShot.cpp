@@ -55,3 +55,18 @@ std::vector<sf::FloatRect> DancingPlutonium::Weapon_DoubleShot::GetBounds()
 
 	return retVal;
 }
+
+bool DancingPlutonium::Weapon_DoubleShot::GetActiveState(const sf::RenderTarget& _rt)
+{
+	if ((leftProjectile->GetPosition().y < 0 || leftProjectile->GetPosition().x < 0 ||
+		leftProjectile->GetPosition().y > _rt.getSize().y || leftProjectile->GetPosition().x > _rt.getSize().x) &&
+		(rightProjectile->GetPosition().y < 0 || rightProjectile->GetPosition().x < 0 ||
+			rightProjectile->GetPosition().y > _rt.getSize().y || rightProjectile->GetPosition().x > _rt.getSize().x))
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}

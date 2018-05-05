@@ -95,7 +95,6 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		_window.draw(bgSprite);
 		me->Update(dt.asSeconds(), _window);
 		me->Draw(_window);
-
 		
 		// EXPERIMENT REGION BE WARNED
 		//
@@ -151,27 +150,48 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			}
 		}
 
-		/*if (enemyShips.size() > 0)
-		{
-			sf::FloatRect npcRect = sf::FloatRect();
-			sf::FloatRect playerBullet = sf::FloatRect();
+		//if (enemyShips.size() > 0)
+		//{
+		//	sf::FloatRect npcRect = sf::FloatRect();
+		//	std::vector<sf::FloatRect> playerBullet = std::vector<sf::FloatRect>();
+		//	std::vector<sf::FloatRect> enemyBullet = std::vector<sf::FloatRect>();
+		//	
+		//	// performance analysis: n = number of enemy ships active. m = number of player projectiles. p = number of bullets managed by a single projectile*
 
-			for (int i = 0; i < static_cast<int>(enemyShips.size()); i++)
-			{
-				if (alladembulletsMmHmm.size() > 0)
-				{
-					for (int j = 0; j < static_cast<int>(alladembulletsMmHmm.size()); j++)
-					{
-						playerBullet = alladembulletsMmHmm[j]->GetBounds();
+		//	for (int i = 0; i < static_cast<int>(enemyShips.size()); i++)
+		//	{
+		//		// players bullets first
+		//		if (alladembulletsMmHmm.size() > 0)
+		//		{
+		//			for (int j = 0; j < static_cast<int>(alladembulletsMmHmm.size()); j++)
+		//			{
+		//				playerBullet = alladembulletsMmHmm[j]->GetBounds();
+		//				
+		//				if (playerBullet.size() > 0)
+		//				{
+		//					for (int k = 0; k < static_cast<int>(playerBullet.size()); k++)
+		//					{
+		//						if (npcRect.intersects(playerBullet[k]))
+		//						{
+		//							std::cout << " You have SHOT an enemy ship! " << std::endl;
+		//						}
+		//					}
+		//				}
+		//			}
+		//		}
 
-						if (npcRect.intersects(playerBullet))
-						{
-							std::cout << " You have SHOT an enemy ship! " << std::endl;
-						}
-					}
-				}
-			}
-		}*/
+		//		if (enemyShips.size() > 0)
+		//		{
+		//			for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
+		//			{
+		//				if (enemyShips[i]->GetActiveState(_window))
+		//				{
+		//					allademeEnemybulletsMmHmm = enemyShips[i]->GetWeaponEquipped()->GetAmmunitionContainer();
+		//				}
+		//			}
+		//		}
+		//	}
+		//}
 
 		_window.display();
 	}

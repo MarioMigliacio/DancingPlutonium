@@ -42,5 +42,8 @@ namespace DancingPlutonium
 
 		// Inherited via AbstractBaseProjectile
 		virtual std::vector<sf::FloatRect> GetBounds() override;
+
+		// Inherited via AbstractBaseProjectile
+		virtual bool GetActiveState(const sf::RenderTarget & _rt) override;
 	};
 }

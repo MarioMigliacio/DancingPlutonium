@@ -35,19 +35,6 @@ void DancingPlutonium::AbstractBaseProjectile::SetDamage(const float _damage)
 	damage = _damage;
 }
 
-bool DancingPlutonium::AbstractBaseProjectile::GetActiveState(const sf::RenderTarget& _rt) const
-{
-	if (sprite.getPosition().y < 0 || sprite.getPosition().x < 0 ||
-		sprite.getPosition().y > _rt.getSize().y || sprite.getPosition().x > _rt.getSize().x)
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
-}
-
 sf::Sprite& DancingPlutonium::AbstractBaseProjectile::GetSprite()
 {
 	return sprite;

@@ -68,14 +68,14 @@ namespace DancingPlutonium
 		float GetDamage() const;
 		/* Sets the damage for this projectile */
 		void SetDamage(const float _damage);
-		/* Returns true if this projectile is active, false otherwise */
-		bool GetActiveState(const sf::RenderTarget& _rt) const;
 		/* Returns a reference to this projectiles sprite */
 		virtual sf::Sprite& GetSprite();
 		/* Returns the position for this projectile */
 		virtual sf::Vector2f GetPosition() const;
 		/* Sets the position and sprite of this projectile to the value of _pos */
 		virtual void SetPosition(const sf::Vector2f& _pos);
+		/* Returns true if this projectile is active, false otherwise */
+		virtual bool GetActiveState(const sf::RenderTarget& _rt) = 0;
 		/* Returns the rectangle representing the bounds of this projectile */
 		virtual std::vector<sf::FloatRect> GetBounds() = 0;
 		/* Draw this projectiles sprite onto the render window _rt */

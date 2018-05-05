@@ -36,3 +36,16 @@ std::vector<sf::FloatRect> DancingPlutonium::Weapon_GrowingShot::GetBounds()
 	return retVal;
 }
 
+bool DancingPlutonium::Weapon_GrowingShot::GetActiveState(const sf::RenderTarget& _rt)
+{
+	if (sprite.getPosition().y < 0 || sprite.getPosition().x < 0 ||
+		sprite.getPosition().y > _rt.getSize().y || sprite.getPosition().x > _rt.getSize().x)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+

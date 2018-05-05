@@ -321,8 +321,6 @@ void DancingPlutonium::Weapon::UpgradeWeaponDamage()
 	}
 }
 
-
-
 void DancingPlutonium::Weapon::CleanAmmunition(sf::RenderTarget& _rt)
 {
 	if (ammunition.size() > 0)
