@@ -133,6 +133,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		alladembulletsMmHmm = me->GetWeaponEquipped()->GetAmmunitionContainer();
 		std::vector<sf::FloatRect> playerBullet = std::vector<sf::FloatRect>();
 
+		// Testing for tracking bullets positions. Not needed after collisions work.
 		if (alladembulletsMmHmm.size() > 0)
 		{
 			for (int j = 0; j < static_cast<int>(alladembulletsMmHmm.size()); j++)
@@ -150,48 +151,78 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			}
 		}
 
-		//if (enemyShips.size() > 0)
-		//{
-		//	sf::FloatRect npcRect = sf::FloatRect();
-		//	std::vector<sf::FloatRect> playerBullet = std::vector<sf::FloatRect>();
-		//	std::vector<sf::FloatRect> enemyBullet = std::vector<sf::FloatRect>();
-		//	
-		//	// performance analysis: n = number of enemy ships active. m = number of player projectiles. p = number of bullets managed by a single projectile*
+		if (enemyShips.size() > 0)
+		{
+			sf::FloatRect npcRect = sf::FloatRect();
+			std::vector<sf::FloatRect> playerBullet = std::vector<sf::FloatRect>();
+			std::vector<sf::FloatRect> enemyBullet = std::vector<sf::FloatRect>();
+			
 
-		//	for (int i = 0; i < static_cast<int>(enemyShips.size()); i++)
-		//	{
-		//		// players bullets first
-		//		if (alladembulletsMmHmm.size() > 0)
-		//		{
-		//			for (int j = 0; j < static_cast<int>(alladembulletsMmHmm.size()); j++)
-		//			{
-		//				playerBullet = alladembulletsMmHmm[j]->GetBounds();
-		//				
-		//				if (playerBullet.size() > 0)
-		//				{
-		//					for (int k = 0; k < static_cast<int>(playerBullet.size()); k++)
-		//					{
-		//						if (npcRect.intersects(playerBullet[k]))
-		//						{
-		//							std::cout << " You have SHOT an enemy ship! " << std::endl;
-		//						}
-		//					}
-		//				}
-		//			}
-		//		}
+			// This is a rudimentary check for our projectiles hitting enemies.
+			// performance analysis: n = number of enemy ships active. m = number of player projectiles. p = number of bullets managed by a single projectile*
+			// = N ^ (M * P). where N will almost always be < 1-100 ships max. M can be capped based on fire rate, P capped at projectile pattern type. 
+			// even though it looks N^2, it would perform within particular boundaries. so N, or O(C). 
+			for (int i = 0; i < static_cast<int>(enemyShips.size()); i++)
+			{
+				npcRect = enemyShips[i]->GetBounds();
 
-		//		if (enemyShips.size() > 0)
-		//		{
-		//			for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
-		//			{
-		//				if (enemyShips[i]->GetActiveState(_window))
-		//				{
-		//					allademeEnemybulletsMmHmm = enemyShips[i]->GetWeaponEquipped()->GetAmmunitionContainer();
-		//				}
-		//			}
-		//		}
-		//	}
-		//}
+				// players bullets first
+				if (alladembulletsMmHmm.size() > 0)
+				{
+					for (int j = 0; j < static_cast<int>(alladembulletsMmHmm.size()); j++)
+					{
+						playerBullet = alladembulletsMmHmm[j]->GetBounds();
+						
+						if (playerBullet.size() > 0)
+						{
+							for (int k = 0; k < static_cast<int>(playerBullet.size()); k++)
+							{
+								if (npcRect.intersects(playerBullet[k]))
+								{
+									std::cout << " You have SHOT an enemy ship! " << std::endl;
+								}
+							}
+						}
+					}
+				}
+
+				// this would be a primitive enemy projectile colliding with player check function.
+				// get an enemy ship from the container
+				if (enemyShips.size() > 0)
+				{
+					for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
+					{
+						if (enemyShips[i]->GetActiveState(_window))
+						{
+							// get that ships weapon container
+							allademeEnemybulletsMmHmm = enemyShips[i]->GetWeaponEquipped()->GetAmmunitionContainer();
+
+							if (allademeEnemybulletsMmHmm.size() > 0)
+							{
+								// for every projectile in the enemy container.. 
+								for (int j = static_cast<int>(allademeEnemybulletsMmHmm.size()) - 1; j >= 0; j--)
+								{
+									// get its component projectiles
+									enemyBullet = allademeEnemybulletsMmHmm[j]->GetBounds();
+
+									if (enemyBullet.size() > 0)
+									{
+										// for every component projectile, check if it intersects with US!
+										for (int k = static_cast<int>(enemyBullet.size()) - 1; k >= 0; k--)
+										{
+											if (enemyBullet[k].intersects(me->GetRect()))
+											{
+												std::cout << " You have been fired upon! " << std::endl;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 
 		_window.display();
 	}
