@@ -92,6 +92,9 @@
     <ClCompile Include="Source\Projectiles\AbstractBaseProjectile.cpp">
       <Filter>Source Files\Weaponry Cpp Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Utility\Collision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\Game States\Game.h">
@@ -144,6 +147,7 @@
     <ClInclude Include="Header\Projectiles\AbstractBaseProjectile.h">
       <Filter>Header\Weaponry Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Header\Utility\Collision.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

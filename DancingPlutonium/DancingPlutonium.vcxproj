@@ -136,6 +136,7 @@
     <ClCompile Include="Source\Game States\Game.cpp" />
     <ClCompile Include="Source\Game States\Intro.cpp" />
     <ClCompile Include="Source\Game States\TitleMenu.cpp" />
+    <ClCompile Include="Source\Utility\Collision.cpp" />
     <ClCompile Include="Source\Utility\IRng.cpp" />
     <ClCompile Include="Source\Utility\Button.cpp" />
     <ClCompile Include="Source\Utility\InputManager.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Header\Game States\TitleMenu.h" />
     <ClInclude Include="Header\Game States\Game.h" />
     <ClInclude Include="Header\Game States\Intro.h" />
+    <ClInclude Include="Header\Utility\Collision.h" />
     <ClInclude Include="Header\Utility\IRng.h" />
     <ClInclude Include="Header\Utility\Enums.h" />
     <ClInclude Include="Header\Utility\Button.h" />
