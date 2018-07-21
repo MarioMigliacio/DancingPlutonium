@@ -252,3 +252,8 @@ void DancingPlutonium::PlutoniumShip::SetSprite(const sf::RenderTarget& _rt)
 	sprite.setPosition(origin);
 	position = origin;
 }
+
+sf::Sprite& DancingPlutonium::PlutoniumShip::GetSprite()
+{
+	return this->sprite;
+}

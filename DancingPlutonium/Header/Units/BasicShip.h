@@ -29,7 +29,9 @@ namespace DancingPlutonium
 		virtual void Update(float _dt, sf::RenderTarget& _rt) override;
 		/* Initialize the weaponry system for this unit */
 		virtual void InitializeWeaponry() override;
+		/* Gets the sprite for THIS object, not the base abstract unit. This was causing issues. */
+		virtual sf::Sprite& GetSprite() override;
 
-		#pragma endregion		
+		#pragma endregion
 	};
 }

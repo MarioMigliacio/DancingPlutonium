@@ -9,7 +9,7 @@
 namespace DancingPlutonium
 {
 	/* PlutoniumShip represents the player in this game */
-	class PlutoniumShip : AbstractBaseUnit
+	class PlutoniumShip : public AbstractBaseUnit
 	{
 	public:
 		#pragma region Ctor/Dtors
@@ -56,6 +56,8 @@ namespace DancingPlutonium
 		virtual void ShootBullet(const float _dt) override;
 		/* Free up lost bullets if they go out of bounds */
 		void CleanAmmunition(const sf::RenderTarget& _rt);
+		/* Gets the sprite object for THIS unit. There was an issue with the abstract base class owning this method. */
+		virtual sf::Sprite& GetSprite() override;
 
 		#pragma endregion
 	private:
@@ -87,5 +89,8 @@ namespace DancingPlutonium
 		static sf::Uint32 m_movement;						/* Static variable which maintains the state for this PlutoniumShips movement */
 
 		#pragma endregion
+
+															// Inherited via AbstractBaseUnit
+		
 	};
 }

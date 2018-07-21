@@ -59,3 +59,8 @@ void DancingPlutonium::BasicShip::InitializeWeaponry()
 	weapon = new Weapon(fireRate, allegiance);
 }
 
+sf::Sprite& DancingPlutonium::BasicShip::GetSprite()
+{
+	return this->sprite;
+}
+

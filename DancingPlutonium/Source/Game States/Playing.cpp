@@ -100,32 +100,54 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		//
 		//
 		// this would be a simple check for Unit to Unit collision.
+		//if (enemyShips.size() > 0)
+		//{
+		//	sf::FloatRect npcRect = sf::FloatRect();
+
+		//	// backwards iterator for vectors are more efficient, because the elements after the removed item are always shifted left and re-evaluate capacity.
+		//	for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
+		//	{
+		//		if (enemyShips[i]->GetActiveState())
+		//		{
+		//			enemyShips[i]->Update(dt.asSeconds(), _window);
+		//			enemyShips[i]->Draw(_window);
+		//			npcRect = enemyShips[i]->GetBounds();
+
+		//			sf::FloatRect temp = me->GetRect();
+
+		//			if (temp.intersects(npcRect))
+		//			{
+		//				// this is where you would trade damages, render objects innert for a time period. etc.
+		//				std::cout << " You have crashed into an enemy ship! " << std::endl;
+		//			}
+		//		}
+		//		else
+		//		{
+		//			std::cout << " ship " << i << " has been destroyed" << std::endl;
+		//			delete enemyShips[i];
+		//			enemyShips.erase(enemyShips.begin() + i);
+		//		}
+		//	}
+		//}
+
+		// This is how collision for unit - unit should be. Using the BoundingBoxTest() function.
 		if (enemyShips.size() > 0)
 		{
-			sf::FloatRect npcRect = sf::FloatRect();
+			sf::Sprite npcUnit = sf::Sprite();
+			sf::Sprite dp = sf::Sprite();
 
-			// backwards iterator for vectors are more efficient, because the elements after the removed item are always shifted left and re-evaluate capacity.
 			for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
 			{
-				if (enemyShips[i]->GetActiveState())
-				{
-					enemyShips[i]->Update(dt.asSeconds(), _window);
-					enemyShips[i]->Draw(_window);
-					npcRect = enemyShips[i]->GetBounds();
+				enemyShips[i]->Update(dt.asSeconds(), _window);
+				enemyShips[i]->Draw(_window);
+				npcUnit = enemyShips[i]->GetSprite();
 
-					auto temp = me->GetRect();
+				// FIXED! the abstract base unit's GetSprite() was not good enough! Had to have override capability to return the 'right' sprite object.
+				dp = me->GetSprite();
 
-					if (temp.intersects(npcRect))
-					{
-						// this is where you would trade damages, render objects innert for a time period. etc.
-						std::cout << " You have crashed into an enemy ship! " << std::endl;
-					}
-				}
-				else
+				if (Collision::BoundingBoxTest(dp, npcUnit))
 				{
-					std::cout << " ship " << i << " has been destroyed" << std::endl;
-					delete enemyShips[i];
-					enemyShips.erase(enemyShips.begin() + i);
+					std::cout << " You have crashed into an enemy ship! " << std::endl;
 				}
 			}
 		}
@@ -159,9 +181,6 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			
 
 			// This is a rudimentary check for our projectiles hitting enemies.
-			// performance analysis: n = number of enemy ships active. m = number of player projectiles. p = number of bullets managed by a single projectile*
-			// = N ^ (M * P). where N will almost always be < 1-100 ships max. M can be capped based on fire rate, P capped at projectile pattern type. 
-			// even though it looks N^2, it would perform within particular boundaries. so N, or O(C). 
 			for (int i = 0; i < static_cast<int>(enemyShips.size()); i++)
 			{
 				npcRect = enemyShips[i]->GetBounds();

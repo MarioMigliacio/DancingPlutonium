@@ -54,8 +54,6 @@ namespace DancingPlutonium
 		virtual Weapon* GetWeaponEquipped() const;
 		/* Returns the activeState of this unit */
 		virtual bool GetActiveState() const;
-		/* Returns the sprite of this unit */
-		virtual sf::Sprite& GetSprite();
 		/* Returns the texture of this unit */
 		virtual sf::Texture GetTexture() const;
 		/* Returns the position of this unit */
@@ -72,6 +70,8 @@ namespace DancingPlutonium
 		virtual void Draw(sf::RenderTarget& _rt);
 		/* Sets the Weaponry state for this unit to a safe default state */
 		virtual void InitializeWeaponry() = 0;
+		/* Returns the sprite of this unit */
+		virtual sf::Sprite& GetSprite() = 0;
 		/* Update this unit in the world based on the clock */
 		virtual void Update(float _dt, sf::RenderTarget& _rt) = 0;
 		/* Abstract method SetSprite must be implemented by inheriting children */

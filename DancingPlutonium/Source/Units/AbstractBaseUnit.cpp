@@ -51,10 +51,6 @@ bool DancingPlutonium::AbstractBaseUnit::GetActiveState() const
 	return isActive;
 }
 
-sf::Sprite& DancingPlutonium::AbstractBaseUnit::GetSprite()
-{
-	return sprite;
-}
 
 sf::Texture DancingPlutonium::AbstractBaseUnit::GetTexture() const
 {
