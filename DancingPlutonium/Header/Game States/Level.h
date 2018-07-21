@@ -7,6 +7,7 @@
 
 namespace DancingPlutonium
 {
+	/* The level object represents an observer that takes in units and players positions and projectiles and manages important game states. */
 	class Level
 	{
 	private:
