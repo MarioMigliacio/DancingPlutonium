@@ -28,12 +28,16 @@ namespace DancingPlutonium
 		sf::FloatRect GetRect() const;
 		/* Returns the amount lives remaining for this PlutoniumShip object */
 		int LivesRemaining() const;
+		/* Adds to the life count for this PlutoniumShip object */
+		void AddLife();
+		/* Minus one to the life count for this PlutoniumShip object */
+		void RemoveLife();
 		/* Returns the score the player has amassed for this PlutoniumShip object */
 		int GetScore() const;
 		/* Adds score to the this PlutoniumShip object based on the _value input parameter */
 		void AddScore(const int _value);
 		/* Returns true if this PlutoniumShip is within the bounds of the game window, false otherwise */
-		bool IsWithinBounds(const sf::RenderTarget& _rt);
+		bool IsWithinBounds(const sf::RenderTarget& _rt) override;
 		/* Modifies this PlutoniumShip object's movement state based on _state input parameter*/
 		void SetMovingState(bool _state);
 		/* Returns the current weaponry state for this PlutoniumShip object */

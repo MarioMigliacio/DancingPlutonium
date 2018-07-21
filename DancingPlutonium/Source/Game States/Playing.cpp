@@ -107,7 +107,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			// backwards iterator for vectors are more efficient, because the elements after the removed item are always shifted left and re-evaluate capacity.
 			for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
 			{
-				if (enemyShips[i]->GetActiveState(_window))
+				if (enemyShips[i]->GetActiveState())
 				{
 					enemyShips[i]->Update(dt.asSeconds(), _window);
 					enemyShips[i]->Draw(_window);
@@ -134,22 +134,22 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		std::vector<sf::FloatRect> playerBullet = std::vector<sf::FloatRect>();
 
 		// Testing for tracking bullets positions. Not needed after collisions work.
-		if (alladembulletsMmHmm.size() > 0)
-		{
-			for (int j = 0; j < static_cast<int>(alladembulletsMmHmm.size()); j++)
-			{
-				playerBullet = alladembulletsMmHmm[j]->GetBounds();
+		///*if (alladembulletsMmHmm.size() > 0)
+		//{
+		//	for (int j = 0; j < static_cast<int>(alladembulletsMmHmm.size()); j++)
+		//	{
+		//		playerBullet = alladembulletsMmHmm[j]->GetBounds();
 
-				if (playerBullet.size() > 0)
-				{
-					for (int k = 0; k < static_cast<int>(playerBullet.size()); k++)
-					{
-						std::cout << " Projectile HOT at (L: " << playerBullet[k].left << ", T: " << playerBullet[k].top <<
-							", W: " << playerBullet[k].width << ", H: " << playerBullet[k].height << std::endl;
-					}
-				}				
-			}
-		}
+		//		if (playerBullet.size() > 0)
+		//		{
+		//			for (int k = 0; k < static_cast<int>(playerBullet.size()); k++)
+		//			{
+		//				std::cout << " Projectile HOT at (L: " << playerBullet[k].left << ", T: " << playerBullet[k].top <<
+		//					", W: " << playerBullet[k].width << ", H: " << playerBullet[k].height << std::endl;
+		//			}
+		//		}				
+		//	}
+		//}*/
 
 		if (enemyShips.size() > 0)
 		{
@@ -188,39 +188,39 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 
 				// this would be a primitive enemy projectile colliding with player check function.
 				// get an enemy ship from the container
-				if (enemyShips.size() > 0)
-				{
-					for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
-					{
-						if (enemyShips[i]->GetActiveState(_window))
-						{
-							// get that ships weapon container
-							allademeEnemybulletsMmHmm = enemyShips[i]->GetWeaponEquipped()->GetAmmunitionContainer();
+				//if (enemyShips.size() > 0)
+				//{
+				//	for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
+				//	{
+				//		if (enemyShips[i]->GetActiveState())
+				//		{
+				//			// get that ships weapon container
+				//			allademeEnemybulletsMmHmm = enemyShips[i]->GetWeaponEquipped()->GetAmmunitionContainer();
 
-							if (allademeEnemybulletsMmHmm.size() > 0)
-							{
-								// for every projectile in the enemy container.. 
-								for (int j = static_cast<int>(allademeEnemybulletsMmHmm.size()) - 1; j >= 0; j--)
-								{
-									// get its component projectiles
-									enemyBullet = allademeEnemybulletsMmHmm[j]->GetBounds();
+				//			if (allademeEnemybulletsMmHmm.size() > 0)
+				//			{
+				//				// for every projectile in the enemy container.. 
+				//				for (int j = static_cast<int>(allademeEnemybulletsMmHmm.size()) - 1; j >= 0; j--)
+				//				{
+				//					// get its component projectiles
+				//					enemyBullet = allademeEnemybulletsMmHmm[j]->GetBounds();
 
-									if (enemyBullet.size() > 0)
-									{
-										// for every component projectile, check if it intersects with US!
-										for (int k = static_cast<int>(enemyBullet.size()) - 1; k >= 0; k--)
-										{
-											if (enemyBullet[k].intersects(me->GetRect()))
-											{
-												std::cout << " You have been fired upon! " << std::endl;
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
+				//					if (enemyBullet.size() > 0)
+				//					{
+				//						// for every component projectile, check if it intersects with US!
+				//						for (int k = static_cast<int>(enemyBullet.size()) - 1; k >= 0; k--)
+				//						{
+				//							if (enemyBullet[k].intersects(me->GetRect()))
+				//							{
+				//								std::cout << " You have been fired upon! " << std::endl;
+				//							}
+				//						}
+				//					}
+				//				}
+				//			}
+				//		}
+				//	}
+				//}
 			}
 		}
 

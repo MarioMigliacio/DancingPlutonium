@@ -25,26 +25,30 @@ float DancingPlutonium::AbstractBaseUnit::GetSpeed() const
 	return speed;
 }
 
-bool DancingPlutonium::AbstractBaseUnit::GetActiveState(const sf::RenderTarget& _rt)
+bool DancingPlutonium::AbstractBaseUnit::IsWithinBounds(const sf::RenderTarget& _rt)
 {
 	auto rect = sprite.getGlobalBounds();
-	sf::FloatRect holdUp = sf::FloatRect(0.0f, 0.0f, static_cast<float>(_rt.getSize().x), static_cast<float>(_rt.getSize().y));
+	sf::FloatRect gameBounds = sf::FloatRect(0.0f, 0.0f, static_cast<float>(_rt.getSize().x), static_cast<float>(_rt.getSize().y));
 
-	if (holdUp.intersects(rect))
+	if (gameBounds.intersects(rect))
 	{
-		isActive = true;
+		return true;
 	}
 	else
 	{
 		isActive = false;
+		return false;
 	}
-
-	return isActive;
 }
 
 DancingPlutonium::Weapon* DancingPlutonium::AbstractBaseUnit::GetWeaponEquipped() const
 {
 	return weapon;
+}
+
+bool DancingPlutonium::AbstractBaseUnit::GetActiveState() const
+{
+	return isActive;
 }
 
 sf::Sprite& DancingPlutonium::AbstractBaseUnit::GetSprite()
@@ -73,7 +77,7 @@ void DancingPlutonium::AbstractBaseUnit::SetPosition(const sf::Vector2f& _pos)
 	sprite.setPosition(_pos);
 }
 
-void DancingPlutonium::AbstractBaseUnit::SetHealth(const int _val)
+void DancingPlutonium::AbstractBaseUnit::SetHealth(const float _val)
 {
 	health -= _val;
 

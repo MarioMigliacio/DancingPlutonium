@@ -46,7 +46,7 @@ void DancingPlutonium::BasicShip::Update(float _dt, sf::RenderTarget& _rt)
 {
 	accumulator += _dt;
 
-	if (GetActiveState(_rt))
+	if (IsWithinBounds(_rt))
 	{
 		SetPosition(sf::Vector2f(position.x, position.y + speed * _dt));
 		ShootBullet(accumulator);

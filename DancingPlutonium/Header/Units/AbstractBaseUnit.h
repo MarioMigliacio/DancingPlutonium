@@ -48,10 +48,12 @@ namespace DancingPlutonium
 		virtual float GetFireRate() const;
 		/* Returns the speed of this unit */
 		virtual float GetSpeed() const;
-		/* Returns true if this unit is active, false otherwise */
-		virtual bool GetActiveState(const sf::RenderTarget& _rt);
+		/* Returns true if this unit is within the bounds of screen, false otherwise */
+		virtual bool IsWithinBounds(const sf::RenderTarget& _rt);
 		/* Allows access to this PlutoniumShip objects weapon pointer */
 		virtual Weapon* GetWeaponEquipped() const;
+		/* Returns the activeState of this unit */
+		virtual bool GetActiveState() const;
 		/* Returns the sprite of this unit */
 		virtual sf::Sprite& GetSprite();
 		/* Returns the texture of this unit */
@@ -62,8 +64,8 @@ namespace DancingPlutonium
 		virtual sf::FloatRect GetBounds() const;
 		/* Sets the position and sprite of this projectile to the value of _pos */
 		virtual void SetPosition(const sf::Vector2f& _pos);
-		/* Sets the health of this unit to the value of _val */
-		virtual void SetHealth(const int _val);
+		/* Sets the health of this unit by subtracting the value of _val */
+		virtual void SetHealth(const float _val);
 		/* Sets the position of this unit to random area */
 		virtual void SpawnRandomly(const sf::RenderTarget& _rt);
 		/* Draw this unit onto the world */

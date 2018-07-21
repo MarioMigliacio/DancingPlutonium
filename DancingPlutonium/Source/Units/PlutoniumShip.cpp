@@ -33,6 +33,16 @@ int DancingPlutonium::PlutoniumShip::LivesRemaining() const
 	return lives;
 }
 
+void DancingPlutonium::PlutoniumShip::AddLife()
+{
+	lives++;
+}
+
+void DancingPlutonium::PlutoniumShip::RemoveLife()
+{
+	lives--;
+}
+
 int DancingPlutonium::PlutoniumShip::GetScore() const
 {
 	return score;

@@ -95,6 +95,9 @@
     <ClCompile Include="Source\Utility\Collision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game States\Level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\Game States\Game.h">
@@ -148,6 +151,7 @@
       <Filter>Header\Weaponry Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Header\Utility\Collision.h" />
+    <ClInclude Include="Header\Game States\Level.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

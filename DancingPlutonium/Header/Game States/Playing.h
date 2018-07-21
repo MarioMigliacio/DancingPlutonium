@@ -20,6 +20,7 @@ namespace DancingPlutonium
 		{
 			s_uninitialized,
 			s_playing,
+			s_stage1,
 			s_quit
 		};
 
