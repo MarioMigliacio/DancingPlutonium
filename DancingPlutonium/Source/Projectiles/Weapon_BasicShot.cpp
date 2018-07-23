@@ -48,3 +48,11 @@ bool DancingPlutonium::Weapon_BasicShot::GetActiveState(const sf::RenderTarget& 
 	}
 }
 
+std::vector<sf::Sprite> DancingPlutonium::Weapon_BasicShot::GetAllSprites()
+{
+	sf::Sprite thisguy = this->sprite;
+	std::vector<sf::Sprite> retVal = std::vector<sf::Sprite>();
+	retVal.push_back(thisguy);
+
+	return retVal;
+}

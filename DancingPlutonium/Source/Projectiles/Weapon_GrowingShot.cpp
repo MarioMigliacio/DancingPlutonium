@@ -49,3 +49,12 @@ bool DancingPlutonium::Weapon_GrowingShot::GetActiveState(const sf::RenderTarget
 	}
 }
 
+std::vector<sf::Sprite> DancingPlutonium::Weapon_GrowingShot::GetAllSprites()
+{
+	auto thisguy = this->sprite;
+	std::vector<sf::Sprite> retVal = std::vector<sf::Sprite>();
+	retVal.push_back(thisguy);
+
+	return retVal;
+}
+

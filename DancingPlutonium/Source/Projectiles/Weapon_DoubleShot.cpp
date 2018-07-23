@@ -70,3 +70,15 @@ bool DancingPlutonium::Weapon_DoubleShot::GetActiveState(const sf::RenderTarget&
 		return true;
 	}
 }
+
+std::vector<sf::Sprite> DancingPlutonium::Weapon_DoubleShot::GetAllSprites()
+{
+	auto leftSprite = leftProjectile->GetSprite();
+	auto rightSprite = rightProjectile->GetSprite();
+
+	std::vector<sf::Sprite> retVal = std::vector<sf::Sprite>();
+	retVal.push_back(leftSprite);
+	retVal.push_back(rightSprite);
+
+	return retVal;
+}

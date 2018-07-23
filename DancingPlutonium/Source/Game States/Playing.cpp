@@ -97,44 +97,14 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		me->Draw(_window);
 		
 		// EXPERIMENT REGION BE WARNED
-		//
-		//
-		// this would be a simple check for Unit to Unit collision.
-		//if (enemyShips.size() > 0)
-		//{
-		//	sf::FloatRect npcRect = sf::FloatRect();
 
-		//	// backwards iterator for vectors are more efficient, because the elements after the removed item are always shifted left and re-evaluate capacity.
-		//	for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
-		//	{
-		//		if (enemyShips[i]->GetActiveState())
-		//		{
-		//			enemyShips[i]->Update(dt.asSeconds(), _window);
-		//			enemyShips[i]->Draw(_window);
-		//			npcRect = enemyShips[i]->GetBounds();
-
-		//			sf::FloatRect temp = me->GetRect();
-
-		//			if (temp.intersects(npcRect))
-		//			{
-		//				// this is where you would trade damages, render objects innert for a time period. etc.
-		//				std::cout << " You have crashed into an enemy ship! " << std::endl;
-		//			}
-		//		}
-		//		else
-		//		{
-		//			std::cout << " ship " << i << " has been destroyed" << std::endl;
-		//			delete enemyShips[i];
-		//			enemyShips.erase(enemyShips.begin() + i);
-		//		}
-		//	}
-		//}
 
 		// This is how collision for unit - unit should be. Using the BoundingBoxTest() function.
+		// TODO write this into a function that the level class maintains.
 		if (enemyShips.size() > 0)
 		{
 			sf::Sprite npcUnit = sf::Sprite();
-			sf::Sprite dp = sf::Sprite();
+			sf::Sprite dp = me->GetSprite();
 
 			for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
 			{
@@ -143,8 +113,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 				npcUnit = enemyShips[i]->GetSprite();
 
 				// FIXED! the abstract base unit's GetSprite() was not good enough! Had to have override capability to return the 'right' sprite object.
-				dp = me->GetSprite();
-
+				
 				if (Collision::BoundingBoxTest(dp, npcUnit))
 				{
 					std::cout << " You have crashed into an enemy ship! " << std::endl;
@@ -152,51 +121,30 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			}
 		}
 
-		alladembulletsMmHmm = me->GetWeaponEquipped()->GetAmmunitionContainer();
-		std::vector<sf::FloatRect> playerBullet = std::vector<sf::FloatRect>();
-
-		// Testing for tracking bullets positions. Not needed after collisions work.
-		///*if (alladembulletsMmHmm.size() > 0)
-		//{
-		//	for (int j = 0; j < static_cast<int>(alladembulletsMmHmm.size()); j++)
-		//	{
-		//		playerBullet = alladembulletsMmHmm[j]->GetBounds();
-
-		//		if (playerBullet.size() > 0)
-		//		{
-		//			for (int k = 0; k < static_cast<int>(playerBullet.size()); k++)
-		//			{
-		//				std::cout << " Projectile HOT at (L: " << playerBullet[k].left << ", T: " << playerBullet[k].top <<
-		//					", W: " << playerBullet[k].width << ", H: " << playerBullet[k].height << std::endl;
-		//			}
-		//		}				
-		//	}
-		//}*/
-
+		// This is how collision for player bullets - enemy units should be. Using the BoundingBoxTest() function.
+		// TODO write this into a function that the level class maintains.
 		if (enemyShips.size() > 0)
 		{
-			sf::FloatRect npcRect = sf::FloatRect();
-			std::vector<sf::FloatRect> playerBullet = std::vector<sf::FloatRect>();
-			std::vector<sf::FloatRect> enemyBullet = std::vector<sf::FloatRect>();
-			
+			sf::Sprite npcUnit = sf::Sprite();
+			std::vector<sf::Sprite> playerBullets = std::vector<sf::Sprite>();
+			alladembulletsMmHmm = me->GetWeaponEquipped()->GetAmmunitionContainer();
 
-			// This is a rudimentary check for our projectiles hitting enemies.
 			for (int i = 0; i < static_cast<int>(enemyShips.size()); i++)
 			{
-				npcRect = enemyShips[i]->GetBounds();
+				npcUnit = enemyShips[i]->GetSprite();
 
 				// players bullets first
 				if (alladembulletsMmHmm.size() > 0)
 				{
 					for (int j = 0; j < static_cast<int>(alladembulletsMmHmm.size()); j++)
 					{
-						playerBullet = alladembulletsMmHmm[j]->GetBounds();
-						
-						if (playerBullet.size() > 0)
+						playerBullets = alladembulletsMmHmm[j]->GetAllSprites();
+
+						if (playerBullets.size() > 0)
 						{
-							for (int k = 0; k < static_cast<int>(playerBullet.size()); k++)
+							for (int k = 0; k < static_cast<int>(playerBullets.size()); k++)
 							{
-								if (npcRect.intersects(playerBullet[k]))
+								if (Collision::BoundingBoxTest(npcUnit, playerBullets[k]))
 								{
 									std::cout << " You have SHOT an enemy ship! " << std::endl;
 								}
@@ -204,42 +152,49 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 						}
 					}
 				}
+			}
+		}
 
-				// this would be a primitive enemy projectile colliding with player check function.
-				// get an enemy ship from the container
-				//if (enemyShips.size() > 0)
-				//{
-				//	for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
-				//	{
-				//		if (enemyShips[i]->GetActiveState())
-				//		{
-				//			// get that ships weapon container
-				//			allademeEnemybulletsMmHmm = enemyShips[i]->GetWeaponEquipped()->GetAmmunitionContainer();
+		// This is how collision for player - enemy bullets should be. Using the BoundingBoxTest() function.
+		// TODO write this into a function that the level class maintains.
+		if (enemyShips.size() > 0)
+		{
+			std::vector<sf::Sprite> enemyBullets = std::vector<sf::Sprite>();
+			sf::Sprite dp = me->GetSprite();
 
-				//			if (allademeEnemybulletsMmHmm.size() > 0)
-				//			{
-				//				// for every projectile in the enemy container.. 
-				//				for (int j = static_cast<int>(allademeEnemybulletsMmHmm.size()) - 1; j >= 0; j--)
-				//				{
-				//					// get its component projectiles
-				//					enemyBullet = allademeEnemybulletsMmHmm[j]->GetBounds();
+			for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
+			{
+				if (enemyShips[i]->GetActiveState())
+				{
+					// get that ships weapon container
+					allademeEnemybulletsMmHmm = enemyShips[i]->GetWeaponEquipped()->GetAmmunitionContainer();
 
-				//					if (enemyBullet.size() > 0)
-				//					{
-				//						// for every component projectile, check if it intersects with US!
-				//						for (int k = static_cast<int>(enemyBullet.size()) - 1; k >= 0; k--)
-				//						{
-				//							if (enemyBullet[k].intersects(me->GetRect()))
-				//							{
-				//								std::cout << " You have been fired upon! " << std::endl;
-				//							}
-				//						}
-				//					}
-				//				}
-				//			}
-				//		}
-				//	}
-				//}
+					if (allademeEnemybulletsMmHmm.size() > 0)
+					{
+						// for every projectile in the enemy container.. 
+						for (int j = static_cast<int>(allademeEnemybulletsMmHmm.size()) - 1; j >= 0; j--)
+						{
+							// get its component projectiles
+							enemyBullets = allademeEnemybulletsMmHmm[j]->GetAllSprites();
+
+							if (enemyBullets.size() > 0)
+							{
+								// for every component projectile, check if it intersects with US!
+								for (int k = static_cast<int>(enemyBullets.size()) - 1; k >= 0; k--)
+								{
+									if (Collision::BoundingBoxTest(enemyBullets[k], dp))
+									{
+										std::cout << " You have been fired upon! " << std::endl;
+									}
+									/*if (enemyBullet[k].intersects(me->GetRect()))
+									{
+										std::cout << " You have been fired upon! " << std::endl;
+									}*/
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 

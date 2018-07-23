@@ -83,3 +83,17 @@ bool DancingPlutonium::Weapon_TripleShot::GetActiveState(const sf::RenderTarget&
 		return true;
 	}
 }
+
+std::vector<sf::Sprite> DancingPlutonium::Weapon_TripleShot::GetAllSprites()
+{
+	auto leftSprite = leftProjectile->GetSprite();
+	auto midSprite = centerProjectile->GetSprite();
+	auto rightSprite = rightProjectile->GetSprite();
+
+	std::vector<sf::Sprite> retVal = std::vector<sf::Sprite>();
+	retVal.push_back(leftSprite);
+	retVal.push_back(midSprite);
+	retVal.push_back(rightSprite);
+
+	return retVal;
+}

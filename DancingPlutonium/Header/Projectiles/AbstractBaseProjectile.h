@@ -78,6 +78,8 @@ namespace DancingPlutonium
 		virtual bool GetActiveState(const sf::RenderTarget& _rt) = 0;
 		/* Returns the rectangle representing the bounds of this projectile */
 		virtual std::vector<sf::FloatRect> GetBounds() = 0;
+		/* Returns the sprites representing the shots for this projectile */
+		virtual std::vector<sf::Sprite> GetAllSprites() = 0;
 		/* Draw this projectiles sprite onto the render window _rt */
 		virtual void Draw(sf::RenderTarget& _rt) = 0;
 		/* Abstract method Update must be implemented by inheriting children */

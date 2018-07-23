@@ -9,7 +9,7 @@ namespace DancingPlutonium
 	class Weapon_GrowingShot : public AbstractBaseProjectile
 	{
 	public:
-#pragma region Ctor/Dtors
+		#pragma region Ctor/Dtors
 
 		/* Weapon_GrowingShot constructor accepting RenderTarget, and Position input parameters */
 		Weapon_GrowingShot(const sf::Vector2f& _pos);
@@ -18,9 +18,9 @@ namespace DancingPlutonium
 		/* Weapon_GrowingShot destructor */
 		~Weapon_GrowingShot() {}
 
-#pragma endregion
+		#pragma endregion
 
-#pragma region Methods
+		#pragma region Methods
 
 		/* Sets this projectiles sprite, texture and default position */
 		virtual void SetSprite(const sf::Vector2f & _origin) override;
@@ -29,12 +29,12 @@ namespace DancingPlutonium
 		// Draw this projectile in the world
 		virtual void Draw(sf::RenderTarget& _rt) override;
 
-#pragma endregion
-
+		#pragma endregion
 		// Inherited via AbstractBaseProjectile
 		virtual std::vector<sf::FloatRect> GetBounds() override;
-
 		// Inherited via AbstractBaseProjectile
 		virtual bool GetActiveState(const sf::RenderTarget & _rt) override;
+		// Inherited via AbstractBaseProjectile
+		virtual std::vector<sf::Sprite> GetAllSprites() override;
 	};
 }
