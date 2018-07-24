@@ -133,7 +133,6 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			{
 				npcUnit = enemyShips[i]->GetSprite();
 
-				// players bullets first
 				if (alladembulletsMmHmm.size() > 0)
 				{
 					for (int j = 0; j < static_cast<int>(alladembulletsMmHmm.size()); j++)
@@ -186,10 +185,6 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 									{
 										std::cout << " You have been fired upon! " << std::endl;
 									}
-									/*if (enemyBullet[k].intersects(me->GetRect()))
-									{
-										std::cout << " You have been fired upon! " << std::endl;
-									}*/
 								}
 							}
 						}

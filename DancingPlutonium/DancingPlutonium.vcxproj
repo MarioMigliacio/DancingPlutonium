@@ -122,7 +122,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Game States\Level.cpp" />
+    <ClCompile Include="Source\Game States\LevelObserver.cpp" />
     <ClCompile Include="Source\Projectiles\Weapon_DoubleShot.cpp" />
     <ClCompile Include="Source\Projectiles\Weapon_GrowingShot.cpp" />
     <ClCompile Include="Source\Projectiles\Weapon_BasicShot.cpp" />
@@ -144,7 +144,7 @@
     <ClCompile Include="Source\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header\Game States\Level.h" />
+    <ClInclude Include="Header\Game States\LevelObserver.h" />
     <ClInclude Include="Header\Projectiles\Weapon.h" />
     <ClInclude Include="Header\Projectiles\AbstractBaseProjectile.h" />
     <ClInclude Include="Header\Projectiles\Weapon_BasicShot.h" />

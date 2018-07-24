@@ -95,7 +95,7 @@
     <ClCompile Include="Source\Utility\Collision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game States\Level.cpp">
+    <ClCompile Include="Source\Game States\LevelObserver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -151,7 +151,7 @@
       <Filter>Header\Weaponry Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Header\Utility\Collision.h" />
-    <ClInclude Include="Header\Game States\Level.h" />
+    <ClInclude Include="Header\Game States\LevelObserver.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

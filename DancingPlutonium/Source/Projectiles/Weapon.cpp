@@ -11,10 +11,10 @@ DancingPlutonium::Weapon::Weapon(const float _fireRate, short _allegiance)
 
 DancingPlutonium::Weapon::~Weapon()
 {
-	for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
+	for (int i = static_cast<int>(ammunition.size() - 1); i >= 0; i--)
 	{
 		delete ammunition[i];
-		ammunition.erase(ammunition.begin() + i);		
+		ammunition.erase(ammunition.begin() + i);
 	}
 }
 
