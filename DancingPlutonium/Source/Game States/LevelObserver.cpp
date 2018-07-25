@@ -1,14 +1,4 @@
 #include "LevelObserver.h"
-#include <iostream>
-
-/* Static member variable for the observer to view enemy ship units */
-std::vector<DancingPlutonium::AbstractBaseUnit*> DancingPlutonium::LevelObserver::enemyShipContainer;
-
-/* Static member variable for the observer to view enemy ship projectiles */
-std::vector<DancingPlutonium::AbstractBaseProjectile*> DancingPlutonium::LevelObserver::enemyProjectileContainer;
-
-/* Static member variable for the observer to view player ship projectiles */
-std::vector<DancingPlutonium::AbstractBaseProjectile*> DancingPlutonium::LevelObserver::playerProjectileContainer;
 
 DancingPlutonium::LevelObserver::LevelObserver()
 {

@@ -14,6 +14,8 @@ namespace DancingPlutonium
 
 		/* The Weapon default constructor */
 		Weapon(const float _fireRate, short _allegiance);
+		/* The Weapon copy constructor */
+		Weapon(const Weapon& _ref) {}
 		/* The Weapon default destructor */
 		~Weapon();
 

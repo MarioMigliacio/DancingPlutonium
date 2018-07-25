@@ -7,6 +7,7 @@
 #include "InputManager.h"
 #include "Weapon.h"
 #include "Collision.h"
+#include "Level1.h"
 
 namespace DancingPlutonium
 {
@@ -20,8 +21,8 @@ namespace DancingPlutonium
 		enum PlayState
 		{
 			s_uninitialized,
-			s_playing,
-			s_stage1,
+			s_sandbox,
+			s_level1,
 			s_quit
 		};
 

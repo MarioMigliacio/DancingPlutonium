@@ -1,26 +1,25 @@
-#include "Playing.h"
+#include "Level1.h"
 #include <iostream>
 
 // Static variable declarations:
-sf::Uint32 DancingPlutonium::Playing::m_state = s_uninitialized;
+sf::Uint32 DancingPlutonium::Level1::m_state = s_uninitialized;
 
-//Playgrounds for testing
-void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
+void DancingPlutonium::Level1::Show(sf::RenderWindow& _window)
 {
 	// Ensure that the initialization takes place correctly here and for the first time.
-	if (m_state != PlayState::s_uninitialized)
+	if (m_state != Level1::s_uninitialized)
 	{
 		return;
 	}
 
+	std::cout << "YOU ARE PLAYING IN THE REAL WORLD NOW!" << std::endl;
+
 	// Set the State:
-	m_state = PlayState::s_sandbox;
+	m_state = Level1::s_intro;
 	BasicShip* m_ship;
 	m_ship = new BasicShip(_window);
 	PlutoniumShip* me;
 	me = new PlutoniumShip(_window);
-
-	Level1 l1 = Level1();
 
 	std::vector<AbstractBaseUnit*> enemyShips;
 	std::vector<AbstractBaseProjectile*> alladembulletsMmHmm;
@@ -44,7 +43,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 	sf::Clock clock;
 	sf::Time dt;
 
-	while (m_state == PlayState::s_sandbox)
+	while (m_state == Level1::s_intro)
 	{
 		sf::Event event;
 
@@ -52,11 +51,11 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		{
 			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
-				m_state = PlayState::s_quit;
+				m_state = Level1::s_quit;
 				return;
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
-			{	
+			{
 				auto tempShip = new BasicShip(_window);
 				tempShip->SpawnRandomly(_window);
 				enemyShips.push_back(tempShip);
@@ -76,17 +75,11 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			{
 				me->GetWeaponEquipped()->UpgradeWeaponVelocityRate();
 			}
-
-			// activate the level testing:
-			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::Num0))
-			{
-				m_state = PlayState::s_level1;
-			}
 		}
-		
+
 		bool isPlayerMoving = InputManager::IsMoving();
 		me->SetMovingState(isPlayerMoving);
-		
+
 		if (isPlayerMoving)
 		{
 			sf::Uint32 whichDirection = InputManager::GetDirection();
@@ -97,13 +90,13 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			//std::cout << " our rect bounds are at (L: " << playerRect.left << ", T: " << playerRect.top <<
 			//	", W: " << playerRect.width << ", H: " << playerRect.height << std::endl;
 		}
-		
+
 		dt = clock.restart();
 		_window.clear();
 		_window.draw(bgSprite);
 		me->Update(dt.asSeconds(), _window);
 		me->Draw(_window);
-		
+
 		// EXPERIMENT REGION BE WARNED
 
 
@@ -121,7 +114,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 				npcUnit = enemyShips[i]->GetSprite();
 
 				// FIXED! the abstract base unit's GetSprite() was not good enough! Had to have override capability to return the 'right' sprite object.
-				
+
 				if (Collision::BoundingBoxTest(dp, npcUnit))
 				{
 					std::cout << " You have crashed into an enemy ship! " << std::endl;
@@ -202,10 +195,5 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		}
 
 		_window.display();
-	}
-
-	if (m_state == PlayState::s_level1)
-	{
-		l1.Show(_window);
 	}
 }
