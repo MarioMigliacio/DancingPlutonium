@@ -81,13 +81,13 @@ bool DancingPlutonium::LevelObserver::CheckForEnemyShotHit(AbstractBaseUnit& _pl
 			{
 				auto allademeEnemybulletsMmHmm = EnemyShipContainer[i]->GetWeaponEquipped()->GetAmmunitionContainer();
 
-				if (EnemyProjectileContainer.size() > 0)
+				if (allademeEnemybulletsMmHmm.size() > 0)
 				{
 					// for every projectile in the enemy container.. 
-					for (int j = static_cast<int>(EnemyProjectileContainer.size()) - 1; j >= 0; j--)
+					for (int j = static_cast<int>(allademeEnemybulletsMmHmm.size()) - 1; j >= 0; j--)
 					{
 						// get its component projectiles
-						enemyBullets = EnemyProjectileContainer[j]->GetAllSprites();
+						enemyBullets = allademeEnemybulletsMmHmm[j]->GetAllSprites();
 
 						if (enemyBullets.size() > 0)
 						{
