@@ -31,9 +31,15 @@ namespace DancingPlutonium
 		void DoProjectileCollisionDamage(AbstractBaseUnit& _unit, AbstractBaseProjectile& _object2);
 		void EnemyUnitDeath(AbstractBaseUnit& _unit, PlutoniumShip& _player);
 		void UpgradeUnitWeaponry(AbstractBaseUnit& _unit);
-		void UpdateEnemyShipContainer(std::vector<AbstractBaseUnit*>& _from);
-		void UpdateEnemyProjectileContainer(std::vector<AbstractBaseProjectile*>& _from);
-		void UpdatePlayerProjectileContainer(std::vector<AbstractBaseProjectile*>& _from);
+		void UpdateEnemyShipContainer(float dt, sf::RenderTarget& _rt);
+
+		#pragma endregion
+
+	public:
+		#pragma region Container Member Variables
+
+		std::vector<AbstractBaseUnit*> EnemyShipContainer;
+		std::vector<AbstractBaseProjectile*> EnemyProjectileContainer;
 
 		#pragma endregion
 
@@ -42,16 +48,6 @@ namespace DancingPlutonium
 
 		void ClearEnemyShipContainer();
 		void ClearEnemyProjectileContainer();
-		void ClearPlayerProjectileContainer();
-
-		#pragma endregion
-
-	private:
-		#pragma region Private Container Member Variables
-
-		std::vector<AbstractBaseUnit*> enemyShipContainer;
-		std::vector<AbstractBaseProjectile*> enemyProjectileContainer;
-		std::vector<AbstractBaseProjectile*> playerProjectileContainer;
 
 		#pragma endregion
 	};

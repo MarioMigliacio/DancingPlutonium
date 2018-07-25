@@ -2,30 +2,28 @@
 
 DancingPlutonium::LevelObserver::LevelObserver()
 {
-	enemyShipContainer = std::vector<AbstractBaseUnit*>();
-	enemyProjectileContainer = std::vector<AbstractBaseProjectile*>();
-	playerProjectileContainer = std::vector<AbstractBaseProjectile*>();
+	EnemyShipContainer = std::vector<AbstractBaseUnit*>();
+	EnemyProjectileContainer = std::vector<AbstractBaseProjectile*>();
 }
 
 DancingPlutonium::LevelObserver::~LevelObserver()
 {
 	ClearEnemyShipContainer();
 	ClearEnemyProjectileContainer();
-	ClearPlayerProjectileContainer();
 }
 
-bool DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision(AbstractBaseUnit& _player, std::vector<AbstractBaseUnit*>& _from)
+bool DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision(AbstractBaseUnit& _player, std::vector<AbstractBaseUnit*>& _enemyUnits)
 {
-	UpdateEnemyShipContainer(_from);
+	//UpdateEnemyShipContainer(_enemyUnits);
 
-	if (enemyShipContainer.size() > 0)
+	if (EnemyShipContainer.size() > 0)
 	{
 		sf::Sprite npcUnit = sf::Sprite();
 		sf::Sprite player = _player.GetSprite();
 
-		for (int i = static_cast<int>(enemyShipContainer.size() - 1); i >= 0; i--)
+		for (int i = static_cast<int>(EnemyShipContainer.size() - 1); i >= 0; i--)
 		{
-			npcUnit = enemyShipContainer[i]->GetSprite();
+			npcUnit = EnemyShipContainer[i]->GetSprite();
 
 			// FIXED! the abstract base unit's GetSprite() was not good enough! Had to have override capability to return the 'right' sprite object.
 
@@ -39,25 +37,25 @@ bool DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision(AbstractBaseUn
 	return false;
 }
 
-bool DancingPlutonium::LevelObserver::CheckForPlayerShotHit(std::vector<AbstractBaseUnit*>& _enemyUnit, std::vector<AbstractBaseProjectile*>& _playerBullets)
+bool DancingPlutonium::LevelObserver::CheckForPlayerShotHit(std::vector<AbstractBaseUnit*>& _enemyUnits, std::vector<AbstractBaseProjectile*>& _playerBullets)
 {
-	UpdatePlayerProjectileContainer(_playerBullets);
-	UpdateEnemyShipContainer(_enemyUnit);
+	//UpdatePlayerProjectileContainer(_playerBullets);
+	//UpdateEnemyShipContainer(_enemyUnits);
 
-	if (enemyShipContainer.size() > 0)
+	if (EnemyShipContainer.size() > 0)
 	{
 		sf::Sprite npcUnit = sf::Sprite();
 		std::vector<sf::Sprite> playerBullets = std::vector<sf::Sprite>();
 
-		for (int i = 0; i < static_cast<int>(enemyShipContainer.size()); i++)
+		for (int i = 0; i < static_cast<int>(EnemyShipContainer.size()); i++)
 		{
-			npcUnit = enemyShipContainer[i]->GetSprite();
+			npcUnit = EnemyShipContainer[i]->GetSprite();
 
-			if (playerProjectileContainer.size() > 0)
+			if (_playerBullets.size() > 0)
 			{
-				for (int j = 0; j < static_cast<int>(playerProjectileContainer.size()); j++)
+				for (int j = 0; j < static_cast<int>(_playerBullets.size()); j++)
 				{
-					playerBullets = playerProjectileContainer[j]->GetAllSprites();
+					playerBullets = _playerBullets[j]->GetAllSprites();
 
 					if (playerBullets.size() > 0)
 					{
@@ -79,28 +77,28 @@ bool DancingPlutonium::LevelObserver::CheckForPlayerShotHit(std::vector<Abstract
 
 bool DancingPlutonium::LevelObserver::CheckForEnemyShotHit(std::vector<AbstractBaseUnit*>& _enemy, AbstractBaseUnit& _player)
 {
-	UpdateEnemyShipContainer(_enemy);
+	//UpdateEnemyShipContainer(_enemy);
 
-	if (enemyShipContainer.size() > 0)
+	if (EnemyShipContainer.size() > 0)
 	{
 		std::vector<sf::Sprite> enemyBullets = std::vector<sf::Sprite>();
 		sf::Sprite player = _player.GetSprite();
 
-		for (int i = static_cast<int>(enemyShipContainer.size() - 1); i >= 0; i--)
+		for (int i = static_cast<int>(EnemyShipContainer.size() - 1); i >= 0; i--)
 		{
-			if (enemyShipContainer[i]->GetActiveState())
+			if (EnemyShipContainer[i]->GetActiveState())
 			{
 				// get that ships weapon container				
-				auto allademeEnemybulletsMmHmm = enemyShipContainer[i]->GetWeaponEquipped()->GetAmmunitionContainer();
-				UpdateEnemyProjectileContainer(allademeEnemybulletsMmHmm);
+				auto allademeEnemybulletsMmHmm = EnemyShipContainer[i]->GetWeaponEquipped()->GetAmmunitionContainer();
+				//UpdateEnemyProjectileContainer(allademeEnemybulletsMmHmm);
 
-				if (enemyProjectileContainer.size() > 0)
+				if (EnemyProjectileContainer.size() > 0)
 				{
 					// for every projectile in the enemy container.. 
-					for (int j = static_cast<int>(enemyProjectileContainer.size()) - 1; j >= 0; j--)
+					for (int j = static_cast<int>(EnemyProjectileContainer.size()) - 1; j >= 0; j--)
 					{
 						// get its component projectiles
-						enemyBullets = enemyProjectileContainer[j]->GetAllSprites();
+						enemyBullets = EnemyProjectileContainer[j]->GetAllSprites();
 
 						if (enemyBullets.size() > 0)
 						{
@@ -137,56 +135,40 @@ void DancingPlutonium::LevelObserver::UpgradeUnitWeaponry(AbstractBaseUnit& _uni
 	_unit.GetWeaponEquipped()->UpgradeWeaponPattern();
 }
 
-void DancingPlutonium::LevelObserver::UpdateEnemyShipContainer(std::vector<AbstractBaseUnit*>& _from)
+void DancingPlutonium::LevelObserver::UpdateEnemyShipContainer(float _dt, sf::RenderTarget& _rt)
 {
-	ClearEnemyShipContainer();
-	enemyShipContainer = _from;
-}
+	for (int i = static_cast<int>(EnemyShipContainer.size() - 1); i >= 0; i--)
+	{
+		EnemyShipContainer[i]->Update(_dt, _rt);
 
-void DancingPlutonium::LevelObserver::UpdateEnemyProjectileContainer(std::vector<AbstractBaseProjectile*>& _from)
-{
-	ClearEnemyProjectileContainer();
-	enemyProjectileContainer = _from;
-}
-
-void DancingPlutonium::LevelObserver::UpdatePlayerProjectileContainer(std::vector<AbstractBaseProjectile*>& _from)
-{
-	ClearPlayerProjectileContainer();
-	playerProjectileContainer = _from;
+		if (EnemyShipContainer[i]->GetActiveState() == false)
+		{
+			delete EnemyShipContainer[i];
+			EnemyShipContainer.erase(EnemyShipContainer.begin() + i);
+		}
+	}
 }
 
 void DancingPlutonium::LevelObserver::ClearEnemyShipContainer()
 {
-	if (enemyShipContainer.size() > 0)
+	if (EnemyShipContainer.size() > 0)
 	{
-		for (int i = static_cast<int>(enemyShipContainer.size() - 1); i >= 0; i--)
+		for (int i = static_cast<int>(EnemyShipContainer.size() - 1); i >= 0; i--)
 		{
-			delete enemyShipContainer[i];
-			enemyShipContainer.erase(enemyShipContainer.begin() + i);
+			delete EnemyShipContainer[i];
+			EnemyShipContainer.erase(EnemyShipContainer.begin() + i);
 		}
 	}
 }
 
 void DancingPlutonium::LevelObserver::ClearEnemyProjectileContainer()
 {
-	if (enemyProjectileContainer.size() > 0)
+	if (EnemyProjectileContainer.size() > 0)
 	{
-		for (int i = static_cast<int>(enemyProjectileContainer.size() - 1); i >= 0; i--)
+		for (int i = static_cast<int>(EnemyProjectileContainer.size() - 1); i >= 0; i--)
 		{
-			delete enemyProjectileContainer[i];
-			enemyProjectileContainer.erase(enemyProjectileContainer.begin() + i);
-		}
-	}
-}
-
-void DancingPlutonium::LevelObserver::ClearPlayerProjectileContainer()
-{
-	if (playerProjectileContainer.size() > 0)
-	{
-		for (int i = static_cast<int>(playerProjectileContainer.size() - 1); i >= 0; i--)
-		{
-			delete playerProjectileContainer[i];
-			playerProjectileContainer.erase(playerProjectileContainer.begin() + i);
+			delete EnemyProjectileContainer[i];
+			EnemyProjectileContainer.erase(EnemyProjectileContainer.begin() + i);
 		}
 	}
 }

@@ -7,6 +7,7 @@
 #include "InputManager.h"
 #include "Weapon.h"
 #include "Collision.h"
+#include "LevelObserver.h"
 
 namespace DancingPlutonium
 {

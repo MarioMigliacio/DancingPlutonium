@@ -20,12 +20,13 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window)
 	m_ship = new BasicShip(_window);
 	PlutoniumShip* me;
 	me = new PlutoniumShip(_window);
+	LevelObserver levelObserver = LevelObserver();
 
 	std::vector<AbstractBaseUnit*> enemyShips;
-	std::vector<AbstractBaseProjectile*> alladembulletsMmHmm;
-	std::vector<AbstractBaseProjectile*> allademeEnemybulletsMmHmm;
-	enemyShips.push_back(m_ship);
-
+	std::vector<AbstractBaseProjectile*> playerBullets;
+	std::vector<AbstractBaseProjectile*> enemybulletsMmHmm;
+	//enemyShips.push_back(m_ship);
+	levelObserver.EnemyShipContainer.push_back(m_ship);
 
 	// Scale screens with different computer screen resolutions: (the standard resolution in place is 720p: 1280wide x 720high, 60 fps)
 	sf::VideoMode mode = sf::VideoMode::getDesktopMode();
@@ -84,11 +85,6 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window)
 		{
 			sf::Uint32 whichDirection = InputManager::GetDirection();
 			me->SetMoveState(whichDirection);
-
-			// this proves level has access to the coords of player and able to get bounding rectangle
-			//auto playerRect = me->GetRect();
-			//std::cout << " our rect bounds are at (L: " << playerRect.left << ", T: " << playerRect.top <<
-			//	", W: " << playerRect.width << ", H: " << playerRect.height << std::endl;
 		}
 
 		dt = clock.restart();
@@ -97,102 +93,23 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window)
 		me->Update(dt.asSeconds(), _window);
 		me->Draw(_window);
 
-		// EXPERIMENT REGION BE WARNED
-
-
-		// This is how collision for unit - unit should be. Using the BoundingBoxTest() function.
-		// TODO write this into a function that the level class maintains.
-		if (enemyShips.size() > 0)
+		/*if (enemyShips.size() > 0)
 		{
-			sf::Sprite npcUnit = sf::Sprite();
-			sf::Sprite dp = me->GetSprite();
-
 			for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
 			{
 				enemyShips[i]->Update(dt.asSeconds(), _window);
 				enemyShips[i]->Draw(_window);
-				npcUnit = enemyShips[i]->GetSprite();
 
-				// FIXED! the abstract base unit's GetSprite() was not good enough! Had to have override capability to return the 'right' sprite object.
-
-				if (Collision::BoundingBoxTest(dp, npcUnit))
+				if (enemyShips[i]->GetActiveState() == false)
 				{
-					std::cout << " You have crashed into an enemy ship! " << std::endl;
+					delete enemyShips[i];
+					enemyShips.erase(enemyShips.begin() + i);
 				}
 			}
-		}
+		}*/
 
-		// This is how collision for player bullets - enemy units should be. Using the BoundingBoxTest() function.
-		// TODO write this into a function that the level class maintains.
-		if (enemyShips.size() > 0)
-		{
-			sf::Sprite npcUnit = sf::Sprite();
-			std::vector<sf::Sprite> playerBullets = std::vector<sf::Sprite>();
-			alladembulletsMmHmm = me->GetWeaponEquipped()->GetAmmunitionContainer();
-
-			for (int i = 0; i < static_cast<int>(enemyShips.size()); i++)
-			{
-				npcUnit = enemyShips[i]->GetSprite();
-
-				if (alladembulletsMmHmm.size() > 0)
-				{
-					for (int j = 0; j < static_cast<int>(alladembulletsMmHmm.size()); j++)
-					{
-						playerBullets = alladembulletsMmHmm[j]->GetAllSprites();
-
-						if (playerBullets.size() > 0)
-						{
-							for (int k = 0; k < static_cast<int>(playerBullets.size()); k++)
-							{
-								if (Collision::BoundingBoxTest(npcUnit, playerBullets[k]))
-								{
-									std::cout << " You have SHOT an enemy ship! " << std::endl;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-
-		// This is how collision for player - enemy bullets should be. Using the BoundingBoxTest() function.
-		// TODO write this into a function that the level class maintains.
-		if (enemyShips.size() > 0)
-		{
-			std::vector<sf::Sprite> enemyBullets = std::vector<sf::Sprite>();
-			sf::Sprite dp = me->GetSprite();
-
-			for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
-			{
-				if (enemyShips[i]->GetActiveState())
-				{
-					// get that ships weapon container
-					allademeEnemybulletsMmHmm = enemyShips[i]->GetWeaponEquipped()->GetAmmunitionContainer();
-
-					if (allademeEnemybulletsMmHmm.size() > 0)
-					{
-						// for every projectile in the enemy container.. 
-						for (int j = static_cast<int>(allademeEnemybulletsMmHmm.size()) - 1; j >= 0; j--)
-						{
-							// get its component projectiles
-							enemyBullets = allademeEnemybulletsMmHmm[j]->GetAllSprites();
-
-							if (enemyBullets.size() > 0)
-							{
-								// for every component projectile, check if it intersects with US!
-								for (int k = static_cast<int>(enemyBullets.size()) - 1; k >= 0; k--)
-								{
-									if (Collision::BoundingBoxTest(enemyBullets[k], dp))
-									{
-										std::cout << " You have been fired upon! " << std::endl;
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+		///
+		levelObserver.CheckForUnitToUnitCollision(*me, enemyShips);
 
 		_window.display();
 	}
