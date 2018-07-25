@@ -22,10 +22,8 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window)
 	me = new PlutoniumShip(_window);
 	LevelObserver levelObserver = LevelObserver();
 
-	std::vector<AbstractBaseUnit*> enemyShips;
 	std::vector<AbstractBaseProjectile*> playerBullets;
-	std::vector<AbstractBaseProjectile*> enemybulletsMmHmm;
-	//enemyShips.push_back(m_ship);
+	//std::vector<AbstractBaseProjectile*> enemybulletsMmHmm;
 	levelObserver.EnemyShipContainer.push_back(m_ship);
 
 	// Scale screens with different computer screen resolutions: (the standard resolution in place is 720p: 1280wide x 720high, 60 fps)
@@ -59,8 +57,7 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window)
 			{
 				auto tempShip = new BasicShip(_window);
 				tempShip->SpawnRandomly(_window);
-				enemyShips.push_back(tempShip);
-				//enemyShips[0]->SpawnRandomly(_window);
+				levelObserver.EnemyShipContainer.push_back(tempShip);
 			}
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LControl ||
 				event.key.code == sf::Keyboard::RControl))
@@ -92,24 +89,19 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window)
 		_window.draw(bgSprite);
 		me->Update(dt.asSeconds(), _window);
 		me->Draw(_window);
+		levelObserver.UpdateEnemyShipContainer(dt.asSeconds(), _window);
+		levelObserver.DrawEnemyShipContainer(_window);
 
-		/*if (enemyShips.size() > 0)
+		// This works! woot woot.
+		if (levelObserver.CheckForUnitToUnitCollision(*me))
 		{
-			for (int i = static_cast<int>(enemyShips.size() - 1); i >= 0; i--)
-			{
-				enemyShips[i]->Update(dt.asSeconds(), _window);
-				enemyShips[i]->Draw(_window);
+			std::cout << "yep you ran into that enemy unit." << std::endl;
+		}
 
-				if (enemyShips[i]->GetActiveState() == false)
-				{
-					delete enemyShips[i];
-					enemyShips.erase(enemyShips.begin() + i);
-				}
-			}
-		}*/
-
-		///
-		levelObserver.CheckForUnitToUnitCollision(*me, enemyShips);
+		if (levelObserver.CheckForEnemyShotHit(*me))
+		{
+			std::cout << "yep you ran into that enemy bullet." << std::endl;
+		}
 
 		_window.display();
 	}

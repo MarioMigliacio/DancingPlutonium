@@ -13,6 +13,8 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		return;
 	}
 
+	std::cout << "YOU ARE PLAYING IN THE SANDBOX!" << std::endl;
+
 	// Set the State:
 	m_state = PlayState::s_sandbox;
 	BasicShip* m_ship;

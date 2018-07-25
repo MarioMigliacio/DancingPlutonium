@@ -12,10 +12,8 @@ DancingPlutonium::LevelObserver::~LevelObserver()
 	ClearEnemyProjectileContainer();
 }
 
-bool DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision(AbstractBaseUnit& _player, std::vector<AbstractBaseUnit*>& _enemyUnits)
+bool DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision(AbstractBaseUnit& _player)
 {
-	//UpdateEnemyShipContainer(_enemyUnits);
-
 	if (EnemyShipContainer.size() > 0)
 	{
 		sf::Sprite npcUnit = sf::Sprite();
@@ -24,8 +22,6 @@ bool DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision(AbstractBaseUn
 		for (int i = static_cast<int>(EnemyShipContainer.size() - 1); i >= 0; i--)
 		{
 			npcUnit = EnemyShipContainer[i]->GetSprite();
-
-			// FIXED! the abstract base unit's GetSprite() was not good enough! Had to have override capability to return the 'right' sprite object.
 
 			if (Collision::BoundingBoxTest(player, npcUnit))
 			{
@@ -37,11 +33,8 @@ bool DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision(AbstractBaseUn
 	return false;
 }
 
-bool DancingPlutonium::LevelObserver::CheckForPlayerShotHit(std::vector<AbstractBaseUnit*>& _enemyUnits, std::vector<AbstractBaseProjectile*>& _playerBullets)
+bool DancingPlutonium::LevelObserver::CheckForPlayerShotHit(std::vector<AbstractBaseProjectile*>& _playerBullets)
 {
-	//UpdatePlayerProjectileContainer(_playerBullets);
-	//UpdateEnemyShipContainer(_enemyUnits);
-
 	if (EnemyShipContainer.size() > 0)
 	{
 		sf::Sprite npcUnit = sf::Sprite();
@@ -75,10 +68,8 @@ bool DancingPlutonium::LevelObserver::CheckForPlayerShotHit(std::vector<Abstract
 	return false;
 }
 
-bool DancingPlutonium::LevelObserver::CheckForEnemyShotHit(std::vector<AbstractBaseUnit*>& _enemy, AbstractBaseUnit& _player)
+bool DancingPlutonium::LevelObserver::CheckForEnemyShotHit(AbstractBaseUnit& _player)
 {
-	//UpdateEnemyShipContainer(_enemy);
-
 	if (EnemyShipContainer.size() > 0)
 	{
 		std::vector<sf::Sprite> enemyBullets = std::vector<sf::Sprite>();
@@ -88,9 +79,7 @@ bool DancingPlutonium::LevelObserver::CheckForEnemyShotHit(std::vector<AbstractB
 		{
 			if (EnemyShipContainer[i]->GetActiveState())
 			{
-				// get that ships weapon container				
 				auto allademeEnemybulletsMmHmm = EnemyShipContainer[i]->GetWeaponEquipped()->GetAmmunitionContainer();
-				//UpdateEnemyProjectileContainer(allademeEnemybulletsMmHmm);
 
 				if (EnemyProjectileContainer.size() > 0)
 				{
@@ -146,6 +135,14 @@ void DancingPlutonium::LevelObserver::UpdateEnemyShipContainer(float _dt, sf::Re
 			delete EnemyShipContainer[i];
 			EnemyShipContainer.erase(EnemyShipContainer.begin() + i);
 		}
+	}
+}
+
+void DancingPlutonium::LevelObserver::DrawEnemyShipContainer(sf::RenderTarget& _rt)
+{
+	for (int i = 0; i <= static_cast<int>(EnemyShipContainer.size() - 1); i++)
+	{
+		EnemyShipContainer[i]->Draw(_rt);
 	}
 }
 
