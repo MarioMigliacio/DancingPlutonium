@@ -17,7 +17,7 @@ namespace DancingPlutonium
 	public:
 		#pragma region PlayState enum
 
-		/* LevelState enum holds the types of states that Dancing Plutonium Level1 logic may be in */
+		/* LevelState enum holds the types of states that this Level object may be in */
 		enum LevelState
 		{
 			s_uninitialized,
@@ -42,11 +42,12 @@ namespace DancingPlutonium
 
 		#pragma region Methods
 
-		/* Runs the logic for Dancing Plutoniums Level1 object */
-		void Show(sf::RenderWindow& _window);
+		/* Runs the logic for this Level object */
+		void Show(sf::RenderWindow& _window, PlutoniumShip* _player);
 
 		#pragma endregion
+
 	private:
-		static sf::Uint32 m_state;	/* Static variable which maintains the state for this Level1 object */
+		static sf::Uint32 m_state;		/* Static variable which maintains the state for this Level1 object */
 	};
 }

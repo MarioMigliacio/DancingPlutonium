@@ -208,6 +208,6 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 
 	if (m_state == PlayState::s_level1)
 	{
-		l1.Show(_window);
+		l1.Show(_window, me);
 	}
 }

@@ -4,7 +4,7 @@
 // Static variable declarations:
 sf::Uint32 DancingPlutonium::Level1::m_state = s_uninitialized;
 
-void DancingPlutonium::Level1::Show(sf::RenderWindow& _window)
+void DancingPlutonium::Level1::Show(sf::RenderWindow& _window, PlutoniumShip* _player)
 {
 	// Ensure that the initialization takes place correctly here and for the first time.
 	if (m_state != Level1::s_uninitialized)
@@ -12,22 +12,12 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window)
 		return;
 	}
 
+	// friendly message for me to know that we moved into the real level
 	std::cout << "YOU ARE PLAYING IN THE REAL WORLD NOW!" << std::endl;
 
 	// Set the State:
 	m_state = Level1::s_intro;
-	BasicShip* m_ship;
-	m_ship = new BasicShip(_window);
-	PlutoniumShip* me;
-	me = new PlutoniumShip(_window);
 	LevelObserver levelObserver = LevelObserver();
-
-	std::vector<AbstractBaseProjectile*> playerBullets;
-	//std::vector<AbstractBaseProjectile*> enemybulletsMmHmm;
-	levelObserver.EnemyShipContainer.push_back(m_ship);
-
-	// Scale screens with different computer screen resolutions: (the standard resolution in place is 720p: 1280wide x 720high, 60 fps)
-	sf::VideoMode mode = sf::VideoMode::getDesktopMode();
 
 	// Set up the background:
 	sf::Texture bgTexture;
@@ -59,48 +49,53 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window)
 				tempShip->SpawnRandomly(_window);
 				levelObserver.EnemyShipContainer.push_back(tempShip);
 			}
-			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LControl ||
+			/*else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LControl ||
 				event.key.code == sf::Keyboard::RControl))
 			{
-				me->GetWeaponEquipped()->UpgradeWeaponPattern();
+				_player->GetWeaponEquipped()->UpgradeWeaponPattern();
 			}
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LAlt ||
 				event.key.code == sf::Keyboard::RAlt))
 			{
-				me->GetWeaponEquipped()->UpgradeWeaponFireRate();
+				_player->GetWeaponEquipped()->UpgradeWeaponFireRate();
 			}
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::Up))
 			{
-				me->GetWeaponEquipped()->UpgradeWeaponVelocityRate();
-			}
+				_player->GetWeaponEquipped()->UpgradeWeaponVelocityRate();
+			}*/
 		}
 
 		bool isPlayerMoving = InputManager::IsMoving();
-		me->SetMovingState(isPlayerMoving);
+		_player->SetMovingState(isPlayerMoving);
 
 		if (isPlayerMoving)
 		{
 			sf::Uint32 whichDirection = InputManager::GetDirection();
-			me->SetMoveState(whichDirection);
+			_player->SetMoveState(whichDirection);
 		}
 
 		dt = clock.restart();
 		_window.clear();
 		_window.draw(bgSprite);
-		me->Update(dt.asSeconds(), _window);
-		me->Draw(_window);
+		_player->Update(dt.asSeconds(), _window);
+		_player->Draw(_window);
 		levelObserver.UpdateEnemyShipContainer(dt.asSeconds(), _window);
 		levelObserver.DrawEnemyShipContainer(_window);
 
 		// This works! woot woot.
-		if (levelObserver.CheckForUnitToUnitCollision(*me))
+		if (levelObserver.CheckForUnitToUnitCollision(*_player))
 		{
-			std::cout << "yep you ran into that enemy unit." << std::endl;
+			std::cout << "Bumped into an enemy unit." << std::endl;
 		}
 
-		if (levelObserver.CheckForEnemyShotHit(*me))
+		if (levelObserver.CheckForEnemyShotHit(*_player))
 		{
-			std::cout << "yep you ran into that enemy bullet." << std::endl;
+			std::cout << "Ran into that enemy bullet." << std::endl;
+		}
+
+		if (levelObserver.CheckForPlayerShotHit(_player->GetWeaponEquipped()->GetAmmunitionContainer()))
+		{
+			std::cout << " You shot that enemy unit! " << std::endl;
 		}
 
 		_window.display();
