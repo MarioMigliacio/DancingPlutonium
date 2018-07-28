@@ -172,5 +172,5 @@ void DancingPlutonium::Button::setColor(const sf::Color& _fillColor, const sf::C
 
 void DancingPlutonium::Button::loadFont()
 {
-	font.loadFromFile("Content/Fonts/Arial.ttf");
+	font.loadFromFile("Content/Fonts/Dejavu.ttf");
 }
