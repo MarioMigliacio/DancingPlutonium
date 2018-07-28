@@ -33,18 +33,20 @@ namespace DancingPlutonium
 		/* Returns the name of this Button */
 		sf::String getName() const;
 		/* Sets this Buttons origin based on the _pos input parameter */
-		void setOrigin(const sf::Vector2f _pos);
+		void SetOrigin(const sf::Vector2f _pos);
 		/* Sets this Buttons position based on the _pos input parameter */
-		void setPosition(const sf::Vector2f _pos);
+		void SetPosition(const sf::Vector2f _pos);
 		/* fadeIn method accepts the clock as input parameter and increases the alpha value of this Button */
-		void fadeIn(float _dt);
+		void FadeIn(float _dt);
 		/* fadeOut method accepts the clock as input parameter and decreases the alpha value of this Button */
-		void fadeOut(float _dt);
+		void FadeOut(float _dt);
 		/* Returns the bounding rectangle of this Button */
-		sf::FloatRect getBounds() const;
+		sf::FloatRect GetBounds() const;
 
 		#pragma endregion
+
 	private:
+
 		#pragma region Members
 
 		bool isFading;					/* Represents the state of whether or not this Button is fading */
@@ -65,9 +67,9 @@ namespace DancingPlutonium
 		#pragma region Private Setters
 
 		/* Sets the color of this Button based on the _fillColor and _boarderColor input parameters */
-		void setColor(const sf::Color& _fillColor, const sf::Color& _boarderColor);
+		void SetColor(const sf::Color& _fillColor, const sf::Color& _boarderColor);
 		/* Sets the font of this Button from the content folders font */
-		void loadFont();
+		void LoadFont();
 
 		#pragma endregion
 	};

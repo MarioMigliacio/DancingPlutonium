@@ -101,6 +101,9 @@
     <ClCompile Include="Source\Game States\Level1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Utility\ChatBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\Game States\Game.h">
@@ -156,6 +159,7 @@
     <ClInclude Include="Header\Utility\Collision.h" />
     <ClInclude Include="Header\Game States\LevelObserver.h" />
     <ClInclude Include="Header\Game States\Level1.h" />
+    <ClInclude Include="Header\Utility\ChatBox.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

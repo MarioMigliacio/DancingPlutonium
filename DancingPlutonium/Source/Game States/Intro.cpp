@@ -20,10 +20,10 @@ void DancingPlutonium::Intro::Show(sf::RenderWindow& _window)
 
 	// Set up the Texts which create the splash screen.
 	Button welcomeButton = Button("Welcome To Dancing Plutonium", sf::Color::Red, sf::Color::Blue, 80, false);
-	welcomeButton.setPosition(sf::Vector2f(_window.getSize().x / 2.0f - welcomeButton.getBounds().width / 2.0f, _window.getSize().y / 3.0f - welcomeButton.getBounds().height / 2.0f));
+	welcomeButton.SetPosition(sf::Vector2f(_window.getSize().x / 2.0f - welcomeButton.GetBounds().width / 2.0f, _window.getSize().y / 3.0f - welcomeButton.GetBounds().height / 2.0f));
 
 	Button sponsor = Button("Starring and Directed by: Mario Migliacio", sf::Color::Yellow, sf::Color::Blue, 40, false);
-	sponsor.setPosition(sf::Vector2f(_window.getSize().x / 2.0f - sponsor.getBounds().width / 2.0f, _window.getSize().y / 2.0f - sponsor.getBounds().height / 2.0f));
+	sponsor.SetPosition(sf::Vector2f(_window.getSize().x / 2.0f - sponsor.GetBounds().width / 2.0f, _window.getSize().y / 2.0f - sponsor.GetBounds().height / 2.0f));
 
 	// Set up the music player.
 	sf::SoundBuffer sb;
@@ -57,23 +57,23 @@ void DancingPlutonium::Intro::Show(sf::RenderWindow& _window)
 				
 		if (clock1.getElapsedTime().asSeconds() >= 5.0f)
 		{
-			welcomeButton.fadeOut(dt.asSeconds());
+			welcomeButton.FadeOut(dt.asSeconds());
 			welcomeButton.Draw(_window);
 		}
 		else if (clock1.getElapsedTime().asSeconds() >= 1.0f)
 		{
-			welcomeButton.fadeIn(dt.asSeconds());
+			welcomeButton.FadeIn(dt.asSeconds());
 			welcomeButton.Draw(_window);
 		}
 
 		if (clock1.getElapsedTime().asSeconds() >= 5.0f)
 		{
-			sponsor.fadeOut(dt.asSeconds());
+			sponsor.FadeOut(dt.asSeconds());
 			sponsor.Draw(_window);
 		}
 		else if (clock1.getElapsedTime().asSeconds() >= 2.0f)
 		{
-			sponsor.fadeIn(dt.asSeconds());
+			sponsor.FadeIn(dt.asSeconds());
 			sponsor.Draw(_window);
 		}		
 

@@ -30,11 +30,11 @@ void DancingPlutonium::TitleMenu::Show(sf::RenderWindow& _window)
 	// Put all the buttons in an iterable container which makes cleanup easy.
 	std::vector<Button*> buttonContainer;
 	buttonContainer.push_back(new Button("Play", sf::Color::Yellow, sf::Color::Blue, 80, true));
-	buttonContainer[0]->setPosition(sf::Vector2f(_window.getSize().x / 2.0f - buttonContainer[0]->getBounds().width / 2.0f, _window.getSize().y / 6.0f - buttonContainer[0]->getBounds().height / 2.0f));
+	buttonContainer[0]->SetPosition(sf::Vector2f(_window.getSize().x / 2.0f - buttonContainer[0]->GetBounds().width / 2.0f, _window.getSize().y / 6.0f - buttonContainer[0]->GetBounds().height / 2.0f));
 	buttonContainer.push_back(new Button("Options", sf::Color::Yellow, sf::Color::Blue, 80, true));
-	buttonContainer[1]->setPosition(sf::Vector2f(_window.getSize().x / 2.0f - buttonContainer[1]->getBounds().width / 2.0f, _window.getSize().y / 6.0f - buttonContainer[1]->getBounds().height / 2.0f + 85));
+	buttonContainer[1]->SetPosition(sf::Vector2f(_window.getSize().x / 2.0f - buttonContainer[1]->GetBounds().width / 2.0f, _window.getSize().y / 6.0f - buttonContainer[1]->GetBounds().height / 2.0f + 85));
 	buttonContainer.push_back(new Button("ScoreBoard", sf::Color::Yellow, sf::Color::Blue, 80, true));
-	buttonContainer[2]->setPosition(sf::Vector2f(_window.getSize().x / 2.0f - buttonContainer[2]->getBounds().width / 2.0f, _window.getSize().y / 6.0f - buttonContainer[2]->getBounds().height / 2.0f + 170));
+	buttonContainer[2]->SetPosition(sf::Vector2f(_window.getSize().x / 2.0f - buttonContainer[2]->GetBounds().width / 2.0f, _window.getSize().y / 6.0f - buttonContainer[2]->GetBounds().height / 2.0f + 170));
 
 	// Set up the Music: 
 	sf::Music menuMusic;

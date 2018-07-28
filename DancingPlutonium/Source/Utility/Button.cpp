@@ -1,14 +1,15 @@
 #include "Button.h"
 
 DancingPlutonium::Button::Button(const sf::String _name, const sf::Color& _fillColor, const sf::Color& _boarderColor, int _size, bool _clickable)
-	: buttonFillColor(_fillColor), buttonBoarderColor(_boarderColor)
 {
 	_clickable ? isClickable = true : isClickable = false;
 	location = sf::Vector2f(0.0f, 0.0f);
 	isClicked = false;
 	isFading = false;
-	setColor(_fillColor, _boarderColor);
-	loadFont();
+	buttonFillColor = _fillColor;
+	buttonBoarderColor = _boarderColor;
+	SetColor(_fillColor, _boarderColor);
+	LoadFont();
 
 	buttonName = sf::Text(_name, font, _size);
 	buttonName.setPosition(location);
@@ -75,7 +76,7 @@ void DancingPlutonium::Button::Update(float _dt, sf::RenderWindow& _window)
 			}
 
 			// Make the button that is highlighted by the mouse RED color for the border.
-			setColor(sf::Color(buttonFillColor.r, buttonFillColor.g, buttonFillColor.b, alpha),
+			SetColor(sf::Color(buttonFillColor.r, buttonFillColor.g, buttonFillColor.b, alpha),
 				sf::Color(255, buttonBoarderColor.g, buttonBoarderColor.b, alpha));
 
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isClickable)
@@ -91,14 +92,14 @@ void DancingPlutonium::Button::Update(float _dt, sf::RenderWindow& _window)
 		{
 			isFading = true;
 
-			setColor(sf::Color(buttonFillColor.r, buttonFillColor.g, buttonFillColor.b, alpha = 255),
+			SetColor(sf::Color(buttonFillColor.r, buttonFillColor.g, buttonFillColor.b, alpha = 255),
 				sf::Color(buttonBoarderColor.r, buttonBoarderColor.g, buttonBoarderColor.b, alpha = 255));
 			accumulator = 0.0f;
 		}
 	}
 	else
 	{
-		setColor(buttonFillColor, buttonBoarderColor);
+		SetColor(buttonFillColor, buttonBoarderColor);
 	}
 }
 
@@ -112,17 +113,17 @@ sf::String DancingPlutonium::Button::getName() const
 	return buttonName.getString();
 }
 
-void DancingPlutonium::Button::setOrigin(const sf::Vector2f _pos)
+void DancingPlutonium::Button::SetOrigin(const sf::Vector2f _pos)
 {
 	buttonName.setOrigin(_pos);
 }
 
-void DancingPlutonium::Button::setPosition(const sf::Vector2f _pos)
+void DancingPlutonium::Button::SetPosition(const sf::Vector2f _pos)
 {
 	buttonName.setPosition(_pos);
 }
 
-void DancingPlutonium::Button::fadeIn(float _dt)
+void DancingPlutonium::Button::FadeIn(float _dt)
 {
 	accumulator += +_dt;
 
@@ -136,11 +137,11 @@ void DancingPlutonium::Button::fadeIn(float _dt)
 		}
 	}
 
-	setColor(sf::Color(buttonFillColor.r, buttonFillColor.g, buttonFillColor.b, alpha),
+	SetColor(sf::Color(buttonFillColor.r, buttonFillColor.g, buttonFillColor.b, alpha),
 		sf::Color(buttonBoarderColor.r, buttonBoarderColor.g, buttonBoarderColor.b, alpha));
 }
 
-void DancingPlutonium::Button::fadeOut(float _dt)
+void DancingPlutonium::Button::FadeOut(float _dt)
 {
 	accumulator += _dt;
 			
@@ -154,23 +155,23 @@ void DancingPlutonium::Button::fadeOut(float _dt)
 		}
 	}
 
-	setColor(sf::Color(buttonFillColor.r, buttonFillColor.g, buttonFillColor.b, alpha),
+	SetColor(sf::Color(buttonFillColor.r, buttonFillColor.g, buttonFillColor.b, alpha),
 		sf::Color(buttonBoarderColor.r, buttonBoarderColor.g, buttonBoarderColor.b, alpha));
 }
 
-sf::FloatRect DancingPlutonium::Button::getBounds() const
+sf::FloatRect DancingPlutonium::Button::GetBounds() const
 {
 	return bounds;
 }
 
-void DancingPlutonium::Button::setColor(const sf::Color& _fillColor, const sf::Color& _boarderColor)
+void DancingPlutonium::Button::SetColor(const sf::Color& _fillColor, const sf::Color& _boarderColor)
 {
 	buttonName.setFillColor(_fillColor);
 	buttonName.setOutlineColor(_boarderColor);
 	buttonName.setOutlineThickness(2);
 }
 
-void DancingPlutonium::Button::loadFont()
+void DancingPlutonium::Button::LoadFont()
 {
 	font.loadFromFile("Content/Fonts/Dejavu.ttf");
 }
