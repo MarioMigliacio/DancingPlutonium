@@ -19,7 +19,7 @@ void DancingPlutonium::Intro::Show(sf::RenderWindow& _window)
 	sf::Time dt;
 
 	// Set up the Texts which create the splash screen.
-	Button welcomeButton = Button("Welcome To Dancing Plutonium", sf::Color::Red, sf::Color::Blue, 80, false);
+	Button welcomeButton = Button("Welcome To Dancing Plutonium", sf::Color::Red, sf::Color::Blue, 60, false);
 	welcomeButton.SetPosition(sf::Vector2f(_window.getSize().x / 2.0f - welcomeButton.GetBounds().width / 2.0f, _window.getSize().y / 3.0f - welcomeButton.GetBounds().height / 2.0f));
 
 	Button sponsor = Button("Starring and Directed by: Mario Migliacio", sf::Color::Yellow, sf::Color::Blue, 40, false);
