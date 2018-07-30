@@ -29,7 +29,9 @@ namespace DancingPlutonium
 		static bool IsUsingBoost();
 		/* Returns true if player is pressing Space bar, false otherwise */
 		static bool IsShooting();
-
+		/* Returns true if player is pressing Enter key, false otherwise */
+		static bool IsFinishedReadingText();
+		
 		#pragma endregion
 	private:
 		#pragma region Ctor

@@ -14,7 +14,7 @@ namespace DancingPlutonium
 		#pragma region Ctor/Dtors
 
 		/* Button constructor accepting a string name, fill color, boarder color, and boolean state for isClickable input parameters */
-		Button(const sf::String _name, const sf::Color& _fillColor, const sf::Color& _boarderColor, int _size, bool _clickable);
+		Button(const sf::String _name, const sf::Color& _fillColor, const sf::Color& _boarderColor, const int _size, bool _clickable);
 		/* Button copy constructor */
 		Button(const Button& _ref);
 		/* Button deconstructor */

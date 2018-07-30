@@ -46,7 +46,7 @@ void DancingPlutonium::Button::Update(float _dt, sf::RenderWindow& _window)
 		accumulator += _dt;
 
 		// special note: do NOT use Mouse::getPosition(), it goes with GLOBAL desktop coords, keep it relative to the window!
-		if (buttonName.getGlobalBounds().contains((float)sf::Mouse::getPosition(_window).x, (float)sf::Mouse::getPosition(_window).y))
+		if (buttonName.getGlobalBounds().contains(static_cast<float>(sf::Mouse::getPosition(_window).x), static_cast<float>(sf::Mouse::getPosition(_window).y)))
 		{
 			if (alpha < 255 && isFading == false)
 			{
@@ -125,7 +125,7 @@ void DancingPlutonium::Button::SetPosition(const sf::Vector2f _pos)
 
 void DancingPlutonium::Button::FadeIn(float _dt)
 {
-	accumulator += +_dt;
+	accumulator += _dt;
 
 	if (alpha < 255)
 	{

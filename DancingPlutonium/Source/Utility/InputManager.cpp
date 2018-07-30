@@ -80,3 +80,12 @@ bool DancingPlutonium::InputManager::IsShooting()
 	return false;
 }
 
+bool DancingPlutonium::InputManager::IsFinishedReadingText()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+	{
+		return true;
+	}
+
+	return false;
+}
