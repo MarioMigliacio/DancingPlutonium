@@ -19,6 +19,10 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window, PlutoniumShip* _p
 	m_state = Level1::s_intro;
 	LevelObserver levelObserver = LevelObserver();
 
+	sf::Vector2f chatBoxTest = sf::Vector2f(static_cast<float>(_window.getSize().x) - 20, static_cast<float>(_window.getSize().y) / 5.f);
+	ChatBox introChatBox = ChatBox("Press SpaceBar to shoot!, navigate using W A S D keys!", chatBoxTest);
+	introChatBox.SetPosition(sf::Vector2f(10.f, _window.getSize().y - introChatBox.GetChatBoxOutline().getSize().y - 10));
+
 	// Set up the background:
 	sf::Texture bgTexture;
 	bgTexture.loadFromFile("Content/Images/Space1.png");
@@ -29,7 +33,7 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window, PlutoniumShip* _p
 	bgSprite.setPosition(bgSprite.getGlobalBounds().width / 2.0f, bgSprite.getGlobalBounds().height / 2.0f);
 
 	// Set up the Timers.
-	sf::Clock clock;
+	sf::Clock clock, box1Timer;
 	sf::Time dt;
 
 	while (m_state == Level1::s_intro)
@@ -81,6 +85,8 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window, PlutoniumShip* _p
 		_player->Draw(_window);
 		levelObserver.UpdateEnemyShipContainer(dt.asSeconds(), _window);
 		levelObserver.DrawEnemyShipContainer(_window);
+		introChatBox.Update(dt.asSeconds(), box1Timer.getElapsedTime().asSeconds());
+		introChatBox.Draw(_window);
 
 		// This works! woot woot.
 		if (levelObserver.CheckForUnitToUnitCollision(*_player))

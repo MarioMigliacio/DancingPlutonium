@@ -8,6 +8,7 @@
 #include "Weapon.h"
 #include "Collision.h"
 #include "LevelObserver.h"
+#include "ChatBox.h"
 
 namespace DancingPlutonium
 {
