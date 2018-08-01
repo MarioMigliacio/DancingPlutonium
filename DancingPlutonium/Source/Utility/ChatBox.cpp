@@ -2,25 +2,55 @@
 
 DancingPlutonium::ChatBox::ChatBox(const sf::String& _nameOfBox, const sf::Vector2f _sizeOfBox)
 {
+	isRead = false;
+	canDispose = false;
 	accumulator = 0;
 	indexer = 0;
-	alpha = 0;
+	alpha = 128;
 
 	chatBoxName = _nameOfBox;
 	outLine.setSize(_sizeOfBox);
-	outLine.setFillColor(sf::Color::Black);
-	outLine.setOutlineColor(sf::Color(128, 128, 128));
-	outLine.setOutlineThickness(2);
-	
-	isRead = false;
 
-	SetMessage(_nameOfBox, 24);
+	outlineFillColor = sf::Color(0, 0, 0, alpha);
+	outlineOutColor = sf::Color(128, 128, 128, alpha);
+	outLine.setFillColor(outlineFillColor);
+	outLine.setOutlineColor(outlineOutColor);
+	outLine.setOutlineThickness(2);
+
+	LoadFont();
+	entireMessage = sf::Text(_nameOfBox, font, 24);
+	entireFillColor = sf::Color(255, 0, 0, alpha);
+	entireOutColor = sf::Color(128, 128, 128, alpha);
+	entireMessage.setFillColor(entireFillColor);
+	entireMessage.setOutlineColor(entireOutColor);
+	entireMessage.setOutlineThickness(1);
+}
+
+DancingPlutonium::ChatBox::ChatBox(const ChatBox& _ref)
+{
+	isRead = _ref.isRead;
+	canDispose = _ref.canDispose;
+	alpha = _ref.alpha;
+	accumulator = _ref.accumulator;
+	indexer = _ref.indexer;
+	entireMessage = _ref.entireMessage;
+	typeWriterMessage = _ref.typeWriterMessage;
+	outLine = _ref.outLine;
+	chatBoxName = _ref.chatBoxName;
+	font = _ref.font;
+	outlineFillColor = _ref.outlineFillColor;
+	outlineOutColor = _ref.outlineOutColor;
+	entireFillColor = _ref.entireFillColor;
+	entireOutColor = _ref.entireOutColor;
 }
 
 void DancingPlutonium::ChatBox::Draw(sf::RenderTarget& _rt) const
 {
-	_rt.draw(outLine);
-	_rt.draw(typeWriterMessage);
+	if (isRead == false)
+	{
+		_rt.draw(outLine);
+		_rt.draw(typeWriterMessage);
+	}
 }
 
 void DancingPlutonium::ChatBox::Update(float _dt, float _killTimer)
@@ -29,9 +59,14 @@ void DancingPlutonium::ChatBox::Update(float _dt, float _killTimer)
 
 	TypeWriterEffect(accumulator);
 
-	if (_killTimer >= 5.f)
+	if (_killTimer >= 2.f)
 	{
 		FadeOut(accumulator);
+
+		if (isRead)
+		{
+			canDispose = true;
+		}
 	}
 }
 
@@ -62,21 +97,14 @@ sf::FloatRect DancingPlutonium::ChatBox::GetBounds() const
 	return outLine.getGlobalBounds();
 }
 
-void DancingPlutonium::ChatBox::SetMessage(const sf::String& _msg, const int _size)
-{
-	LoadFont();
-
-	entireMessage = sf::Text(_msg, font, _size);
-	entireMessage.setFillColor(sf::Color::Red);
-	entireMessage.setOutlineColor(sf::Color(128, 128, 128));
-	entireMessage.setOutlineThickness(1);
-
-	entireMessage.setPosition(sf::Vector2f(outLine.getPosition().x + 10, outLine.getPosition().y - 10));
-}
-
 sf::RectangleShape& DancingPlutonium::ChatBox::GetChatBoxOutline()
 {
 	return this->outLine;
+}
+
+bool DancingPlutonium::ChatBox::CanDispose()
+{
+	return canDispose;
 }
 
 void DancingPlutonium::ChatBox::TypeWriterEffect(float _dt)
@@ -95,21 +123,21 @@ void DancingPlutonium::ChatBox::TypeWriterEffect(float _dt)
 
 void DancingPlutonium::ChatBox::FadeOut(float _dt)
 {
-	if (alpha < 255 && accumulator >= 0.0025f)
+	if (alpha <= 255 && accumulator >= 0.025f)
 	{
 		alpha++;
 		accumulator = 0.0f;
 	}
 
-	auto outlineFill = outLine.getFillColor();
-	auto outlineOut = outLine.getOutlineColor();
-	auto entireFill = entireMessage.getFillColor();
-	auto entireOut = entireMessage.getOutlineColor();
+	outLine.setFillColor(sf::Color(outlineFillColor.r, outlineFillColor.g, outlineFillColor.b, alpha));
+	outLine.setOutlineColor(sf::Color(outlineOutColor.r, outlineOutColor.g, outlineOutColor.b, alpha));
+	typeWriterMessage.setFillColor(sf::Color(entireFillColor.r, entireFillColor.g, entireFillColor.b, alpha));
+	typeWriterMessage.setOutlineColor(sf::Color(entireOutColor.r, entireOutColor.g, entireOutColor.b, alpha));
 
-	outLine.setFillColor(sf::Color(outlineFill.r, outlineFill.g, outlineFill.b, alpha));
-	outLine.setOutlineColor(sf::Color(outlineOut.r, outlineOut.g, outlineOut.b, alpha));
-	entireMessage.setFillColor(sf::Color(entireFill.r, entireFill.g, entireFill.b, alpha));
-	entireMessage.setFillColor(sf::Color(entireOut.r, entireOut.g, outlineFill.b, alpha));
+	if (alpha == 256)
+	{
+		isRead = true;
+	}
 }
 
 void DancingPlutonium::ChatBox::LoadFont()

@@ -20,6 +20,10 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window, PlutoniumShip* _p
 	LevelObserver levelObserver = LevelObserver();
 
 	sf::Vector2f chatBoxTest = sf::Vector2f(static_cast<float>(_window.getSize().x) - 20, static_cast<float>(_window.getSize().y) / 5.f);
+
+	// Now that chatboxes work, we can make the Level object itself have a dictionary of string values to create new chatboxes later on.
+	// We should be able to add chatboxes into a vector similar to how we have done in TitleMenu with buttons. 
+	// we'll need to dispose of chatboxes based on the CanDispose() method, and can space the timing of chatboxes by using negative time values on the clock timer
 	ChatBox introChatBox = ChatBox("Press SpaceBar to shoot!, navigate using W A S D keys!", chatBoxTest);
 	introChatBox.SetPosition(sf::Vector2f(10.f, _window.getSize().y - introChatBox.GetChatBoxOutline().getSize().y - 10));
 
@@ -53,20 +57,6 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window, PlutoniumShip* _p
 				tempShip->SpawnRandomly(_window);
 				levelObserver.EnemyShipContainer.push_back(tempShip);
 			}
-			/*else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LControl ||
-				event.key.code == sf::Keyboard::RControl))
-			{
-				_player->GetWeaponEquipped()->UpgradeWeaponPattern();
-			}
-			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LAlt ||
-				event.key.code == sf::Keyboard::RAlt))
-			{
-				_player->GetWeaponEquipped()->UpgradeWeaponFireRate();
-			}
-			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::Up))
-			{
-				_player->GetWeaponEquipped()->UpgradeWeaponVelocityRate();
-			}*/
 		}
 
 		bool isPlayerMoving = InputManager::IsMoving();
@@ -81,12 +71,14 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window, PlutoniumShip* _p
 		dt = clock.restart();
 		_window.clear();
 		_window.draw(bgSprite);
+		// special: Draw chatboxes before other things so the alpha can really work.
+		introChatBox.Update(dt.asSeconds(), box1Timer.getElapsedTime().asSeconds());
+		introChatBox.Draw(_window);
 		_player->Update(dt.asSeconds(), _window);
 		_player->Draw(_window);
 		levelObserver.UpdateEnemyShipContainer(dt.asSeconds(), _window);
 		levelObserver.DrawEnemyShipContainer(_window);
-		introChatBox.Update(dt.asSeconds(), box1Timer.getElapsedTime().asSeconds());
-		introChatBox.Draw(_window);
+		
 
 		// This works! woot woot.
 		if (levelObserver.CheckForUnitToUnitCollision(*_player))

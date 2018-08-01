@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "InputManager.h"
 
 namespace DancingPlutonium
 {
@@ -18,7 +17,7 @@ namespace DancingPlutonium
 		ChatBox(const sf::String& _nameOfBox, const sf::Vector2f _sizeOfBox);
 
 		/* ChatBox copy constructor */
-		ChatBox(const ChatBox& _ref) {}
+		ChatBox(const ChatBox& _ref);
 
 		/* ChatBox destructor */
 		~ChatBox() {}
@@ -42,12 +41,10 @@ namespace DancingPlutonium
 		void SetPosition(const sf::Vector2f _pos);
 		/* Returns the bounding rectangle of this ChatBox */
 		sf::FloatRect GetBounds() const;
-		/* Sets the message qualities of this ChatBox */
-		void SetMessage(const sf::String& _msg, const int _size);
 		/* Returns the RectangleShape that is internal to this ChatBox object */
 		sf::RectangleShape& GetChatBoxOutline();
-
-		//bool ShouldDisposeBox()
+		/* Returns the state of canDispose */
+		bool CanDispose();
 		
 		#pragma endregion
 
@@ -55,14 +52,19 @@ namespace DancingPlutonium
 		#pragma region Private Members
 		
 		bool isRead;					/* Represents the state of whether or not this ChatBox has been read */
+		bool canDispose;				/* Represents after the fact of isRead, that we can safely dispose of this ChatBox */
+		int alpha;						/* Represents the alpha color value for this ChatBox */
 		float accumulator;				/* Represents the accumulator value used to update this ChatBox based on the clock */
 		unsigned int indexer;			/* Represents the index value used to manage the TypeWriter effect */
 		sf::Text entireMessage;			/* Represents the message contained within this ChatBox */
 		sf::Text typeWriterMessage;		/* Represents the substring that is drawn to the screen */
 		sf::RectangleShape outLine;		/* Represents the Rectangle box that this ChatBox will occupy */
-		sf::Uint8 alpha;				/* Represents the alpha color value for this ChatBox */
 		sf::String chatBoxName;			/* Represents this ChatBox name */
 		sf::Font font;					/* Represents the font for this ChatBox */
+		sf::Color outlineFillColor;		/* Represents the outLine objects' fill color, which maintains the same lifetime as this ChatBox */
+		sf::Color outlineOutColor;		/* Represents the outLine objects' outline color, which maintains the same lifetime as this ChatBox */
+		sf::Color entireFillColor;		/* Represents the text objects' fill color, which maintains the same lifetime as this ChatBox */
+		sf::Color entireOutColor;		/* Represents the text objects' outline color, which maintains the same lifetime as this ChatBox */
 
 		#pragma endregion
 
