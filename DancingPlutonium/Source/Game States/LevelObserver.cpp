@@ -12,7 +12,7 @@ DancingPlutonium::LevelObserver::~LevelObserver()
 	ClearEnemyProjectileContainer();
 }
 
-bool DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision(AbstractBaseUnit& _player)
+bool DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision(PlutoniumShip& _player)
 {
 	if (EnemyShipContainer.size() > 0)
 	{
@@ -25,6 +25,18 @@ bool DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision(AbstractBaseUn
 
 			if (Collision::BoundingBoxTest(player, npcUnit))
 			{
+				// issue here: player has 0 lives but is not disposed, so it is allowed to continue going invulnerable but isActive = false, so spam the life loss msg.
+				// fix: need to have player getActive state, but is this really necessary? if player isActive = false it SHOULD be game over anyway.
+				// do this logic some time
+				if (!_player.IsInvulnerable())
+				{
+					// GetHealth returns the players current life, which is then dealt to him
+					_player.TakeDamage(_player.GetHealth());
+
+					std::cout << "You have lost One Life! You had " << _player.LivesRemaining() << " lives." << std::endl;
+
+					_player.RemoveLife();
+				}
 				return true;
 			}
 		}
@@ -68,7 +80,7 @@ bool DancingPlutonium::LevelObserver::CheckForPlayerShotHit(std::vector<Abstract
 	return false;
 }
 
-bool DancingPlutonium::LevelObserver::CheckForEnemyShotHit(AbstractBaseUnit& _player)
+bool DancingPlutonium::LevelObserver::CheckForEnemyShotHit(PlutoniumShip& _player)
 {
 	if (EnemyShipContainer.size() > 0)
 	{
@@ -111,7 +123,7 @@ bool DancingPlutonium::LevelObserver::CheckForEnemyShotHit(AbstractBaseUnit& _pl
 
 void DancingPlutonium::LevelObserver::DoProjectileCollisionDamage(AbstractBaseUnit& _unit1, AbstractBaseProjectile& _unit2)
 {
-	_unit1.SetHealth(_unit2.GetDamage());
+	_unit1.TakeDamage(_unit2.GetDamage());
 }
 
 void DancingPlutonium::LevelObserver::EnemyUnitDeath(AbstractBaseUnit& _unit, PlutoniumShip& _player)

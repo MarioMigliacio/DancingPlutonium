@@ -98,12 +98,12 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		// This works! woot woot.
 		if (levelObserver.CheckForUnitToUnitCollision(*me))
 		{
-			std::cout << "Bumped into an enemy unit." << std::endl;
+			//std::cout << "Bumped into an enemy unit." << std::endl;
 		}
 
 		if (levelObserver.CheckForEnemyShotHit(*me))
 		{
-			std::cout << "Ran into that enemy bullet." << std::endl;
+			//std::cout << "Ran into that enemy bullet." << std::endl;
 		}
 
 		if (levelObserver.CheckForPlayerShotHit(me->GetWeaponEquipped()->GetAmmunitionContainer()))

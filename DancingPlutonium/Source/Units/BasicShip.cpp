@@ -11,6 +11,7 @@ DancingPlutonium::BasicShip::BasicShip(const sf::RenderTarget& _rt)
 	accumulator = 0.0f;
 	speed = 50.0f;
 	isActive = true;
+	isInvulnerable = false;
 	allegiance = -1;
 	SetSprite(_rt);
 	InitializeWeaponry();

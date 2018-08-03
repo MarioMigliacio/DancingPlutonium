@@ -15,6 +15,7 @@ namespace DancingPlutonium
 
 		int value;											/* Represents the point value for the player upon killing this unit */
 		float health;										/* Represents the health points this unit has */
+		bool isInvulnerable;								/* Represents the invulnerable state for this unit */
 		float damageMultiplier;								/* Represents the additional damage multiplier this unit can deal */
 		float fireRate;										/* Represents the rate of fire this unit is allowed to shoot projectiles */
 		float speed;										/* Represents the speed that this unit may move at */
@@ -42,6 +43,10 @@ namespace DancingPlutonium
 		virtual int GetValue() const;
 		/* Returns the health of this unit */
 		virtual float GetHealth() const;
+		/* Returns the state of invulnerability for this unit */
+		bool IsInvulnerable();
+		/* Changes the state of vulnerability for this unit */
+		void ToggleInvulnerability();
 		/* Returns the damageMultiplier of this unit */
 		virtual float GetDamageMultiplier() const;
 		/* Returns the fireRate of this unit */
@@ -63,7 +68,7 @@ namespace DancingPlutonium
 		/* Sets the position and sprite of this projectile to the value of _pos */
 		virtual void SetPosition(const sf::Vector2f& _pos);
 		/* Sets the health of this unit by subtracting the value of _val */
-		virtual void SetHealth(const float _val);
+		virtual void TakeDamage(const float _val);
 		/* Sets the position of this unit to random area */
 		virtual void SpawnRandomly(const sf::RenderTarget& _rt);
 		/* Draw this unit onto the world */

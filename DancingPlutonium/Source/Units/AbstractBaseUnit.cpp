@@ -10,6 +10,16 @@ float DancingPlutonium::AbstractBaseUnit::GetHealth() const
 	return health;
 }
 
+bool DancingPlutonium::AbstractBaseUnit::IsInvulnerable()
+{
+	return isInvulnerable;
+}
+
+void DancingPlutonium::AbstractBaseUnit::ToggleInvulnerability()
+{
+	isInvulnerable ? isInvulnerable = false : isInvulnerable = true;
+}
+
 float DancingPlutonium::AbstractBaseUnit::GetDamageMultiplier() const
 {
 	return damageMultiplier;
@@ -73,11 +83,15 @@ void DancingPlutonium::AbstractBaseUnit::SetPosition(const sf::Vector2f& _pos)
 	sprite.setPosition(_pos);
 }
 
-void DancingPlutonium::AbstractBaseUnit::SetHealth(const float _val)
+void DancingPlutonium::AbstractBaseUnit::TakeDamage(const float _val)
 {
-	health -= _val;
+	if (!isInvulnerable)
+	{
+		health -= _val;
 
-	health > 0.0f ? isActive = true : isActive = false;
+		// this component should only be for Enemy units, players should just lose life.
+		//health > 0.0f ? isActive = true : isActive = false;
+	}
 }
 
 void DancingPlutonium::AbstractBaseUnit::SpawnRandomly(const sf::RenderTarget& _rt)

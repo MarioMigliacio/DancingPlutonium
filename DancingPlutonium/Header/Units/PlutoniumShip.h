@@ -63,6 +63,7 @@ namespace DancingPlutonium
 	private:
 		#pragma region Members
 
+		float invulnerablePeriod;							/* Represents how long the player is allowed invulnerability */
 		short bombs;										/* Represents the bombs count for this PlutoniumShip object */
 		short lives;										/* Represents the lives count for this PlutoniumShip object */
 		int score;											/* Represents the score for this PlutoniumShip object */
@@ -84,13 +85,6 @@ namespace DancingPlutonium
 
 		#pragma endregion
 	private:
-		#pragma region Static State Members
-
-		static sf::Uint32 m_movement;						/* Static variable which maintains the state for this PlutoniumShips movement */
-
-		#pragma endregion
-
-															// Inherited via AbstractBaseUnit
-		
+		static sf::Uint32 m_movement;						/* Static variable which maintains the state for this PlutoniumShips movement */	
 	};
 }
