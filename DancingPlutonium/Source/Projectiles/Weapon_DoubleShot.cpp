@@ -5,7 +5,9 @@ DancingPlutonium::Weapon_DoubleShot::Weapon_DoubleShot(const sf::Vector2f& _pos)
 	leftProjectile = new Weapon_BasicShot(_pos);
 	rightProjectile = new Weapon_BasicShot(_pos);
 	position = _pos;
-	speed = 190.0f;
+	speed = 200.0f;
+	damage = 55.0f;
+	innert = false;
 	SetSprite(_pos);
 }
 
@@ -27,21 +29,30 @@ void DancingPlutonium::Weapon_DoubleShot::SetSprite(const sf::Vector2f& _origin)
 
 void DancingPlutonium::Weapon_DoubleShot::Update(float _dt)
 {
-	//SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - _dt * speed));
-
-	// get that double shot action boiyee
-	auto leftboi = leftProjectile->GetPosition();
-	leftboi.y -= _dt * speed * allegiance;
-	leftProjectile->SetPosition(leftboi);
-	auto rightboi = rightProjectile->GetPosition();
-	rightboi.y -= _dt * speed * allegiance;
-	rightProjectile->SetPosition(rightboi);
+	if (leftProjectile->IsInnert() == false)
+	{
+		auto leftboi = leftProjectile->GetPosition();
+		leftboi.y -= _dt * speed * allegiance;
+		leftProjectile->SetPosition(leftboi);
+	}
+	if (rightProjectile->IsInnert() == false)
+	{
+		auto rightboi = rightProjectile->GetPosition();
+		rightboi.y -= _dt * speed * allegiance;
+		rightProjectile->SetPosition(rightboi);
+	}
 }
 
 void DancingPlutonium::Weapon_DoubleShot::Draw(sf::RenderTarget& _rt)
 {
-	_rt.draw(leftProjectile->GetSprite());
-	_rt.draw(rightProjectile->GetSprite());
+	if (leftProjectile->IsInnert() == false)
+	{
+		_rt.draw(leftProjectile->GetSprite());
+	}
+	if (rightProjectile->IsInnert() == false)
+	{
+		_rt.draw(rightProjectile->GetSprite());
+	}
 }
 
 std::vector<sf::FloatRect> DancingPlutonium::Weapon_DoubleShot::GetBounds()
@@ -79,6 +90,16 @@ std::vector<sf::Sprite> DancingPlutonium::Weapon_DoubleShot::GetAllSprites()
 	std::vector<sf::Sprite> retVal = std::vector<sf::Sprite>();
 	retVal.push_back(leftSprite);
 	retVal.push_back(rightSprite);
+
+	return retVal;
+}
+
+std::vector<DancingPlutonium::AbstractBaseProjectile*> DancingPlutonium::Weapon_DoubleShot::GetAllComponentBullets()
+{
+	auto retVal = std::vector<AbstractBaseProjectile*>();
+
+	retVal.push_back(leftProjectile);
+	retVal.push_back(rightProjectile);
 
 	return retVal;
 }

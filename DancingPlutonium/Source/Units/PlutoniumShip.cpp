@@ -107,6 +107,14 @@ void DancingPlutonium::PlutoniumShip::SetPosition(const sf::Vector2f& _pos)
 	sprite.setPosition(_pos);
 }
 
+void DancingPlutonium::PlutoniumShip::TakeDamage(const float _val)
+{
+	if (!isInvulnerable)
+	{
+		health -= _val;
+	}
+}
+
 void DancingPlutonium::PlutoniumShip::Update(float _dt, sf::RenderTarget& _rt)
 {
 	accumulator += _dt;

@@ -110,7 +110,7 @@ std::vector<DancingPlutonium::AbstractBaseProjectile*> DancingPlutonium::Weapon:
 
 void DancingPlutonium::Weapon::Update(sf::RenderTarget& _rt, float _dt)
 {
-	if (ammunition.size() != 0)
+	/*if (ammunition.size() != 0)
 	{
 		CleanAmmunition(_rt);
 
@@ -118,14 +118,51 @@ void DancingPlutonium::Weapon::Update(sf::RenderTarget& _rt, float _dt)
 		{
 			ammunition[i]->Update(_dt);
 		}
+	}*/
+
+	if (ammunition.size() != 0)
+	{
+		CleanAmmunition(_rt);
+
+		for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
+		{
+			// represents the bullet collection that a single bullet object may be responsible for
+			auto tempStorage = std::vector<AbstractBaseProjectile*>();
+			
+			for (int j = 0; j < static_cast<int>(ammunition[i]->GetAllComponentBullets().size()); j++)
+			{
+				tempStorage = ammunition[i]->GetAllComponentBullets();
+
+				if (tempStorage[j]->IsInnert() == false)
+				{
+					ammunition[i]->Update(_dt);
+				}
+			}			
+		}
 	}
 }
 
 void DancingPlutonium::Weapon::Draw(sf::RenderTarget& _rt)
 {
-	for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
+	/*for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
 	{
 		ammunition[i]->Draw(_rt);
+	}*/
+
+	// represents the bullet collection that a single bullet object may be responsible for
+	auto tempStorage = std::vector<AbstractBaseProjectile*>();
+
+	for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
+	{
+		tempStorage = ammunition[i]->GetAllComponentBullets();
+		
+		for (int j = 0; j < static_cast<int>(ammunition[i]->GetAllComponentBullets().size()); j++)
+		{
+			if (tempStorage[j]->IsInnert() == false)
+			{
+				tempStorage[j]->Draw(_rt);
+			}
+		}
 	}
 }
 
@@ -248,26 +285,26 @@ void DancingPlutonium::Weapon::UpgradeWeaponPattern()
 	switch (weaponPattern)
 	{
 		case AbstractBaseProjectile::ProjectilePattern::BasicShot:
-			weaponPattern = AbstractBaseProjectile::ProjectilePattern::GrowingShot;
-			break;
-		case AbstractBaseProjectile::ProjectilePattern::GrowingShot:
-			weaponPattern = AbstractBaseProjectile::ProjectilePattern::DoubleShot;
-			break;
-		case AbstractBaseProjectile::ProjectilePattern::IncendiaryShot:
-			weaponPattern = AbstractBaseProjectile::ProjectilePattern::AimedShot;
-			break;
-		case AbstractBaseProjectile::ProjectilePattern::AimedShot:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::DoubleShot;
 			break;
 		case AbstractBaseProjectile::ProjectilePattern::DoubleShot:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::TripleShot;
 			break;
+		case AbstractBaseProjectile::ProjectilePattern::TripleShot:
+			weaponPattern = AbstractBaseProjectile::ProjectilePattern::GrowingShot;
+			break;
+		case AbstractBaseProjectile::ProjectilePattern::GrowingShot:
+			weaponPattern = AbstractBaseProjectile::ProjectilePattern::BasicShot;	// loop to beginning (develop the rest of the bullets and change this)
+			break;
+		case AbstractBaseProjectile::ProjectilePattern::AimedShot:
+			weaponPattern = AbstractBaseProjectile::ProjectilePattern::DoubleShot;
+			break;
+		case AbstractBaseProjectile::ProjectilePattern::IncendiaryShot:
+			weaponPattern = AbstractBaseProjectile::ProjectilePattern::AimedShot;
+			break;				
 		case AbstractBaseProjectile::ProjectilePattern::HomingShot:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::TripleShot;
-			break;
-		case AbstractBaseProjectile::ProjectilePattern::TripleShot:
-			weaponPattern = AbstractBaseProjectile::ProjectilePattern::BasicShot;
-			break;
+			break;		
 		case AbstractBaseProjectile::ProjectilePattern::StandardLazer:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::JoesLazer;
 			break;
@@ -321,6 +358,8 @@ void DancingPlutonium::Weapon::UpgradeWeaponDamage()
 	}
 }
 
+// we might need to impose a better cleanup: this might be the time to make levelobserver responsible for the vector of live bullets after all.
+// not vectors of bullets owned by weapons, owned by units...
 void DancingPlutonium::Weapon::CleanAmmunition(sf::RenderTarget& _rt)
 {
 	if (ammunition.size() > 0)

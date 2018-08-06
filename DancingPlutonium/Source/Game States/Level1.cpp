@@ -91,7 +91,7 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window, PlutoniumShip* _p
 			std::cout << "Ran into that enemy bullet." << std::endl;
 		}
 
-		if (levelObserver.CheckForPlayerShotHit(_player->GetWeaponEquipped()->GetAmmunitionContainer()))
+		if (levelObserver.CheckForPlayerShotHit(_player->GetWeaponEquipped()->GetAmmunitionContainer(), *_player))
 		{
 			std::cout << " You shot that enemy unit! " << std::endl;
 		}

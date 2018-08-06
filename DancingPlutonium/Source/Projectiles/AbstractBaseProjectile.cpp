@@ -25,6 +25,14 @@ bool DancingPlutonium::AbstractBaseProjectile::IsInnert() const
 	return innert;
 }
 
+void DancingPlutonium::AbstractBaseProjectile::RenderInnert()
+{
+	if (innert == false)
+	{
+		innert = true;
+	}
+}
+
 float DancingPlutonium::AbstractBaseProjectile::GetDamage() const
 {
 	return damage;

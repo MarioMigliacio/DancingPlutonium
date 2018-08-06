@@ -62,8 +62,10 @@ namespace DancingPlutonium
 		float GetSpeed() const;
 		/* Sets the speed for this projectile */
 		void SetSpeed(const float _speed);
-		/* Returns true if this projectile has not yet hurt a unit, it is said to be active or 'innert', false otherwise */
+		/* Returns true if this projectile has not yet hurt a unit, it is said to be active and not 'innert', false otherwise */
 		bool IsInnert() const;
+		/* If a bullet is not innert, turn it to innert so that it cant do damage, and it will stop updating */
+		void RenderInnert();
 		/* Returns the damage from this projectile */
 		float GetDamage() const;
 		/* Sets the damage for this projectile */
@@ -80,6 +82,8 @@ namespace DancingPlutonium
 		virtual std::vector<sf::FloatRect> GetBounds() = 0;
 		/* Returns the sprites representing the shots for this projectile */
 		virtual std::vector<sf::Sprite> GetAllSprites() = 0;
+		/* Returns the projectiles used to represent this type of bullet spray pattern */
+		virtual std::vector<AbstractBaseProjectile*> GetAllComponentBullets() = 0;
 		/* Draw this projectiles sprite onto the render window _rt */
 		virtual void Draw(sf::RenderTarget& _rt) = 0;
 		/* Abstract method Update must be implemented by inheriting children */

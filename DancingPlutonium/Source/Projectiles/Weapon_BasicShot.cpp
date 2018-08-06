@@ -5,6 +5,8 @@ DancingPlutonium::Weapon_BasicShot::Weapon_BasicShot(const sf::Vector2f& _pos)
 	position = _pos;
 	speed = 200.0f;
 	SetSprite(position);
+	innert = false;
+	damage = 50.0f;
 }
 
 void DancingPlutonium::Weapon_BasicShot::SetSprite(const sf::Vector2f& _origin)
@@ -18,12 +20,18 @@ void DancingPlutonium::Weapon_BasicShot::SetSprite(const sf::Vector2f& _origin)
 
 void DancingPlutonium::Weapon_BasicShot::Update(float _dt)
 {
-	SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - _dt * speed * allegiance));
+	if (!innert)
+	{
+		SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - _dt * speed * allegiance));
+	}
 }
 
 void DancingPlutonium::Weapon_BasicShot::Draw(sf::RenderTarget& _rt)
 {
-	_rt.draw(sprite);
+	if (!innert)
+	{
+		_rt.draw(sprite);
+	}
 }
 
 std::vector<sf::FloatRect> DancingPlutonium::Weapon_BasicShot::GetBounds()
@@ -50,9 +58,17 @@ bool DancingPlutonium::Weapon_BasicShot::GetActiveState(const sf::RenderTarget& 
 
 std::vector<sf::Sprite> DancingPlutonium::Weapon_BasicShot::GetAllSprites()
 {
-	sf::Sprite thisguy = this->sprite;
-	std::vector<sf::Sprite> retVal = std::vector<sf::Sprite>();
-	retVal.push_back(thisguy);
+	auto retVal = std::vector<sf::Sprite>();
+	retVal.push_back(this->sprite);
+
+	return retVal;
+}
+
+std::vector<DancingPlutonium::AbstractBaseProjectile*> DancingPlutonium::Weapon_BasicShot::GetAllComponentBullets()
+{
+	auto retVal = std::vector<AbstractBaseProjectile*>();
+
+	retVal.push_back(this);
 
 	return retVal;
 }

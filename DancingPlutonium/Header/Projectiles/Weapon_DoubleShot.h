@@ -43,6 +43,8 @@ namespace DancingPlutonium
 		// Inherited via AbstractBaseProjectile
 		virtual bool GetActiveState(const sf::RenderTarget & _rt) override;
 		// Inherited via AbstractBaseProjectile
-		virtual std::vector<sf::Sprite> GetAllSprites() override;
+		virtual std::vector<sf::Sprite> GetAllSprites() override;		
+		// Inherited via AbstractBaseProjectile
+		virtual std::vector<AbstractBaseProjectile*> GetAllComponentBullets() override;
 	};
 }

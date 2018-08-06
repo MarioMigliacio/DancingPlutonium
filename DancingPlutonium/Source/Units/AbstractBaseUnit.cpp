@@ -90,7 +90,7 @@ void DancingPlutonium::AbstractBaseUnit::TakeDamage(const float _val)
 		health -= _val;
 
 		// this component should only be for Enemy units, players should just lose life.
-		//health > 0.0f ? isActive = true : isActive = false;
+		health > 0.0f ? isActive = true : isActive = false;
 	}
 }
 

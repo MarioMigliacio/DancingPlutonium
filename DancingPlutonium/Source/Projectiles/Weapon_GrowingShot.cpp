@@ -4,6 +4,8 @@ DancingPlutonium::Weapon_GrowingShot::Weapon_GrowingShot(const sf::Vector2f& _po
 {
 	position = _pos;
 	speed = 175.0f;
+	innert = false;
+	damage = 65.0f;
 	SetSprite(position);
 }
 
@@ -18,13 +20,19 @@ void DancingPlutonium::Weapon_GrowingShot::SetSprite(const sf::Vector2f& _origin
 
 void DancingPlutonium::Weapon_GrowingShot::Update(float _dt)
 {
-	sprite.setScale(sf::Vector2f(sprite.getScale().x + _dt * 2.0f, sprite.getScale().y + _dt * 2.0f));
-	SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - _dt * speed * allegiance));
+	if (!innert)
+	{
+		sprite.setScale(sf::Vector2f(sprite.getScale().x + _dt * 2.0f, sprite.getScale().y + _dt * 2.0f));
+		SetPosition(sf::Vector2f(GetPosition().x, GetPosition().y - _dt * speed * allegiance));
+	}
 }
 
 void DancingPlutonium::Weapon_GrowingShot::Draw(sf::RenderTarget& _rt)
 {
-	_rt.draw(sprite);
+	if (!innert)
+	{
+		_rt.draw(sprite);
+	}
 }
 
 std::vector<sf::FloatRect> DancingPlutonium::Weapon_GrowingShot::GetBounds()
@@ -54,6 +62,15 @@ std::vector<sf::Sprite> DancingPlutonium::Weapon_GrowingShot::GetAllSprites()
 	auto thisguy = this->sprite;
 	std::vector<sf::Sprite> retVal = std::vector<sf::Sprite>();
 	retVal.push_back(thisguy);
+
+	return retVal;
+}
+
+std::vector<DancingPlutonium::AbstractBaseProjectile*> DancingPlutonium::Weapon_GrowingShot::GetAllComponentBullets()
+{
+	auto retVal = std::vector<AbstractBaseProjectile*>();
+
+	retVal.push_back(this);
 
 	return retVal;
 }

@@ -29,7 +29,7 @@ namespace DancingPlutonium
 		/* Returns true if a collision occurs between _player and any units contained in the _enemyUnits container, false otherwise. */
 		bool CheckForUnitToUnitCollision(PlutoniumShip& _player);
 		/* Returns true if a collision occurs between any units contained in the EnemyShipContainer container and the _playerBullets container, false otherwise. */
-		bool CheckForPlayerShotHit(std::vector<AbstractBaseProjectile*>& _playerBullet);
+		bool CheckForPlayerShotHit(std::vector<AbstractBaseProjectile*>& _playerBullet, PlutoniumShip& _player);
 		/* Returns true if a collision occurs between any projectiles within the EnemyShipContainer container and the _player, false otherwise. */
 		bool CheckForEnemyShotHit(PlutoniumShip& _player);
 		/* Once a collision has occured, Object2 deals damage to Unit1. */

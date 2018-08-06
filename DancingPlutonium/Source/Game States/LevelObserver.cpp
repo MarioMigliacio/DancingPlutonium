@@ -16,8 +16,8 @@ bool DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision(PlutoniumShip&
 {
 	if (EnemyShipContainer.size() > 0)
 	{
-		sf::Sprite npcUnit = sf::Sprite();
-		sf::Sprite player = _player.GetSprite();
+		auto npcUnit = sf::Sprite();
+		auto player = _player.GetSprite();
 
 		for (int i = static_cast<int>(EnemyShipContainer.size() - 1); i >= 0; i--)
 		{
@@ -37,6 +37,7 @@ bool DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision(PlutoniumShip&
 
 					_player.RemoveLife();
 				}
+
 				return true;
 			}
 		}
@@ -45,12 +46,13 @@ bool DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision(PlutoniumShip&
 	return false;
 }
 
-bool DancingPlutonium::LevelObserver::CheckForPlayerShotHit(std::vector<AbstractBaseProjectile*>& _playerBullets)
+bool DancingPlutonium::LevelObserver::CheckForPlayerShotHit(std::vector<AbstractBaseProjectile*>& _playerBullets, PlutoniumShip& _player)
 {
 	if (EnemyShipContainer.size() > 0)
 	{
-		sf::Sprite npcUnit = sf::Sprite();
-		std::vector<sf::Sprite> playerBullets = std::vector<sf::Sprite>();
+		auto npcUnit = sf::Sprite();
+		auto playerBullets = std::vector<sf::Sprite>();
+		auto projectileComponents = std::vector<AbstractBaseProjectile*>();
 
 		for (int i = 0; i < static_cast<int>(EnemyShipContainer.size()); i++)
 		{
@@ -61,13 +63,34 @@ bool DancingPlutonium::LevelObserver::CheckForPlayerShotHit(std::vector<Abstract
 				for (int j = 0; j < static_cast<int>(_playerBullets.size()); j++)
 				{
 					playerBullets = _playerBullets[j]->GetAllSprites();
+					projectileComponents = _playerBullets[j]->GetAllComponentBullets();
 
-					if (playerBullets.size() > 0)
+					//if (playerBullets.size() > 0)
+					if (projectileComponents.size() > 0)
 					{
-						for (int k = 0; k < static_cast<int>(playerBullets.size()); k++)
+						//for (int k = 0; k < static_cast<int>(playerBullets.size()); k++)
+						for (int k = 0; k < static_cast<int>(projectileComponents.size()); k++)
 						{
-							if (Collision::BoundingBoxTest(npcUnit, playerBullets[k]))
+							//if (Collision::BoundingBoxTest(npcUnit, playerBullets[k]) && !_playerBullets[j]->IsInnert())
+							if (Collision::BoundingBoxTest(npcUnit, projectileComponents[k]->GetSprite()) && !_playerBullets[j]->IsInnert())
 							{
+								if (!EnemyShipContainer[i]->IsInvulnerable())
+								{
+									// a bullet hit an enemy, so we need to disable it's damage in the many frames that it is colliding.
+									projectileComponents[k]->RenderInnert();
+
+									// if an enemy unit dies, before rendering it as Inactive, add its score to our player!
+									if (EnemyShipContainer[i]->GetHealth() <= projectileComponents[k]->GetDamage())
+									{
+										EnemyUnitDeath(*EnemyShipContainer[i], _player);
+										std::cout << "player score is currently: " << _player.GetScore() << "!" << std::endl;
+									}
+
+									EnemyShipContainer[i]->TakeDamage(projectileComponents[k]->GetDamage());
+
+									std::cout << "An enemy unit took " << projectileComponents[k]->GetDamage() << " damage!" << std::endl;
+								}
+
 								return true;
 							}
 						}

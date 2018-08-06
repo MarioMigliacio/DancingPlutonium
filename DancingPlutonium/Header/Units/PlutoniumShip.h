@@ -48,6 +48,8 @@ namespace DancingPlutonium
 		void SetMoveState(const sf::Uint32 _state);
 		/* Sets the position for this PlutoniumShip object based on the _pos input parameter */
 		void SetPosition(const sf::Vector2f& _pos);
+		/* Sets the health of this unit by subtracting the value of _val (behavior is different for regular units) */
+		virtual void TakeDamage(const float _val) override;
 		/* Update this PlutoniumShip in the world based on the clock and render winder input parameters */
 		void Update(float dt, sf::RenderTarget& _rt);
 		/* Draw this PlutoniumShip sprite onto the render window _rt */
