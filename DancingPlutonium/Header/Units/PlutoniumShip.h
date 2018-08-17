@@ -25,7 +25,6 @@ namespace DancingPlutonium
 
 		#pragma region Public Methods
 
-		sf::FloatRect GetRect() const;
 		/* Returns the amount lives remaining for this PlutoniumShip object */
 		int LivesRemaining() const;
 		/* Adds to the life count for this PlutoniumShip object */
@@ -40,8 +39,6 @@ namespace DancingPlutonium
 		bool IsWithinBounds(const sf::RenderTarget& _rt) override;
 		/* Modifies this PlutoniumShip object's movement state based on _state input parameter*/
 		void SetMovingState(bool _state);
-		/* Returns the current weaponry state for this PlutoniumShip object */
-		sf::Uint32 GetWeaponState() const;
 		/* Allows access to this PlutoniumShip objects weapon pointer */
 		Weapon* GetWeaponEquipped();
 		/* Sets the movement state for this PlutoniumShip object based on the _state input parameter */
@@ -54,14 +51,15 @@ namespace DancingPlutonium
 		void Update(float dt, sf::RenderTarget& _rt);
 		/* Draw this PlutoniumShip sprite onto the render window _rt */
 		void Draw(sf::RenderTarget& _rt);
-		/* If a projectile is allowed to be fired, ShootBullet adds the ammunition to the Weapon container */
-		virtual void ShootBullet(const float _dt) override;
-		/* Free up lost bullets if they go out of bounds */
-		void CleanAmmunition(const sf::RenderTarget& _rt);
 		/* Gets the sprite object for THIS unit. There was an issue with the abstract base class owning this method. */
 		virtual sf::Sprite& GetSprite() override;
+		/* Calls upon this unit to see if it can shoot */
+		virtual bool CanShoot(const float & _dt) override;
+		/* Calls upon this unit to Shoot a projectile */
+		virtual AbstractBaseProjectile* Shoot() override;
 
 		#pragma endregion
+
 	private:
 		#pragma region Members
 
@@ -80,13 +78,11 @@ namespace DancingPlutonium
 
 		#pragma region Private Methods
 
-		/* Sets the Weaponry state for this PlutoniumShip to a safe default state */
-		virtual void InitializeWeaponry() override;
 		/* Sets this PlutoniumShips sprite, texture and default position */
 		void SetSprite(const sf::RenderTarget& _rt);
 
 		#pragma endregion
 	private:
-		static sf::Uint32 m_movement;						/* Static variable which maintains the state for this PlutoniumShips movement */	
+		static sf::Uint32 m_movement;						/* Static variable which maintains the state for this PlutoniumShips movement */
 	};
 }

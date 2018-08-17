@@ -3,31 +3,24 @@
 
 sf::Uint32 DancingPlutonium::PlutoniumShip::m_movement = Movement::s_noMovement;
 
-DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt)
+DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt) : AbstractBaseUnit(), lives(3),
+	invulnerablePeriod(0.0f),
+	bombs(0),
+	score(0)
+	
 {
-	lives = 3;
-	invulnerablePeriod = 0.0f;
-	bombs = 0;
-	score = 0;
-	health = 100;
-	accumulator = 0.0f;
 	speed = 175.0f;
 	isActive = true;
 	isInvulnerable = false;
 	allegiance = 1;
 	SetSprite(_rt);
-	fireRate = 0.5;
-	InitializeWeaponry();
+	fireRate = 0.5f;
+	weapon = new Weapon(fireRate, allegiance);
 }
 
 DancingPlutonium::PlutoniumShip::~PlutoniumShip()
 {
 	delete weapon;
-}
-
-sf::FloatRect DancingPlutonium::PlutoniumShip::GetRect() const
-{
-	return sprite.getGlobalBounds();
 }
 
 int DancingPlutonium::PlutoniumShip::LivesRemaining() const
@@ -86,10 +79,6 @@ void DancingPlutonium::PlutoniumShip::SetMovingState(bool _state)
 	isMoving = _state;
 }
 
-sf::Uint32 DancingPlutonium::PlutoniumShip::GetWeaponState() const
-{
-	return weapon->GetPattern();
-}
 
 DancingPlutonium::Weapon* DancingPlutonium::PlutoniumShip::GetWeaponEquipped()
 {
@@ -138,88 +127,88 @@ void DancingPlutonium::PlutoniumShip::Update(float _dt, sf::RenderTarget& _rt)
 			// perform bounds checking to make sure the player is within the render window limits before calling SetPosition().
 			switch (m_movement)
 			{
-			case Movement::s_north:
-				SetPosition(sf::Vector2f(position.x, position.y - speed * _dt));
-				break;
-			case Movement::s_east:
-				SetPosition(sf::Vector2f(position.x + speed * _dt, position.y));
-				break;
-			case Movement::s_south:
-				SetPosition(sf::Vector2f(position.x, position.y + speed * _dt));
-				break;
-			case Movement::s_west:
-				SetPosition(sf::Vector2f(position.x - speed * _dt, position.y));
-				break;
-			case Movement::s_northWest:
-				SetPosition(sf::Vector2f(position.x - speed * _dt, position.y - speed * _dt));
-				if (!IsWithinBounds(_rt))
-				{
-					SetPosition(tempPosition);
-					SetPosition(sf::Vector2f(position.x - speed * _dt, position.y));
-				}
-				if (!IsWithinBounds(_rt))
-				{
-					SetPosition(tempPosition);
+				case Movement::s_north:
 					SetPosition(sf::Vector2f(position.x, position.y - speed * _dt));
-				}
-				if (!IsWithinBounds(_rt))
-				{
-					SetPosition(tempPosition);
-				}
-				break;
-			case Movement::s_northEast:
-				SetPosition(sf::Vector2f(position.x + speed * _dt, position.y - speed * _dt));
-				if (!IsWithinBounds(_rt))
-				{
-					SetPosition(tempPosition);
+					break;
+				case Movement::s_east:
 					SetPosition(sf::Vector2f(position.x + speed * _dt, position.y));
-				}
-				if (!IsWithinBounds(_rt))
-				{
-					SetPosition(tempPosition);
-					SetPosition(sf::Vector2f(position.x, position.y - speed * _dt));
-				}
-				if (!IsWithinBounds(_rt))
-				{
-					SetPosition(tempPosition);
-				}
-				break;
-			case Movement::s_southEast:
-				SetPosition(sf::Vector2f(position.x + speed * _dt, position.y + speed * _dt));
-				if (!IsWithinBounds(_rt))
-				{
-					SetPosition(tempPosition);
-					SetPosition(sf::Vector2f(position.x + speed * _dt, position.y));
-				}
-				if (!IsWithinBounds(_rt))
-				{
-					SetPosition(tempPosition);
+					break;
+				case Movement::s_south:
 					SetPosition(sf::Vector2f(position.x, position.y + speed * _dt));
-				}
-				if (!IsWithinBounds(_rt))
-				{
-					SetPosition(tempPosition);
-				}
-				break;
-			case Movement::s_southWest:
-				SetPosition(sf::Vector2f(position.x - speed * _dt, position.y + speed * _dt));
-				if (!IsWithinBounds(_rt))
-				{
-					SetPosition(tempPosition);
+					break;
+				case Movement::s_west:
 					SetPosition(sf::Vector2f(position.x - speed * _dt, position.y));
-				}
-				if (!IsWithinBounds(_rt))
-				{
-					SetPosition(tempPosition);
-					SetPosition(sf::Vector2f(position.x, position.y + speed * _dt));
-				}
-				if (!IsWithinBounds(_rt))
-				{
-					SetPosition(tempPosition);
-				}
-				break;
-			default:
-				break;
+					break;
+				case Movement::s_northWest:
+					SetPosition(sf::Vector2f(position.x - speed * _dt, position.y - speed * _dt));
+					if (!IsWithinBounds(_rt))
+					{
+						SetPosition(tempPosition);
+						SetPosition(sf::Vector2f(position.x - speed * _dt, position.y));
+					}
+					if (!IsWithinBounds(_rt))
+					{
+						SetPosition(tempPosition);
+						SetPosition(sf::Vector2f(position.x, position.y - speed * _dt));
+					}
+					if (!IsWithinBounds(_rt))
+					{
+						SetPosition(tempPosition);
+					}
+					break;
+				case Movement::s_northEast:
+					SetPosition(sf::Vector2f(position.x + speed * _dt, position.y - speed * _dt));
+					if (!IsWithinBounds(_rt))
+					{
+						SetPosition(tempPosition);
+						SetPosition(sf::Vector2f(position.x + speed * _dt, position.y));
+					}
+					if (!IsWithinBounds(_rt))
+					{
+						SetPosition(tempPosition);
+						SetPosition(sf::Vector2f(position.x, position.y - speed * _dt));
+					}
+					if (!IsWithinBounds(_rt))
+					{
+						SetPosition(tempPosition);
+					}
+					break;
+				case Movement::s_southEast:
+					SetPosition(sf::Vector2f(position.x + speed * _dt, position.y + speed * _dt));
+					if (!IsWithinBounds(_rt))
+					{
+						SetPosition(tempPosition);
+						SetPosition(sf::Vector2f(position.x + speed * _dt, position.y));
+					}
+					if (!IsWithinBounds(_rt))
+					{
+						SetPosition(tempPosition);
+						SetPosition(sf::Vector2f(position.x, position.y + speed * _dt));
+					}
+					if (!IsWithinBounds(_rt))
+					{
+						SetPosition(tempPosition);
+					}
+					break;
+				case Movement::s_southWest:
+					SetPosition(sf::Vector2f(position.x - speed * _dt, position.y + speed * _dt));
+					if (!IsWithinBounds(_rt))
+					{
+						SetPosition(tempPosition);
+						SetPosition(sf::Vector2f(position.x - speed * _dt, position.y));
+					}
+					if (!IsWithinBounds(_rt))
+					{
+						SetPosition(tempPosition);
+						SetPosition(sf::Vector2f(position.x, position.y + speed * _dt));
+					}
+					if (!IsWithinBounds(_rt))
+					{
+						SetPosition(tempPosition);
+					}
+					break;
+				default:
+					break;
 			}
 
 			if (!IsWithinBounds(_rt))
@@ -228,13 +217,15 @@ void DancingPlutonium::PlutoniumShip::Update(float _dt, sf::RenderTarget& _rt)
 			}
 		}
 
-		// update bullets
 		if (InputManager::IsShooting())
 		{
-			ShootBullet(accumulator);
+			if (CanShoot(accumulator) && !IsFiringBullet())
+			{
+				// remember that the LevelObserver needs to do the same operation, toggleFiring needs to flip or we'll never be able to shoot again!
+				ToggleFiring();
+				accumulator = 0.0f;
+			}
 		}
-
-		weapon->Update(_rt, _dt);
 
 		// go blinky blinky! (get around to it eventually)
 		if (isInvulnerable)
@@ -254,25 +245,6 @@ void DancingPlutonium::PlutoniumShip::Update(float _dt, sf::RenderTarget& _rt)
 void DancingPlutonium::PlutoniumShip::Draw(sf::RenderTarget& _rt)
 {
 	_rt.draw(sprite);
-	weapon->Draw(_rt);
-}
-
-void DancingPlutonium::PlutoniumShip::ShootBullet(const float _dt)
-{
-	if (weapon->AddMunition(sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f), _dt))
-	{
-		accumulator = 0.0f;
-		//std::cout << " Torpedo Fired! " << std::endl;
-		//std::cout << " we are at POS: (" << position.x << ", " << position.y << ")" << std::endl;
-		//std::cout << " our rect bounds are at (L: " << sprite.getGlobalBounds().left << ", T: " << sprite.getGlobalBounds().top <<
-		//	", W: " << sprite.getGlobalBounds().width << ", H: " << sprite.getGlobalBounds().height << std::endl;
-	}
-}
-
-
-void DancingPlutonium::PlutoniumShip::InitializeWeaponry()
-{
-	weapon = new Weapon(fireRate, allegiance);
 }
 
 void DancingPlutonium::PlutoniumShip::SetSprite(const sf::RenderTarget& _rt)
@@ -287,6 +259,18 @@ void DancingPlutonium::PlutoniumShip::SetSprite(const sf::RenderTarget& _rt)
 	sprite.setOrigin(sf::Vector2f(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f));
 	sprite.setPosition(origin);
 	position = origin;
+}
+
+bool DancingPlutonium::PlutoniumShip::CanShoot(const float & _dt)
+{
+	return weapon->CanShoot(_dt);
+}
+
+DancingPlutonium::AbstractBaseProjectile* DancingPlutonium::PlutoniumShip::Shoot()
+{
+	auto retVal = weapon->SpawnBullet(position);
+
+	return retVal;
 }
 
 sf::Sprite& DancingPlutonium::PlutoniumShip::GetSprite()

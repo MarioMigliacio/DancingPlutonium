@@ -23,15 +23,15 @@ namespace DancingPlutonium
 
 		/* Sets this ships sprite, texture and default position */
 		virtual void SetSprite(const sf::RenderTarget& _rt) override;
-		/* Activate a projectile that spawns from this ship */
-		virtual void ShootBullet(const float _dt) override;
 		/* Updates this unit in the world */
 		virtual void Update(float _dt, sf::RenderTarget& _rt) override;
-		/* Initialize the weaponry system for this unit */
-		virtual void InitializeWeaponry() override;
 		/* Gets the sprite for THIS object, not the base abstract unit. This was causing issues. */
 		virtual sf::Sprite& GetSprite() override;
+		// /* Calls upon this unit to see if it can shoot */
+		virtual bool CanShoot(const float & _dt) override;
+		/* Calls upon this unit to Shoot a projectile */
+		virtual AbstractBaseProjectile* Shoot() override;
 
-		#pragma endregion
+		#pragma endregion		
 	};
 }

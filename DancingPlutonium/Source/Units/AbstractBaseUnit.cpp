@@ -10,7 +10,7 @@ float DancingPlutonium::AbstractBaseUnit::GetHealth() const
 	return health;
 }
 
-bool DancingPlutonium::AbstractBaseUnit::IsInvulnerable()
+bool DancingPlutonium::AbstractBaseUnit::IsInvulnerable() const
 {
 	return isInvulnerable;
 }
@@ -18,6 +18,16 @@ bool DancingPlutonium::AbstractBaseUnit::IsInvulnerable()
 void DancingPlutonium::AbstractBaseUnit::ToggleInvulnerability()
 {
 	isInvulnerable ? isInvulnerable = false : isInvulnerable = true;
+}
+
+bool DancingPlutonium::AbstractBaseUnit::IsFiringBullet() const
+{
+	return isFiring;
+}
+
+void DancingPlutonium::AbstractBaseUnit::ToggleFiring()
+{
+	isFiring ? isFiring = false : isFiring = true;
 }
 
 float DancingPlutonium::AbstractBaseUnit::GetDamageMultiplier() const
@@ -51,7 +61,7 @@ bool DancingPlutonium::AbstractBaseUnit::IsWithinBounds(const sf::RenderTarget& 
 	}
 }
 
-DancingPlutonium::Weapon* DancingPlutonium::AbstractBaseUnit::GetWeaponEquipped() const
+DancingPlutonium::Weapon* DancingPlutonium::AbstractBaseUnit::GetWeaponEquipped()
 {
 	return weapon;
 }
@@ -61,20 +71,9 @@ bool DancingPlutonium::AbstractBaseUnit::GetActiveState() const
 	return isActive;
 }
 
-
-sf::Texture DancingPlutonium::AbstractBaseUnit::GetTexture() const
-{
-	return texture;
-}
-
 sf::Vector2f DancingPlutonium::AbstractBaseUnit::GetPosition() const
 {
 	return position;
-}
-
-sf::FloatRect DancingPlutonium::AbstractBaseUnit::GetBounds() const
-{
-	return sprite.getGlobalBounds();
 }
 
 void DancingPlutonium::AbstractBaseUnit::SetPosition(const sf::Vector2f& _pos)
@@ -105,5 +104,4 @@ void DancingPlutonium::AbstractBaseUnit::SpawnRandomly(const sf::RenderTarget& _
 void DancingPlutonium::AbstractBaseUnit::Draw(sf::RenderTarget& _rt)
 {
 	_rt.draw(sprite);
-	weapon->Draw(_rt);
 }

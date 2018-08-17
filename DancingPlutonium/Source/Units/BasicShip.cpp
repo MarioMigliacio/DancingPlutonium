@@ -2,6 +2,7 @@
 
 #include "BasicShip.h"
 
+// Is there a better way to get the initializer list going for this type of design?
 DancingPlutonium::BasicShip::BasicShip(const sf::RenderTarget& _rt)
 {
 	value = 50;
@@ -14,7 +15,8 @@ DancingPlutonium::BasicShip::BasicShip(const sf::RenderTarget& _rt)
 	isInvulnerable = false;
 	allegiance = -1;
 	SetSprite(_rt);
-	InitializeWeaponry();
+
+	weapon = new Weapon(fireRate, allegiance);
 }
 
 DancingPlutonium::BasicShip::~BasicShip()
@@ -35,14 +37,6 @@ void DancingPlutonium::BasicShip::SetSprite(const sf::RenderTarget& _rt)
 	SetPosition(origin);
 }
 
-void DancingPlutonium::BasicShip::ShootBullet(float _dt)
-{
-	if (weapon->AddMunition(sf::Vector2f(position.x + 3, position.y - texture.getSize().y / 2.0f), _dt))
-	{
-		accumulator = 0.0f;
-	}
-}
-
 void DancingPlutonium::BasicShip::Update(float _dt, sf::RenderTarget& _rt)
 {
 	accumulator += _dt;
@@ -50,18 +44,31 @@ void DancingPlutonium::BasicShip::Update(float _dt, sf::RenderTarget& _rt)
 	if (IsWithinBounds(_rt))
 	{
 		SetPosition(sf::Vector2f(position.x, position.y + speed * _dt));
-		ShootBullet(accumulator);
-		weapon->Update(_rt, _dt);
-	}
-}
+		// ask to shoot a bullet
 
-void DancingPlutonium::BasicShip::InitializeWeaponry()
-{
-	weapon = new Weapon(fireRate, allegiance);
+		if (CanShoot(accumulator) && !IsFiringBullet())
+		{
+			// remember that the LevelObserver needs to do the same operation, toggleFiring needs to flip or we'll never be able to shoot again!
+			ToggleFiring();
+			accumulator = 0.0f;
+		}
+	}
 }
 
 sf::Sprite& DancingPlutonium::BasicShip::GetSprite()
 {
 	return this->sprite;
+}
+
+bool DancingPlutonium::BasicShip::CanShoot(const float & _dt)
+{
+	return weapon->CanShoot(_dt);
+}
+
+DancingPlutonium::AbstractBaseProjectile* DancingPlutonium::BasicShip::Shoot()
+{
+	auto retVal = weapon->SpawnBullet(position);
+
+	return retVal;
 }
 

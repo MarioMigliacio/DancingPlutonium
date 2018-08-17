@@ -38,10 +38,12 @@ namespace DancingPlutonium
 		void EnemyUnitDeath(AbstractBaseUnit& _unit, PlutoniumShip& _player);
 		/* Perform a weapon upgrade on the _unit in question. */
 		void UpgradeUnitWeaponry(AbstractBaseUnit& _unit);
-		/* Call for an update on the units contained within the EnemyShipContainer. */
-		void UpdateEnemyShipContainer(float dt, sf::RenderTarget& _rt);
-		/* Call for a draw on the units contained within the EnemyShipContainer. */
-		void DrawEnemyShipContainer(sf::RenderTarget& _rt);
+		/* Call for an update on our LevelObserver object. */
+		void Update(sf::RenderTarget& _rt, float _dt, PlutoniumShip& _player);
+		/* Call to Draw our LevelObserver components to the render target. */
+		void Draw(sf::RenderTarget& _rt);
+		/* Clean up projectiles which have become Inactive */
+		void CleanAmmunition(sf::RenderTarget& _rt);
 
 		#pragma endregion
 

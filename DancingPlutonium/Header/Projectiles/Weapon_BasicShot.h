@@ -13,6 +13,8 @@ namespace DancingPlutonium
 
 		/* BasicBullet constructor accepting RenderTarget, and Position input parameters */
 		Weapon_BasicShot(const sf::Vector2f& _pos);
+		/* A specialized BasicBullet constructor which also accepts a damage, velocity, and allegiance input */
+		Weapon_BasicShot(const sf::Vector2f& _pos, const float& _dmg, const float& _vel, const short& _alle);
 		/* BasicBullet copy constructor */
 		Weapon_BasicShot(const Weapon_BasicShot& _ref) {}
 		/* BasicBullet destructor */
@@ -28,7 +30,7 @@ namespace DancingPlutonium
 		virtual void Update(float _dt) override;
 		// Draw this projectile in the world
 		virtual void Draw(sf::RenderTarget& _rt) override;
-
+		//float damage;
 		#pragma endregion
 
 		// Inherited via AbstractBaseProjectile

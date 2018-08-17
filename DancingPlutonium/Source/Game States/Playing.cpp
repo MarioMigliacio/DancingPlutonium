@@ -52,6 +52,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{	
+				// Extract this into a Spawn ship function owned by LevelObserver. This way we can Spawn waves of ships in sequences.
 				auto tempShip = new BasicShip(_window);
 				tempShip->SpawnRandomly(_window);
 				levelObserver.EnemyShipContainer.push_back(tempShip);
@@ -92,8 +93,10 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		_window.draw(bgSprite);
 		me->Update(dt.asSeconds(), _window);
 		me->Draw(_window);
-		levelObserver.UpdateEnemyShipContainer(dt.asSeconds(), _window);
-		levelObserver.DrawEnemyShipContainer(_window);
+
+		// Update the LevelObserver object AFTER the player. (we have to check if player is trying to shoot, then toggle if true)
+		levelObserver.Update(_window, dt.asSeconds(), *me);
+		levelObserver.Draw(_window);
 		
 		// This works! woot woot.
 		if (levelObserver.CheckForUnitToUnitCollision(*me))
@@ -106,10 +109,10 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			//std::cout << "Ran into that enemy bullet." << std::endl;
 		}
 
-		if (levelObserver.CheckForPlayerShotHit(me->GetWeaponEquipped()->GetAmmunitionContainer(), *me))
+		/*if (levelObserver.CheckForPlayerShotHit(me->GetWeaponEquipped()->GetAmmunitionContainer(), *me))
 		{
 			std::cout << " You shot that enemy unit! " << std::endl;
-		}
+		}*/
 
 		_window.display();
 	}

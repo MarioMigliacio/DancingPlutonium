@@ -32,7 +32,8 @@ namespace DancingPlutonium
 		#pragma region Factory Method
 
 		/* Gets a reference to a Projectile based on enum type, and position input parameters */
-		static AbstractBaseProjectile* GetProjectile(AbstractBaseProjectile::ProjectilePattern _toMake, sf::Vector2f& _pos);
+		static AbstractBaseProjectile* GetProjectile(const AbstractBaseProjectile::ProjectilePattern _toMake, const sf::Vector2f& _pos, 
+			float _dmg = -1.0f, float _vel = -1.0f, short _alle = 0);
 
 		#pragma endregion
 	};		

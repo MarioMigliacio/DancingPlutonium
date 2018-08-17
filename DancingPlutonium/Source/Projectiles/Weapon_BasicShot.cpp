@@ -9,6 +9,16 @@ DancingPlutonium::Weapon_BasicShot::Weapon_BasicShot(const sf::Vector2f& _pos)
 	damage = 50.0f;
 }
 
+DancingPlutonium::Weapon_BasicShot::Weapon_BasicShot(const sf::Vector2f& _pos, const float& _dmg, const float& _vel, const short& _alle)
+{
+	position = _pos;
+	speed = _vel * 200.0f;
+	SetSprite(position);
+	innert = false;
+	damage = 50.0f * _dmg;
+	allegiance = _alle;
+}
+
 void DancingPlutonium::Weapon_BasicShot::SetSprite(const sf::Vector2f& _origin)
 {
 	texture.loadFromFile("Content/Images/BulletBlue.png");

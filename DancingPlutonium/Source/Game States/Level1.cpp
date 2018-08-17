@@ -76,8 +76,8 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window, PlutoniumShip* _p
 		introChatBox.Draw(_window);
 		_player->Update(dt.asSeconds(), _window);
 		_player->Draw(_window);
-		levelObserver.UpdateEnemyShipContainer(dt.asSeconds(), _window);
-		levelObserver.DrawEnemyShipContainer(_window);
+		levelObserver.Update(_window, dt.asSeconds(), *_player);
+		levelObserver.Draw(_window);
 		
 
 		// This works! woot woot.
@@ -91,10 +91,10 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window, PlutoniumShip* _p
 			std::cout << "Ran into that enemy bullet." << std::endl;
 		}
 
-		if (levelObserver.CheckForPlayerShotHit(_player->GetWeaponEquipped()->GetAmmunitionContainer(), *_player))
+		/*if (levelObserver.CheckForPlayerShotHit(_player->GetWeaponEquipped()->GetAmmunitionContainer(), *_player))
 		{
 			std::cout << " You shot that enemy unit! " << std::endl;
-		}
+		}*/
 
 		_window.display();
 	}

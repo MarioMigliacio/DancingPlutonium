@@ -105,41 +105,41 @@ bool DancingPlutonium::LevelObserver::CheckForPlayerShotHit(std::vector<Abstract
 
 bool DancingPlutonium::LevelObserver::CheckForEnemyShotHit(PlutoniumShip& _player)
 {
-	if (EnemyShipContainer.size() > 0)
-	{
-		std::vector<sf::Sprite> enemyBullets = std::vector<sf::Sprite>();
-		sf::Sprite player = _player.GetSprite();
+	//if (EnemyShipContainer.size() > 0)
+	//{
+	//	std::vector<sf::Sprite> enemyBullets = std::vector<sf::Sprite>();
+	//	sf::Sprite player = _player.GetSprite();
 
-		for (int i = static_cast<int>(EnemyShipContainer.size() - 1); i >= 0; i--)
-		{
-			if (EnemyShipContainer[i]->GetActiveState())
-			{
-				auto allademeEnemybulletsMmHmm = EnemyShipContainer[i]->GetWeaponEquipped()->GetAmmunitionContainer();
+	//	for (int i = static_cast<int>(EnemyShipContainer.size() - 1); i >= 0; i--)
+	//	{
+	//		if (EnemyShipContainer[i]->GetActiveState())
+	//		{
+	//			auto allademeEnemybulletsMmHmm = EnemyShipContainer[i]->GetWeaponEquipped()->GetAmmunitionContainer();
 
-				if (allademeEnemybulletsMmHmm.size() > 0)
-				{
-					// for every projectile in the enemy container.. 
-					for (int j = static_cast<int>(allademeEnemybulletsMmHmm.size()) - 1; j >= 0; j--)
-					{
-						// get its component projectiles
-						enemyBullets = allademeEnemybulletsMmHmm[j]->GetAllSprites();
+	//			if (allademeEnemybulletsMmHmm.size() > 0)
+	//			{
+	//				// for every projectile in the enemy container.. 
+	//				for (int j = static_cast<int>(allademeEnemybulletsMmHmm.size()) - 1; j >= 0; j--)
+	//				{
+	//					// get its component projectiles
+	//					enemyBullets = allademeEnemybulletsMmHmm[j]->GetAllSprites();
 
-						if (enemyBullets.size() > 0)
-						{
-							// for every component projectile, check if it intersects with US!
-							for (int k = static_cast<int>(enemyBullets.size()) - 1; k >= 0; k--)
-							{
-								if (Collision::BoundingBoxTest(enemyBullets[k], player))
-								{
-									return true;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+	//					if (enemyBullets.size() > 0)
+	//					{
+	//						// for every component projectile, check if it intersects with US!
+	//						for (int k = static_cast<int>(enemyBullets.size()) - 1; k >= 0; k--)
+	//						{
+	//							if (Collision::BoundingBoxTest(enemyBullets[k], player))
+	//							{
+	//								return true;
+	//							}
+	//						}
+	//					}
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 
 	return false;
 }
@@ -159,8 +159,18 @@ void DancingPlutonium::LevelObserver::UpgradeUnitWeaponry(AbstractBaseUnit& _uni
 	_unit.GetWeaponEquipped()->UpgradeWeaponPattern();
 }
 
-void DancingPlutonium::LevelObserver::UpdateEnemyShipContainer(float _dt, sf::RenderTarget& _rt)
+/// This is where a lot of testing is going to be needed.
+void DancingPlutonium::LevelObserver::Update(sf::RenderTarget& _rt, float _dt, PlutoniumShip& _player)
 {
+	// push back bullets fired by us if we are allowed to do so
+	if (_player.IsFiringBullet())
+	{
+		_player.ToggleFiring();
+		auto b = _player.Shoot();
+		EnemyProjectileContainer.push_back(b);
+	}
+
+	// Update the EnemyShipContainer
 	for (int i = static_cast<int>(EnemyShipContainer.size() - 1); i >= 0; i--)
 	{
 		EnemyShipContainer[i]->Update(_dt, _rt);
@@ -170,14 +180,77 @@ void DancingPlutonium::LevelObserver::UpdateEnemyShipContainer(float _dt, sf::Re
 			delete EnemyShipContainer[i];
 			EnemyShipContainer.erase(EnemyShipContainer.begin() + i);
 		}
+
+		// push back bullets fired by an enemy unit that is allowed to do so
+		if (EnemyShipContainer[i]->IsFiringBullet())
+		{
+			EnemyShipContainer[i]->ToggleFiring();
+			auto b = EnemyShipContainer[i]->Shoot();
+			EnemyProjectileContainer.push_back(b);
+		}
+	}
+
+	// Update the ProjectileContainer
+	if (EnemyProjectileContainer.size() != 0)
+	{
+		CleanAmmunition(_rt);
+		
+		for (int i = 0; i < static_cast<int>(EnemyProjectileContainer.size()); i++)
+		{
+			// represents the bullet collection that a single bullet object may be responsible for (multi shot, etc..)
+			auto tempStorage = std::vector<AbstractBaseProjectile*>();
+					
+			for (int j = 0; j < static_cast<int>(EnemyProjectileContainer[i]->GetAllComponentBullets().size()); j++)
+			{
+				tempStorage = EnemyProjectileContainer[i]->GetAllComponentBullets();
+		
+				if (tempStorage[j]->IsInnert() == false)
+				{
+					EnemyProjectileContainer[i]->Update(_dt);
+				}
+			}			
+		}
 	}
 }
 
-void DancingPlutonium::LevelObserver::DrawEnemyShipContainer(sf::RenderTarget& _rt)
+void DancingPlutonium::LevelObserver::Draw(sf::RenderTarget & _rt)
 {
+	// Draw the EnemyShipContainer
 	for (int i = 0; i <= static_cast<int>(EnemyShipContainer.size() - 1); i++)
 	{
 		EnemyShipContainer[i]->Draw(_rt);
+	}
+
+	// represents the bullet collection that a single bullet object may be responsible for
+	auto tempStorage = std::vector<AbstractBaseProjectile*>();
+	
+	for (int i = 0; i < static_cast<int>(EnemyProjectileContainer.size()); i++)
+	{
+		tempStorage = EnemyProjectileContainer[i]->GetAllComponentBullets();
+			
+		for (int j = 0; j < static_cast<int>(EnemyProjectileContainer[i]->GetAllComponentBullets().size()); j++)
+		{
+			if (tempStorage[j]->IsInnert() == false)
+			{
+				tempStorage[j]->Draw(_rt);
+			}
+		}
+	}
+}
+
+void DancingPlutonium::LevelObserver::CleanAmmunition(sf::RenderTarget& _rt)
+{
+	if (EnemyProjectileContainer.size() > 0)
+	{
+		// backwards iterators for vectors more efficient
+		for (int i = static_cast<int>(EnemyProjectileContainer.size() - 1); i >= 0; i--)
+		{
+			if (EnemyProjectileContainer[i]->GetActiveState(_rt) == false)
+			{
+				delete EnemyProjectileContainer[i];
+				EnemyProjectileContainer.erase(EnemyProjectileContainer.begin() + i);
+			}
+		}
 	}
 }
 

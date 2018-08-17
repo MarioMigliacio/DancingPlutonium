@@ -8,9 +8,58 @@ namespace DancingPlutonium
 	class AbstractBaseProjectile
 	{
 	public:
-		#pragma region Patterns enum
+		#pragma region Virtual Dtor
 
-		/* ProjectilePatterns enum encapsulates the types of projectile PATTERNS that can be found in DancingPlutonium (the advanced bullet patterns) */
+		/* The virtual Projectile Destructor */
+		virtual ~AbstractBaseProjectile() {}
+
+		#pragma endregion
+
+	public:
+		#pragma region State Enumerations
+
+		/* An enumeration particular to the projectile damage state */
+		enum projectileDamageState
+		{
+			d_Uninitialized,
+			d_Normal,
+			d_One,
+			d_Two,
+			d_Three,
+			d_Four,
+			d_Max
+		};
+
+		/* An enumeration particular to the projectile fire rate state */
+		enum projectileFireRateState
+		{
+			r_Uninitialized,
+			r_Normal,
+			r_One,
+			r_Two,
+			r_Three,
+			r_Four,
+			r_Max
+		};
+
+		/* An enumeration particular to the projectile velocity rate state */
+		enum projectileVelocityState
+		{
+			v_Uninitialized,
+			v_Normal,
+			v_One,
+			v_Two,
+			v_Three,
+			v_Four,
+			v_Max
+		};
+
+		#pragma endregion
+
+	public:
+		#pragma region Pattern Enumerations
+
+		/* ProjectilePatterns enum encapsulates the types of projectile PATTERNS that can be found in DancingPlutonium */
 		enum ProjectilePattern
 		{
 			NoBullet,
@@ -44,14 +93,8 @@ namespace DancingPlutonium
 		float damage;					/* Represents the damage that this proctile will do upon impact */
 
 		#pragma endregion
+
 	public:
-		#pragma region Virtual Dtor
-
-		/* The virtual Projectile Destructor */
-		virtual ~AbstractBaseProjectile() {}
-
-		#pragma endregion
-
 		#pragma region Methods
 
 		/* Sets the allegiance state for this projectile */

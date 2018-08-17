@@ -1,283 +1,20 @@
 #include "Weapon.h"
 
-DancingPlutonium::Weapon::Weapon(const float _fireRate, short _allegiance)
+/* Now following the principles of using an initializer list to construct. This being the first of all the classes.*/
+DancingPlutonium::Weapon::Weapon(const float _fireRate, short _allegiance) : 
+	allegiance(_allegiance),
+	baseDamage(1.0f), 
+	baseFireRate(_fireRate),
+	baseVelocity(1.0f),
+	weaponPattern(AbstractBaseProjectile::ProjectilePattern::BasicShot),
+	weaponDamageState(AbstractBaseProjectile::projectileDamageState::d_Normal),
+	weaponFireRateState(AbstractBaseProjectile::projectileFireRateState::r_Normal),
+	weaponVelocityRateState(AbstractBaseProjectile::projectileVelocityState::v_Normal)
 {
-	InitializeWeaponSystem(_fireRate);
-	allegiance = _allegiance;
-	baseDamage = 1.0f;
-	baseFireRate = 1.0f;
-	baseVelocity = 1.0f;
 }
 
 DancingPlutonium::Weapon::~Weapon()
 {
-	for (int i = static_cast<int>(ammunition.size() - 1); i >= 0; i--)
-	{
-		delete ammunition[i];
-		ammunition.erase(ammunition.begin() + i);
-	}
-}
-
-bool DancingPlutonium::Weapon::AddMunition(sf::Vector2f& _pos, float _dt)
-{
-	/* it did */
-	AbstractBaseProjectile* omgDoesThisWork;
-	bool check = false;
-
-	if (_dt >= fireRate)
-	{
-		switch (weaponPattern)
-		{
-			case AbstractBaseProjectile::ProjectilePattern::BasicShot:
-				omgDoesThisWork = BulletFactory::GetProjectile(AbstractBaseProjectile::ProjectilePattern::BasicShot, _pos);
-				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 
-				SetWeaponVelocityState(omgDoesThisWork);
-				SetProjectileAllegiance(omgDoesThisWork);
-				ammunition.push_back(omgDoesThisWork);
-				check = true;
-				break;
-			case AbstractBaseProjectile::ProjectilePattern::IncendiaryShot:
-				break;
-			case AbstractBaseProjectile::ProjectilePattern::GrowingShot:
-				omgDoesThisWork = BulletFactory::GetProjectile(AbstractBaseProjectile::ProjectilePattern::GrowingShot, _pos);
-				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 
-				SetWeaponVelocityState(omgDoesThisWork);
-				SetProjectileAllegiance(omgDoesThisWork);
-				ammunition.push_back(omgDoesThisWork);
-				check = true;
-				break;
-			case AbstractBaseProjectile::ProjectilePattern::AimedShot:
-				break;
-			case AbstractBaseProjectile::ProjectilePattern::DoubleShot:
-				omgDoesThisWork = BulletFactory::GetProjectile(AbstractBaseProjectile::ProjectilePattern::DoubleShot, _pos);
-				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 
-				SetWeaponVelocityState(omgDoesThisWork);
-				SetProjectileAllegiance(omgDoesThisWork);
-				ammunition.push_back(omgDoesThisWork);
-				check = true;
-				break;
-			case AbstractBaseProjectile::ProjectilePattern::HomingShot:
-				break;
-			case AbstractBaseProjectile::ProjectilePattern::TripleShot:
-				omgDoesThisWork = BulletFactory::GetProjectile(AbstractBaseProjectile::ProjectilePattern::TripleShot, _pos);
-				SetWeaponDamageState(omgDoesThisWork);		// this needs to be tested 
-				SetWeaponVelocityState(omgDoesThisWork);
-				SetProjectileAllegiance(omgDoesThisWork);
-				ammunition.push_back(omgDoesThisWork);
-				check = true;
-				break;
-			case AbstractBaseProjectile::ProjectilePattern::StandardLazer:
-				break;
-			case AbstractBaseProjectile::ProjectilePattern::JoesLazer:
-				break;
-			case AbstractBaseProjectile::ProjectilePattern::QuadShot:
-				break;
-			case AbstractBaseProjectile::ProjectilePattern::PhotonPacket:
-				break;
-			case AbstractBaseProjectile::ProjectilePattern::PhotonStream:
-				break;
-			case AbstractBaseProjectile::ProjectilePattern::PhotonTriplet:
-				break;
-			case AbstractBaseProjectile::ProjectilePattern::PhotonQuartet:
-				break;
-			default:
-				break;
-		}
-	}
-
-	return check;
-}
-
-DancingPlutonium::AbstractBaseProjectile* DancingPlutonium::Weapon::GetIndexOfAmmunition(int _index)
-{
-	if (static_cast<int>(ammunition.size()) > 0 && static_cast<int>(ammunition.size()) > _index)
-	{
-		return ammunition[_index];
-	}
-
-	return nullptr;
-}
-
-int DancingPlutonium::Weapon::GetSizeOfAmmunition()
-{
-	return static_cast<int>(ammunition.size());
-}
-
-std::vector<DancingPlutonium::AbstractBaseProjectile*> DancingPlutonium::Weapon::GetAmmunitionContainer()
-{
-	return ammunition;
-}
-
-void DancingPlutonium::Weapon::Update(sf::RenderTarget& _rt, float _dt)
-{
-	/*if (ammunition.size() != 0)
-	{
-		CleanAmmunition(_rt);
-
-		for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
-		{
-			ammunition[i]->Update(_dt);
-		}
-	}*/
-
-	if (ammunition.size() != 0)
-	{
-		CleanAmmunition(_rt);
-
-		for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
-		{
-			// represents the bullet collection that a single bullet object may be responsible for
-			auto tempStorage = std::vector<AbstractBaseProjectile*>();
-			
-			for (int j = 0; j < static_cast<int>(ammunition[i]->GetAllComponentBullets().size()); j++)
-			{
-				tempStorage = ammunition[i]->GetAllComponentBullets();
-
-				if (tempStorage[j]->IsInnert() == false)
-				{
-					ammunition[i]->Update(_dt);
-				}
-			}			
-		}
-	}
-}
-
-void DancingPlutonium::Weapon::Draw(sf::RenderTarget& _rt)
-{
-	/*for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
-	{
-		ammunition[i]->Draw(_rt);
-	}*/
-
-	// represents the bullet collection that a single bullet object may be responsible for
-	auto tempStorage = std::vector<AbstractBaseProjectile*>();
-
-	for (int i = 0; i < static_cast<int>(ammunition.size()); i++)
-	{
-		tempStorage = ammunition[i]->GetAllComponentBullets();
-		
-		for (int j = 0; j < static_cast<int>(ammunition[i]->GetAllComponentBullets().size()); j++)
-		{
-			if (tempStorage[j]->IsInnert() == false)
-			{
-				tempStorage[j]->Draw(_rt);
-			}
-		}
-	}
-}
-
-void DancingPlutonium::Weapon::UpgradeWeaponFireRate()
-{
-	switch (weaponFireRateState)
-	{
-		case WeaponFireRateState::r_Normal:
-			weaponFireRateState = WeaponFireRateState::r_One;
-			fireRate *= 0.8f;
-			break;
-		case WeaponFireRateState::r_One:
-			weaponFireRateState = WeaponFireRateState::r_Two;
-			fireRate *= 0.8f;
-			break;
-		case WeaponFireRateState::r_Two:
-			weaponFireRateState = WeaponFireRateState::r_Three;
-			fireRate *= 0.8f;
-			break;
-		case WeaponFireRateState::r_Three:
-			weaponFireRateState = WeaponFireRateState::r_Four;
-			fireRate *= 0.8f;
-			break;
-		case WeaponFireRateState::r_Four:
-			weaponFireRateState = WeaponFireRateState::r_Max;
-			fireRate *= 0.8f;
-			break;
-		case WeaponFireRateState::r_Max:
-			break;
-		default:
-			break;
-	}
-}
-
-void DancingPlutonium::Weapon::UpgradeWeaponVelocityRate()
-{
-	switch (weaponVelocityRateState)
-	{
-		case WeaponVelocityState::v_Normal:
-			weaponVelocityRateState = WeaponVelocityState::v_One;
-			baseVelocity = 1.0f;
-			break;
-		case WeaponVelocityState::v_One:
-			weaponVelocityRateState = WeaponVelocityState::v_Two;
-			baseVelocity = 1.25f;
-			break;
-		case WeaponVelocityState::v_Two:
-			weaponVelocityRateState = WeaponVelocityState::v_Three;
-			baseVelocity = 1.5f;
-			break;
-		case WeaponVelocityState::v_Three:
-			weaponVelocityRateState = WeaponVelocityState::v_Four;
-			baseVelocity = 1.75f;
-			break;
-		case WeaponVelocityState::v_Four:
-			weaponVelocityRateState = WeaponVelocityState::v_Max;
-			baseVelocity = 2.0f;
-			break;
-		case WeaponVelocityState::v_Max:
-			break;
-		default:
-			break;
-	}
-}
-
-void DancingPlutonium::Weapon::SetWeaponDamageState(AbstractBaseProjectile* _shot)
-{
-	switch (weaponDamageState)
-	{
-		case WeaponDamageState::d_Normal:
-			_shot->SetDamage(_shot->GetDamage() * 1.0f);
-			break;
-		case WeaponDamageState::d_One:
-			_shot->SetDamage(_shot->GetDamage() * 1.2f);
-			break;
-		case WeaponDamageState::d_Two:
-			_shot->SetDamage(_shot->GetDamage() * 1.4f);
-			break;
-		case WeaponDamageState::d_Three:
-			_shot->SetDamage(_shot->GetDamage() * 1.6f);
-			break;
-		case WeaponDamageState::d_Four:
-			_shot->SetDamage(_shot->GetDamage() * 1.8f);
-			break;
-		case WeaponDamageState::d_Max:
-			_shot->SetDamage(_shot->GetDamage() * 2.0f);
-			break;
-		default:
-			break;
-	}
-}
-
-void DancingPlutonium::Weapon::SetWeaponVelocityState(AbstractBaseProjectile* _shot)
-{
-	_shot->SetSpeed(_shot->GetSpeed() * baseVelocity);
-}
-
-void DancingPlutonium::Weapon::SetProjectileAllegiance(AbstractBaseProjectile* _shot)
-{
-	_shot->SetAllegiance(allegiance);
-}
-
-void DancingPlutonium::Weapon::InitializeWeaponSystem(const float _fireRate)
-{
-	weaponPattern = AbstractBaseProjectile::ProjectilePattern::BasicShot;
-	weaponDamageState = WeaponDamageState::d_Normal;
-	weaponFireRateState = WeaponFireRateState::r_Normal;
-	weaponVelocityRateState = WeaponVelocityState::v_Normal;
-	fireRate = _fireRate;
-	ammunition = std::vector<AbstractBaseProjectile*>();
-}
-
-sf::Uint32 DancingPlutonium::Weapon::GetPattern()
-{
-	return weaponPattern;
 }
 
 void DancingPlutonium::Weapon::UpgradeWeaponPattern()
@@ -287,45 +24,59 @@ void DancingPlutonium::Weapon::UpgradeWeaponPattern()
 		case AbstractBaseProjectile::ProjectilePattern::BasicShot:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::DoubleShot;
 			break;
+
 		case AbstractBaseProjectile::ProjectilePattern::DoubleShot:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::TripleShot;
 			break;
+
 		case AbstractBaseProjectile::ProjectilePattern::TripleShot:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::GrowingShot;
 			break;
+
 		case AbstractBaseProjectile::ProjectilePattern::GrowingShot:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::BasicShot;	// loop to beginning (develop the rest of the bullets and change this)
 			break;
+
 		case AbstractBaseProjectile::ProjectilePattern::AimedShot:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::DoubleShot;
 			break;
+
 		case AbstractBaseProjectile::ProjectilePattern::IncendiaryShot:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::AimedShot;
-			break;				
+			break;
+
 		case AbstractBaseProjectile::ProjectilePattern::HomingShot:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::TripleShot;
-			break;		
+			break;
+
 		case AbstractBaseProjectile::ProjectilePattern::StandardLazer:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::JoesLazer;
 			break;
+
 		case AbstractBaseProjectile::ProjectilePattern::JoesLazer:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::QuadShot;
 			break;
+
 		case AbstractBaseProjectile::ProjectilePattern::QuadShot:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::PhotonPacket;
 			break;
+
 		case AbstractBaseProjectile::ProjectilePattern::PhotonPacket:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::PhotonStream;
 			break;
+
 		case AbstractBaseProjectile::ProjectilePattern::PhotonStream:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::PhotonTriplet;
 			break;
+
 		case AbstractBaseProjectile::ProjectilePattern::PhotonTriplet:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::PhotonQuartet;
 			break;
+
 		case AbstractBaseProjectile::ProjectilePattern::PhotonQuartet:
 			weaponPattern = AbstractBaseProjectile::ProjectilePattern::IMMAFIRINMAHLAZOR;
 			break;
+
 		default:
 			break;
 	}
@@ -335,43 +86,206 @@ void DancingPlutonium::Weapon::UpgradeWeaponDamage()
 {
 	switch (weaponDamageState)
 	{
-		case WeaponDamageState::d_Normal:
-			weaponDamageState = WeaponDamageState::d_One;
-		break;
-		case WeaponDamageState::d_One:
-			weaponDamageState = WeaponDamageState::d_Two;
+		case AbstractBaseProjectile::projectileDamageState::d_Normal:
+			weaponDamageState = AbstractBaseProjectile::projectileDamageState::d_One;
+			baseDamage = 1.2f;
 			break;
-		case WeaponDamageState::d_Two:
-			weaponDamageState = WeaponDamageState::d_Three;
+
+		case AbstractBaseProjectile::projectileDamageState::d_One:
+			weaponDamageState = AbstractBaseProjectile::projectileDamageState::d_Two;
+			baseDamage = 1.4f;
 			break;
-		case WeaponDamageState::d_Three:
-			weaponDamageState = WeaponDamageState::d_Four;
+
+		case AbstractBaseProjectile::projectileDamageState::d_Two:
+			weaponDamageState = AbstractBaseProjectile::projectileDamageState::d_Three;
+			baseDamage = 1.6f;
 			break;
-		case WeaponDamageState::d_Four:
-			weaponDamageState = WeaponDamageState::d_Max;
+
+		case AbstractBaseProjectile::projectileDamageState::d_Three:
+			weaponDamageState = AbstractBaseProjectile::projectileDamageState::d_Four;
+			baseDamage = 1.8f;
 			break;
-		case WeaponDamageState::d_Max:
-			weaponDamageState = WeaponDamageState::d_Max;
+
+		case AbstractBaseProjectile::projectileDamageState::d_Four:
+			weaponDamageState = AbstractBaseProjectile::projectileDamageState::d_Max;
+			baseDamage = 2.0f;
 			break;
+
+		case AbstractBaseProjectile::projectileDamageState::d_Max:
+			weaponDamageState = AbstractBaseProjectile::projectileDamageState::d_Max;
+			break;
+
 		default:
 			break;
 	}
 }
 
-// we might need to impose a better cleanup: this might be the time to make levelobserver responsible for the vector of live bullets after all.
-// not vectors of bullets owned by weapons, owned by units...
-void DancingPlutonium::Weapon::CleanAmmunition(sf::RenderTarget& _rt)
+void DancingPlutonium::Weapon::UpgradeWeaponFireRate()
 {
-	if (ammunition.size() > 0)
+	switch (weaponFireRateState)
 	{
-		// backwards iterators for vectors more efficient
-		for (int i = static_cast<int>(ammunition.size() - 1); i >= 0; i--)
-		{
-			if (ammunition[i]->GetActiveState(_rt) == false)
-			{
-				delete ammunition[i];
-				ammunition.erase(ammunition.begin() + i);
-			}
-		}
+		case AbstractBaseProjectile::projectileFireRateState::r_Normal:
+			weaponFireRateState = AbstractBaseProjectile::projectileFireRateState::r_One;
+			baseFireRate *= 0.8f;
+			break;
+
+		case AbstractBaseProjectile::projectileFireRateState::r_One:
+			weaponFireRateState = AbstractBaseProjectile::projectileFireRateState::r_Two;
+			baseFireRate *= 0.8f;
+			break;
+
+		case AbstractBaseProjectile::projectileFireRateState::r_Two:
+			weaponFireRateState = AbstractBaseProjectile::projectileFireRateState::r_Three;
+			baseFireRate *= 0.8f;
+			break;
+
+		case AbstractBaseProjectile::projectileFireRateState::r_Three:
+			weaponFireRateState = AbstractBaseProjectile::projectileFireRateState::r_Four;
+			baseFireRate *= 0.8f;
+			break;
+
+		case AbstractBaseProjectile::projectileFireRateState::r_Four:
+			weaponFireRateState = AbstractBaseProjectile::projectileFireRateState::r_Max;
+			baseFireRate *= 0.8f;
+			break;
+
+		case AbstractBaseProjectile::projectileFireRateState::r_Max:
+			break;
+
+		default:
+			break;
 	}
+}
+
+void DancingPlutonium::Weapon::UpgradeWeaponVelocityRate()
+{
+	switch (weaponVelocityRateState)
+	{
+		case AbstractBaseProjectile::projectileVelocityState::v_Normal:
+			weaponVelocityRateState = AbstractBaseProjectile::projectileVelocityState::v_One;
+			baseVelocity = 1.0f;
+			break;
+
+		case AbstractBaseProjectile::projectileVelocityState::v_One:
+			weaponVelocityRateState = AbstractBaseProjectile::projectileVelocityState::v_Two;
+			baseVelocity = 1.25f;
+			break;
+
+		case AbstractBaseProjectile::projectileVelocityState::v_Two:
+			weaponVelocityRateState = AbstractBaseProjectile::projectileVelocityState::v_Three;
+			baseVelocity = 1.5f;
+			break;
+
+		case AbstractBaseProjectile::projectileVelocityState::v_Three:
+			weaponVelocityRateState = AbstractBaseProjectile::projectileVelocityState::v_Four;
+			baseVelocity = 1.75f;
+			break;
+
+		case AbstractBaseProjectile::projectileVelocityState::v_Four:
+			weaponVelocityRateState = AbstractBaseProjectile::projectileVelocityState::v_Max;
+			baseVelocity = 2.0f;
+			break;
+
+		case AbstractBaseProjectile::projectileVelocityState::v_Max:
+			break;
+
+		default:
+			break;
+	}
+}
+
+void DancingPlutonium::Weapon::SetWeaponPattern(const sf::Uint32 _pat)
+{
+	weaponPattern = _pat;
+}
+
+void DancingPlutonium::Weapon::SetWeaponDamageState(const sf::Uint32 _dmg)
+{
+	weaponDamageState = _dmg;
+}
+
+void DancingPlutonium::Weapon::SetWeaponFireRateState(const sf::Uint32 _rate)
+{
+	weaponFireRateState = _rate;
+}
+
+void DancingPlutonium::Weapon::SetWeaponVelocityState(const sf::Uint32 _veloc)
+{
+	weaponVelocityRateState = _veloc;
+}
+
+bool DancingPlutonium::Weapon::CanShoot(const float _dt)
+{
+	return _dt >= baseFireRate;
+	//bool check = false;
+
+	//_dt >= baseFireRate ? check = true : check = false;
+
+	//return check;
+}
+
+DancingPlutonium::AbstractBaseProjectile* DancingPlutonium::Weapon::SpawnBullet(sf::Vector2f& _pos)
+{
+	AbstractBaseProjectile* omgDoesThisWork = nullptr;
+
+	switch (weaponPattern)
+	{
+		case AbstractBaseProjectile::ProjectilePattern::BasicShot:
+			// work out this constructor
+			omgDoesThisWork = BulletFactory::GetProjectile(AbstractBaseProjectile::ProjectilePattern::BasicShot, _pos, 
+				baseDamage, baseVelocity, allegiance); 
+			break;
+
+		case AbstractBaseProjectile::ProjectilePattern::IncendiaryShot:
+			break;
+
+		case AbstractBaseProjectile::ProjectilePattern::GrowingShot:
+			// work out this constructor
+			omgDoesThisWork = BulletFactory::GetProjectile(AbstractBaseProjectile::ProjectilePattern::GrowingShot, _pos,
+				baseDamage, baseVelocity, allegiance); 
+			break;
+
+		case AbstractBaseProjectile::ProjectilePattern::AimedShot:
+			break;
+		case AbstractBaseProjectile::ProjectilePattern::DoubleShot:
+			// work out this constructor
+			omgDoesThisWork = BulletFactory::GetProjectile(AbstractBaseProjectile::ProjectilePattern::DoubleShot, _pos,
+				baseDamage, baseVelocity, allegiance); 
+			break;
+
+		case AbstractBaseProjectile::ProjectilePattern::HomingShot:
+			break;
+
+		case AbstractBaseProjectile::ProjectilePattern::TripleShot:
+			// work out this constructor
+			omgDoesThisWork = BulletFactory::GetProjectile(AbstractBaseProjectile::ProjectilePattern::TripleShot, _pos,
+				baseDamage, baseVelocity, allegiance); 
+			break;
+
+		case AbstractBaseProjectile::ProjectilePattern::StandardLazer:
+			break;
+
+		case AbstractBaseProjectile::ProjectilePattern::JoesLazer:
+			break;
+
+		case AbstractBaseProjectile::ProjectilePattern::QuadShot:
+			break;
+
+		case AbstractBaseProjectile::ProjectilePattern::PhotonPacket:
+			break;
+
+		case AbstractBaseProjectile::ProjectilePattern::PhotonStream:
+			break;
+
+		case AbstractBaseProjectile::ProjectilePattern::PhotonTriplet:
+			break;
+
+		case AbstractBaseProjectile::ProjectilePattern::PhotonQuartet:
+			break;
+
+		default:
+			break;
+	}
+
+	return omgDoesThisWork;
 }
