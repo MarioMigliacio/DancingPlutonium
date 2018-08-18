@@ -98,21 +98,10 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		levelObserver.Update(_window, dt.asSeconds(), *me);
 		levelObserver.Draw(_window);
 		
-		// This works! woot woot.
-		if (levelObserver.CheckForUnitToUnitCollision(*me))
-		{
-			//std::cout << "Bumped into an enemy unit." << std::endl;
-		}
 
-		if (levelObserver.CheckForEnemyShotHit(*me))
-		{
-			//std::cout << "Ran into that enemy bullet." << std::endl;
-		}
+		levelObserver.CheckForEnemyShotHit(*me);
 
-		/*if (levelObserver.CheckForPlayerShotHit(me->GetWeaponEquipped()->GetAmmunitionContainer(), *me))
-		{
-			std::cout << " You shot that enemy unit! " << std::endl;
-		}*/
+		levelObserver.CheckForPlayerShotHit(*me);
 
 		_window.display();
 	}

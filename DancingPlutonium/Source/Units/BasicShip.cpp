@@ -48,7 +48,6 @@ void DancingPlutonium::BasicShip::Update(float _dt, sf::RenderTarget& _rt)
 
 		if (CanShoot(accumulator) && !IsFiringBullet())
 		{
-			// remember that the LevelObserver needs to do the same operation, toggleFiring needs to flip or we'll never be able to shoot again!
 			ToggleFiring();
 			accumulator = 0.0f;
 		}

@@ -26,12 +26,11 @@ namespace DancingPlutonium
 	public:
 		#pragma region Basic Level Functionality
 
-		/* Returns true if a collision occurs between _player and any units contained in the _enemyUnits container, false otherwise. */
-		bool CheckForUnitToUnitCollision(PlutoniumShip& _player);
+		
 		/* Returns true if a collision occurs between any units contained in the EnemyShipContainer container and the _playerBullets container, false otherwise. */
-		bool CheckForPlayerShotHit(std::vector<AbstractBaseProjectile*>& _playerBullet, PlutoniumShip& _player);
+		void CheckForPlayerShotHit(PlutoniumShip& _player);
 		/* Returns true if a collision occurs between any projectiles within the EnemyShipContainer container and the _player, false otherwise. */
-		bool CheckForEnemyShotHit(PlutoniumShip& _player);
+		void CheckForEnemyShotHit(PlutoniumShip& _player);
 		/* Once a collision has occured, Object2 deals damage to Unit1. */
 		void DoProjectileCollisionDamage(AbstractBaseUnit& _unit1, AbstractBaseProjectile& _object2);
 		/* Once an enemy unit has been destroyed by combat, add the score of the _unit to the player. */
@@ -42,8 +41,12 @@ namespace DancingPlutonium
 		void Update(sf::RenderTarget& _rt, float _dt, PlutoniumShip& _player);
 		/* Call to Draw our LevelObserver components to the render target. */
 		void Draw(sf::RenderTarget& _rt);
+		/* Clean up enemy ships which have become Inactive */
+		void CleanEnemyShips();
 		/* Clean up projectiles which have become Inactive */
 		void CleanAmmunition(sf::RenderTarget& _rt);
+		/* Clean up projectiles which have become Inactive */
+		void CleanPlayerAmmunition(sf::RenderTarget& _rt);
 
 		#pragma endregion
 
@@ -54,12 +57,16 @@ namespace DancingPlutonium
 		std::vector<AbstractBaseUnit*> EnemyShipContainer;
 		/* A container which holds pointers to the projectiles of enemy units. LevelObserver is responsible for the cleanup and update of this container. */
 		std::vector<AbstractBaseProjectile*> EnemyProjectileContainer;
+		/* A container which holds pointers to the projectiles of the player. LevelObserver is responsible for the cleanup and update of this container. */
+		std::vector<AbstractBaseProjectile*> PlayerProjectileContainer;
 
 		#pragma endregion
 
 	private:
-		#pragma region Container Functionality
+		#pragma region Private Functionality
 
+		/* Returns true if a collision occurs between _player and any units contained in the _enemyUnits container, false otherwise. */
+		void CheckForUnitToUnitCollision(PlutoniumShip& _player);
 		/* Disposes of memory within the EnemyShipContainer vector. */
 		void ClearEnemyShipContainer();
 		/* Disposes of memory within the EnemyProjectileContainer vector. */

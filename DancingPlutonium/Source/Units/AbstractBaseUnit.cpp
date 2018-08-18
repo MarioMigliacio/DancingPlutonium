@@ -71,6 +71,11 @@ bool DancingPlutonium::AbstractBaseUnit::GetActiveState() const
 	return isActive;
 }
 
+short DancingPlutonium::AbstractBaseUnit::GetAllegiance() const
+{
+	return allegiance;
+}
+
 sf::Vector2f DancingPlutonium::AbstractBaseUnit::GetPosition() const
 {
 	return position;

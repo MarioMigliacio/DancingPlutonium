@@ -9,7 +9,8 @@ DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt) : Ab
 	score(0)
 	
 {
-	speed = 175.0f;
+	health = 200.0f;
+	speed = 175.0f;	
 	isActive = true;
 	isInvulnerable = false;
 	allegiance = 1;
@@ -38,7 +39,7 @@ void DancingPlutonium::PlutoniumShip::RemoveLife()
 	if (lives > 0)
 	{
 		lives--;
-		health = 100.f;
+		health = 200.f;
 
 		if (!isInvulnerable)
 		{

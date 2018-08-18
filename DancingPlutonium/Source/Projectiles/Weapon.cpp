@@ -217,11 +217,6 @@ void DancingPlutonium::Weapon::SetWeaponVelocityState(const sf::Uint32 _veloc)
 bool DancingPlutonium::Weapon::CanShoot(const float _dt)
 {
 	return _dt >= baseFireRate;
-	//bool check = false;
-
-	//_dt >= baseFireRate ? check = true : check = false;
-
-	//return check;
 }
 
 DancingPlutonium::AbstractBaseProjectile* DancingPlutonium::Weapon::SpawnBullet(sf::Vector2f& _pos)

@@ -83,6 +83,8 @@ namespace DancingPlutonium
 		virtual Weapon* GetWeaponEquipped();
 		/* Returns the activeState of this unit */
 		virtual bool GetActiveState() const;
+		/* Returns the allegiance value of this unit */
+		virtual short GetAllegiance() const;
 		/* Returns the position of this unit */
 		virtual sf::Vector2f GetPosition() const;
 		/* Sets the position and sprite of this projectile to the value of _pos */
