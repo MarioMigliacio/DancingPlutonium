@@ -4,6 +4,7 @@
 #include "AbstractBaseUnit.h"
 #include "Collision.h"
 #include "PlutoniumShip.h"
+#include "BasicShip.h"
 #include <iostream>
 
 namespace DancingPlutonium
@@ -26,13 +27,14 @@ namespace DancingPlutonium
 	public:
 		#pragma region Basic Level Functionality
 
-		
-		/* Returns true if a collision occurs between any units contained in the EnemyShipContainer container and the _playerBullets container, false otherwise. */
-		void CheckForPlayerShotHit(PlutoniumShip& _player);
-		/* Returns true if a collision occurs between any projectiles within the EnemyShipContainer container and the _player, false otherwise. */
-		void CheckForEnemyShotHit(PlutoniumShip& _player);
 		/* Once a collision has occured, Object2 deals damage to Unit1. */
 		void DoProjectileCollisionDamage(AbstractBaseUnit& _unit1, AbstractBaseProjectile& _object2);
+
+		/* Need this done. */
+		void SpawnEnemyUnit(sf::RenderTarget& _rt);
+		/* Need this done. */
+		void SpawnEnemyWave(sf::RenderTarget& _rt);
+
 		/* Once an enemy unit has been destroyed by combat, add the score of the _unit to the player. */
 		void EnemyUnitDeath(AbstractBaseUnit& _unit, PlutoniumShip& _player);
 		/* Perform a weapon upgrade on the _unit in question. */
@@ -50,7 +52,7 @@ namespace DancingPlutonium
 
 		#pragma endregion
 
-	public:
+	private:
 		#pragma region Container Member Variables
 
 		/* A container which holds pointers to observable enemy units. LevelObserver is responsible for the cleanup and update of this container. */
@@ -67,6 +69,10 @@ namespace DancingPlutonium
 
 		/* Returns true if a collision occurs between _player and any units contained in the _enemyUnits container, false otherwise. */
 		void CheckForUnitToUnitCollision(PlutoniumShip& _player);
+		/* Returns true if a collision occurs between any units contained in the EnemyShipContainer container and the _playerBullets container, false otherwise. */
+		void CheckForPlayerShotHit(PlutoniumShip& _player);
+		/* Returns true if a collision occurs between any projectiles within the EnemyShipContainer container and the _player, false otherwise. */
+		void CheckForEnemyShotHit(PlutoniumShip& _player);
 		/* Disposes of memory within the EnemyShipContainer vector. */
 		void ClearEnemyShipContainer();
 		/* Disposes of memory within the EnemyProjectileContainer vector. */

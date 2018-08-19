@@ -155,6 +155,17 @@ void DancingPlutonium::LevelObserver::DoProjectileCollisionDamage(AbstractBaseUn
 	_unit1.TakeDamage(_unit2.GetDamage());
 }
 
+void DancingPlutonium::LevelObserver::SpawnEnemyUnit(sf::RenderTarget& _rt)
+{
+	auto u = new BasicShip(_rt);
+	u->SpawnRandomly(_rt);
+	EnemyShipContainer.push_back(u);
+}
+
+void DancingPlutonium::LevelObserver::SpawnEnemyWave(sf::RenderTarget& _rt)
+{
+}
+
 void DancingPlutonium::LevelObserver::EnemyUnitDeath(AbstractBaseUnit& _unit, PlutoniumShip& _player)
 {
 	_player.AddScore(_unit.GetValue());
@@ -222,6 +233,11 @@ void DancingPlutonium::LevelObserver::Update(sf::RenderTarget& _rt, float _dt, P
 			}			
 		}
 	}
+
+	// Perform collision detection
+	CheckForUnitToUnitCollision(_player);
+	CheckForPlayerShotHit(_player);
+	CheckForEnemyShotHit(_player);
 }
 
 void DancingPlutonium::LevelObserver::Draw(sf::RenderTarget& _rt)

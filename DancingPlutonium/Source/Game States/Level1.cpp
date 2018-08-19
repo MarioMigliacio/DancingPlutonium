@@ -53,9 +53,7 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window, PlutoniumShip* _p
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{
-				auto tempShip = new BasicShip(_window);
-				tempShip->SpawnRandomly(_window);
-				levelObserver.EnemyShipContainer.push_back(tempShip);
+				levelObserver.SpawnEnemyUnit(_window);
 			}
 		}
 
@@ -78,10 +76,6 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window, PlutoniumShip* _p
 		_player->Draw(_window);
 		levelObserver.Update(_window, dt.asSeconds(), *_player);
 		levelObserver.Draw(_window);
-
-		levelObserver.CheckForEnemyShotHit(*_player);
-
-		levelObserver.CheckForPlayerShotHit(*_player);
 
 		_window.display();
 	}

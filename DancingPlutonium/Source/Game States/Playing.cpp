@@ -18,13 +18,11 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 	// Set the State:
 	m_state = PlayState::s_sandbox;
 	LevelObserver levelObserver = LevelObserver();
-	BasicShip* m_ship;
-	m_ship = new BasicShip(_window);
 	PlutoniumShip* me;
 	me = new PlutoniumShip(_window);	
 
 	Level1 l1 = Level1();
-	levelObserver.EnemyShipContainer.push_back(m_ship);
+	levelObserver.SpawnEnemyUnit(_window);
 
 	// Set up the background:
 	sf::Texture bgTexture;
@@ -52,10 +50,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{	
-				// Extract this into a Spawn ship function owned by LevelObserver. This way we can Spawn waves of ships in sequences.
-				auto tempShip = new BasicShip(_window);
-				tempShip->SpawnRandomly(_window);
-				levelObserver.EnemyShipContainer.push_back(tempShip);
+				levelObserver.SpawnEnemyUnit(_window);
 			}
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::LControl ||
 				event.key.code == sf::Keyboard::RControl))
@@ -97,11 +92,6 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		// Update the LevelObserver object AFTER the player. (we have to check if player is trying to shoot, then toggle if true)
 		levelObserver.Update(_window, dt.asSeconds(), *me);
 		levelObserver.Draw(_window);
-		
-
-		levelObserver.CheckForEnemyShotHit(*me);
-
-		levelObserver.CheckForPlayerShotHit(*me);
 
 		_window.display();
 	}
