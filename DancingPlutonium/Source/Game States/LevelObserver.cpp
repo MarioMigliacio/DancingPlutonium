@@ -34,6 +34,7 @@ void DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision(PlutoniumShip&
 					// GetHealth returns the players current life, which is then dealt to him
 					_player.TakeDamage(_player.GetHealth());
 
+					// DEBUG purposes
 					std::cout << "You have lost One Life! You had " << _player.LivesRemaining() << " lives." << std::endl;
 
 					_player.RemoveLife();
@@ -80,11 +81,14 @@ void DancingPlutonium::LevelObserver::CheckForPlayerShotHit(PlutoniumShip& _play
 									if (EnemyShipContainer[i]->GetHealth() <= projectileComponents[k]->GetDamage())
 									{
 										EnemyUnitDeath(*EnemyShipContainer[i], _player);
+										// DEBUG purposes
 										std::cout << "KILLSHOT: player score is currently: " << _player.GetScore() << "!" << std::endl;
 									}
 
+									// otherwise, hurt the enemy unit
 									EnemyShipContainer[i]->TakeDamage(projectileComponents[k]->GetDamage());
 
+									// DEBUG purposes
 									std::cout << "An enemy unit took " << projectileComponents[k]->GetDamage() << " damage!" << std::endl;
 								}
 
@@ -113,24 +117,27 @@ void DancingPlutonium::LevelObserver::CheckForEnemyShotHit(PlutoniumShip& _playe
 
 			for (int k = 0; k < static_cast<int>(projectileComponents.size()); k++)
 			{
-				// Check projectiles to enemies
+				// Check projectiles to player
 				if (Collision::BoundingBoxTest(player, projectileComponents[k]->GetSprite()) && !projectileComponents[k]->IsInnert() &&
 					projectileComponents[k]->GetAllegiance() != _player.GetAllegiance())
 				{
 					if (!_player.IsInvulnerable())
 					{
-						// a bullet hit an enemy, so we need to disable it's damage in the many frames that it is colliding.
+						// a bullet hit us, so we need to disable it's damage in the many frames that it is colliding.
 						projectileComponents[k]->RenderInnert();
 
-						// if an enemy unit dies, before rendering it as Inactive, add its score to our player!
+						// if an we die remove a life to our player!
 						if (_player.GetHealth() <= projectileComponents[k]->GetDamage())
 						{
 							_player.RemoveLife();
-							std::cout << "KILLSHOT: player took fatal damage!" << std::endl;
+							// DEBUG purposes
+							std::cout << "YOU DIED! YOU HAVE " << _player.LivesRemaining() << " LIVES REMAINING" << std::endl;
 						}
 
+						// otherwise take some damage
 						_player.TakeDamage(projectileComponents[k]->GetDamage());
 
+						// DEBUG purposes
 						std::cout << "You took " << projectileComponents[k]->GetDamage() <<
 							" damage! You now have " << _player.GetHealth() << " health!" << std::endl;
 					}
@@ -193,19 +200,12 @@ void DancingPlutonium::LevelObserver::Update(sf::RenderTarget& _rt, float _dt, P
 	if (EnemyProjectileContainer.size() != 0)
 	{		
 		for (int i = 0; i < static_cast<int>(EnemyProjectileContainer.size()); i++)
-		{
-			// represents the bullet collection that a single bullet object may be responsible for (multi shot, etc..)
-			auto tempStorage = std::vector<AbstractBaseProjectile*>();
-					
-			for (int j = 0; j < static_cast<int>(EnemyProjectileContainer[i]->GetAllComponentBullets().size()); j++)
+		{	
+			if (EnemyProjectileContainer[i]->IsInnert() == false)
 			{
-				tempStorage = EnemyProjectileContainer[i]->GetAllComponentBullets();
-		
-				if (tempStorage[j]->IsInnert() == false)
-				{
-					EnemyProjectileContainer[i]->Update(_dt);
-				}
-			}			
+				EnemyProjectileContainer[i]->Update(_dt);
+			}
+						
 		}
 	}
 
@@ -216,18 +216,10 @@ void DancingPlutonium::LevelObserver::Update(sf::RenderTarget& _rt, float _dt, P
 	{
 		for (int i = 0; i < static_cast<int>(PlayerProjectileContainer.size()); i++)
 		{
-			// represents the bullet collection that a single bullet object may be responsible for (multi shot, etc..)
-			auto tempStorage = std::vector<AbstractBaseProjectile*>();
-
-			for (int j = 0; j < static_cast<int>(PlayerProjectileContainer[i]->GetAllComponentBullets().size()); j++)
+			if (PlayerProjectileContainer[i]->IsInnert() == false)
 			{
-				tempStorage = PlayerProjectileContainer[i]->GetAllComponentBullets();
-
-				if (tempStorage[j]->IsInnert() == false)
-				{
-					PlayerProjectileContainer[i]->Update(_dt);
-				}
-			}
+				PlayerProjectileContainer[i]->Update(_dt);
+			}			
 		}
 	}
 }
@@ -274,7 +266,8 @@ void DancingPlutonium::LevelObserver::CleanAmmunition(sf::RenderTarget& _rt)
 	{
 		for (int i = static_cast<int>(EnemyProjectileContainer.size() - 1); i >= 0; i--)
 		{
-			if (EnemyProjectileContainer[i]->GetActiveState(_rt) == false)
+			if (EnemyProjectileContainer[i]->GetActiveState(_rt) == false ||
+				EnemyProjectileContainer[i]->IsInnert())
 			{
 				delete EnemyProjectileContainer[i];
 				EnemyProjectileContainer.erase(EnemyProjectileContainer.begin() + i);
@@ -289,7 +282,8 @@ void DancingPlutonium::LevelObserver::CleanPlayerAmmunition(sf::RenderTarget& _r
 	{
 		for (int i = static_cast<int>(PlayerProjectileContainer.size() - 1); i >= 0; i--)
 		{
-			if (PlayerProjectileContainer[i]->GetActiveState(_rt) == false)
+			if (PlayerProjectileContainer[i]->GetActiveState(_rt) == false ||
+				PlayerProjectileContainer[i]->IsInnert())
 			{
 				delete PlayerProjectileContainer[i];
 				PlayerProjectileContainer.erase(PlayerProjectileContainer.begin() + i);

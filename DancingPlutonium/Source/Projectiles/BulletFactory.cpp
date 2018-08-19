@@ -11,13 +11,13 @@ DancingPlutonium::AbstractBaseProjectile* DancingPlutonium::BulletFactory::GetPr
 			_dmg > 0.0f ? retVal = new Weapon_BasicShot(_pos, _dmg, _vel, _alle) :	retVal = new Weapon_BasicShot(_pos);
 			break;
 		case DancingPlutonium::AbstractBaseProjectile::ProjectilePattern::GrowingShot:
-			retVal = new Weapon_GrowingShot(_pos);
+			_dmg > 0.0f ? retVal = new Weapon_GrowingShot(_pos, _dmg, _vel, _alle) : retVal = new Weapon_GrowingShot(_pos);
 			break;
 		case DancingPlutonium::AbstractBaseProjectile::ProjectilePattern::DoubleShot:
-			retVal = new Weapon_DoubleShot(_pos);
+			_dmg > 0.0f ? retVal = new Weapon_DoubleShot(_pos, _dmg, _vel, _alle) : retVal = new Weapon_DoubleShot(_pos);
 			break;
 		case DancingPlutonium::AbstractBaseProjectile::ProjectilePattern::TripleShot:
-			retVal = new Weapon_TripleShot(_pos);
+			_dmg > 0.0f ? retVal = new Weapon_TripleShot(_pos, _dmg, _vel, _alle) : retVal = new Weapon_TripleShot(_pos);
 			break;
 		default:
 			retVal = nullptr;

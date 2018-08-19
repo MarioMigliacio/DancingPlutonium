@@ -51,7 +51,6 @@ namespace DancingPlutonium
 	private:
 		#pragma region Member Variables
 
-		//std::vector<AbstractBaseProjectile*> ammunition;		/* Represents the container for the projectiles that this weapon object maintains */
 		short allegiance;										/* Represents the friendly or hostile state of the projectiles that this weapon fires */
 		float baseDamage;										/* Represents the base damage bonus for a projectile */
 		float baseFireRate;										/* Represents the base fire rate this weapon is allowed to add projectiles to the munition container */

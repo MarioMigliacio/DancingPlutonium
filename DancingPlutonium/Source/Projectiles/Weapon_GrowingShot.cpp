@@ -3,10 +3,20 @@
 DancingPlutonium::Weapon_GrowingShot::Weapon_GrowingShot(const sf::Vector2f& _pos)
 {
 	position = _pos;
-	speed = 175.0f;
+	speed = defaultSpeed;
 	innert = false;
-	damage = 65.0f;
+	damage = defaultDamage;
 	SetSprite(position);
+}
+
+DancingPlutonium::Weapon_GrowingShot::Weapon_GrowingShot(const sf::Vector2f& _pos, const float& _dmg, const float& _vel, const short& _alle)
+{
+	position = _pos;
+	damage = defaultDamage * _dmg;
+	speed = _vel * defaultSpeed;
+	allegiance = _alle;
+	SetSprite(position);
+	innert = false;
 }
 
 void DancingPlutonium::Weapon_GrowingShot::SetSprite(const sf::Vector2f& _origin)
@@ -33,15 +43,6 @@ void DancingPlutonium::Weapon_GrowingShot::Draw(sf::RenderTarget& _rt)
 	{
 		_rt.draw(sprite);
 	}
-}
-
-std::vector<sf::FloatRect> DancingPlutonium::Weapon_GrowingShot::GetBounds()
-{
-	auto growingBounds = sprite.getGlobalBounds();
-	std::vector<sf::FloatRect> retVal = std::vector<sf::FloatRect>();
-	retVal.push_back(growingBounds);
-
-	return retVal;
 }
 
 bool DancingPlutonium::Weapon_GrowingShot::GetActiveState(const sf::RenderTarget& _rt)

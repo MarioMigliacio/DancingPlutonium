@@ -5,10 +5,26 @@ DancingPlutonium::Weapon_DoubleShot::Weapon_DoubleShot(const sf::Vector2f& _pos)
 	leftProjectile = new Weapon_BasicShot(_pos);
 	rightProjectile = new Weapon_BasicShot(_pos);
 	position = _pos;
-	speed = 200.0f;
-	damage = 55.0f;
+	speed = defaultSpeed;
+	damage = defaultDamage;
 	innert = false;
 	SetSprite(_pos);
+}
+
+DancingPlutonium::Weapon_DoubleShot::Weapon_DoubleShot(const sf::Vector2f& _pos, const float& _dmg, const float& _vel, const short& _alle)
+{
+	leftProjectile = BulletFactory::GetProjectile(AbstractBaseProjectile::ProjectilePattern::BasicShot, _pos, _dmg, _vel, _alle);
+	rightProjectile = BulletFactory::GetProjectile(AbstractBaseProjectile::ProjectilePattern::BasicShot, _pos, _dmg, _vel, _alle);
+	position = _pos;
+	damage = defaultDamage * _dmg;
+	speed = _vel * defaultSpeed;
+	allegiance = _alle;
+	leftProjectile->SetDamage(damage);
+	rightProjectile->SetDamage(damage);
+	leftProjectile->SetSpeed(speed);
+	rightProjectile->SetSpeed(speed);
+	SetSprite(position);
+	innert = false;
 }
 
 DancingPlutonium::Weapon_DoubleShot::~Weapon_DoubleShot()
@@ -53,18 +69,6 @@ void DancingPlutonium::Weapon_DoubleShot::Draw(sf::RenderTarget& _rt)
 	{
 		_rt.draw(rightProjectile->GetSprite());
 	}
-}
-
-std::vector<sf::FloatRect> DancingPlutonium::Weapon_DoubleShot::GetBounds()
-{
-	auto leftBounds = leftProjectile->GetSprite();
-	auto rightBounds = rightProjectile->GetSprite();
-
-	std::vector<sf::FloatRect> retVal = std::vector<sf::FloatRect>();
-	retVal.push_back(leftBounds.getGlobalBounds());
-	retVal.push_back(rightBounds.getGlobalBounds());
-
-	return retVal;
 }
 
 bool DancingPlutonium::Weapon_DoubleShot::GetActiveState(const sf::RenderTarget& _rt)

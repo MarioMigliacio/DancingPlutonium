@@ -3,19 +3,19 @@
 DancingPlutonium::Weapon_BasicShot::Weapon_BasicShot(const sf::Vector2f& _pos)
 {
 	position = _pos;
-	speed = 200.0f;
+	speed = defaultSpeed;
 	SetSprite(position);
 	innert = false;
-	damage = 50.0f;
+	damage = defaultDamage;
 }
 
 DancingPlutonium::Weapon_BasicShot::Weapon_BasicShot(const sf::Vector2f& _pos, const float& _dmg, const float& _vel, const short& _alle)
 {
 	position = _pos;
-	speed = _vel * 200.0f;
+	speed = _vel * defaultSpeed;
 	SetSprite(position);
 	innert = false;
-	damage = 50.0f * _dmg;
+	damage = defaultDamage * _dmg;
 	allegiance = _alle;
 }
 
@@ -42,15 +42,6 @@ void DancingPlutonium::Weapon_BasicShot::Draw(sf::RenderTarget& _rt)
 	{
 		_rt.draw(sprite);
 	}
-}
-
-std::vector<sf::FloatRect> DancingPlutonium::Weapon_BasicShot::GetBounds()
-{
-	auto basicBounds = sprite.getGlobalBounds();
-	std::vector<sf::FloatRect> retVal = std::vector<sf::FloatRect>();
-	retVal.push_back(basicBounds);
-
-	return retVal;
 }
 
 bool DancingPlutonium::Weapon_BasicShot::GetActiveState(const sf::RenderTarget& _rt)

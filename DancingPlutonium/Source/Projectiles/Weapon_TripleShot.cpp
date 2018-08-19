@@ -6,19 +6,35 @@ DancingPlutonium::Weapon_TripleShot::Weapon_TripleShot(const sf::Vector2f& _pos)
 	centerProjectile = new Weapon_BasicShot(_pos);
 	rightProjectile = new Weapon_BasicShot(_pos);
 	position = _pos;
-	speed = 200.0f;
-	damage = 60.0f;
+	speed = defaultSpeed;
+	damage = defaultDamage;
+	innert = false;
+}
+
+DancingPlutonium::Weapon_TripleShot::Weapon_TripleShot(const sf::Vector2f& _pos, const float& _dmg, const float& _vel, const short& _alle)
+{
+	leftProjectile = BulletFactory::GetProjectile(AbstractBaseProjectile::ProjectilePattern::BasicShot, _pos, _dmg, _vel, _alle);
+	centerProjectile = BulletFactory::GetProjectile(AbstractBaseProjectile::ProjectilePattern::BasicShot, _pos, _dmg, _vel, _alle);
+	rightProjectile = BulletFactory::GetProjectile(AbstractBaseProjectile::ProjectilePattern::BasicShot, _pos, _dmg, _vel, _alle);
+	position = _pos;
+	damage = defaultDamage * _dmg;
+	speed = _vel * defaultSpeed;
+	allegiance = _alle;
+	leftProjectile->SetDamage(damage);
+	centerProjectile->SetDamage(damage);
+	rightProjectile->SetDamage(damage);
+	leftProjectile->SetSpeed(speed);
+	centerProjectile->SetSpeed(speed);
+	rightProjectile->SetSpeed(speed);
+	SetSprite(position);
 	innert = false;
 }
 
 DancingPlutonium::Weapon_TripleShot::~Weapon_TripleShot()
 {
 	delete leftProjectile;
-	leftProjectile = NULL;
 	delete centerProjectile;
-	centerProjectile = NULL;
 	delete rightProjectile;
-	rightProjectile = NULL;
 }
 
 void DancingPlutonium::Weapon_TripleShot::SetSprite(const sf::Vector2f& _origin)
@@ -28,104 +44,48 @@ void DancingPlutonium::Weapon_TripleShot::SetSprite(const sf::Vector2f& _origin)
 
 void DancingPlutonium::Weapon_TripleShot::Update(float _dt)
 {
-	if (leftProjectile)
+	if (leftProjectile->IsInnert() == false)
 	{
-		if (!leftProjectile->IsInnert())
-		{
-			auto leftboi = leftProjectile->GetPosition();
-			leftboi.x -= (_dt * speed) * .33f;
-			leftboi.y -= _dt * speed * allegiance;
-			leftProjectile->SetPosition(leftboi);
-		}
-		else
-		{
-			delete leftProjectile;
-			leftProjectile = NULL;
-		}
+		auto leftboi = leftProjectile->GetPosition();
+		leftboi.x -= (_dt * speed) * .33f;
+		leftboi.y -= _dt * speed * allegiance;
+		leftProjectile->SetPosition(leftboi);
 	}
-	if (!centerProjectile->IsInnert())
+	if (centerProjectile->IsInnert() == false)
 	{
 		auto centerboi = centerProjectile->GetPosition();
 		centerboi.y -= _dt * speed * allegiance;
 		centerProjectile->SetPosition(centerboi);
 	}
-	else
-	{
-		delete centerProjectile;
-		centerProjectile = NULL;
-	}
-	if (!rightProjectile->IsInnert())
+	if (rightProjectile->IsInnert() == false)
 	{
 		auto rightboi = rightProjectile->GetPosition();
 		rightboi.x += (_dt * speed) * .33f;
 		rightboi.y -= _dt * speed * allegiance;
 		rightProjectile->SetPosition(rightboi);
 	}
-	else
-	{
-		delete rightProjectile;
-		rightProjectile = NULL;
-	}
 }
 
 void DancingPlutonium::Weapon_TripleShot::Draw(sf::RenderTarget& _rt)
 {
-	if (leftProjectile)
+	if (leftProjectile->IsInnert() == false)
 	{
-		if (!leftProjectile->IsInnert() && leftProjectile->GetActiveState(_rt))
-		{
-			_rt.draw(leftProjectile->GetSprite());
-		}
+		_rt.draw(leftProjectile->GetSprite());
 	}
-	if (centerProjectile)
+	
+	if (centerProjectile->IsInnert() == false)
 	{
-		if (!centerProjectile->IsInnert() && centerProjectile->GetActiveState(_rt))
-		{
-			_rt.draw(centerProjectile->GetSprite());
-		}
+		_rt.draw(centerProjectile->GetSprite());
 	}
-	if (rightProjectile)
+	
+	if (rightProjectile->IsInnert() == false)
 	{
-		if (!rightProjectile->IsInnert() && rightProjectile->GetActiveState(_rt))
-		{
-			_rt.draw(rightProjectile->GetSprite());
-		}
-	}
-}
-
-std::vector<sf::FloatRect> DancingPlutonium::Weapon_TripleShot::GetBounds()
-{
-	auto leftBounds = leftProjectile->GetSprite();
-	auto midBounds = centerProjectile->GetSprite();
-	auto rightBounds = rightProjectile->GetSprite();
-
-	std::vector<sf::FloatRect> retVal = std::vector<sf::FloatRect>();
-	retVal.push_back(leftBounds.getGlobalBounds());
-	retVal.push_back(midBounds.getGlobalBounds());
-	retVal.push_back(rightBounds.getGlobalBounds());
-
-	return retVal;
+		_rt.draw(rightProjectile->GetSprite());
+	}	
 }
 
 bool DancingPlutonium::Weapon_TripleShot::GetActiveState(const sf::RenderTarget& _rt)
 {
-	// NEW: if a bullet goes off screen it should be treated the same as innert, and in new updates innert bullets get cleaned up
-	if ((leftProjectile->GetPosition().y < 0 || leftProjectile->GetPosition().x < 0 ||
-		leftProjectile->GetPosition().y > _rt.getSize().y || leftProjectile->GetPosition().x > _rt.getSize().x))
-	{
-		leftProjectile->RenderInnert();
-	}
-	if ((centerProjectile->GetPosition().y < 0 || centerProjectile->GetPosition().x < 0 ||
-		centerProjectile->GetPosition().y > _rt.getSize().y || centerProjectile->GetPosition().x > _rt.getSize().x))
-	{
-		centerProjectile->RenderInnert();
-	}
-	if ((rightProjectile->GetPosition().y < 0 || rightProjectile->GetPosition().x < 0 ||
-		rightProjectile->GetPosition().y > _rt.getSize().y || rightProjectile->GetPosition().x > _rt.getSize().x))
-	{
-		rightProjectile->RenderInnert();
-	}
-
 	if ((leftProjectile->GetPosition().y < 0 || leftProjectile->GetPosition().x < 0 ||
 		leftProjectile->GetPosition().y > _rt.getSize().y || leftProjectile->GetPosition().x > _rt.getSize().x) &&
 		(centerProjectile->GetPosition().y < 0 || centerProjectile->GetPosition().x < 0 ||

@@ -121,8 +121,6 @@ namespace DancingPlutonium
 		virtual void SetPosition(const sf::Vector2f& _pos);
 		/* Returns true if this projectile is active, false otherwise */
 		virtual bool GetActiveState(const sf::RenderTarget& _rt) = 0;
-		/* Returns the rectangle representing the bounds of this projectile */
-		virtual std::vector<sf::FloatRect> GetBounds() = 0;
 		/* Returns the sprites representing the shots for this projectile */
 		virtual std::vector<sf::Sprite> GetAllSprites() = 0;
 		/* Returns the projectiles used to represent this type of bullet spray pattern */
