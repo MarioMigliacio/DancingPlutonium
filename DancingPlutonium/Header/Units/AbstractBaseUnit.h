@@ -1,6 +1,6 @@
 #pragma once
 
-#include<SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include "IRng.h"
 #include "AbstractBaseProjectile.h"
 #include "Weapon.h"

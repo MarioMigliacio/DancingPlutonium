@@ -79,7 +79,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./Header;./Header/Projectiles;./Header/Game States;./Header/Units;./Header/Utility;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./Header;./Header/Projectiles;./Header/Game States;./Header/Units;./Header/Utility;./Header/Item Tokens;</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -124,6 +124,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Game States\Level1.cpp" />
     <ClCompile Include="Source\Game States\LevelObserver.cpp" />
+    <ClCompile Include="Source\Item Tokens\ItemToken.cpp" />
     <ClCompile Include="Source\Projectiles\Weapon_DoubleShot.cpp" />
     <ClCompile Include="Source\Projectiles\Weapon_GrowingShot.cpp" />
     <ClCompile Include="Source\Projectiles\Weapon_BasicShot.cpp" />
@@ -148,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="Header\Game States\Level1.h" />
     <ClInclude Include="Header\Game States\LevelObserver.h" />
+    <ClInclude Include="Header\Item Tokens\ItemToken.h" />
     <ClInclude Include="Header\Projectiles\Weapon.h" />
     <ClInclude Include="Header\Projectiles\AbstractBaseProjectile.h" />
     <ClInclude Include="Header\Projectiles\Weapon_BasicShot.h" />
