@@ -5,12 +5,14 @@ DancingPlutonium::LevelObserver::LevelObserver()
 	EnemyShipContainer = std::vector<AbstractBaseUnit*>();
 	EnemyProjectileContainer = std::vector<AbstractBaseProjectile*>();
 	PlayerProjectileContainer = std::vector<AbstractBaseProjectile*>();
+	ItemTokens = std::vector<ItemToken*>();
 }
 
 DancingPlutonium::LevelObserver::~LevelObserver()
 {
 	ClearEnemyShipContainer();
 	ClearEnemyProjectileContainer();
+	ClearItemTokens();
 }
 
 void DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision(PlutoniumShip& _player)
@@ -166,6 +168,13 @@ void DancingPlutonium::LevelObserver::SpawnEnemyWave(sf::RenderTarget& _rt)
 {
 }
 
+void DancingPlutonium::LevelObserver::SpawnPatternToken(sf::RenderTarget& _rt)
+{
+	auto p = new PatternToken();
+	p->SpawnRandomly(_rt);
+	ItemTokens.push_back(p);
+}
+
 void DancingPlutonium::LevelObserver::EnemyUnitDeath(AbstractBaseUnit& _unit, PlutoniumShip& _player)
 {
 	_player.AddScore(_unit.GetValue());
@@ -234,6 +243,20 @@ void DancingPlutonium::LevelObserver::Update(sf::RenderTarget& _rt, float _dt, P
 		}
 	}
 
+	CleanItemTokens(_rt);
+
+	// Update the ItemTokens container
+	if (ItemTokens.size() != 0)
+	{
+		for (int i = 0; i < static_cast<int>(ItemTokens.size()); i++)
+		{
+			if (ItemTokens[i]->IsActive())
+			{
+				ItemTokens[i]->Update(_dt, _rt);
+			}
+		}
+	}
+
 	// Perform collision detection
 	CheckForUnitToUnitCollision(_player);
 	CheckForPlayerShotHit(_player);
@@ -258,6 +281,12 @@ void DancingPlutonium::LevelObserver::Draw(sf::RenderTarget& _rt)
 	for (int i = 0; i < static_cast<int>(EnemyProjectileContainer.size()); i++)
 	{
 		EnemyProjectileContainer[i]->Draw(_rt);
+	}
+
+	// Draw the Item Tokens
+	for (int i = 0; i < static_cast<int>(ItemTokens.size()); i++)
+	{
+		ItemTokens[i]->Draw(_rt);
 	}
 }
 
@@ -287,6 +316,21 @@ void DancingPlutonium::LevelObserver::CleanAmmunition(sf::RenderTarget& _rt)
 			{
 				delete EnemyProjectileContainer[i];
 				EnemyProjectileContainer.erase(EnemyProjectileContainer.begin() + i);
+			}
+		}
+	}
+}
+
+void DancingPlutonium::LevelObserver::CleanItemTokens(sf::RenderTarget& _rt)
+{
+	if (ItemTokens.size() > 0)
+	{
+		for (int i = static_cast<int>(ItemTokens.size() - 1); i >= 0; i--)
+		{
+			if (ItemTokens[i]->IsActive() == false)
+			{
+				delete ItemTokens[i];
+				ItemTokens.erase(ItemTokens.begin() + i);
 			}
 		}
 	}
@@ -328,6 +372,18 @@ void DancingPlutonium::LevelObserver::ClearEnemyProjectileContainer()
 		{
 			delete EnemyProjectileContainer[i];
 			EnemyProjectileContainer.erase(EnemyProjectileContainer.begin() + i);
+		}
+	}
+}
+
+void DancingPlutonium::LevelObserver::ClearItemTokens()
+{
+	if (ItemTokens.size() > 0)
+	{
+		for (int i = static_cast<int>(ItemTokens.size() - 1); i >= 0; i--)
+		{
+			delete ItemTokens[i];
+			ItemTokens.erase(ItemTokens.begin() + i);
 		}
 	}
 }

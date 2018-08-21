@@ -10,7 +10,9 @@ namespace DancingPlutonium
 	/* AbstractBaseUnit class represents an abstract base unit for which to inherit from */
 	class AbstractBaseUnit
 	{
-	protected:
+	public:
+		#pragma region Protected 
+
 		/* AbstractBaseUnit default Ctor */
 		AbstractBaseUnit() :
 			value(0),
@@ -28,6 +30,11 @@ namespace DancingPlutonium
 			position(),
 			weapon()
 		{}
+
+		/* The virtual AbstractBaseUnit destructor */
+		virtual ~AbstractBaseUnit() {}
+
+		#pragma endregion
 
 	protected:
 		#pragma region Members
@@ -48,15 +55,8 @@ namespace DancingPlutonium
 		Weapon* weapon;										/* Represents the weapon for this unit */
 
 		#pragma endregion
+
 	public:
-
-		#pragma region Virtual Dtor
-
-		/* The virtual AbstractBaseUnit destructor */
-		virtual ~AbstractBaseUnit() {}
-
-		#pragma endregion
-
 		#pragma region Methods
 
 		/* Returns the value of this unit */

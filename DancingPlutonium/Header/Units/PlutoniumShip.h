@@ -23,6 +23,7 @@ namespace DancingPlutonium
 
 		#pragma endregion
 
+	public:
 		#pragma region Public Methods
 
 		/* Returns the amount lives remaining for this PlutoniumShip object */
@@ -61,6 +62,14 @@ namespace DancingPlutonium
 		#pragma endregion
 
 	private:
+		#pragma region Private Methods
+
+		/* Sets this PlutoniumShips sprite, texture and default position */
+		void SetSprite(const sf::RenderTarget& _rt);
+
+		#pragma endregion
+
+	private:
 		#pragma region Members
 
 		float invulnerablePeriod;							/* Represents how long the player is allowed invulnerability */
@@ -75,13 +84,7 @@ namespace DancingPlutonium
 		Weapon* weapon;										/* Represents the weapon for this PlutoniumShip object */
 
 		#pragma endregion
-
-		#pragma region Private Methods
-
-		/* Sets this PlutoniumShips sprite, texture and default position */
-		void SetSprite(const sf::RenderTarget& _rt);
-
-		#pragma endregion
+		
 	private:
 		static sf::Uint32 m_movement;						/* Static variable which maintains the state for this PlutoniumShips movement */
 	};

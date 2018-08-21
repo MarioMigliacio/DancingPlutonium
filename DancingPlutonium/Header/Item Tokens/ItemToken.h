@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "IRng.h"
 
 namespace DancingPlutonium
 {
@@ -11,41 +12,56 @@ namespace DancingPlutonium
 	public:
 		#pragma region Ctor/Dtor
 
-		/* The Ctor for the ItemToken object, which accepts a position to spawn at. */
-		ItemToken(const sf::Vector2f& _pos);
-		/* The copy Ctor for the ItemToken object. */
-		ItemToken(const ItemToken& _ref) {}
+		/* The defualt Ctor for the ItemToken object. */
+		ItemToken() : 
+			isActive(false),
+			accumulator(0.0f),
+			speed(0.0f),
+			sprite(),
+			texture(),
+			position()
+		{}
+
 		/* The Dtor for the ItemToken object. */
-		~ItemToken() {}
+		virtual ~ItemToken() {}
 
 		#pragma endregion
 
 	public:
 		#pragma region Update/Draw
 
-		/* Update the qualities of the render token (plan to make them move after a set time period. */
-		void Update(const float& _dt);
 		/* Draw this ItemToken into the world. */
-		void Draw(const sf::RenderTarget& _rt);
+		virtual void Draw(sf::RenderTarget& _rt);
 		/* Returns whether or not this ItemToken is actively available. */
-		bool IsActive() const;
+		virtual bool IsActive() const;
 		/* Changes the isActive member variable for this ItemToken. */
-		void ToggleActiveState();
+		virtual void ToggleActiveState();
 		/* Returns the sprite for this ItemToken object. */
-		sf::Sprite& GetSprite();
+		virtual sf::Sprite& GetSprite();
+		/* Returns the position of this ItemToken */
+		virtual sf::Vector2f GetPosition() const;
+		/* Sets the position and sprite of this ItemToken to the value of _pos */
+		virtual void SetPosition(const sf::Vector2f& _pos);
+		/* Sets the position of this ItemToken to random area */
+		virtual void SpawnRandomly(const sf::RenderTarget& _rt);
+		/* Returns the state of whether or not this ItemToken is within the game screen bounds. */
+		virtual bool IsWithinBounds(const sf::RenderTarget& _rt);
 		/* Sets the sprite for this ItemToken object. */
-		void SetSprite(const sf::Vector2f& _origin);
+		virtual void SetSprite() = 0;
+		/* Update the qualities of the render token. */
+		virtual void Update(const float& _dt, const sf::RenderTarget& _rt) = 0;
 
 		#pragma endregion
 
-	private:
+	protected:
 		#pragma region Members
 
-		bool isActive;										/* Represents a boolean value that can be used to tell the outside world if its active. */
+		bool isActive;										/* Represents a boolean value that can be used to tell the outside world if this ItemToken is active. */
 		float accumulator;									/* Represents an accumulator value to perform behavior after time passes. */
-		sf::Sprite sprite;									/* Represents the sprite for this unit. */
-		sf::Texture texture;								/* Represents the texture for this unit. */
-		sf::Vector2f position;								/* Represents the position for this unit. */
+		float speed;										/* Represents the speed for this ItemToken */
+		sf::Sprite sprite;									/* Represents the sprite for this ItemToken. */
+		sf::Texture texture;								/* Represents the texture for this ItemToken. */
+		sf::Vector2f position;								/* Represents the position for this ItemToken. */
 
 		#pragma endregion
 	};

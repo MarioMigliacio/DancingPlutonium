@@ -1,11 +1,12 @@
 #pragma once
 
 #include <SFML\Graphics.hpp>
+#include <iostream>
 #include "AbstractBaseUnit.h"
 #include "Collision.h"
 #include "PlutoniumShip.h"
 #include "BasicShip.h"
-#include <iostream>
+#include "PatternToken.h"
 
 namespace DancingPlutonium
 {
@@ -30,10 +31,12 @@ namespace DancingPlutonium
 		/* Once a collision has occured, Object2 deals damage to Unit1. */
 		void DoProjectileCollisionDamage(AbstractBaseUnit& _unit1, AbstractBaseProjectile& _object2);
 
-		/* Need this done. */
+		/* Spawn an enemy unit into the game world. */
 		void SpawnEnemyUnit(sf::RenderTarget& _rt);
 		/* Need this done. */
 		void SpawnEnemyWave(sf::RenderTarget& _rt);
+		/* Spawn a Pattern Token! */
+		void SpawnPatternToken(sf::RenderTarget& _rt);
 
 		/* Once an enemy unit has been destroyed by combat, add the score of the _unit to the player. */
 		void EnemyUnitDeath(AbstractBaseUnit& _unit, PlutoniumShip& _player);
@@ -43,12 +46,6 @@ namespace DancingPlutonium
 		void Update(sf::RenderTarget& _rt, float _dt, PlutoniumShip& _player);
 		/* Call to Draw our LevelObserver components to the render target. */
 		void Draw(sf::RenderTarget& _rt);
-		/* Clean up enemy ships which have become Inactive */
-		void CleanEnemyShips();
-		/* Clean up projectiles which have become Inactive */
-		void CleanAmmunition(sf::RenderTarget& _rt);
-		/* Clean up projectiles which have become Inactive */
-		void CleanPlayerAmmunition(sf::RenderTarget& _rt);
 
 		#pragma endregion
 
@@ -61,6 +58,8 @@ namespace DancingPlutonium
 		std::vector<AbstractBaseProjectile*> EnemyProjectileContainer;
 		/* A container which holds pointers to the projectiles of the player. LevelObserver is responsible for the cleanup and update of this container. */
 		std::vector<AbstractBaseProjectile*> PlayerProjectileContainer;
+		/* A container which holds pointers to the item tokens active in the world. LevelObserver is responsible for the cleanup and update of this container. */
+		std::vector<ItemToken*> ItemTokens;
 
 		#pragma endregion
 
@@ -73,10 +72,20 @@ namespace DancingPlutonium
 		void CheckForPlayerShotHit(PlutoniumShip& _player);
 		/* Returns true if a collision occurs between any projectiles within the EnemyShipContainer container and the _player, false otherwise. */
 		void CheckForEnemyShotHit(PlutoniumShip& _player);
+		/* Clean up projectiles which have become Inactive */
+		void CleanAmmunition(sf::RenderTarget& _rt);
+		/* Clean up projectiles which have become Inactive */
+		void CleanPlayerAmmunition(sf::RenderTarget& _rt);
+		/* Clean up enemy ships which have become Inactive. */
+		void CleanEnemyShips();
+		/* Clean up ItemTokens which have become Inactive */
+		void CleanItemTokens(sf::RenderTarget& _rt);
 		/* Disposes of memory within the EnemyShipContainer vector. */
 		void ClearEnemyShipContainer();
 		/* Disposes of memory within the EnemyProjectileContainer vector. */
 		void ClearEnemyProjectileContainer();
+		/* Disposes of memory within the ItemTokens vector. */
+		void ClearItemTokens();
 
 		#pragma endregion
 	};
