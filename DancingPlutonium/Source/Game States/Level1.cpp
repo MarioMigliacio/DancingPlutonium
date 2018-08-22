@@ -17,7 +17,7 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window, PlutoniumShip* _p
 
 	// Set the State:
 	m_state = Level1::s_intro;
-	LevelObserver levelObserver = LevelObserver();
+	LevelObserver levelObserver = LevelObserver(*_player);
 
 	sf::Vector2f chatBoxTest = sf::Vector2f(static_cast<float>(_window.getSize().x) - 20, static_cast<float>(_window.getSize().y) / 5.f);
 
@@ -74,7 +74,7 @@ void DancingPlutonium::Level1::Show(sf::RenderWindow& _window, PlutoniumShip* _p
 		introChatBox.Draw(_window);
 		_player->Update(dt.asSeconds(), _window);
 		_player->Draw(_window);
-		levelObserver.Update(_window, dt.asSeconds(), *_player);
+		levelObserver.Update(_window, dt.asSeconds());
 		levelObserver.Draw(_window);
 
 		_window.display();

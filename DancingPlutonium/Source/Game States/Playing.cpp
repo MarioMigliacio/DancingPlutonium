@@ -17,10 +17,9 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 
 	// Set the State:
 	m_state = PlayState::s_sandbox;
-	LevelObserver levelObserver = LevelObserver();
 	PlutoniumShip* me;
 	me = new PlutoniumShip(_window);	
-
+	LevelObserver levelObserver = LevelObserver(*me);
 	Level1 l1 = Level1();
 	levelObserver.SpawnEnemyUnit(_window);
 
@@ -94,7 +93,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		me->Draw(_window);
 
 		// Update the LevelObserver object AFTER the player. (we have to check if player is trying to shoot, then toggle if true)
-		levelObserver.Update(_window, dt.asSeconds(), *me);
+		levelObserver.Update(_window, dt.asSeconds());
 		levelObserver.Draw(_window);
 
 		_window.display();
