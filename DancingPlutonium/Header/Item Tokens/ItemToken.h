@@ -38,11 +38,11 @@ namespace DancingPlutonium
 		virtual void ToggleActiveState();
 		/* Returns the sprite for this ItemToken object. */
 		virtual sf::Sprite& GetSprite();
-		/* Returns the position of this ItemToken */
+		/* Returns the position of this ItemToken. */
 		virtual sf::Vector2f GetPosition() const;
-		/* Sets the position and sprite of this ItemToken to the value of _pos */
+		/* Sets the position and sprite of this ItemToken to the value of _pos. */
 		virtual void SetPosition(const sf::Vector2f& _pos);
-		/* Sets the position of this ItemToken to random area */
+		/* Sets the position of this ItemToken to random area. */
 		virtual void SpawnRandomly(const sf::RenderTarget& _rt);
 		/* Returns the state of whether or not this ItemToken is within the game screen bounds. */
 		virtual bool IsWithinBounds(const sf::RenderTarget& _rt);
@@ -58,7 +58,7 @@ namespace DancingPlutonium
 
 		bool isActive;										/* Represents a boolean value that can be used to tell the outside world if this ItemToken is active. */
 		float accumulator;									/* Represents an accumulator value to perform behavior after time passes. */
-		float speed;										/* Represents the speed for this ItemToken */
+		float speed;										/* Represents the speed for this ItemToken. */
 		sf::Sprite sprite;									/* Represents the sprite for this ItemToken. */
 		sf::Texture texture;								/* Represents the texture for this ItemToken. */
 		sf::Vector2f position;								/* Represents the position for this ItemToken. */

@@ -169,6 +169,7 @@ void DancingPlutonium::LevelObserver::SpawnEnemyWave(sf::RenderTarget& _rt)
 {
 }
 
+// CHEAT CODES - remove this later
 void DancingPlutonium::LevelObserver::SpawnPatternToken(sf::RenderTarget& _rt)
 {
 	auto p = new PatternToken();
@@ -179,6 +180,10 @@ void DancingPlutonium::LevelObserver::SpawnPatternToken(sf::RenderTarget& _rt)
 void DancingPlutonium::LevelObserver::EnemyUnitDeath(AbstractBaseUnit& _unit)
 {
 	_playerRef.AddScore(_unit.GetValue());
+
+	auto p = new PatternToken();
+	p->SetPosition(_unit.GetPosition());
+	ItemTokens.push_back(p);
 }
 
 void DancingPlutonium::LevelObserver::UpgradeUnitWeaponry(AbstractBaseUnit& _unit)

@@ -16,7 +16,7 @@ namespace DancingPlutonium
 	public:
 		#pragma region Ctor/Dtors
 
-		/* LevelObserver default constructor */
+		/* LevelObserver default constructor. Note that it is NOT A COPY CONSTRUCTOR. */
 		LevelObserver(PlutoniumShip& _player);
 		/* LevelObserver destructor */
 		~LevelObserver();
@@ -30,9 +30,8 @@ namespace DancingPlutonium
 		void SpawnEnemyUnit(sf::RenderTarget& _rt);
 		/* Need this done. */
 		void SpawnEnemyWave(sf::RenderTarget& _rt);
-		/* Spawn a Pattern Token! */
+		/* Spawn a Pattern Token! THIS IS A CHEAT MECHANISM DELETE THIS MARIO. */
 		void SpawnPatternToken(sf::RenderTarget& _rt);
-
 		/* Once an enemy unit has been destroyed by combat, add the score of the _unit to the player. */
 		void EnemyUnitDeath(AbstractBaseUnit& _unit);
 		/* Perform a weapon upgrade on the _unit in question. */
@@ -63,13 +62,13 @@ namespace DancingPlutonium
 	private:
 		#pragma region Private Functionality
 
-		/* Check if a collision occurs between _player and any units contained in the _enemyUnits container, false otherwise. */
+		/* Check if a collision occurs between player and any units contained in the EnemyShips container. */
 		void CheckForUnitToUnitCollision();
-		/* Check if a collision occurs between any units contained in the EnemyShipContainer container and the _playerBullets container, false otherwise. */
+		/* Check if a collision occurs between any units contained in the EnemyShip container and the PlayerProjectile container. */
 		void CheckForPlayerShotHit();
-		/* Check if a collision occurs between any projectiles within the EnemyShipContainer container and the _player, false otherwise. */
+		/* Check if a collision occurs between player and any projectiles within the EnemyShip container container. */
 		void CheckForEnemyShotHit();
-		/*  */
+		/* Checks if a collision occurs between player and any item tokens within the ItemTokens container.  */
 		void CheckForItemCollision();
 		/* Clean up projectiles which have become Inactive */
 		void CleanAmmunition(sf::RenderTarget& _rt);
