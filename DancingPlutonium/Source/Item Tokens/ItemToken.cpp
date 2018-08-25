@@ -47,6 +47,47 @@ void DancingPlutonium::ItemToken::SpawnRandomly(const sf::RenderTarget& _rt)
 	SetPosition(sf::Vector2f(static_cast<float>(randomX), static_cast<float>(randomY)));
 }
 
+DancingPlutonium::ItemToken* DancingPlutonium::ItemToken::GetRandomToken()
+{
+	auto criteria = RandomFloatRange();
+	ItemToken* retVal = nullptr;
+
+	// no drop = 30%
+	// free score = 25%
+	// bomb = 10%
+	// upgrade pattern = 10%
+	// damage = 10%
+	// fireRate = 10%
+	// life = 5%
+
+	/*if (criteria < .05f)
+	{
+		retVal = TokenFactory::GetToken(ItemToken::ItemType::LifeToken);
+	}
+	else if (criteria < .15)
+	{
+		retVal = TokenFactory::GetToken(ItemToken::ItemType::FireRateToken);
+	}
+	else if (criteria < .25)
+	{
+		retVal = TokenFactory::GetToken(ItemToken::ItemType::DamageToken);
+	}
+	else if (criteria < .35)
+	{
+		retVal = TokenFactory::GetToken(ItemToken::ItemType::PatternToken);
+	}
+	else if (criteria < .45)
+	{
+		retVal = TokenFactory::GetToken(ItemToken::ItemType::BombToken);
+	}
+	else if (criteria < .70)
+	{
+		retVal = TokenFactory::GetToken(ItemToken::ItemType::FreeScoreToken);
+	}*/
+
+	return retVal;
+}
+
 bool DancingPlutonium::ItemToken::IsWithinBounds(const sf::RenderTarget& _rt)
 {
 	auto rect = sprite.getGlobalBounds();

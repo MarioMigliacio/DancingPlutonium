@@ -15,6 +15,7 @@ namespace DancingPlutonium
 		/* An enumeration particular to the item type tokens. */
 		enum ItemType
 		{
+			Uninitialized,
 			BombToken,
 			DamageToken,
 			FireRateToken,
@@ -24,6 +25,7 @@ namespace DancingPlutonium
 		};
 
 		#pragma endregion
+
 	public:
 		#pragma region Ctor/Dtor
 
@@ -46,6 +48,8 @@ namespace DancingPlutonium
 	public:
 		#pragma region Update/Draw
 
+		/* Determine which token we should spawn. */
+		virtual ItemToken* GetRandomToken();
 		/* Draw this ItemToken into the world. */
 		virtual void Draw(sf::RenderTarget& _rt);
 		/* Returns whether or not this ItemToken is actively available. */

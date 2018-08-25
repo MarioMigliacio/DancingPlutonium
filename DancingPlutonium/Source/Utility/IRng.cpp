@@ -9,3 +9,13 @@ int DancingPlutonium::RandomIntRange(const int& A, const int& B)
 
 	return dist(twister);
 }
+
+float DancingPlutonium::RandomFloatRange()
+{
+	static std::random_device randDev;
+	static std::mt19937 twister(randDev());
+	static std::uniform_real_distribution<double> dist;
+	dist.param(std::uniform_real_distribution<double>::param_type(0, 1));
+
+	return static_cast<float>(dist(twister));
+}

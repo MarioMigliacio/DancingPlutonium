@@ -1,12 +1,10 @@
 #pragma once
 
-#include <SFML\Graphics.hpp>
 #include "AbstractBaseProjectile.h"
 #include "Weapon_BasicShot.h"
 #include "Weapon_GrowingShot.h"
 #include "Weapon_DoubleShot.h"
 #include "Weapon_TripleShot.h"
-#include "Enums.h"
 
 namespace DancingPlutonium
 {
