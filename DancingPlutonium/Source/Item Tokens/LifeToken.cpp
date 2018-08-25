@@ -1,6 +1,6 @@
 #include "LifeToken.h"
 
-DancingPlutonium::LifeToken::LifeToken()
+DancingPlutonium::LifeToken::LifeToken() : ItemToken()
 {
 	isActive = true;
 	accumulator = 0.f;

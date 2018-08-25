@@ -150,7 +150,37 @@ void DancingPlutonium::LevelObserver::CheckForItemCollision()
 		{
 			if (Collision::BoundingBoxTest(_playerRef.GetSprite(), ItemTokens[i]->GetSprite()))
 			{
-				_playerRef.GetWeaponEquipped()->UpgradeWeaponPattern();
+				// we need to check what type of upgrade to perform!
+				if (ItemTokens[i]->GetType() == ItemToken::ItemType::PatternToken)
+				{
+					_playerRef.GetWeaponEquipped()->UpgradeWeaponPattern();
+					std::cout << "You ran into a pattern upgrade token!" << std::endl;
+				}
+				else if (ItemTokens[i]->GetType() == ItemToken::ItemType::BombToken)
+				{
+					_playerRef.AddBomb();
+					std::cout << "You ran into a bomb token! You are carrying " << _playerRef.BombsRemaining() << " bombs." << std::endl;
+				}
+				else if (ItemTokens[i]->GetType() == ItemToken::ItemType::DamageToken)
+				{
+					_playerRef.GetWeaponEquipped()->UpgradeWeaponDamage();
+					std::cout << "You ran into a weapon damage upgrade token!" << std::endl;
+				}
+				else if (ItemTokens[i]->GetType() == ItemToken::ItemType::FireRateToken)
+				{
+					_playerRef.GetWeaponEquipped()->UpgradeWeaponFireRate();
+					std::cout << "You ran into a fire rate upgrade token!" << std::endl;
+				}
+				else if (ItemTokens[i]->GetType() == ItemToken::ItemType::FreeScoreToken)
+				{
+					_playerRef.AddScore(100);
+					std::cout << "You ran into a Free Score token! Your score is now " << _playerRef.GetScore() << std::endl;
+				}
+				else if (ItemTokens[i]->GetType() == ItemToken::ItemType::LifeToken)
+				{
+					_playerRef.AddLife();
+					std::cout << "You ran into a extra life token! You have " << _playerRef.LivesRemaining() << " lives remaining." << std::endl;
+				}
 
 				ItemTokens[i]->ToggleActiveState();
 			}
@@ -170,20 +200,32 @@ void DancingPlutonium::LevelObserver::SpawnEnemyWave(sf::RenderTarget& _rt)
 }
 
 // CHEAT CODES - remove this later
-void DancingPlutonium::LevelObserver::SpawnPatternToken(sf::RenderTarget& _rt)
+void DancingPlutonium::LevelObserver::SpawnItemToken(const sf::Vector2f& _pos)
 {
-	auto p = new PatternToken();
-	p->SpawnRandomly(_rt);
-	ItemTokens.push_back(p);
+	ItemToken* item = TokenFactory::GetToken();
+	
+	if (item != nullptr)
+	{
+		item->SetPosition(_pos);
+		ItemTokens.push_back(item);
+	}
+}
+
+void DancingPlutonium::LevelObserver::KillCommand()
+{
+	for (int i = 0; i < static_cast<int>(EnemyShipContainer.size()); i++)
+	{
+		EnemyUnitDeath(*EnemyShipContainer[i]);
+
+		EnemyShipContainer[i]->TakeDamage(300.f);
+	}
 }
 
 void DancingPlutonium::LevelObserver::EnemyUnitDeath(AbstractBaseUnit& _unit)
 {
 	_playerRef.AddScore(_unit.GetValue());
 
-	auto p = new PatternToken();
-	p->SetPosition(_unit.GetPosition());
-	ItemTokens.push_back(p);
+	SpawnItemToken(_unit.GetPosition());
 }
 
 void DancingPlutonium::LevelObserver::UpgradeUnitWeaponry(AbstractBaseUnit& _unit)

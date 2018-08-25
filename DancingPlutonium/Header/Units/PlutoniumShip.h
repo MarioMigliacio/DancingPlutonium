@@ -32,6 +32,12 @@ namespace DancingPlutonium
 		void AddLife();
 		/* Minus one to the life count for this PlutoniumShip object */
 		void RemoveLife();
+		/* Add a bomb to our PlutoniumShip's bomb count */
+		void AddBomb();
+		/* Attempt to try to use a bomb */
+		void ShootBomb();
+		/* Returns the amount of bombs remaining for this PlutoniumShip object */
+		int BombsRemaining() const;
 		/* Returns the score the player has amassed for this PlutoniumShip object */
 		int GetScore() const;
 		/* Adds score to the this PlutoniumShip object based on the _value input parameter */

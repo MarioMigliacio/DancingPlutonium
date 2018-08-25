@@ -6,7 +6,8 @@
 #include "Collision.h"
 #include "PlutoniumShip.h"
 #include "BasicShip.h"
-#include "PatternToken.h"
+#include "ItemToken.h"
+#include "TokenFactory.h"
 
 namespace DancingPlutonium
 {
@@ -31,7 +32,9 @@ namespace DancingPlutonium
 		/* Need this done. */
 		void SpawnEnemyWave(sf::RenderTarget& _rt);
 		/* Spawn a Pattern Token! THIS IS A CHEAT MECHANISM DELETE THIS MARIO. */
-		void SpawnPatternToken(sf::RenderTarget& _rt);
+		void SpawnItemToken(const sf::Vector2f& _pos);
+		/* THIS IS A CHEAT MECHANISM DELETE THIS MARIO. */
+		void KillCommand();
 		/* Once an enemy unit has been destroyed by combat, add the score of the _unit to the player. */
 		void EnemyUnitDeath(AbstractBaseUnit& _unit);
 		/* Perform a weapon upgrade on the _unit in question. */

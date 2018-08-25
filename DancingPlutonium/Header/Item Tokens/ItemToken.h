@@ -48,8 +48,7 @@ namespace DancingPlutonium
 	public:
 		#pragma region Update/Draw
 
-		/* Determine which token we should spawn. */
-		virtual ItemToken* GetRandomToken();
+		
 		/* Draw this ItemToken into the world. */
 		virtual void Draw(sf::RenderTarget& _rt);
 		/* Returns whether or not this ItemToken is actively available. */

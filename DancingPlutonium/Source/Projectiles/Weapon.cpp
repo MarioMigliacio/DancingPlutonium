@@ -126,27 +126,27 @@ void DancingPlutonium::Weapon::UpgradeWeaponFireRate()
 	{
 		case AbstractBaseProjectile::ProjectileFireRateState::r_Normal:
 			weaponFireRateState = AbstractBaseProjectile::ProjectileFireRateState::r_One;
-			baseFireRate *= 0.8f;
+			baseFireRate *= 0.9f;
 			break;
 
 		case AbstractBaseProjectile::ProjectileFireRateState::r_One:
 			weaponFireRateState = AbstractBaseProjectile::ProjectileFireRateState::r_Two;
-			baseFireRate *= 0.8f;
+			baseFireRate *= 0.9f;
 			break;
 
 		case AbstractBaseProjectile::ProjectileFireRateState::r_Two:
 			weaponFireRateState = AbstractBaseProjectile::ProjectileFireRateState::r_Three;
-			baseFireRate *= 0.8f;
+			baseFireRate *= 0.9f;
 			break;
 
 		case AbstractBaseProjectile::ProjectileFireRateState::r_Three:
 			weaponFireRateState = AbstractBaseProjectile::ProjectileFireRateState::r_Four;
-			baseFireRate *= 0.8f;
+			baseFireRate *= 0.9f;
 			break;
 
 		case AbstractBaseProjectile::ProjectileFireRateState::r_Four:
 			weaponFireRateState = AbstractBaseProjectile::ProjectileFireRateState::r_Max;
-			baseFireRate *= 0.8f;
+			baseFireRate *= 0.9f;
 			break;
 
 		case AbstractBaseProjectile::ProjectileFireRateState::r_Max:

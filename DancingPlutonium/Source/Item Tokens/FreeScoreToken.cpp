@@ -1,6 +1,6 @@
 #include "FreeScoreToken.h"
 
-DancingPlutonium::FreeScoreToken::FreeScoreToken()
+DancingPlutonium::FreeScoreToken::FreeScoreToken() : ItemToken()
 {
 	isActive = true;
 	accumulator = 0.f;

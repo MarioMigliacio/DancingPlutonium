@@ -31,7 +31,10 @@ int DancingPlutonium::PlutoniumShip::LivesRemaining() const
 
 void DancingPlutonium::PlutoniumShip::AddLife()
 {
-	lives++;
+	if (lives < 99)
+	{
+		lives++;
+	}
 }
 
 void DancingPlutonium::PlutoniumShip::RemoveLife()
@@ -50,6 +53,28 @@ void DancingPlutonium::PlutoniumShip::RemoveLife()
 	{
 		isActive = false;
 	}
+}
+
+void DancingPlutonium::PlutoniumShip::AddBomb()
+{
+	if (bombs < 5)
+	{
+		bombs++;
+	}
+}
+
+void DancingPlutonium::PlutoniumShip::ShootBomb()
+{
+	if (bombs > 0)
+	{
+		// This would be cool to have it be a projectile type which travels forward for 3 seconds and then detonates with the explosion animation and bomb final sprite.
+		// can expand on its area by utilizing the sprite.Scale
+	}
+}
+
+int DancingPlutonium::PlutoniumShip::BombsRemaining() const
+{
+	return bombs;
 }
 
 int DancingPlutonium::PlutoniumShip::GetScore() const

@@ -125,6 +125,9 @@
     <ClCompile Include="Source\Item Tokens\LifeToken.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Item Tokens\TokenFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\Game States\Game.h">
@@ -188,6 +191,7 @@
     <ClInclude Include="Header\Item Tokens\DamageToken.h" />
     <ClInclude Include="Header\Item Tokens\FireRateToken.h" />
     <ClInclude Include="Header\Item Tokens\LifeToken.h" />
+    <ClInclude Include="Header\Item Tokens\TokenFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

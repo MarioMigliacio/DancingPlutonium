@@ -65,9 +65,9 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			{
 				me->GetWeaponEquipped()->UpgradeWeaponVelocityRate();
 			}
-			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::P))
+			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::K))
 			{
-				levelObserver.SpawnPatternToken(_window);
+				levelObserver.KillCommand();
 			}
 
 			// activate the level testing:

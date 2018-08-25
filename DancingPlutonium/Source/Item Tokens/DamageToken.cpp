@@ -1,6 +1,6 @@
 #include "DamageToken.h"
 
-DancingPlutonium::DamageToken::DamageToken()
+DancingPlutonium::DamageToken::DamageToken() : ItemToken()
 {
 	isActive = true;
 	accumulator = 0.f;

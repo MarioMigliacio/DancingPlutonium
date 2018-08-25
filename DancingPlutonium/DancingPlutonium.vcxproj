@@ -131,6 +131,7 @@
     <ClCompile Include="Source\Game States\Level1.cpp" />
     <ClCompile Include="Source\Game States\LevelObserver.cpp" />
     <ClCompile Include="Source\Item Tokens\ItemToken.cpp" />
+    <ClCompile Include="Source\Item Tokens\TokenFactory.cpp" />
     <ClCompile Include="Source\Projectiles\Weapon_DoubleShot.cpp" />
     <ClCompile Include="Source\Projectiles\Weapon_GrowingShot.cpp" />
     <ClCompile Include="Source\Projectiles\Weapon_BasicShot.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="Header\Item Tokens\ItemToken.h" />
     <ClInclude Include="Header\Item Tokens\LifeToken.h" />
     <ClInclude Include="Header\Item Tokens\PatternToken.h" />
+    <ClInclude Include="Header\Item Tokens\TokenFactory.h" />
     <ClInclude Include="Header\Projectiles\Weapon.h" />
     <ClInclude Include="Header\Projectiles\AbstractBaseProjectile.h" />
     <ClInclude Include="Header\Projectiles\Weapon_BasicShot.h" />

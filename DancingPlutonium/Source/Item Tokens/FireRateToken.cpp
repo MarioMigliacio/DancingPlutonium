@@ -1,6 +1,6 @@
 #include "FireRateToken.h"
 
-DancingPlutonium::FireRateToken::FireRateToken()
+DancingPlutonium::FireRateToken::FireRateToken() : ItemToken()
 {
 	isActive = true;
 	accumulator = 0.f;
