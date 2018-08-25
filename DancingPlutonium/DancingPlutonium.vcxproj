@@ -122,6 +122,11 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Item Tokens\BombToken.cpp" />
+    <ClCompile Include="Source\Item Tokens\DamageToken.cpp" />
+    <ClCompile Include="Source\Item Tokens\FireRateToken.cpp" />
+    <ClCompile Include="Source\Item Tokens\FreeScoreToken.cpp" />
+    <ClCompile Include="Source\Item Tokens\LifeToken.cpp" />
     <ClCompile Include="Source\Item Tokens\PatternToken.cpp" />
     <ClCompile Include="Source\Game States\Level1.cpp" />
     <ClCompile Include="Source\Game States\LevelObserver.cpp" />
@@ -150,7 +155,12 @@
   <ItemGroup>
     <ClInclude Include="Header\Game States\Level1.h" />
     <ClInclude Include="Header\Game States\LevelObserver.h" />
+    <ClInclude Include="Header\Item Tokens\BombToken.h" />
+    <ClInclude Include="Header\Item Tokens\DamageToken.h" />
+    <ClInclude Include="Header\Item Tokens\FireRateToken.h" />
+    <ClInclude Include="Header\Item Tokens\FreeScoreToken.h" />
     <ClInclude Include="Header\Item Tokens\ItemToken.h" />
+    <ClInclude Include="Header\Item Tokens\LifeToken.h" />
     <ClInclude Include="Header\Item Tokens\PatternToken.h" />
     <ClInclude Include="Header\Projectiles\Weapon.h" />
     <ClInclude Include="Header\Projectiles\AbstractBaseProjectile.h" />

@@ -9,22 +9,23 @@ namespace DancingPlutonium
 	public:
 		#pragma region Ctor/Dtors
 
-		/* BasicShip constructor accepting a rendertarget input parameter */
+		/* PatternToken constructor accepting a rendertarget input parameter */
 		PatternToken();
-		/* BasicShip copy constructor */
+		/* PatternToken copy constructor */
 		PatternToken(const PatternToken& _ref) {}
-		/* BasicShip destructor */
+		/* PatternToken destructor */
 		~PatternToken() {}
 
 		#pragma endregion
 
 	private:
+		#pragma region Unique Behavior
 
-		// Inherited via ItemToken
+		/* Sets the sprite for this particular PatternToken object */
 		virtual void SetSprite() override;
 
-		virtual void Update(const float& _dt, const sf::RenderTarget& _rt) override;
+		#pragma endregion
 
-		const float defaultSpeed = 100.f;
+		const float defaultSpeed = 100.f;						/* Defines the speed that this PatternToken can move at during updating. */
 	};
 }

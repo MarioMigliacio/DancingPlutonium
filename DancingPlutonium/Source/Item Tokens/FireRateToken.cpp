@@ -1,6 +1,6 @@
-#include "PatternToken.h"
+#include "FireRateToken.h"
 
-DancingPlutonium::PatternToken::PatternToken() : ItemToken()
+DancingPlutonium::FireRateToken::FireRateToken()
 {
 	isActive = true;
 	accumulator = 0.f;
@@ -8,9 +8,9 @@ DancingPlutonium::PatternToken::PatternToken() : ItemToken()
 	speed = defaultSpeed;
 }
 
-void DancingPlutonium::PatternToken::SetSprite()
+void DancingPlutonium::FireRateToken::SetSprite()
 {
-	texture.loadFromFile("Content/Images/PatternToken.png");
+	texture.loadFromFile("Content/Images/FireRateToken.png");
 	auto width = texture.getSize().x;
 	auto height = texture.getSize().y;
 	sf::Vector2f origin = sf::Vector2f(width / 2.0f, height / 2.0f);

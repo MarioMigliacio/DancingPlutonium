@@ -46,10 +46,10 @@ namespace DancingPlutonium
 		virtual void SpawnRandomly(const sf::RenderTarget& _rt);
 		/* Returns the state of whether or not this ItemToken is within the game screen bounds. */
 		virtual bool IsWithinBounds(const sf::RenderTarget& _rt);
+		/* Update the qualities of the render token. */
+		virtual void Update(const float& _dt, const sf::RenderTarget& _rt);
 		/* Sets the sprite for this ItemToken object. */
 		virtual void SetSprite() = 0;
-		/* Update the qualities of the render token. */
-		virtual void Update(const float& _dt, const sf::RenderTarget& _rt) = 0;
 
 		#pragma endregion
 

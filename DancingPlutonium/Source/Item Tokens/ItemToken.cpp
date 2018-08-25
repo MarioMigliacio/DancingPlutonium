@@ -57,3 +57,18 @@ bool DancingPlutonium::ItemToken::IsWithinBounds(const sf::RenderTarget& _rt)
 		return false;
 	}
 }
+
+void DancingPlutonium::ItemToken::Update(const float & _dt, const sf::RenderTarget & _rt)
+{
+	if (IsWithinBounds(_rt))
+	{
+		accumulator += _dt;
+
+		if (accumulator >= 3.f)
+		{
+			auto tempPos = position;
+			tempPos.y += _dt * speed;
+			SetPosition(tempPos);
+		}
+	}
+}

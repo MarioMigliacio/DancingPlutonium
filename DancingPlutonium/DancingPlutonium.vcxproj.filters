@@ -110,6 +110,21 @@
     <ClCompile Include="Source\Item Tokens\PatternToken.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Item Tokens\FreeScoreToken.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item Tokens\BombToken.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item Tokens\DamageToken.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item Tokens\FireRateToken.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item Tokens\LifeToken.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\Game States\Game.h">
@@ -168,6 +183,11 @@
     <ClInclude Include="Header\Utility\ChatBox.h" />
     <ClInclude Include="Header\Item Tokens\ItemToken.h" />
     <ClInclude Include="Header\Item Tokens\PatternToken.h" />
+    <ClInclude Include="Header\Item Tokens\FreeScoreToken.h" />
+    <ClInclude Include="Header\Item Tokens\BombToken.h" />
+    <ClInclude Include="Header\Item Tokens\DamageToken.h" />
+    <ClInclude Include="Header\Item Tokens\FireRateToken.h" />
+    <ClInclude Include="Header\Item Tokens\LifeToken.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
