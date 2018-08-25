@@ -7,9 +7,9 @@ DancingPlutonium::Weapon::Weapon(const float _fireRate, short _allegiance) :
 	baseFireRate(_fireRate),
 	baseVelocity(1.0f),
 	weaponPattern(AbstractBaseProjectile::ProjectilePattern::BasicShot),
-	weaponDamageState(AbstractBaseProjectile::projectileDamageState::d_Normal),
-	weaponFireRateState(AbstractBaseProjectile::projectileFireRateState::r_Normal),
-	weaponVelocityRateState(AbstractBaseProjectile::projectileVelocityState::v_Normal)
+	weaponDamageState(AbstractBaseProjectile::ProjectileDamageState::d_Normal),
+	weaponFireRateState(AbstractBaseProjectile::ProjectileFireRateState::r_Normal),
+	weaponVelocityRateState(AbstractBaseProjectile::ProjectileVelocityState::v_Normal)
 {
 }
 
@@ -86,33 +86,33 @@ void DancingPlutonium::Weapon::UpgradeWeaponDamage()
 {
 	switch (weaponDamageState)
 	{
-		case AbstractBaseProjectile::projectileDamageState::d_Normal:
-			weaponDamageState = AbstractBaseProjectile::projectileDamageState::d_One;
+		case AbstractBaseProjectile::ProjectileDamageState::d_Normal:
+			weaponDamageState = AbstractBaseProjectile::ProjectileDamageState::d_One;
 			baseDamage = 1.2f;
 			break;
 
-		case AbstractBaseProjectile::projectileDamageState::d_One:
-			weaponDamageState = AbstractBaseProjectile::projectileDamageState::d_Two;
+		case AbstractBaseProjectile::ProjectileDamageState::d_One:
+			weaponDamageState = AbstractBaseProjectile::ProjectileDamageState::d_Two;
 			baseDamage = 1.4f;
 			break;
 
-		case AbstractBaseProjectile::projectileDamageState::d_Two:
-			weaponDamageState = AbstractBaseProjectile::projectileDamageState::d_Three;
+		case AbstractBaseProjectile::ProjectileDamageState::d_Two:
+			weaponDamageState = AbstractBaseProjectile::ProjectileDamageState::d_Three;
 			baseDamage = 1.6f;
 			break;
 
-		case AbstractBaseProjectile::projectileDamageState::d_Three:
-			weaponDamageState = AbstractBaseProjectile::projectileDamageState::d_Four;
+		case AbstractBaseProjectile::ProjectileDamageState::d_Three:
+			weaponDamageState = AbstractBaseProjectile::ProjectileDamageState::d_Four;
 			baseDamage = 1.8f;
 			break;
 
-		case AbstractBaseProjectile::projectileDamageState::d_Four:
-			weaponDamageState = AbstractBaseProjectile::projectileDamageState::d_Max;
+		case AbstractBaseProjectile::ProjectileDamageState::d_Four:
+			weaponDamageState = AbstractBaseProjectile::ProjectileDamageState::d_Max;
 			baseDamage = 2.0f;
 			break;
 
-		case AbstractBaseProjectile::projectileDamageState::d_Max:
-			weaponDamageState = AbstractBaseProjectile::projectileDamageState::d_Max;
+		case AbstractBaseProjectile::ProjectileDamageState::d_Max:
+			weaponDamageState = AbstractBaseProjectile::ProjectileDamageState::d_Max;
 			break;
 
 		default:
@@ -124,32 +124,32 @@ void DancingPlutonium::Weapon::UpgradeWeaponFireRate()
 {
 	switch (weaponFireRateState)
 	{
-		case AbstractBaseProjectile::projectileFireRateState::r_Normal:
-			weaponFireRateState = AbstractBaseProjectile::projectileFireRateState::r_One;
+		case AbstractBaseProjectile::ProjectileFireRateState::r_Normal:
+			weaponFireRateState = AbstractBaseProjectile::ProjectileFireRateState::r_One;
 			baseFireRate *= 0.8f;
 			break;
 
-		case AbstractBaseProjectile::projectileFireRateState::r_One:
-			weaponFireRateState = AbstractBaseProjectile::projectileFireRateState::r_Two;
+		case AbstractBaseProjectile::ProjectileFireRateState::r_One:
+			weaponFireRateState = AbstractBaseProjectile::ProjectileFireRateState::r_Two;
 			baseFireRate *= 0.8f;
 			break;
 
-		case AbstractBaseProjectile::projectileFireRateState::r_Two:
-			weaponFireRateState = AbstractBaseProjectile::projectileFireRateState::r_Three;
+		case AbstractBaseProjectile::ProjectileFireRateState::r_Two:
+			weaponFireRateState = AbstractBaseProjectile::ProjectileFireRateState::r_Three;
 			baseFireRate *= 0.8f;
 			break;
 
-		case AbstractBaseProjectile::projectileFireRateState::r_Three:
-			weaponFireRateState = AbstractBaseProjectile::projectileFireRateState::r_Four;
+		case AbstractBaseProjectile::ProjectileFireRateState::r_Three:
+			weaponFireRateState = AbstractBaseProjectile::ProjectileFireRateState::r_Four;
 			baseFireRate *= 0.8f;
 			break;
 
-		case AbstractBaseProjectile::projectileFireRateState::r_Four:
-			weaponFireRateState = AbstractBaseProjectile::projectileFireRateState::r_Max;
+		case AbstractBaseProjectile::ProjectileFireRateState::r_Four:
+			weaponFireRateState = AbstractBaseProjectile::ProjectileFireRateState::r_Max;
 			baseFireRate *= 0.8f;
 			break;
 
-		case AbstractBaseProjectile::projectileFireRateState::r_Max:
+		case AbstractBaseProjectile::ProjectileFireRateState::r_Max:
 			break;
 
 		default:
@@ -161,32 +161,32 @@ void DancingPlutonium::Weapon::UpgradeWeaponVelocityRate()
 {
 	switch (weaponVelocityRateState)
 	{
-		case AbstractBaseProjectile::projectileVelocityState::v_Normal:
-			weaponVelocityRateState = AbstractBaseProjectile::projectileVelocityState::v_One;
+		case AbstractBaseProjectile::ProjectileVelocityState::v_Normal:
+			weaponVelocityRateState = AbstractBaseProjectile::ProjectileVelocityState::v_One;
 			baseVelocity = 1.0f;
 			break;
 
-		case AbstractBaseProjectile::projectileVelocityState::v_One:
-			weaponVelocityRateState = AbstractBaseProjectile::projectileVelocityState::v_Two;
+		case AbstractBaseProjectile::ProjectileVelocityState::v_One:
+			weaponVelocityRateState = AbstractBaseProjectile::ProjectileVelocityState::v_Two;
 			baseVelocity = 1.25f;
 			break;
 
-		case AbstractBaseProjectile::projectileVelocityState::v_Two:
-			weaponVelocityRateState = AbstractBaseProjectile::projectileVelocityState::v_Three;
+		case AbstractBaseProjectile::ProjectileVelocityState::v_Two:
+			weaponVelocityRateState = AbstractBaseProjectile::ProjectileVelocityState::v_Three;
 			baseVelocity = 1.5f;
 			break;
 
-		case AbstractBaseProjectile::projectileVelocityState::v_Three:
-			weaponVelocityRateState = AbstractBaseProjectile::projectileVelocityState::v_Four;
+		case AbstractBaseProjectile::ProjectileVelocityState::v_Three:
+			weaponVelocityRateState = AbstractBaseProjectile::ProjectileVelocityState::v_Four;
 			baseVelocity = 1.75f;
 			break;
 
-		case AbstractBaseProjectile::projectileVelocityState::v_Four:
-			weaponVelocityRateState = AbstractBaseProjectile::projectileVelocityState::v_Max;
+		case AbstractBaseProjectile::ProjectileVelocityState::v_Four:
+			weaponVelocityRateState = AbstractBaseProjectile::ProjectileVelocityState::v_Max;
 			baseVelocity = 2.0f;
 			break;
 
-		case AbstractBaseProjectile::projectileVelocityState::v_Max:
+		case AbstractBaseProjectile::ProjectileVelocityState::v_Max:
 			break;
 
 		default:

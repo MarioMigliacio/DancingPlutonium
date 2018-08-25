@@ -10,6 +10,21 @@ namespace DancingPlutonium
 	class ItemToken
 	{
 	public:
+		#pragma region Enum Type
+
+		/* An enumeration particular to the item type tokens. */
+		enum ItemType
+		{
+			BombToken,
+			DamageToken,
+			FireRateToken,
+			FreeScoreToken,
+			LifeToken,
+			PatternToken
+		};
+
+		#pragma endregion
+	public:
 		#pragma region Ctor/Dtor
 
 		/* The defualt Ctor for the ItemToken object. */
@@ -19,7 +34,8 @@ namespace DancingPlutonium
 			speed(0.0f),
 			sprite(),
 			texture(),
-			position()
+			position(),
+			itemType(0)
 		{}
 
 		/* The Dtor for the ItemToken object. */
@@ -42,6 +58,8 @@ namespace DancingPlutonium
 		virtual sf::Vector2f GetPosition() const;
 		/* Sets the position and sprite of this ItemToken to the value of _pos. */
 		virtual void SetPosition(const sf::Vector2f& _pos);
+		/* Returns the Enumeration type of Item that belongs to this ItemToken. */
+		virtual sf::Uint32 GetType();
 		/* Sets the position of this ItemToken to random area. */
 		virtual void SpawnRandomly(const sf::RenderTarget& _rt);
 		/* Returns the state of whether or not this ItemToken is within the game screen bounds. */
@@ -62,6 +80,7 @@ namespace DancingPlutonium
 		sf::Sprite sprite;									/* Represents the sprite for this ItemToken. */
 		sf::Texture texture;								/* Represents the texture for this ItemToken. */
 		sf::Vector2f position;								/* Represents the position for this ItemToken. */
+		sf::Uint32 itemType;								/* Represents this ItemTokens ItemType enum. */
 
 		#pragma endregion
 	};

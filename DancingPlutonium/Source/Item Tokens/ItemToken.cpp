@@ -31,6 +31,11 @@ void DancingPlutonium::ItemToken::SetPosition(const sf::Vector2f& _pos)
 	sprite.setPosition(_pos);
 }
 
+sf::Uint32 DancingPlutonium::ItemToken::GetType()
+{
+	return itemType;
+}
+
 void DancingPlutonium::ItemToken::SpawnRandomly(const sf::RenderTarget& _rt)
 {
 	int randomX = static_cast<int>(_rt.getSize().x - sprite.getGlobalBounds().width / 2.0f);

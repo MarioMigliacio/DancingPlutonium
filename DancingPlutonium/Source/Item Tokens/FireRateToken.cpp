@@ -6,6 +6,7 @@ DancingPlutonium::FireRateToken::FireRateToken()
 	accumulator = 0.f;
 	SetSprite();
 	speed = defaultSpeed;
+	itemType = ItemToken::ItemType::FireRateToken;
 }
 
 void DancingPlutonium::FireRateToken::SetSprite()

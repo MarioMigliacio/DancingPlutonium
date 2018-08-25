@@ -6,6 +6,7 @@ DancingPlutonium::DamageToken::DamageToken()
 	accumulator = 0.f;
 	SetSprite();
 	speed = defaultSpeed;
+	itemType = ItemToken::ItemType::DamageToken;
 }
 
 void DancingPlutonium::DamageToken::SetSprite()

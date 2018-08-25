@@ -6,6 +6,7 @@ DancingPlutonium::BombToken::BombToken()
 	accumulator = 0.f;
 	SetSprite();
 	speed = defaultSpeed;
+	itemType = ItemToken::ItemType::BombToken;
 }
 
 void DancingPlutonium::BombToken::SetSprite()

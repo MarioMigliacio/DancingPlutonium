@@ -19,7 +19,7 @@ namespace DancingPlutonium
 		#pragma region State Enumerations
 
 		/* An enumeration particular to the projectile damage state */
-		enum projectileDamageState
+		enum ProjectileDamageState
 		{
 			d_Uninitialized,
 			d_Normal,
@@ -31,7 +31,7 @@ namespace DancingPlutonium
 		};
 
 		/* An enumeration particular to the projectile fire rate state */
-		enum projectileFireRateState
+		enum ProjectileFireRateState
 		{
 			r_Uninitialized,
 			r_Normal,
@@ -43,7 +43,7 @@ namespace DancingPlutonium
 		};
 
 		/* An enumeration particular to the projectile velocity rate state */
-		enum projectileVelocityState
+		enum ProjectileVelocityState
 		{
 			v_Uninitialized,
 			v_Normal,

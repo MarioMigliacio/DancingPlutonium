@@ -16,7 +16,7 @@ namespace DancingPlutonium
 	public:
 		#pragma region Ctor/Dtors
 
-		/* LevelObserver default constructor. Note that it is NOT A COPY CONSTRUCTOR. */
+		/* LevelObserver default constructor. Note that it is NOT A COPY CONSTRUCTOR. It needs a reference to player object. */
 		LevelObserver(PlutoniumShip& _player);
 		/* LevelObserver destructor */
 		~LevelObserver();

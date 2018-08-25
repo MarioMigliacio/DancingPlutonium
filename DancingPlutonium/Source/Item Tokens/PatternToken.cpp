@@ -6,6 +6,7 @@ DancingPlutonium::PatternToken::PatternToken() : ItemToken()
 	accumulator = 0.f;
 	SetSprite();
 	speed = defaultSpeed;
+	itemType = ItemToken::ItemType::LifeToken;
 }
 
 void DancingPlutonium::PatternToken::SetSprite()

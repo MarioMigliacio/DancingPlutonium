@@ -6,6 +6,7 @@ DancingPlutonium::LifeToken::LifeToken()
 	accumulator = 0.f;
 	SetSprite();
 	speed = defaultSpeed;
+	itemType = ItemToken::ItemType::LifeToken;
 }
 
 void DancingPlutonium::LifeToken::SetSprite()
