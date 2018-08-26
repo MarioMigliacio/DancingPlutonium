@@ -71,7 +71,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>./Header;./Header/Projectiles;./Header/Game States;./Header/Units;./Header/Utility;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./Header;./Header/Projectiles;./Header/Game States;./Header/Units;./Header/Utility;./Header/Item Tokens;</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
