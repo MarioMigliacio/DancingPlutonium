@@ -146,6 +146,8 @@
     <ClCompile Include="Source\Game States\Game.cpp" />
     <ClCompile Include="Source\Game States\Intro.cpp" />
     <ClCompile Include="Source\Game States\TitleMenu.cpp" />
+    <ClCompile Include="Source\Utility\AnimatedSprite.cpp" />
+    <ClCompile Include="Source\Utility\Animation.cpp" />
     <ClCompile Include="Source\Utility\ChatBox.cpp" />
     <ClCompile Include="Source\Utility\Collision.cpp" />
     <ClCompile Include="Source\Utility\IRng.cpp" />
@@ -178,6 +180,8 @@
     <ClInclude Include="Header\Game States\TitleMenu.h" />
     <ClInclude Include="Header\Game States\Game.h" />
     <ClInclude Include="Header\Game States\Intro.h" />
+    <ClInclude Include="Header\Utility\AnimatedSprite.h" />
+    <ClInclude Include="Header\Utility\Animation.h" />
     <ClInclude Include="Header\Utility\ChatBox.h" />
     <ClInclude Include="Header\Utility\Collision.h" />
     <ClInclude Include="Header\Utility\IRng.h" />
