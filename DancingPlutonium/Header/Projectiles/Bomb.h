@@ -36,11 +36,21 @@ namespace DancingPlutonium
 		#pragma endregion
 
 	private:
+		#pragma region Internal Methods
+
+		/* initialize the animation spreadsheet stuff */
+		void InitializeAnimationSpriteSheet();
+
+		#pragma endregion
+
+	private:
 		#pragma region Default values
 
 		Animation* currentAnimation;
 		sf::Texture texture;
 		AnimatedSprite animatedSprite;
+
+		float accumulator;
 
 		const float defaultDamage = 200.f;			/* Represents a defaultDamage that is safe to use for this projectile */
 		const float defaultSpeed = 200.f;			/* Represents a defaultSpeed that is safe to use for this projectile */
