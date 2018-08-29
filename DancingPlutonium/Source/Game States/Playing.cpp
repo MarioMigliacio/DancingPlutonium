@@ -109,8 +109,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			}
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::B))
 			{
-				// update AnimatedSprite
-				/*animatedSprite.play(*currentAnimation);*/
+				me->ShootBomb();
 			}
 
 			// activate the level testing:

@@ -5,6 +5,7 @@
 #include "AbstractBaseUnit.h"
 #include "Enums.h"
 #include "Weapon.h"
+#include "Bomb.h"
 
 namespace DancingPlutonium
 {
@@ -88,6 +89,7 @@ namespace DancingPlutonium
 		sf::Texture texture;								/* Represents the texture for this PlutoniumShip object */
 		sf::Vector2f position;								/* Represents the position for this PlutoniumShip object */
 		Weapon* weapon;										/* Represents the weapon for this PlutoniumShip object */
+		Bomb* bomb;
 
 		#pragma endregion
 		

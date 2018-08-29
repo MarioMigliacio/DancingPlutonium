@@ -23,7 +23,7 @@
 
 #include "AnimatedSprite.h"
 
-DancingPlutonium::AnimatedSprite::AnimatedSprite(sf::Time frameTime, bool paused, bool looped) :
+DancingPlutonium::AnimatedSprite::AnimatedSprite(float frameTime, bool paused, bool looped) :
 	m_animation(NULL), m_frameTime(frameTime), m_currentFrame(0), m_isPaused(paused), m_isLooped(looped), m_texture(NULL)
 {
 
@@ -37,7 +37,7 @@ void DancingPlutonium::AnimatedSprite::setAnimation(const Animation& animation)
 	setFrame(m_currentFrame);
 }
 
-void DancingPlutonium::AnimatedSprite::setFrameTime(sf::Time time)
+void DancingPlutonium::AnimatedSprite::setFrameTime(float time)
 {
 	m_frameTime = time;
 }
@@ -110,7 +110,7 @@ bool DancingPlutonium::AnimatedSprite::isPlaying() const
 	return !m_isPaused;
 }
 
-sf::Time DancingPlutonium::AnimatedSprite::getFrameTime() const
+float DancingPlutonium::AnimatedSprite::getFrameTime() const
 {
 	return m_frameTime;
 }
@@ -139,10 +139,10 @@ void DancingPlutonium::AnimatedSprite::setFrame(std::size_t newFrame, bool reset
 	}
 
 	if (resetTime)
-		m_currentTime = sf::Time::Zero;
+		m_currentTime = 0.f;
 }
 
-void DancingPlutonium::AnimatedSprite::update(sf::Time deltaTime)
+void DancingPlutonium::AnimatedSprite::update(float deltaTime)
 {
 	// if not paused and we have a valid animation
 	if (!m_isPaused && m_animation)
@@ -154,7 +154,7 @@ void DancingPlutonium::AnimatedSprite::update(sf::Time deltaTime)
 		if (m_currentTime >= m_frameTime)
 		{
 			// reset time, but keep the remainder
-			m_currentTime = sf::microseconds(m_currentTime.asMicroseconds() % m_frameTime.asMicroseconds());
+			m_currentTime = 0.f;
 
 			// get next Frame index
 			if (m_currentFrame + 1 < m_animation->getSize())
