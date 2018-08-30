@@ -5,13 +5,13 @@ sf::Uint32 DancingPlutonium::PlutoniumShip::m_movement = Movement::s_noMovement;
 
 DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt) : AbstractBaseUnit(), lives(3),
 	invulnerablePeriod(0.0f),
-	bombs(1),
-	score(0),
-	bomb(nullptr)
+	bombs(5),
+	score(0)
 {
 	health = 200.0f;
 	speed = 175.0f;	
 	isActive = true;
+	isShootingBomb = false;
 	isInvulnerable = false;
 	allegiance = 1;
 	SetSprite(_rt);
@@ -22,7 +22,6 @@ DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt) : Ab
 DancingPlutonium::PlutoniumShip::~PlutoniumShip()
 {
 	delete weapon;
-	delete bomb;
 }
 
 int DancingPlutonium::PlutoniumShip::LivesRemaining() const
@@ -64,16 +63,28 @@ void DancingPlutonium::PlutoniumShip::AddBomb()
 	}
 }
 
-void DancingPlutonium::PlutoniumShip::ShootBomb()
+bool DancingPlutonium::PlutoniumShip::IsShootingBomb()
 {
-	if (bombs > 0)
-	{
-		// Cleanup this bomb!
-		if (bomb == nullptr)
-		{
-			bomb = new Bomb(position);
-		}
-	}
+	return isShootingBomb;
+}
+
+void DancingPlutonium::PlutoniumShip::ToggleShootingBomb()
+{
+	isShootingBomb ? isShootingBomb = false : isShootingBomb = true;
+}
+
+bool DancingPlutonium::PlutoniumShip::CanUseBomb()
+{
+	bool retVal = false;
+
+	bombs > 0 ? retVal = true : retVal = false;
+
+	return retVal;
+}
+
+DancingPlutonium::Bomb* DancingPlutonium::PlutoniumShip::GetBomb()
+{
+	return new Bomb(position);
 }
 
 int DancingPlutonium::PlutoniumShip::BombsRemaining() const
@@ -257,16 +268,25 @@ void DancingPlutonium::PlutoniumShip::Update(float _dt, sf::RenderTarget& _rt)
 			}
 		}
 
-		// shooting a bomb..
-		if (bomb != nullptr)
+		if (InputManager::IsUsingBomb())
 		{
-			bomb->Update(_dt);
-/*
-			if (bomb->GetActiveState() == false)
+			if (CanUseBomb())
 			{
-				delete bomb;
-			}*/
+				ToggleShootingBomb();
+				bombs--;
+			}
 		}
+
+		// shooting a bomb..
+//		if (bomb != nullptr)
+//		{
+//			bomb->Update(_dt);
+///*
+//			if (bomb->GetActiveState() == false)
+//			{
+//				delete bomb;
+//			}*/
+//		}
 		
 
 		// go blinky blinky! (get around to it eventually)
@@ -288,10 +308,10 @@ void DancingPlutonium::PlutoniumShip::Draw(sf::RenderTarget& _rt)
 {
 	_rt.draw(sprite);
 
-	if (bomb != nullptr)
+	/*if (bomb != nullptr)
 	{
 		bomb->Draw(_rt);
-	}
+	}*/
 }
 
 void DancingPlutonium::PlutoniumShip::SetSprite(const sf::RenderTarget& _rt)

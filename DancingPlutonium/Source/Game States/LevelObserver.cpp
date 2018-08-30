@@ -6,6 +6,7 @@ DancingPlutonium::LevelObserver::LevelObserver(PlutoniumShip& _player) : _player
 	EnemyProjectileContainer = std::vector<AbstractBaseProjectile*>();
 	PlayerProjectileContainer = std::vector<AbstractBaseProjectile*>();
 	ItemTokens = std::vector<ItemToken*>();
+	BombContainer = std::vector<Bomb*>();
 }
 
 DancingPlutonium::LevelObserver::~LevelObserver()
@@ -14,6 +15,34 @@ DancingPlutonium::LevelObserver::~LevelObserver()
 	ClearEnemyProjectileContainer();
 	ClearPlayerProjectileContainer();
 	ClearItemTokens();
+	ClearBombs();
+}
+
+void DancingPlutonium::LevelObserver::CheckForBombCollision()
+{
+	if (BombContainer.size() > 0)
+	{
+		for (int i = static_cast<int>(BombContainer.size() - 1); i >= 0; i--)
+		{
+			if (BombContainer[i]->IsExploding())
+			{
+				if (EnemyShipContainer.size() > 0)
+				{
+					for (int j = static_cast<int>(EnemyShipContainer.size() - 1); j >= 0; j--)
+					{
+						if (Collision::BoundingBoxTest(BombContainer[i]->GetExplosionSprite(), EnemyShipContainer[j]->GetSprite()))
+						{
+							// GetHealth returns the players current life, which is then dealt to him
+							EnemyShipContainer[i]->TakeDamage(BombContainer[i]->GetDamagePerFrame());
+
+							// DEBUG purposes
+							std::cout << "ENEMY IN BLAST RADIUS! taking " << BombContainer[i]->GetDamagePerFrame() << " Damage per tick!" << std::endl;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 void DancingPlutonium::LevelObserver::CheckForUnitToUnitCollision()
@@ -243,6 +272,14 @@ void DancingPlutonium::LevelObserver::Update(sf::RenderTarget& _rt, float _dt)
 		PlayerProjectileContainer.push_back(b);
 	}
 
+	// fire a bomb if we are allowed to do so
+	if (_playerRef.IsShootingBomb())
+	{
+		_playerRef.ToggleShootingBomb();
+		auto b = _playerRef.GetBomb();
+		BombContainer.push_back(b);
+	}
+
 	CleanEnemyShips();
 
 	// Update the EnemyShipContainer
@@ -305,11 +342,26 @@ void DancingPlutonium::LevelObserver::Update(sf::RenderTarget& _rt, float _dt)
 		}
 	}
 
+	CleanBombs(_rt);
+
+	// Update the Bombs container
+	if (BombContainer.size() != 0)
+	{
+		for (int i = 0; i < static_cast<int>(BombContainer.size()); i++)
+		{
+			if (BombContainer[i]->GetActiveState())
+			{
+				BombContainer[i]->Update(_dt);
+			}
+		}
+	}
+
 	// Perform collision detection
 	CheckForUnitToUnitCollision();
 	CheckForPlayerShotHit();
 	CheckForEnemyShotHit();
 	CheckForItemCollision();
+	CheckForBombCollision();
 }
 
 void DancingPlutonium::LevelObserver::Draw(sf::RenderTarget& _rt)
@@ -336,6 +388,12 @@ void DancingPlutonium::LevelObserver::Draw(sf::RenderTarget& _rt)
 	for (int i = 0; i < static_cast<int>(ItemTokens.size()); i++)
 	{
 		ItemTokens[i]->Draw(_rt);
+	}
+
+	// Draw the Bombs
+	for (int i = 0; i < static_cast<int>(BombContainer.size()); i++)
+	{
+		BombContainer[i]->Draw(_rt);
 	}
 }
 
@@ -380,6 +438,21 @@ void DancingPlutonium::LevelObserver::CleanItemTokens(sf::RenderTarget& _rt)
 			{
 				delete ItemTokens[i];
 				ItemTokens.erase(ItemTokens.begin() + i);
+			}
+		}
+	}
+}
+
+void DancingPlutonium::LevelObserver::CleanBombs(sf::RenderTarget& _rt)
+{
+	if (BombContainer.size() > 0)
+	{
+		for (int i = static_cast<int>(BombContainer.size() - 1); i >= 0; i--)
+		{
+			if (BombContainer[i]->GetActiveState() == false)
+			{
+				delete BombContainer[i];
+				BombContainer.erase(BombContainer.begin() + i);
 			}
 		}
 	}
@@ -445,6 +518,18 @@ void DancingPlutonium::LevelObserver::ClearItemTokens()
 		{
 			delete ItemTokens[i];
 			ItemTokens.erase(ItemTokens.begin() + i);
+		}
+	}
+}
+
+void DancingPlutonium::LevelObserver::ClearBombs()
+{
+	if (BombContainer.size() > 0)
+	{
+		for (int i = static_cast<int>(BombContainer.size() - 1); i >= 0; i--)
+		{
+			delete BombContainer[i];
+			BombContainer.erase(BombContainer.begin() + i);
 		}
 	}
 }

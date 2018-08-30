@@ -12,7 +12,12 @@ DancingPlutonium::Bomb::Bomb(const sf::Vector2f& _pos) :
 
 DancingPlutonium::Bomb::~Bomb()
 {
-	delete currentAnimation;
+	//delete currentAnimation;
+}
+
+float DancingPlutonium::Bomb::GetDamagePerFrame()
+{
+	return defaultDamage / 60.f;
 }
 
 void DancingPlutonium::Bomb::SetPosition(const sf::Vector2f& _pos)
@@ -24,14 +29,11 @@ void DancingPlutonium::Bomb::SetPosition(const sf::Vector2f& _pos)
 
 void DancingPlutonium::Bomb::SetSprite(const sf::Vector2f& _origin)
 {
-	if (!isExploding)
-	{
-		texture.loadFromFile("Content/Images/BulletRed.png");
-		sprite.setTexture(texture);
-		sprite.setOrigin(sf::Vector2f(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f));
-		sprite.setPosition(_origin);
-		position = _origin;
-	}
+	texture.loadFromFile("Content/Images/BulletRed.png");
+	sprite.setTexture(texture);
+	sprite.setOrigin(sf::Vector2f(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f));
+	sprite.setPosition(_origin);
+	position = _origin;
 }
 
 void DancingPlutonium::Bomb::Update(float _dt)
@@ -80,9 +82,19 @@ bool DancingPlutonium::Bomb::GetActiveState()
 	return isActive;
 }
 
-sf::Sprite DancingPlutonium::Bomb::GetSprite()
+bool DancingPlutonium::Bomb::IsExploding()
 {
+	return isExploding;
+}
+
+sf::Sprite DancingPlutonium::Bomb::GetSprite()
+{	
 	return sprite;
+}
+
+sf::Sprite DancingPlutonium::Bomb::GetExplosionSprite()
+{
+	return explosionSprite;
 }
 
 void DancingPlutonium::Bomb::InitializeAnimationSpriteSheet()
@@ -110,4 +122,7 @@ void DancingPlutonium::Bomb::InitializeAnimationSpriteSheet()
 
 	currentAnimation = &bombAnimation;
 	animatedSprite = AnimatedSprite(0.2f, true, false);
+
+	auto thing = bombAnimation.getSpriteSheet();
+	explosionSprite.setTexture(*thing);
 }

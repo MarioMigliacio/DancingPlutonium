@@ -107,10 +107,10 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			{
 				levelObserver.KillCommand();
 			}
-			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::B))
+			/*else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::B))
 			{
-				me->ShootBomb();
-			}
+				me->GetBomb();
+			}*/
 
 			// activate the level testing:
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::Num0))

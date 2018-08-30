@@ -14,7 +14,7 @@ namespace DancingPlutonium
 	public:
 		#pragma region Dtor
 
-		/* InputManager destructor */
+		/* InputManager destructor. */
 		~InputManager() {}
 
 		#pragma endregion
@@ -23,20 +23,22 @@ namespace DancingPlutonium
 
 		/* GetDirection should be used once it is known the player is moving (Query IsMoving 1st).  */
 		static sf::Uint32 GetDirection();
-		/* Returns true if player is attempting to move, false otherwise */
+		/* Returns true if player is attempting to move, false otherwise. */
 		static bool IsMoving();
-		/* Returns true if player is pressing Left Shift or Right Shift to try to make player move faster, false otherwise */
+		/* Returns true if player is pressing Left Shift or Right Shift to try to make player move faster, false otherwise. */
 		static bool IsUsingBoost();
-		/* Returns true if player is pressing Space bar, false otherwise */
+		/* Returns true if player is pressing Space bar, false otherwise. */
 		static bool IsShooting();
-		/* Returns true if player is pressing Enter key, false otherwise */
+		/* Returns true if player is pressing B key, false otherwise. */
+		static bool IsUsingBomb();
+		/* Returns true if player is pressing Enter key, false otherwise. */
 		static bool IsFinishedReadingText();
 		
 		#pragma endregion
 	private:
 		#pragma region Ctor
 
-		/* Disallow access to creating the InputManager class. It holds useful static methods which can be queried by using syntax: InputManager::<member name> */
+		/* Disallow access to creating the InputManager class. It holds useful static methods which can be queried by using syntax: InputManager::<member name>. */
 		InputManager() { }
 
 		#pragma endregion
