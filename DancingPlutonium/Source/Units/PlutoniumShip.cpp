@@ -6,7 +6,8 @@ sf::Uint32 DancingPlutonium::PlutoniumShip::m_movement = Movement::s_noMovement;
 DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt) : AbstractBaseUnit(), lives(3),
 	invulnerablePeriod(0.0f),
 	bombs(5),
-	score(0)
+	score(0),
+	bombCoolDown(2.f)
 {
 	health = 200.0f;
 	speed = 175.0f;	
@@ -79,6 +80,16 @@ bool DancingPlutonium::PlutoniumShip::CanUseBomb()
 
 	bombs > 0 ? retVal = true : retVal = false;
 
+	if (bombCoolDown > 2.0f && retVal)
+	{
+		retVal = true;
+		bombCoolDown = 0.0f;
+	}
+	else
+	{
+		retVal = false;
+	}
+
 	return retVal;
 }
 
@@ -148,6 +159,7 @@ void DancingPlutonium::PlutoniumShip::TakeDamage(const float _val)
 void DancingPlutonium::PlutoniumShip::Update(float _dt, sf::RenderTarget& _rt)
 {
 	accumulator += _dt;
+	bombCoolDown += _dt;
 
 	if (isActive)
 	{

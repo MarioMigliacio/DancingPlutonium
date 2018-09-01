@@ -24,7 +24,8 @@ void DancingPlutonium::Bomb::SetPosition(const sf::Vector2f& _pos)
 {
 	position = _pos;
 	sprite.setPosition(_pos);
-	animatedSprite.setPosition(sf::Vector2f(_pos.x - (imgwidth / 2) * scale, _pos.y - (imgwidth / 2) * scale));
+	animatedSprite.getSprite().setPosition(sf::Vector2f(position.x - (imgwidth / 2) * scale, position.y - (imgwidth / 2) * scale));
+	animatedSprite.setPosition(sf::Vector2f(position.x - (imgwidth / 2) * scale, position.y - (imgwidth / 2) * scale));
 }
 
 void DancingPlutonium::Bomb::SetSprite(const sf::Vector2f& _origin)
@@ -54,6 +55,7 @@ void DancingPlutonium::Bomb::Update(float _dt)
 	else if (isExploding)
 	{
 		animatedSprite.update(_dt);
+		SetPosition(sf::Vector2f(position.x, position.y));
 	}
 
 	if (accumulator > 4.f)
@@ -94,7 +96,7 @@ sf::Sprite DancingPlutonium::Bomb::GetSprite()
 
 sf::Sprite DancingPlutonium::Bomb::GetExplosionSprite()
 {
-	return explosionSprite;
+	return animatedSprite.getSprite();
 }
 
 void DancingPlutonium::Bomb::InitializeAnimationSpriteSheet()
@@ -122,7 +124,14 @@ void DancingPlutonium::Bomb::InitializeAnimationSpriteSheet()
 
 	currentAnimation = &bombAnimation;
 	animatedSprite = AnimatedSprite(0.2f, true, false);
-
+	sf::Texture shit;
+	sf::Image img;
+	sf::Sprite dumbass;
+	img.loadFromFile("Content/Images/BombBlast_Final.png");
+	shit.loadFromImage(img);
+	dumbass.setTexture(shit);
+	animatedSprite.setSprite(dumbass);
+	
 	auto thing = bombAnimation.getSpriteSheet();
 	explosionSprite.setTexture(*thing);
 }

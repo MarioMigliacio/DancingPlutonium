@@ -24,7 +24,7 @@
 #include "AnimatedSprite.h"
 
 DancingPlutonium::AnimatedSprite::AnimatedSprite(float frameTime, bool paused, bool looped) :
-	m_animation(NULL), m_frameTime(frameTime), m_currentFrame(0), m_isPaused(paused), m_isLooped(looped), m_texture(NULL)
+	m_animation(NULL), m_frameTime(frameTime), m_currentFrame(0), m_isPaused(paused), m_isLooped(looped), m_texture(NULL), m_sprite()
 {
 
 }
@@ -140,6 +140,18 @@ void DancingPlutonium::AnimatedSprite::setFrame(std::size_t newFrame, bool reset
 
 	if (resetTime)
 		m_currentTime = 0.f;
+}
+
+// I made these - mario
+void DancingPlutonium::AnimatedSprite::setSprite(sf::Sprite& sprite)
+{
+	m_sprite = sprite;
+}
+
+// I made these - mario
+sf::Sprite DancingPlutonium::AnimatedSprite::getSprite()
+{
+	return m_sprite;
 }
 
 void DancingPlutonium::AnimatedSprite::update(float deltaTime)

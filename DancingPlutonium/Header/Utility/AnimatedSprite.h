@@ -49,6 +49,8 @@ namespace DancingPlutonium
 		bool isPlaying() const;
 		float getFrameTime() const;
 		void setFrame(std::size_t newFrame, bool resetTime = true);
+		void setSprite(sf::Sprite& sprite);
+		sf::Sprite getSprite();
 
 	private:
 		const Animation* m_animation;
@@ -59,6 +61,7 @@ namespace DancingPlutonium
 		bool m_isLooped;
 		const sf::Texture* m_texture;
 		sf::Vertex m_vertices[4];
+		sf::Sprite m_sprite;
 
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	};

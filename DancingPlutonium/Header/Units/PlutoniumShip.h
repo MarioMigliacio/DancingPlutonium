@@ -85,6 +85,7 @@ namespace DancingPlutonium
 	private:
 		#pragma region Members
 
+		float bombCoolDown;									/* Represents how long the player has to wait before another bomb can be used. */
 		float invulnerablePeriod;							/* Represents how long the player is allowed invulnerability. */
 		short bombs;										/* Represents the bombs count for this PlutoniumShip object. */
 		short lives;										/* Represents the lives count for this PlutoniumShip object. */
