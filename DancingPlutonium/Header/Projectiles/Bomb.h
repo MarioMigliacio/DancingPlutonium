@@ -66,7 +66,7 @@ namespace DancingPlutonium
 		bool isActive;								/* Represents the active state for this bomb object. */
 		bool isExploding;							/* Represents a boolean to keep track of if it is time to explode. */
 		float accumulator;							/* Represents a timer based object to perform logic based off of. */
-		const float defaultDamage = 100.f;			/* Represents a defaultDamage that is safe to use for this projectile (per frame basis). */
+		const float defaultDamage = 200.f;			/* Represents a defaultDamage that is safe to use for this projectile (per frame basis). */
 		const float defaultSpeed = 150.f;			/* Represents a defaultSpeed that is safe to use for this projectile. */
 		const int imgwidth = 128;					/* Represents this sprite images width dimension in pixels. */
 		const float scale = 3.f;					/* Represents this sprite images scale factor. */

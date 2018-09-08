@@ -24,7 +24,6 @@ void DancingPlutonium::Bomb::SetPosition(const sf::Vector2f& _pos)
 {
 	position = _pos;
 	sprite.setPosition(_pos);
-	animatedSprite.getSprite().setPosition(sf::Vector2f(position.x - (imgwidth / 2) * scale, position.y - (imgwidth / 2) * scale));
 	animatedSprite.setPosition(sf::Vector2f(position.x - (imgwidth / 2) * scale, position.y - (imgwidth / 2) * scale));
 }
 
@@ -46,6 +45,13 @@ void DancingPlutonium::Bomb::Update(float _dt)
 		isExploding = true;
 		animatedSprite.play(*currentAnimation);
 		animatedSprite.setScale(scale, scale);
+		
+		sf::Texture tex;
+		tex.loadFromFile("Content/Images/BombBlast_Final.png");
+		sprite = sf::Sprite();
+		sprite.setTexture(tex);
+		sprite.setOrigin(sf::Vector2f(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f));
+		sprite.setScale(scale, scale);
 	}
 
 	if (!isExploding)
@@ -124,13 +130,6 @@ void DancingPlutonium::Bomb::InitializeAnimationSpriteSheet()
 
 	currentAnimation = &bombAnimation;
 	animatedSprite = AnimatedSprite(0.2f, true, false);
-	sf::Texture shit;
-	sf::Image img;
-	sf::Sprite dumbass;
-	img.loadFromFile("Content/Images/BombBlast_Final.png");
-	shit.loadFromImage(img);
-	dumbass.setTexture(shit);
-	animatedSprite.setSprite(dumbass);
 	
 	auto thing = bombAnimation.getSpriteSheet();
 	explosionSprite.setTexture(*thing);

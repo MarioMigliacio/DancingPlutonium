@@ -30,10 +30,10 @@ void DancingPlutonium::LevelObserver::CheckForBombCollision()
 				{
 					for (int j = static_cast<int>(EnemyShipContainer.size() - 1); j >= 0; j--)
 					{
-						if (EnemyShipContainer[j]->GetSprite().getGlobalBounds().intersects(BombContainer[i]->GetExplosionSprite().getGlobalBounds()))
+						if (Collision::BoundingBoxTest(EnemyShipContainer[j]->GetSprite(), BombContainer[i]->GetSprite()))
 						{
 							// GetHealth returns the players current life, which is then dealt to him
-							EnemyShipContainer[i]->TakeDamage(BombContainer[i]->GetDamagePerFrame());
+							EnemyShipContainer[j]->TakeDamage(BombContainer[i]->GetDamagePerFrame());
 
 							// DEBUG purposes
 							std::cout << "ENEMY IN BLAST RADIUS! taking " << BombContainer[i]->GetDamagePerFrame() << " Damage per tick!" << std::endl;
