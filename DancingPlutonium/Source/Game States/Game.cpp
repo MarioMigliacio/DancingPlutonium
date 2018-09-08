@@ -25,6 +25,7 @@ void DancingPlutonium::Game::Initialize()
 	// use the sf::Style to change the window's options. Fullscreen makes debugging a nightmare, the Titlebar + close styles prevent resizing window.
 	m_window.create(sf::VideoMode(gameWidth, gameHeight, mode.bitsPerPixel), "Dancing Plutonium", sf::Style::Titlebar | sf::Style::Close);
 	m_window.setView(gameView);
+	m_window.setFramerateLimit(60);
 
 	m_state = CurrentState::s_intro;
 

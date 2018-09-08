@@ -5,13 +5,14 @@ sf::Uint32 DancingPlutonium::PlutoniumShip::m_movement = Movement::s_noMovement;
 
 DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt) : AbstractBaseUnit(), lives(3),
 	invulnerablePeriod(0.0f),
-	bombs(0),
-	score(0)
-	
+	bombs(5),
+	score(0),
+	bombCoolDown(2.f)
 {
 	health = 200.0f;
 	speed = 175.0f;	
 	isActive = true;
+	isShootingBomb = false;
 	isInvulnerable = false;
 	allegiance = 1;
 	SetSprite(_rt);
@@ -63,13 +64,38 @@ void DancingPlutonium::PlutoniumShip::AddBomb()
 	}
 }
 
-void DancingPlutonium::PlutoniumShip::ShootBomb()
+bool DancingPlutonium::PlutoniumShip::IsShootingBomb()
 {
-	if (bombs > 0)
+	return isShootingBomb;
+}
+
+void DancingPlutonium::PlutoniumShip::ToggleShootingBomb()
+{
+	isShootingBomb ? isShootingBomb = false : isShootingBomb = true;
+}
+
+bool DancingPlutonium::PlutoniumShip::CanUseBomb()
+{
+	bool retVal = false;
+
+	bombs > 0 ? retVal = true : retVal = false;
+
+	if (bombCoolDown > 2.0f && retVal)
 	{
-		// This would be cool to have it be a projectile type which travels forward for 3 seconds and then detonates with the explosion animation and bomb final sprite.
-		// can expand on its area by utilizing the sprite.Scale
+		retVal = true;
+		bombCoolDown = 0.0f;
 	}
+	else
+	{
+		retVal = false;
+	}
+
+	return retVal;
+}
+
+DancingPlutonium::Bomb* DancingPlutonium::PlutoniumShip::GetBomb()
+{
+	return new Bomb(position);
 }
 
 int DancingPlutonium::PlutoniumShip::BombsRemaining() const
@@ -133,6 +159,7 @@ void DancingPlutonium::PlutoniumShip::TakeDamage(const float _val)
 void DancingPlutonium::PlutoniumShip::Update(float _dt, sf::RenderTarget& _rt)
 {
 	accumulator += _dt;
+	bombCoolDown += _dt;
 
 	if (isActive)
 	{
@@ -253,6 +280,27 @@ void DancingPlutonium::PlutoniumShip::Update(float _dt, sf::RenderTarget& _rt)
 			}
 		}
 
+		if (InputManager::IsUsingBomb())
+		{
+			if (CanUseBomb())
+			{
+				ToggleShootingBomb();
+				bombs--;
+			}
+		}
+
+		// shooting a bomb..
+//		if (bomb != nullptr)
+//		{
+//			bomb->Update(_dt);
+///*
+//			if (bomb->GetActiveState() == false)
+//			{
+//				delete bomb;
+//			}*/
+//		}
+		
+
 		// go blinky blinky! (get around to it eventually)
 		if (isInvulnerable)
 		{
@@ -271,6 +319,11 @@ void DancingPlutonium::PlutoniumShip::Update(float _dt, sf::RenderTarget& _rt)
 void DancingPlutonium::PlutoniumShip::Draw(sf::RenderTarget& _rt)
 {
 	_rt.draw(sprite);
+
+	/*if (bomb != nullptr)
+	{
+		bomb->Draw(_rt);
+	}*/
 }
 
 void DancingPlutonium::PlutoniumShip::SetSprite(const sf::RenderTarget& _rt)

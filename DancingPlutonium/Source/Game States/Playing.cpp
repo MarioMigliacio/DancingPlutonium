@@ -1,5 +1,6 @@
 #include "Playing.h"
 #include <iostream>
+#include "AnimatedSprite.h"
 
 // Static variable declarations:
 sf::Uint32 DancingPlutonium::Playing::m_state = s_uninitialized;
@@ -22,6 +23,43 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 	LevelObserver levelObserver = LevelObserver(*me);
 	Level1 l1 = Level1();
 	levelObserver.SpawnEnemyUnit(_window);
+
+	// animation test:
+	//sf::Texture bombTex;
+	//if (!bombTex.loadFromFile("Content/Images/BombBlast_Original.png"))
+	//{
+	//	std::cout << "Failed to load bomb spritesheet!" << std::endl;
+	//}
+
+	//Animation bomb;
+	//bomb.setSpriteSheet(bombTex);
+	//
+	//bomb.addFrame(sf::IntRect(384, 384, 128, 128));
+	//bomb.addFrame(sf::IntRect(0, 0, 128, 128));
+	//bomb.addFrame(sf::IntRect(128, 0, 128, 128));
+	//bomb.addFrame(sf::IntRect(256, 0, 128, 128));
+	//bomb.addFrame(sf::IntRect(384, 0, 128, 128));
+	//
+	//bomb.addFrame(sf::IntRect(0, 128, 128, 128));
+	//bomb.addFrame(sf::IntRect(128, 128, 128, 128));
+	//bomb.addFrame(sf::IntRect(256, 128, 128, 128));
+	//bomb.addFrame(sf::IntRect(384, 128, 128, 128));
+	//
+	//bomb.addFrame(sf::IntRect(0, 256, 128, 128));
+	//bomb.addFrame(sf::IntRect(128, 256, 128, 128));
+	//bomb.addFrame(sf::IntRect(256, 256, 128, 128));
+	//bomb.addFrame(sf::IntRect(384, 256, 128, 128));
+	//
+	//bomb.addFrame(sf::IntRect(0, 384, 128, 128));
+	//bomb.addFrame(sf::IntRect(128, 384, 128, 128));
+	//bomb.addFrame(sf::IntRect(256, 384, 128, 128));
+	//
+
+	//Animation* currentAnimation = &bomb;
+
+	//// set up AnimatedSprite
+	//AnimatedSprite animatedSprite(sf::seconds(0.2f), true, false);
+	//animatedSprite.setPosition(sf::Vector2f(_window.getSize().x / 2.f - 128, _window.getSize().y / 2.f - 128));
 
 	// Set up the background:
 	sf::Texture bgTexture;
@@ -69,6 +107,10 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 			{
 				levelObserver.KillCommand();
 			}
+			/*else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::B))
+			{
+				me->GetBomb();
+			}*/
 
 			// activate the level testing:
 			else if (event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::Num0))
@@ -76,7 +118,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 				m_state = PlayState::s_level1;
 			}
 		}
-		
+
 		bool isPlayerMoving = InputManager::IsMoving();
 		me->SetMovingState(isPlayerMoving);
 		
@@ -92,6 +134,8 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		me->Update(dt.asSeconds(), _window);
 		me->Draw(_window);
 
+		/*animatedSprite.update(dt);
+		_window.draw(animatedSprite);*/
 		// Update the LevelObserver object AFTER the player. (we have to check if player is trying to shoot, then toggle if true)
 		levelObserver.Update(_window, dt.asSeconds());
 		levelObserver.Draw(_window);

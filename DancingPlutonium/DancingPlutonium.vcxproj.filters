@@ -128,6 +128,15 @@
     <ClCompile Include="Source\Item Tokens\TokenFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Utility\Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\AnimatedSprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Projectiles\Bomb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\Game States\Game.h">
@@ -192,6 +201,9 @@
     <ClInclude Include="Header\Item Tokens\FireRateToken.h" />
     <ClInclude Include="Header\Item Tokens\LifeToken.h" />
     <ClInclude Include="Header\Item Tokens\TokenFactory.h" />
+    <ClInclude Include="Header\Utility\Animation.h" />
+    <ClInclude Include="Header\Utility\AnimatedSprite.h" />
+    <ClInclude Include="Header\Projectiles\Bomb.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

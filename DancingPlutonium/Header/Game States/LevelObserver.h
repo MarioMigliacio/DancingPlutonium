@@ -8,6 +8,7 @@
 #include "BasicShip.h"
 #include "ItemToken.h"
 #include "TokenFactory.h"
+#include "Bomb.h"
 
 namespace DancingPlutonium
 {
@@ -59,12 +60,16 @@ namespace DancingPlutonium
 		std::vector<AbstractBaseProjectile*> PlayerProjectileContainer;
 		/* A container which holds pointers to the item tokens active in the world. LevelObserver is responsible for the cleanup and update of this container. */
 		std::vector<ItemToken*> ItemTokens;
+		/* A container which holds pointers to the bomb objects active in the world. LevelObserver is responsible for the cleanup and update of this container. */
+		std::vector<Bomb*> BombContainer;
 
 		#pragma endregion
 
 	private:
 		#pragma region Private Functionality
 
+		/* Check if a collision occurs between enemy units and the Bomb objects in the BombContainer. */
+		void CheckForBombCollision();
 		/* Check if a collision occurs between player and any units contained in the EnemyShips container. */
 		void CheckForUnitToUnitCollision();
 		/* Check if a collision occurs between any units contained in the EnemyShip container and the PlayerProjectile container. */
@@ -81,6 +86,8 @@ namespace DancingPlutonium
 		void CleanEnemyShips();
 		/* Clean up ItemTokens which have become Inactive */
 		void CleanItemTokens(sf::RenderTarget& _rt);
+		/* Clean up Bombs which have become Inactive  */
+		void CleanBombs(sf::RenderTarget& _rt);
 		/* Disposes of memory within the EnemyShipContainer vector. */
 		void ClearEnemyShipContainer();
 		/* Disposes of memory within the EnemyProjectileContainer vector. */
@@ -89,6 +96,8 @@ namespace DancingPlutonium
 		void ClearPlayerProjectileContainer();
 		/* Disposes of memory within the ItemTokens vector. */
 		void ClearItemTokens();
+		/* Disposes of memory within the BombContainer vector. */
+		void ClearBombs();
 
 		#pragma endregion
 	};
