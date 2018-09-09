@@ -145,7 +145,15 @@ void DancingPlutonium::Game::Play()
 	Playing playGame;
 
 	playGame.Show(m_window);
-	m_state = CurrentState::s_quit;
+
+	if (playGame.getPlayState() == Playing::PlayState::s_gameover)
+	{
+		m_state = CurrentState::s_gameover;
+	}
+	else
+	{
+		m_state = CurrentState::s_quit;
+	}
 }
 
 void DancingPlutonium::Game::WinLevel()
@@ -156,8 +164,14 @@ void DancingPlutonium::Game::WinLevel()
 
 void DancingPlutonium::Game::GameOver()
 {
+	DancingPlutonium::GameOver gameOver;
 	m_window.setTitle("Game Over");
-	// get around to creating the gameover class.
+	gameOver.Show(m_window);
+
+	if (gameOver.getGameOverState() == GameOver::GameOverState::s_done)
+	{
+		m_state = CurrentState::s_menu;
+	}
 }
 
 void DancingPlutonium::Game::Options()

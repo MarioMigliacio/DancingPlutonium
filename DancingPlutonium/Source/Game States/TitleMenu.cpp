@@ -8,7 +8,7 @@ void DancingPlutonium::TitleMenu::Show(sf::RenderWindow& _window)
 	// Ensure that the initialization takes place correctly here and for the first time.
 	if (menuState != MenuState::s_uninitialized)
 	{
-		return;
+		menuState = s_uninitialized;
 	}
 
 	// Set the State:

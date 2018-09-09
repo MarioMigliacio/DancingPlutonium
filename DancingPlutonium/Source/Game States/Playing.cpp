@@ -11,7 +11,7 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 	// Ensure that the initialization takes place correctly here and for the first time.
 	if (m_state != PlayState::s_uninitialized)
 	{
-		return;
+		m_state = s_uninitialized;
 	}
 
 	std::cout << "YOU ARE PLAYING IN THE SANDBOX!" << std::endl;
@@ -91,6 +91,13 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 		_window.clear();
 		_window.draw(bgSprite);
 		me->Update(dt.asSeconds(), _window);
+
+		// test the gameover state logic
+		if (me->GetActiveState() == false)
+		{
+			m_state = PlayState::s_gameover;
+		}
+
 		me->Draw(_window);
 
 		// Update the LevelObserver object AFTER the player. (we have to check if player is trying to shoot, then toggle if true)
@@ -104,4 +111,9 @@ void DancingPlutonium::Playing::Show(sf::RenderWindow& _window)
 	{
 		l1.Show(_window, me);
 	}
+}
+
+sf::Uint32 DancingPlutonium::Playing::getPlayState() const
+{
+	return m_state;
 }

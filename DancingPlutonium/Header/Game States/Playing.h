@@ -45,6 +45,8 @@ namespace DancingPlutonium
 
 		/* Runs the logic for Dancing Plutoniums Playing object */
 		void Show(sf::RenderWindow& _window);
+		/* Returns the state of which the Playing object is in */
+		sf::Uint32 getPlayState() const;
 
 		#pragma endregion
 	private:

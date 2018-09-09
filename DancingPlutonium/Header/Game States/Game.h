@@ -5,6 +5,7 @@
 #include "Intro.h"
 #include "TitleMenu.h"
 #include "Playing.h"
+#include "GameOver.h"
 
 namespace DancingPlutonium
 {

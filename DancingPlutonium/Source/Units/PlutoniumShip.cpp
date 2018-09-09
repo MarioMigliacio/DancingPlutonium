@@ -3,7 +3,7 @@
 
 sf::Uint32 DancingPlutonium::PlutoniumShip::m_movement = Movement::s_noMovement;
 
-DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt) : AbstractBaseUnit(), lives(3),
+DancingPlutonium::PlutoniumShip::PlutoniumShip(const sf::RenderTarget& _rt) : AbstractBaseUnit(), lives(2),
 	invulnerablePeriod(0.0f),
 	bombs(5),
 	score(0),
