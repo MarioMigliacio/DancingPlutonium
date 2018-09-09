@@ -137,6 +137,9 @@
     <ClCompile Include="Source\Projectiles\Bomb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game States\GameOver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\Game States\Game.h">
@@ -204,6 +207,7 @@
     <ClInclude Include="Header\Utility\Animation.h" />
     <ClInclude Include="Header\Utility\AnimatedSprite.h" />
     <ClInclude Include="Header\Projectiles\Bomb.h" />
+    <ClInclude Include="Header\Game States\GameOver.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

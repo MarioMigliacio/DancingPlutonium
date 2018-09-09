@@ -24,6 +24,7 @@ namespace DancingPlutonium
 			s_uninitialized,
 			s_sandbox,
 			s_level1,
+			s_gameover,
 			s_quit
 		};
 

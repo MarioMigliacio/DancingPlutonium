@@ -28,7 +28,7 @@ namespace DancingPlutonium
 		Intro() {}
 		/* Intro copy constructor */
 		Intro(const Intro& _ref) {}
-		/* Intro deconstructor */
+		/* Intro destructor */
 		~Intro() {}
 
 		#pragma endregion
