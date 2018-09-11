@@ -10,8 +10,8 @@ namespace DancingPlutonium
 	/* AbstractBaseUnit class represents an abstract base unit for which to inherit from */
 	class AbstractBaseUnit
 	{
-	public:
-		#pragma region Protected 
+	protected:
+		#pragma region Ctor
 
 		/* AbstractBaseUnit default Ctor */
 		AbstractBaseUnit() :
@@ -28,12 +28,30 @@ namespace DancingPlutonium
 			sprite(),
 			texture(),
 			position(),
-			weapon()
+			weapon()			
 		{}
+
+		#pragma endregion
+
+	public:
+		#pragma region Virtual Dtor
 
 		/* The virtual AbstractBaseUnit destructor */
 		virtual ~AbstractBaseUnit() {}
 
+		#pragma endregion
+
+	public:
+		#pragma region State Enumerations
+
+		/* Defines the types of ships that inherit from the AbstractBaseUnit. */
+		enum ShipType
+		{
+			s_uninitialized,
+			s_basic,
+			s_kamikaze
+		};
+		
 		#pragma endregion
 
 	protected:

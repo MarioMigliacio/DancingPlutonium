@@ -212,4 +212,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Content\Images\KamikazeShip.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Content\Images\ModularShips.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
